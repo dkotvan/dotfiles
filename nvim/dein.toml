@@ -1,0 +1,164 @@
+[[plugins]]
+repo = 'Shougo/dein.vim'
+
+[[plugins]]
+repo = 'roxma/vim-hug-neovim-rpc'
+on_if = '!has("nvim")'
+
+[[plugins]]
+repo = 'roxma/nvim-yarp'
+
+################## LAYOUT PLUGINS #######################
+
+[[plugins]]
+repo = 'vim-airline/vim-airline'
+hook_source = '''
+  let g:airline_powerline_fonts = 1
+"  let g:airline#extensions#branch#enabled = 1
+"  let g:airline#extensions#branch#displayed_head_limit = 10
+"  let g:airline#extensions#branch#format = 2
+"  let g:airline#extensions#branch#sha1_len = 10
+  let g:airline#extensions#hunks#enabled = 1
+  let g:airline#extensions#hunks#hunk_symbols = ['+', '~', '-']
+  let g:airline#extensions#taboo#enabled = 1
+  let g:airline#extensions#gutentags#enabled = 1
+  let g:airline#extensions#anzu#enabled = 1
+  let g:airline#extensions#ale#enabled = 1
+  let airline#extensions#ale#error_symbol = 'E:'
+  let airline#extensions#ale#warning_symbol = 'W:'
+  let airline#extensions#ale#open_lnum_symbol = '(L'
+  let airline#extensions#ale#close_lnum_symbol = ')'
+  let g:airline_detect_spell=0
+  let g:airline_detect_paste=0
+  let g:airline#extensions#obsession#enabled = 1
+  let g:airline#extensions#obsession#indicator_text = '$'
+'''
+
+[[plugins]]
+repo = 'vim-airline/vim-airline-themes'
+depends = 'vim-airline'
+
+[[plugins]]
+repo = 'morhetz/gruvbox'
+hook_source = '''
+  let g:gruvbox_bold=1
+  let g:gruvbox_italic=1
+  let g:gruvbox_underline=1
+  let g:gruvbox_undercurl=1
+  let g:gruvbox_termcolors=256
+  let g:gruvbox_contrast_dark='medium'
+  let g:gruvbox_contrast_light='medium'
+'''
+  # let g:gruvbox_sign_column='grey'
+  # let g:gruvbox_hls_cursor= 
+  # let g:gruvbox_number_column
+  # let g:gruvbox_color_column
+  # let g:gruvbox_vert_split=blue
+  # let g:gruvbox_italicize_comments
+  # let g:gruvbox_italicize_strings
+  # let g:gruvbox_invert_selection
+  # let g:gruvbox_invert_signs
+  # let g:gruvbox_invert_indent_guides
+  # let g:gruvbox_invert_tabline
+  # let g:gruvbox_improved_strings
+  # let g:gruvbox_improved_warnings
+  # let g:gruvbox_guisp_fallback
+
+################## EDIT & MOTION PLUGINS ###################
+
+[[plugins]]
+repo = 'wellle/targets.vim'
+
+[[plugins]]
+# Insert end automatically
+repo = 'tpope/vim-endwise'
+
+[[plugins]]
+# allow to create your own text objects
+repo = 'kana/vim-textobj-user'
+
+[[plugins]]
+# Editor config
+repo = 'editorconfig/editorconfig-vim'
+hook_source = '''
+  let g:EditorConfig_exclude_patterns = ['fugitive://.*', 'scp://.*']
+'''
+
+################## SEARCH PLUGINS ###################
+
+[[plugins]]
+# better search
+repo = 'haya14busa/is.vim'
+# on_map = ['/', '\', 'n', 'N', '*', '#', 'gd', 'gD', 'g*', 'g#']
+
+################## GIT PLUGINS ###################
+
+[[plugins]]
+# git gutter like but with async support
+repo = 'mhinz/vim-signify'
+hook_source = '''
+  let g:signify_realtime = 1
+  let g:signify_line_highlight = 0
+  let g:signify_vcs_list = ['git']
+'''
+
+[[plugins]]
+# best git plugin
+repo = 'tpope/vim-fugitive'
+
+[[plugins]]
+# Gbrowse open browser in Bitbucket too
+repo = 'tommcdo/vim-fubitive'
+depends = 'vim-fugitive'
+
+[[plugins]]
+# Gbrowse open browser in Github. use hub command
+repo = 'tpope/vim-rhubarb.git'
+depends = 'vim-fugitive'
+
+[[plugins]]
+# Show git blame at status line
+repo = 'tommcdo/vim-fugitive-blame-ext'
+depends = 'vim-fugitive'
+
+################## UTILITIES PLUGINS ###################
+
+[[plugins]]
+# BW kill buffer without closing window
+repo = 'qpkorr/vim-bufkill'
+hook_source = '''
+  let g:BufKillOverrideCtrlCaret = 1
+'''
+
+[[plugins]]
+# Now vim recognize line numbers on errors
+repo = 'wsdjeg/vim-fetch'
+
+[[plugins]]
+# Sudo that works with neovim
+repo = 'lambdalisue/suda.vim'
+
+################## LANGUAGE PLUGINS ###################
+
+[[plugins]]
+# Multiple filetypes
+repo = 'sheerun/vim-polyglot'
+hook_source = '''
+  " There are conflicts with fugitive
+  " * https://github.com/sheerun/vim-polyglot/issues/363
+  " * https://github.com/tpope/vim-fugitive/issues/1174
+  let g:polyglot_disabled = ['git']
+'''
+
+[[plugins]]
+# Asynchronous linting
+repo = 'w0rp/ale'
+hook_source = '''
+  " deoplete and ale compete 
+  let g:ale_linters_ignore = {'ruby': ['solargraph']}
+  let g:ale_completion_enabled=0
+'''
+
+[[plugins]]
+# Asynchronous tag generation
+repo = 'ludovicchabant/vim-gutentags'

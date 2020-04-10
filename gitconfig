@@ -1,0 +1,42 @@
+[user]
+	name = Dimas Kotvan
+  email = dimas.kotvan@gmail.com
+[core]
+	editor = nvim
+	excludesfile = ~/.gitignore
+	pager = less -F -X
+[alias]
+	d = difftool
+	co = checkout
+	ci = commit
+	st = status -sb
+	br = branch
+	hist = log --pretty=format:\"%h %ad | %s%d [%an]\" --graph --date=short
+	wc = rev-parse --short HEAD
+	oldest-ancestor = !zsh -c 'diff --old-line-format= --new-line-format= <(git rev-list --first-parent \"${1:-master}\") <(git rev-list --first-parent \"${2:-HEAD}\") | head -1' -
+	branchdiff = !sh -c \"git diff `git oldest-ancestor`..\"
+	branchlog = !sh -c \"git log `git oldest-ancestor`..\"
+[color]
+	ui = auto
+[push]
+	default = simple
+[merge]
+	tool = vimdiff
+[diff]
+	tool = vimdirdiff
+[mergetool]
+	tool = vimdiff
+[mergetool]
+  prompt = true
+[mergetool "vimdiff"]
+  cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[difftool "vimdirdiff"]
+  cmd = nvim -f '+next' '+execute \"DirDiff\" argv(0) argv(1)' $LOCAL $REMOTE
+[mergetool "vimdirdiff"]
+  cmd = nvim -c 'DirDiff $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
+[difftool]
+  prompt = false
+[github]
+	user = dkotvan
+[credential]
+	helper = store

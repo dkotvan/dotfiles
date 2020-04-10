@@ -1,0 +1,328 @@
+################# LANGUAGE PLUGINS ###################
+
+[[plugins]]
+# Integração com Bundler
+repo = 'tpope/vim-bundler'
+on_ft = 'ruby'
+
+[[plugins]]
+# textobject ar | ir
+repo = 'nelstrom/vim-textobj-rubyblock'
+depends = 'vim-textobj-user'
+on_ft = 'ruby'
+
+############## AUTOCOMPLETE PLUGINS ###################
+
+[[plugins]]
+repo = 'Shougo/context_filetype.vim'
+
+[[plugins]]
+repo = 'autozimu/LanguageClient-neovim'
+on_ft = ['ruby']
+build = 'bash install.sh'
+rev = 'next'
+hook_source = '''
+set hidden
+let g:LanguageClient_serverCommands = {
+    \ 'ruby': ['solargraph', 'stdio'],
+    \ }
+let g:LanguageClient_autoStart = 1
+nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+'''
+
+[[plugins]]
+repo = 'zchee/deoplete-jedi'
+on_ft = 'python'
+hook_source = '''
+  let g:deoplete#sources#jedi#enable_typeinfo = 0
+'''
+
+[[plugins]]
+repo = 'deathlyfrantic/deoplete-spell'
+on_source = 'deoplete.nvim'
+
+[[plugins]]
+repo = 'zchee/deoplete-zsh'
+on_ft = ['zsh', 'sh']
+
+[[plugins]]
+repo = 'zchee/deoplete-docker'
+on_ft = ['dockerfile']
+
+[[plugins]]
+repo = 'fishbullet/deoplete-ruby'
+on_ft = ['ruby']
+
+[[plugins]]
+repo = 'fszymanski/deoplete-emoji'
+on_ft = ['gitcommit', 'markdown']
+
+[[plugins]]
+repo = 'Shougo/neco-vim'
+on_source = 'deoplete.nvim'
+on_ft = 'vim'
+
+[[plugins]]
+repo = 'tenfyzhong/CompleteParameter.vim'
+on_source = 'deoplete.nvim'
+
+[[plugins]]
+repo = 'rinx/deoplete-auto-programming'
+on_source = 'deoplete.nvim'
+
+[[plugins]]
+repo = 'Shougo/neco-syntax'
+
+[[plugins]]
+repo = 'Shougo/neosnippet-snippets'
+
+[[plugins]]
+repo = 'honza/vim-snippets'
+
+[[plugins]]
+repo = 'Shougo/neosnippet.vim'
+depends = ['vim-snippets', 'neosnippet-snippets', 'context_filetype.vim']
+on_event = 'InsertCharPre'
+on_ft = 'snippet'
+hook_source = '''
+  imap <C-k>     <Plug>(neosnippet_expand_or_jump)
+  smap <C-k>     <Plug>(neosnippet_expand_or_jump)
+  xmap <C-k>     <Plug>(neosnippet_expand_target)
+
+  let g:neosnippet#enable_snipmate_compatibility = 1
+  let g:neosnippet#enable_completed_snippet = 1
+  let g:neosnippet#expand_word_boundary = 1
+'''
+
+[[plugins]]
+repo = 'wellle/tmux-complete.vim'
+
+[[plugins]]
+repo = 'Shougo/deoplete.nvim'
+depends = ['context_filetype.vim', 'neco-syntax', 'tmux-complete.vim', 'CompleteParameter.vim']
+on_event = 'InsertEnter'
+hook_source = '''
+  source $MYVIMPATH/plugins/deoplete.vim
+  call deoplete#enable()
+'''
+
+################## DENITE PLUGINS ###################
+
+[[plugins]]
+repo = 'Shougo/denite.nvim'
+on_cmd = 'Denite'
+hook_source = 'source $MYVIMPATH/plugins/denite.vim'
+hook_add = '''
+  nnoremap <C-P> :<C-U>Denite buffer gitstatus file/rec<CR>
+  nnoremap <leader>t :<C-U>Denite tag buffer file/rec<CR>
+  nnoremap <C-_> :<C-u>Denite -buffer-name=ag grep:.<CR>
+  nnoremap <leader>h :<C-U>Denite help<CR>
+  nnoremap <leader>o :<C-U>Denite outline<CR>
+'''
+
+[[plugins]]
+repo = 'raghur/fruzzy'
+on_source = ['denite.nvim']
+hook_post_update = 'call fruzzy#install()'
+hook_source = '''
+let g:fruzzy#usenative = 1
+'''
+
+[[plugins]]
+# Extra stuff for denite - session project commands location_list quickfix history 
+repo = 'neoclide/denite-extra'
+on_source = ['denite.nvim']
+on_cmd = ['SessionSave', 'SessionLoad']
+hook_source = '''
+   let g:session_directory = $MYVIMPATH . '/sessions'
+
+  nnoremap <leader>ch :<C-u>Denite change<CR>
+  nnoremap <leader>co :<C-u>Denite command_history<CR>
+  nnoremap <leader>s :<C-U>Denite session<CR>
+'''
+
+[[plugins]]
+# Denite shows git stuff
+repo = 'neoclide/denite-git'
+on_source = ['denite.nvim']
+hook_source = '''
+  nnoremap <leader>gs :<C-U>Denite gitstatus<CR>
+  nnoremap <leader>gc :<C-U>Denite gitchanged<CR>
+  nnoremap <leader>gb :<C-U>Denite gitbranch<CR>
+  nnoremap <leader>gl :<C-U>Denite gitlog<CR>
+'''
+
+[[plugins]]
+# Denite show ale errors / warnings
+repo = 'iyuuya/denite-ale'
+on_source = ['denite.nvim']
+hook_source = '''
+  nnoremap <leader>a :<C-U>Denite ale<CR>
+'''
+
+################## UTILITIES PLUGINS ###################
+
+[[plugins]]
+repo = 'mbbill/undotree'
+on_cmd = ['UndotreeToggle', 'UndotreeFocus', 'UndotreeHide', 'UndotreeShow']
+hook_add = '''
+  nnoremap <leader>u :UndotreeToggle<CR>
+'''
+
+[[plugins]]
+repo = 'mattn/calendar-vim'
+on_cmd = ['Calendar', 'CalendarH', 'CalendarT']
+
+[[plugins]]
+repo = 'tpope/vim-eunuch'
+on_cmd = ['Delete', 'Unlink', 'Move', 'Rename', 'Chmod', 'Mkdir', 'Cfind', 'Clocate', 'Lfind', 'Llocate', 'Wall', 'SudoWrite', 'SudoEdit']
+
+[[plugins]]
+repo = 'scrooloose/nerdtree'
+on_cmd = 'NERDTreeToggle'
+hook_add = '''
+  nnoremap <leader>f :NERDTreeToggle<CR>
+'''
+
+[[plugins]]
+repo = 'Xuyuanp/nerdtree-git-plugin'
+on_source = ['nerdtree']
+
+[[plugins]]
+# rename tabs
+repo = 'gcmt/taboo.vim'
+on_cmd = [ 'TabooOpen', 'TabooRename', 'TabooReset' ]
+hook_add = '''
+  nnoremap <leader>tr :<C-u>TabooRename 
+'''
+
+[[plugins]]
+# compare directories
+repo = 'vim-scripts/dirdiff.vim'
+on_cmd = ['DirDiff']
+
+[[plugins]]
+# kill all buffers except the current
+repo = 'duff/vim-bufonly'
+on_cmd = ['BufOnly', 'Bufonly']
+
+[[plugins]]
+repo = 'AndrewRadev/linediff.vim'
+on_cmd = ['Linediff', 'LinediffAdd', 'LinediffLast', 'LinediffMerge', 'LinediffPick', 'LinediffReset', 'LinediffShow'] 
+
+################## GIT PLUGINS ###################
+
+[[plugins]]
+# A fast git commit browser
+repo = 'rbong/vim-flog'
+on_cmd = ['Flog', 'FlogSplit']
+
+# Using Flog
+# Open the commit graph with :Flog or :Flogsplit. Many options can be passed in, complete with <Tab> completion.
+# Preview commits once you've opened Flog using <CR>. Jump between commits with <C-N> and <C-P>.
+# Refresh the graph with u. Toggle viewing all branches with a. Toggle bisect mode with gb. Toggle displaying no merges with gm. Quit with ZZ.
+# If you forget these bindings, press g? at any time to get help.
+# Run :Git commands in a split next to the graph using :Floggit!. Command line completion is provided to do any git command with the commits and refs under the cursor.
+
+[[plugins]]
+# A fast git commit browser
+repo = 'junegunn/gv.vim'
+on_cmd = ['GV', 'GV!', 'GV?']
+
+################## EDIT & MOTION PLUGINS ###################
+
+[[plugins]]
+repo = 'tpope/vim-repeat'
+on_map = '.'
+
+[[plugins]]
+# ys add delimiters, cs change delimites, ds delete delimiters
+repo = 'tpope/vim-surround'
+on_map = { 
+  n = ['cs', 'ds', 'ys'],
+  x = 'S'
+}
+depends = 'vim-repeat'
+
+[[plugins]]
+repo = 'AndrewRadev/switch.vim'
+on_cmd = ['Switch', 'SwitchReverse']
+on_map = { 
+  n = ['gs'],
+}
+hook_add = '''
+  nmap gs <Plug>Switch<cr>
+'''
+
+[[plugins]]
+# textobject ae | ie 
+repo = 'kana/vim-textobj-entire'
+on_map = {
+  xo = ['ae', 'ie']
+}
+
+[[plugins]]
+# textobject al | il
+repo = 'kana/vim-textobj-line'
+on_map = {
+  xo = ['al', 'il']
+}
+
+[[plugins]]
+# textobject ai | ii
+repo = 'kana/vim-textobj-indent'
+on_map = {
+  xo = ['ai', 'ii']
+}
+
+[[plugins]]
+# textobject an | in
+repo = 'haya14busa/vim-textobj-number'
+on_map = {
+  xo = ['an', 'in']
+}
+
+[[plugins]]
+# better f, F, t and T - highlight the  first letters
+repo = 'deris/vim-shot-f'
+on_map = ['f', 'F', 't', 'T']
+
+[[plugins]]
+# Comments! gc
+repo = 'tpope/vim-commentary'
+on_map = 'gc'
+
+[[plugins]]
+# align text by character -> gl and gL
+repo = 'tommcdo/vim-lion'
+on_map = ['gl', 'gL']
+
+[[plugins]]
+# swap text - cx, cxx, X (visual mode) 
+repo = 'tommcdo/vim-exchange'
+on_map = {
+  n = 'cx',
+  x = 'X'
+}
+
+[[plugins]]
+# :%S - replace text preserving case
+repo = 'tpope/vim-abolish'
+on_cmd = ['Abolish', 'S', 'Subvert']
+on_map = 'cr'
+depends = 'vim-repeat'
+
+[[plugins]]
+repo = 'junegunn/limelight.vim'
+on_cmd = ['Limelight', 'Limelight!', 'Limelight!!']
+
+################## SEARCH PLUGINS ###################
+
+[[plugins]]
+# Show the searches
+repo = 'osyo-manga/vim-anzu'
+on_map = ['n', 'N']
+hook_source = '''
+  map n <Plug>(is-nohl)<Plug>(anzu-n-with-echo)
+  map N <Plug>(is-nohl)<Plug>(anzu-N-with-echo) 
+'''
