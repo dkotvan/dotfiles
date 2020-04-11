@@ -11,15 +11,11 @@ source ~/.zsh_plugins.sh
 
 export EDITOR='nvim'
 
-# Homebrew Support
-export MANPATH="/home/linuxbrew/.linuxbrew/share/man:$MANPATH"
-export INFOPATH="/home/linuxbrew/.linuxbrew/share/info:$INFOPATH"
-fpath=(/home/linuxbrew/.linuxbrew/share/zsh-completions $fpath)
+eval "$(pyenv init -)"
+eval "$(pyenv virtualenv-init -)"
 
-export PATH="$PATH:$HOME/.rvm/bin"
 export PATH="$HOME/.nodenv/bin:$PATH"
 eval "$(nodenv init -)"
-export PATH="$PATH:$HOME/.rvm/bin"
 export PATH="$PATH:$HOME/.local/bin"
 
 bindkey -v

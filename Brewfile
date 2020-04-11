@@ -8,6 +8,8 @@ brew "make"
 # Languages
 brew "python"
 brew "python@2"
+brew "pyenv"
+brew "pyenv-virtualenv"
 brew "node-build"
 brew "nodenv"
 brew "yarn"
