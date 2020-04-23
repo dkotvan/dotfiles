@@ -13,10 +13,7 @@ export EDITOR='nvim'
 
 eval "$(pyenv init -)"
 eval "$(pyenv virtualenv-init -)"
-
-export PATH="$HOME/.nodenv/bin:$PATH"
 eval "$(nodenv init -)"
-export PATH="$PATH:$HOME/.local/bin"
 
 bindkey -v
 
@@ -46,5 +43,3 @@ FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 FZF_CTRL_T_OPTS="--border --preview='bat --paging=never {}'"
 
 [ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
-export PATH="/home/linuxbrew/.linuxbrew/opt/jdk@8/bin:$PATH"
-
