@@ -71,7 +71,8 @@ repo = 'rinx/deoplete-auto-programming'
 on_source = 'deoplete.nvim'
 
 [[plugins]]
-repo = 'Shougo/neco-syntax'
+repo = 'deoplete-plugins/deoplete-tag'
+on_source = 'deoplete.nvim'
 
 [[plugins]]
 repo = 'Shougo/neosnippet-snippets'
