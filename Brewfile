@@ -13,6 +13,7 @@ brew "pyenv-virtualenv"
 brew "node-build"
 brew "nodenv"
 brew "yarn"
+brew "rust"
 brew "openjdk@11", link: true
 
 # Utilities
