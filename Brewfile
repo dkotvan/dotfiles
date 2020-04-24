@@ -33,6 +33,7 @@ brew "the_silver_searcher"
 brew "unzip"
 brew "yamllint"
 brew "zip"
+brew "magic-wormhole"
 
 # apps
 brew "neovim"
