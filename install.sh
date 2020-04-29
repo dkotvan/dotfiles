@@ -27,11 +27,13 @@ curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh >
 sh /tmp/installer.sh ~/dotfiles/nvim/bundles
 nvim +q
 
-# Change default shell
-sudo echo '/home/linuxbrew/.linuxbrew/bin/zsh' >> /etc/shells
-sudo chsh -s /home/linuxbrew/.linuxbrew/bin/zsh "$USER"
-
 # Install nvim requirements 
 yarn global add neovim
 pip install neovim
 pip3 install neovim
+
+# Change default shell
+sudo sh -c "echo $(which zsh) >> /etc/shells" && chsh -s $(which zsh)
+
+# Instal Tmux plugins
+git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
