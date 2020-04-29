@@ -34,6 +34,7 @@ brew "unzip"
 brew "yamllint"
 brew "zip"
 brew "magic-wormhole"
+brew "pinentry-mac"
 
 # apps
 brew "neovim"
