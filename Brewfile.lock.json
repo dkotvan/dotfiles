@@ -703,6 +703,18 @@
         "options": {
           "full_name": "intellij-idea-ce"
         }
+      },
+      "docker": {
+        "version": "2.2.0.5,43884",
+        "options": {
+          "full_name": "docker"
+        }
+      },
+      "slack": {
+        "version": "4.4.2",
+        "options": {
+          "full_name": "slack"
+        }
       }
     }
   },

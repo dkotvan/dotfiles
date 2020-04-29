@@ -39,10 +39,13 @@ brew "magic-wormhole"
 brew "neovim"
 brew "pgcli"
 brew "tmux"
+cask "docker"
 cask "iterm2"
 cask "firefox"
 cask "intellij-idea-ce"
+cask "slack"
 
+# Good font for terminal and programming
 cask "font-saucecodepro-nerd-font"
 
 # Better ctags
