@@ -1,5 +1,6 @@
 tap "homebrew/core"
 tap "homebrew/bundle"
+tap "homebrew/cask-fonts"
 
 # Prerequisites
 brew "gcc"
@@ -7,7 +8,6 @@ brew "make"
 
 # Languages
 brew "python"
-brew "python@2"
 brew "pyenv"
 brew "pyenv-virtualenv"
 brew "node-build"
@@ -39,6 +39,11 @@ brew "magic-wormhole"
 brew "neovim"
 brew "pgcli"
 brew "tmux"
+cask "iterm2"
+cask "firefox"
+cask "intellij-idea-ce"
+
+cask "font-saucecodepro-nerd-font"
 
 # Better ctags
 tap "universal-ctags/universal-ctags"
