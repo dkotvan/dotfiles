@@ -1,6 +1,4 @@
 export RPS1='' # purer and vim mode will not conflict anymore
-# Initialize Homebrew
-eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 
 # Load Antibody plugins
 if [[ ! -a ~/.zsh_plugins.sh   ]]; then
