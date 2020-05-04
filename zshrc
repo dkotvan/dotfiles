@@ -1,5 +1,10 @@
 export RPS1='' # purer and vim mode will not conflict anymore
 
+if [[ $OSTYPE == linux* ]]; then
+  # Initialize Homebrew
+  eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+fi
+
 # Load Antibody plugins
 if [[ ! -a ~/.zsh_plugins.sh   ]]; then
    antibody bundle < ~/dotfiles/zsh_plugins.txt > ~/.zsh_plugins.sh 
@@ -49,4 +54,7 @@ MODE_CURSOR_SEARCH="#ff00ff steady underline"
 MODE_CURSOR_VISUAL="$MODE_CURSOR_VICMD steady bar"
 MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL #00ffff"
 
-export GPG_TTY=`tty` # akes gpg and git works well
+if [ $OSTYPE == darwin* ]; then
+  export GPG_TTY=`tty` # Makes gpg and git works well
+fi
+

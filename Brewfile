@@ -34,20 +34,11 @@ brew "unzip"
 brew "yamllint"
 brew "zip"
 brew "magic-wormhole"
-brew "pinentry-mac"
 
 # apps
 brew "neovim"
 brew "pgcli"
 brew "tmux"
-cask "docker"
-cask "iterm2"
-cask "firefox"
-cask "intellij-idea-ce"
-cask "slack"
-
-# Good font for terminal and programming
-cask "font-saucecodepro-nerd-font"
 
 # Better ctags
 tap "universal-ctags/universal-ctags"
@@ -64,3 +55,18 @@ brew "bundler-completion"
 # Antibody to install ZSH plugins fast
 tap "getantibody/tap"
 brew "getantibody/tap/antibody"
+
+if OS.mac?
+  # Utilities
+  brew "pinentry-mac"
+
+  # Aoos
+  cask "docker"
+  cask "iterm2"
+  cask "firefox"
+  cask "intellij-idea-ce"
+  cask "slack"
+
+  # Good font for terminal and programming
+  cask "font-saucecodepro-nerd-font"
+end
