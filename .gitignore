@@ -4,3 +4,4 @@ nvim/bundles
 nvim/undodir
 nvim/swapdir
 nvim/sessions
+Brewfile.lock.json
