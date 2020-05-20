@@ -1,6 +1,5 @@
 tap "homebrew/core"
 tap "homebrew/bundle"
-tap "homebrew/cask-fonts"
 
 # Prerequisites
 brew "gcc"
@@ -20,7 +19,7 @@ brew "openjdk@11"
 brew "bat"
 brew "bzip2"
 brew "curl"
-brew "docker-compose"
+brew "docker-compose" unless OS.mac?
 brew "exa"
 brew "fd"
 brew "fzf"
@@ -28,17 +27,20 @@ brew "fasd"
 brew "git"
 brew "gnupg"
 brew "hub"
+brew "htop"
 brew "jq"
+brew "kubernetes-cli"
+brew "magic-wormhole"
 brew "the_silver_searcher"
 brew "unzip"
 brew "yamllint"
 brew "zip"
-brew "magic-wormhole"
 
 # apps
 brew "neovim"
 brew "pgcli"
 brew "tmux"
+brew "kubectl"
 
 # Better ctags
 tap "universal-ctags/universal-ctags"
@@ -57,6 +59,8 @@ tap "getantibody/tap"
 brew "getantibody/tap/antibody"
 
 if OS.mac?
+  tap "homebrew/cask-fonts"
+
   # Utilities
   brew "pinentry-mac"
 
@@ -66,6 +70,23 @@ if OS.mac?
   cask "firefox"
   cask "intellij-idea-ce"
   cask "slack"
+
+  cask "chef-workstation"
+  cask "dbeaver-community"
+  cask "discord"
+  cask "docker"
+  cask "firefox"
+
+  cask "intellij-idea-ce"
+  cask "iterm2"
+  cask "lastpass"
+  cask "postman"
+  cask "simplenote"
+  cask "skype"
+  cask "slack"
+  cask "tomighty"
+  cask "yed"
+  cask "zoomus"
 
   # Good font for terminal and programming
   cask "font-saucecodepro-nerd-font"
