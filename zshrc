@@ -37,8 +37,10 @@ setopt hist_ignore_space         # Don't record an entry starting with a space.
 setopt hist_reduce_blanks        # Remove superfluous blanks before recording entry.
 setopt auto_cd                   # Don't need to chdir to directory
 
-export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#a0a0a0,underline"
+export ZSH_AUTOSUGGEST_HIGHLIGHT_STYLE="fg=#11cca0,underline"
 export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
+export ZSH_AUTOSUGGEST_USE_ASYNC=true
+export ZSH_AUTOSUGGEST_COMPLETION_IGNORE='brew *'
 
 FZF_WIDGET_TMUX=1
 FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
