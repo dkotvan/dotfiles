@@ -13,7 +13,6 @@ robbyrussell/oh-my-zsh path:plugins/colored-man-pages
 djui/alias-tips # remember if there is an alias for the command youre using
 robbyrussell/oh-my-zsh path:plugins/alias-finder # command to find alias alias-finder -l git
 robbyrussell/oh-my-zsh path:plugins/z # jumps to most used directory
-webyneter/docker-aliases
 xorkevin/code-review-zsh # add command code review
 zpm-zsh/clipboard # pbcopy, pbpaste and clip
 zdharma/zsh-diff-so-fancy # git dsf
