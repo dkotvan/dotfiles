@@ -21,6 +21,7 @@ eval "$(nodenv init -)"
 bindkey -v
 
 source ~/dotfiles/alias.zsh
+source ~/dotfiles/local/*.zsh
 
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=10000000
@@ -59,4 +60,3 @@ MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL #00ffff"
 if [[ $OSTYPE == darwin* ]]; then
   export GPG_TTY=`tty` # Makes gpg and git works well
 fi
-
