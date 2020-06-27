@@ -27,3 +27,5 @@
   path = ~/.gitconfig.local
 [commit]
 	gpgsign = true
+[pull]
+	ff = only
