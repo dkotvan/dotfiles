@@ -6,6 +6,7 @@ ln -s ~/dotfiles/gitignore ~/.gitignore
 ln -s ~/dotfiles/agignore ~/.agignore
 ln -s ~/dotfiles/agignore ~/.fdignore
 mkdir -p ~/.config
+ln -s ~/dotfiles/starship.toml ~/.config/starship.toml
 ln -s ~/dotfiles/nvim/ ~/.config/nvim
 ln -s ~/dotfiles/ideavimrc ~/.ideavimrc
 

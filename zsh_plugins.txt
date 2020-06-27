@@ -1,7 +1,5 @@
 robbyrussell/oh-my-zsh
 robbyrussell/oh-my-zsh path:plugins/git # nice git aliases
-mafredri/zsh-async # req for purer
-therealklanni/purity # best prompt in the world
 willghatch/zsh-saneopt # zsh configurations
 softmoth/zsh-vim-mode # better vim mode
 okapia/zsh-viexchange # cx swap text

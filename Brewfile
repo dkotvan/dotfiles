@@ -50,6 +50,7 @@ brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD", "without-
 # Shell
 brew "zsh"
 brew "zsh-completions"
+brew "starship"
 brew "brew-cask-completion"
 brew "pip-completion"
 brew "rake-completion"

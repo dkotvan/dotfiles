@@ -1,5 +1,3 @@
-export RPS1='' # purer and vim mode will not conflict anymore
-
 if [[ $OSTYPE == linux* ]]; then
   # Initialize Homebrew
   eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
@@ -60,3 +58,5 @@ MODE_CURSOR_VLINE="$MODE_CURSOR_VISUAL #00ffff"
 if [[ $OSTYPE == darwin* ]]; then
   export GPG_TTY=`tty` # Makes gpg and git works well
 fi
+
+eval "$(starship init zsh)"
