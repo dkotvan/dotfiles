@@ -121,6 +121,13 @@ depends = 'vim-fugitive'
 repo = 'tommcdo/vim-fugitive-blame-ext'
 depends = 'vim-fugitive'
 
+[[plugins]]
+repo = 'rhysd/git-messenger.vim'
+hook_source = '''
+let g:git_messenger_include_diff = 'current'
+let g:git_messenger_always_into_popup = 1
+'''
+
 ################## UTILITIES PLUGINS ###################
 
 [[plugins]]
@@ -162,3 +169,8 @@ hook_source = '''
 [[plugins]]
 # Asynchronous tag generation
 repo = 'ludovicchabant/vim-gutentags'
+
+[[plugins]]
+# Integration of clipboard between tmux and vim
+repo = 'roxma/vim-tmux-clipboard'
+
