@@ -29,6 +29,7 @@ brew "gnupg"
 brew "hub"
 brew "htop"
 brew "jq"
+brew "kafkacat"
 brew "kubernetes-cli"
 brew "magic-wormhole"
 brew "the_silver_searcher"
@@ -61,22 +62,16 @@ brew "getantibody/tap/antibody"
 if OS.mac?
   tap "homebrew/cask-fonts"
 
-  # Utilities
   brew "pinentry-mac"
 
-  # Aoos
-  cask "docker"
-  cask "iterm2"
-  cask "firefox"
-  cask "intellij-idea-ce"
-  cask "slack"
-
+  cask "adoptopenjdk8"
+  cask "ccmenu"
   cask "chef-workstation"
   cask "dbeaver-community"
   cask "discord"
   cask "docker"
   cask "firefox"
-
+  cask "gifcapture"
   cask "intellij-idea-ce"
   cask "iterm2"
   cask "lastpass"
@@ -84,6 +79,7 @@ if OS.mac?
   cask "simplenote"
   cask "skype"
   cask "slack"
+  cask "sourcetree"
   cask "tomighty"
   cask "yed"
   cask "zoomus"
