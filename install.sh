@@ -4,7 +4,7 @@ ln -s ~/dotfiles/tmux.conf ~/.tmux.conf
 ln -s ~/dotfiles/gitconfig ~/.gitconfig
 ln -s ~/dotfiles/gitignore ~/.gitignore
 ln -s ~/dotfiles/agignore ~/.agignore
-ln -s ~/dotfiles/fdignore ~/.fdignore
+ln -s ~/dotfiles/agignore ~/.fdignore
 mkdir -p ~/.config
 ln -s ~/dotfiles/nvim/ ~/.config/nvim
 ln -s ~/dotfiles/ideavimrc ~/.ideavimrc
