@@ -100,7 +100,7 @@ repo = 'wellle/tmux-complete.vim'
 
 [[plugins]]
 repo = 'Shougo/deoplete.nvim'
-depends = ['context_filetype.vim', 'neco-syntax', 'tmux-complete.vim', 'CompleteParameter.vim']
+depends = ['context_filetype.vim', 'tmux-complete.vim', 'CompleteParameter.vim']
 on_event = 'InsertEnter'
 hook_source = '''
   source $MYVIMPATH/plugins/deoplete.vim
