@@ -7,6 +7,9 @@ disabled = true
 [battery]
 disabled = true
 
+[java]
+disabled = true
+
 [line_break]
 disabled = true
 
