@@ -19,7 +19,9 @@ eval "$(nodenv init -)"
 bindkey -v
 
 source ~/dotfiles/alias.zsh
-source ~/dotfiles/local/*.zsh
+for file in ~/dotfiles/local/*.zsh; do
+    source "$file"
+done
 
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=10000000
