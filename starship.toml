@@ -11,10 +11,10 @@ disabled = true
 disabled = true
 
 [kubernetes]
-disabled = false
+disabled = true
 
 [line_break]
 disabled = true
 
 [time]
-disabled = false
+disabled = true
