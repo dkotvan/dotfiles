@@ -31,7 +31,9 @@ brew "hub"
 brew "htop"
 brew "jq"
 brew "kafkacat"
+unless OS.mac?
 brew "kubernetes-cli"
+end
 brew "magic-wormhole"
 brew "task"
 brew "the_silver_searcher"
@@ -43,7 +45,6 @@ brew "zip"
 brew "neovim"
 brew "pgcli"
 brew "tmux"
-brew "kubectl"
 
 # Better ctags
 tap "universal-ctags/universal-ctags"
