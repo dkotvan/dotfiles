@@ -32,10 +32,9 @@ brew "htop"
 brew "jq"
 brew "kafkacat"
 unless OS.mac?
-brew "kubernetes-cli"
+  brew "kubernetes-cli"
 end
 brew "magic-wormhole"
-brew "task"
 brew "the_silver_searcher"
 brew "unzip"
 brew "yamllint"

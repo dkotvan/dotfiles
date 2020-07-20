@@ -327,13 +327,6 @@ depends = 'vim-repeat'
 repo = 'junegunn/limelight.vim'
 on_cmd = ['Limelight', 'Limelight!', 'Limelight!!']
 
-[[plugins]]
-repo = 'blindFS/vim-taskwarrior'
-on_cmd = ['TW', 'TWUndo', 'TWEditTaskrc', 'TWEditVitrc', 'TWDeleteCompleted', 'TWAdd', 'TWAnnotate', 'TWComplete', 'TWDelete', 'TWDeleteAnnotation', 'TWModifyInteractive', 'TWReportInfo', 'TWReportSort', 'TWSync', 'TWToggleReadonly', 'TWToggleHLField', 'TWHistory', 'TWHistoryClear', 'TWBookmark', 'TWBookmarkClear']
-hook_source = '''
-let g:task_rc_override = 'rc.defaultwidth=0'
-'''
-
 ################## SEARCH PLUGINS ###################
 
 [[plugins]]
