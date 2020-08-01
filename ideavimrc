@@ -8,8 +8,10 @@ set textobj-entire
 set commentary
 set surround
 set multiple-cursors
+set exchange
+set ReplaceWithRegister
 
-" Search 
+" Search
 set incsearch hlsearch
 set ignorecase smartcase
 set wrapscan
