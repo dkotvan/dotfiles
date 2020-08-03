@@ -34,7 +34,9 @@ brew "kafkacat"
 unless OS.mac?
   brew "kubernetes-cli"
 end
+brew "kubectx"
 brew "magic-wormhole"
+brew "mdcat"
 brew "the_silver_searcher"
 brew "unzip"
 brew "yamllint"
@@ -79,6 +81,7 @@ if OS.mac?
   cask "gifcapture"
   cask "intellij-idea-ce"
   cask "iterm2"
+  cask "kitty"
   cask "lastpass"
   cask "postman"
   cask "simplenote"

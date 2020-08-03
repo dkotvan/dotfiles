@@ -43,6 +43,10 @@ export ZSH_AUTOSUGGEST_STRATEGY=(history completion)
 export ZSH_AUTOSUGGEST_USE_ASYNC=true
 export ZSH_AUTOSUGGEST_COMPLETION_IGNORE='brew *'
 
+# Fix Kitty wih ZSH
+export LANG=en_US.UTF-8
+export LC_ALL=en_US.UTF-8
+
 FZF_WIDGET_TMUX=1
 FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"

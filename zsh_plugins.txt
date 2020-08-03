@@ -16,3 +16,6 @@ xorkevin/code-review-zsh # add command code review
 zpm-zsh/clipboard # pbcopy, pbpaste and clip
 zdharma/zsh-diff-so-fancy # git dsf
 DarrinTisdale/zsh-aliases-exa # aliases for exa
+robbyrussell/oh-my-zsh path:plugins/zsh-interactive-cd # cd completion with fzf
+zdharma/fast-syntax-highlighting
+Aloxaf/fzf-tab
