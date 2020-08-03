@@ -1,5 +1,6 @@
 tap "homebrew/core"
 tap "homebrew/bundle"
+tap "AdoptOpenJDK/openjdk"
 
 # Prerequisites
 brew "gcc"
@@ -13,7 +14,9 @@ brew "node-build"
 brew "nodenv"
 brew "yarn"
 brew "rust"
-brew "openjdk@11"
+brew "rbenv"
+brew "rbenv-binstubs"
+brew "rbenv-bundler"
 
 # Utilities
 brew "bat"
@@ -70,6 +73,7 @@ if OS.mac?
   brew "pinentry-mac"
 
   cask "adoptopenjdk8"
+  cask "adoptopenjdk13"
   cask "android-file-transfer"
   cask "ccmenu"
   cask "chef-workstation"

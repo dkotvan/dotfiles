@@ -65,4 +65,8 @@ if [[ $OSTYPE == darwin* ]]; then
   export GPG_TTY=`tty` # Makes gpg and git works well
 fi
 
+export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
+
+eval "$(rbenv init -)"
+
 eval "$(starship init zsh)"
