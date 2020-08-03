@@ -161,6 +161,11 @@ hook_source = '''
   nnoremap <leader>a :<C-U>Denite ale<CR>
 '''
 
+[[plugins]]
+repo = 'liuchengxu/vim-clap'
+on_source = ['denite.nvim']
+hook_post_update = 'Clap install-binary!'
+
 ################## UTILITIES PLUGINS ###################
 
 [[plugins]]

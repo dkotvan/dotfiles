@@ -7,6 +7,8 @@ call denite#custom#option('default', {
       \ 'highlight_matched_char': 'Underlined'
       \ })
 call denite#custom#source('_', 'matchers', ['matcher/fruzzy'])
+call denite#custom#filter('matcher/clap', 'clap_path',
+      \ expand('~/dotfiles/nvim/bundles/repos/github.com/liuchengxu/vim-clap'))
 call denite#custom#source('_', 'max_candidates', 50000)
 call denite#custom#source('file/rec', 'sorters', ['sorter_rank'])
 
