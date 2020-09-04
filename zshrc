@@ -3,6 +3,8 @@ if [[ $OSTYPE == linux* ]]; then
   eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 fi
 
+DISABLE_AUTO_TITLE=”true”
+
 # Load Antibody plugins
 if [[ ! -a ~/.zsh_plugins.sh   ]]; then
    antibody bundle < ~/dotfiles/zsh_plugins.txt > ~/.zsh_plugins.sh 
@@ -70,3 +72,4 @@ export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 eval "$(rbenv init -)"
 
 eval "$(starship init zsh)"
+

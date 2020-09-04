@@ -1,8 +1,8 @@
 # Git aliases
 if [[ $OSTYPE == darwin* ]]; then
-  alias prci='xdg-open `hub ci-status -f %U`'
+  alias prci='open `hub ci-status -f %U`'
 else
-  alias prci='xopen `hub ci-status -f %U`'
+  alias prci='xdg-open `hub ci-status -f %U`'
 fi
 alias prl="hub pr list"
 alias pro="hub pr show"
