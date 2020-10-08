@@ -99,4 +99,5 @@ if OS.mac?
 
   # Good font for terminal and programming
   cask "font-saucecodepro-nerd-font"
+  cask "font-fira-code-nerd-font"
 end
