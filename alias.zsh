@@ -12,3 +12,9 @@ alias brdiff="git difftool --dir-diff --tool=vimdirdiff"
 # NVIM
 alias update_nvim='nvim -c "try | call dein#update() | messages | finally | qall! | endtry" --headless'
 alias ngst='nvim -c ":G"'
+alias note='nvim -c ":SimplenoteList"'
+
+# Tmux
+
+alias tm="tmux attach || tmux new"
+
