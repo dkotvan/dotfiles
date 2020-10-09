@@ -112,6 +112,7 @@ hook_source = '''
 [[plugins]]
 repo = 'Shougo/denite.nvim'
 on_cmd = 'Denite'
+on_source = ['nerdtree']
 hook_source = 'source $MYVIMPATH/plugins/denite.vim'
 hook_add = '''
   nnoremap <C-P> :<C-U>Denite buffer gitstatus file/rec<CR>
@@ -186,6 +187,7 @@ on_cmd = ['Delete', 'Unlink', 'Move', 'Rename', 'Chmod', 'Mkdir', 'Cfind', 'Cloc
 [[plugins]]
 repo = 'scrooloose/nerdtree'
 on_cmd = 'NERDTreeToggle'
+on_source = ['denite.nvim']
 hook_add = '''
   nnoremap <leader>f :NERDTreeToggle<CR>
 '''
@@ -222,7 +224,7 @@ on_ft = ['markdown']
 build = 'cargo build --release'
 hook_source = '''
 let g:markdown_composer_browser = 'firefox'
-let g:markdown_composer_open_browser = 0
+let g:markdown_composer_open_browser = 1
 nnoremap <leader>mp :<C-U>ComposerOpen<CR>
 '''
 
@@ -331,6 +333,17 @@ depends = 'vim-repeat'
 [[plugins]]
 repo = 'junegunn/limelight.vim'
 on_cmd = ['Limelight', 'Limelight!', 'Limelight!!']
+
+[[plugins]]
+repo = 'simplenote-vim/simplenote.vim'
+on_cmd = ['SimplenoteOpen', 'SimplenoteNew', 'SimplenoteList']
+hook_source = '''
+  source ~/.simplenoterc
+  let g:SimplenoteSingleWindow = 0
+  let g:SimplenoteFiletype = "markdown"
+  " let g:SimplenoteVertical = 1 
+  let g:SimplenoteListSize = 15
+'''
 
 ################## SEARCH PLUGINS ###################
 

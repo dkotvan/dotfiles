@@ -173,4 +173,3 @@ repo = 'ludovicchabant/vim-gutentags'
 [[plugins]]
 # Integration of clipboard between tmux and vim
 repo = 'roxma/vim-tmux-clipboard'
-
