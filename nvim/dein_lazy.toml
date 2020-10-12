@@ -170,6 +170,10 @@ hook_post_update = 'Clap install-binary!'
 ################## UTILITIES PLUGINS ###################
 
 [[plugins]]
+repo = 'rhysd/vim-grammarous'
+on_cmd = ['GrammarousCheck', 'GrammarousReset']
+
+[[plugins]]
 repo = 'mbbill/undotree'
 on_cmd = ['UndotreeToggle', 'UndotreeFocus', 'UndotreeHide', 'UndotreeShow']
 hook_add = '''
