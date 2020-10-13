@@ -38,6 +38,7 @@ unless OS.mac?
   brew "kubernetes-cli"
 end
 brew "kubectx"
+brew "zaquestion/tap/lab"
 brew "magic-wormhole"
 brew "mdcat"
 brew "the_silver_searcher"
