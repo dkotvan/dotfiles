@@ -17,6 +17,10 @@ on_ft = 'ruby'
 repo = 'Shougo/context_filetype.vim'
 
 [[plugins]]
+repo = 'kristijanhusak/vim-dadbod-completion'
+on_source = 'deoplete.nvim'
+
+[[plugins]]
 repo = 'autozimu/LanguageClient-neovim'
 on_ft = ['ruby']
 build = 'bash install.sh'
@@ -107,65 +111,18 @@ hook_source = '''
   call deoplete#enable()
 '''
 
-################## DENITE PLUGINS ###################
-
-[[plugins]]
-repo = 'Shougo/denite.nvim'
-on_cmd = 'Denite'
-on_source = ['nerdtree']
-hook_source = 'source $MYVIMPATH/plugins/denite.vim'
-hook_add = '''
-  nnoremap <C-P> :<C-U>Denite buffer gitstatus file/rec<CR>
-  nnoremap <leader>t :<C-U>Denite tag buffer file/rec<CR>
-  nnoremap <C-_> :<C-u>Denite -buffer-name=ag grep:.<CR>
-  nnoremap <leader>h :<C-U>Denite help<CR>
-  nnoremap <leader>o :<C-U>Denite outline<CR>
-'''
-
-[[plugins]]
-repo = 'raghur/fruzzy'
-on_source = ['denite.nvim']
-hook_post_update = 'call fruzzy#install()'
-hook_source = '''
-let g:fruzzy#usenative = 1
-'''
-
-[[plugins]]
-# Extra stuff for denite - session project commands location_list quickfix history 
-repo = 'neoclide/denite-extra'
-on_source = ['denite.nvim']
-on_cmd = ['SessionSave', 'SessionLoad']
-hook_source = '''
-   let g:session_directory = $MYVIMPATH . '/sessions'
-
-  nnoremap <leader>ch :<C-u>Denite change<CR>
-  nnoremap <leader>co :<C-u>Denite command_history<CR>
-  nnoremap <leader>s :<C-U>Denite session<CR>
-'''
-
-[[plugins]]
-# Denite shows git stuff
-repo = 'neoclide/denite-git'
-on_source = ['denite.nvim']
-hook_source = '''
-  nnoremap <leader>gs :<C-U>Denite gitstatus<CR>
-  nnoremap <leader>gc :<C-U>Denite gitchanged<CR>
-  nnoremap <leader>gb :<C-U>Denite gitbranch<CR>
-  nnoremap <leader>gl :<C-U>Denite gitlog<CR>
-'''
-
-[[plugins]]
-# Denite show ale errors / warnings
-repo = 'iyuuya/denite-ale'
-on_source = ['denite.nvim']
-hook_source = '''
-  nnoremap <leader>a :<C-U>Denite ale<CR>
-'''
+################## CLAP PLUGINS ###################
 
 [[plugins]]
 repo = 'liuchengxu/vim-clap'
-on_source = ['denite.nvim']
+on_cmd = ['Clap']
 hook_post_update = 'Clap install-binary!'
+hook_add = '''
+  nnoremap <C-P> :<C-U>Clap files<CR>
+  nnoremap <C-_> :<C-u>Clap grep<CR>
+  nnoremap <leader>t :<C-U>Clap tags<CR>
+  nnoremap <leader>o :<C-U>Denite outline<CR>
+'''
 
 ################## UTILITIES PLUGINS ###################
 
@@ -204,7 +161,6 @@ on_cmd = ['Delete', 'Unlink', 'Move', 'Rename', 'Chmod', 'Mkdir', 'Cfind', 'Cloc
 [[plugins]]
 repo = 'scrooloose/nerdtree'
 on_cmd = 'NERDTreeToggle'
-on_source = ['denite.nvim']
 hook_add = '''
   nnoremap <leader>f :NERDTreeToggle<CR>
 '''
@@ -358,8 +314,8 @@ hook_source = '''
   source ~/.simplenoterc
   let g:SimplenoteSingleWindow = 0
   let g:SimplenoteFiletype = "markdown"
-  " let g:SimplenoteVertical = 1 
-  let g:SimplenoteListSize = 15
+  let g:SimplenoteVertical = 1 
+  let g:SimplenoteListSize = 40
 '''
 
 ################## SEARCH PLUGINS ###################
