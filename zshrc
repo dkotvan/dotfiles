@@ -14,8 +14,6 @@ source ~/.zsh_plugins.sh
 
 export EDITOR='nvim'
 
-eval "$(pyenv init -)"
-eval "$(pyenv virtualenv-init -)"
 eval "$(nodenv init -)"
 
 bindkey -v

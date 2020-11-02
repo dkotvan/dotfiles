@@ -8,8 +8,6 @@ brew "make"
 
 # Languages
 brew "python"
-brew "pyenv"
-brew "pyenv-virtualenv"
 brew "node-build"
 brew "nodenv"
 brew "yarn"
@@ -26,7 +24,6 @@ brew "docker-compose" unless OS.mac?
 brew "exa"
 brew "fd"
 brew "fzf"
-brew "fasd"
 brew "git"
 brew "gnupg"
 brew "helm"
