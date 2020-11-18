@@ -173,15 +173,3 @@ repo = 'ludovicchabant/vim-gutentags'
 [[plugins]]
 # Integration of clipboard between tmux and vim
 repo = 'roxma/vim-tmux-clipboard'
-
-[[plugins]]
-repo = 'tpope/vim-dadbod'
-
-[[plugins]]
-repo = 'kristijanhusak/vim-dadbod-ui'
-
-################## TAG PLUGINS ###################
-
-[[plugins]]
-repo = 'liuchengxu/vista.vim'
-
