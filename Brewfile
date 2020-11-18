@@ -50,7 +50,7 @@ brew "tmux"
 
 # Better ctags
 tap "universal-ctags/universal-ctags"
-brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD", "without-xml"]
+brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD", "with-jansson", "without-xml"]
 
 # Shell
 brew "zsh"
@@ -71,6 +71,7 @@ if OS.mac?
   brew "pinentry-mac"
 
   cask "adoptopenjdk8"
+  cask "adoptopenjdk11"
   cask "adoptopenjdk13"
   cask "android-file-transfer"
   cask "ccmenu"
