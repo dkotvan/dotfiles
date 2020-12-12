@@ -115,8 +115,7 @@ on_cmd = 'Denite'
 on_source = ['nerdtree']
 hook_source = 'source $MYVIMPATH/plugins/denite.vim'
 hook_add = '''
-  nnoremap <C-P> :<C-U>Denite buffer gitstatus file/rec<CR>
-  nnoremap <leader>t :<C-U>Denite tag buffer file/rec<CR>
+  nnoremap <C-P> :<C-U>Denite buffer gitstatus file/rec tag<CR>
   nnoremap <C-_> :<C-u>Denite -buffer-name=ag grep:.<CR>
   nnoremap <leader>h :<C-U>Denite help<CR>
   nnoremap <leader>o :<C-U>Denite outline<CR>
@@ -162,12 +161,18 @@ hook_source = '''
   nnoremap <leader>a :<C-U>Denite ale<CR>
 '''
 
-[[plugins]]
-repo = 'liuchengxu/vim-clap'
-on_source = ['denite.nvim']
-hook_post_update = 'Clap install-binary!'
-
 ################## UTILITIES PLUGINS ###################
+
+[[plugins]]
+repo = 'mattn/vim-maketable'
+on_fmt = ['markdown']
+
+[[plugins]]
+repo = 'preservim/tagbar'
+on_cmd = ['TagbarToggle']
+hook_add = '''
+  nnoremap <leader>ft :TagbarToggle<CR>
+'''
 
 [[plugins]]
 repo = 'rhysd/vim-grammarous'
@@ -234,16 +239,6 @@ on_cmd = ['BufOnly', 'Bufonly']
 [[plugins]]
 repo = 'AndrewRadev/linediff.vim'
 on_cmd = ['Linediff', 'LinediffAdd', 'LinediffLast', 'LinediffMerge', 'LinediffPick', 'LinediffReset', 'LinediffShow'] 
-
-[[plugins]]
-repo = 'euclio/vim-markdown-composer'
-on_ft = ['markdown']
-build = 'cargo build --release'
-hook_source = '''
-let g:markdown_composer_browser = 'firefox'
-let g:markdown_composer_open_browser = 1
-nnoremap <leader>mp :<C-U>ComposerOpen<CR>
-'''
 
 ################## GIT PLUGINS ###################
 
