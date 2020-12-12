@@ -131,6 +131,13 @@ let g:git_messenger_always_into_popup = 1
 ################## UTILITIES PLUGINS ###################
 
 [[plugins]]
+repo = 'euclio/vim-markdown-composer'
+build = 'cargo build --release'
+hook_source = '''
+let g:markdown_composer_browser = '/Applications/Google Chrome.app/Contents/MacOS/Google Chrome'
+'''
+
+[[plugins]]
 # BW kill buffer without closing window
 repo = 'qpkorr/vim-bufkill'
 hook_source = '''
