@@ -180,3 +180,9 @@ repo = 'ludovicchabant/vim-gutentags'
 [[plugins]]
 # Integration of clipboard between tmux and vim
 repo = 'roxma/vim-tmux-clipboard'
+
+[[plugins]]
+# MakeTable! -> csv to markdown table
+# UnmakeTable  -> markdown to csv
+repo = 'mattn/vim-maketable'
+

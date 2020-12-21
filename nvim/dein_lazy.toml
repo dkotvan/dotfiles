@@ -164,10 +164,6 @@ hook_source = '''
 ################## UTILITIES PLUGINS ###################
 
 [[plugins]]
-repo = 'mattn/vim-maketable'
-on_fmt = ['markdown']
-
-[[plugins]]
 repo = 'preservim/tagbar'
 on_cmd = ['TagbarToggle']
 hook_add = '''
