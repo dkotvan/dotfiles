@@ -12,6 +12,8 @@ djui/alias-tips # remember if there is an alias for the command youre using
 robbyrussell/oh-my-zsh path:plugins/alias-finder # command to find alias alias-finder -l git
 robbyrussell/oh-my-zsh path:plugins/z # jumps to most used directory
 robbyrussell/oh-my-zsh path:plugins/kubectl # k = kubectl and also autocomplete work
+robbyrussell/oh-my-zsh path:plugins/docker #auto completion for docker
+robbyrussell/oh-my-zsh path:plugins/docker-compose # auto completion for docker-compose + alias dco, dcb, dce, etc...
 zpm-zsh/clipboard # pbcopy, pbpaste and clip
 zdharma/zsh-diff-so-fancy # git dsf
 DarrinTisdale/zsh-aliases-exa # aliases for exa
