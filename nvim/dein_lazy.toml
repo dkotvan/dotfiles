@@ -119,6 +119,7 @@ hook_add = '''
   nnoremap <C-_> :<C-u>Denite -buffer-name=ag grep:.<CR>
   nnoremap <leader>h :<C-U>Denite help<CR>
   nnoremap <leader>o :<C-U>Denite outline<CR>
+  nnoremap <leader>b :<C-U>Denite buffer<CR>
 '''
 
 [[plugins]]
