@@ -124,6 +124,11 @@ repo = 'tpope/vim-rhubarb.git'
 depends = 'vim-fugitive'
 
 [[plugins]]
+# Gbrowse open browser in Github. use lab command
+repo = 'shumphrey/fugitive-gitlab.vim'
+depends = 'vim-fugitive'
+
+[[plugins]]
 # Show git blame at status line
 repo = 'tommcdo/vim-fugitive-blame-ext'
 depends = 'vim-fugitive'
