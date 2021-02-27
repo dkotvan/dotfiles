@@ -8,6 +8,7 @@ zsh-users/zsh-completions # a lot of command completions
 robbyrussell/oh-my-zsh path:plugins/command-not-found # ubuntu command not found works now at brew zsh 
 robbyrussell/oh-my-zsh path:plugins/gradle # gradle or gradlew doesnt matter anymore
 robbyrussell/oh-my-zsh path:plugins/colored-man-pages
+robbyrussell/oh-my-zsh path:plugins/urltools # urlencode
 djui/alias-tips # remember if there is an alias for the command youre using
 robbyrussell/oh-my-zsh path:plugins/alias-finder # command to find alias alias-finder -l git
 robbyrussell/oh-my-zsh path:plugins/z # jumps to most used directory

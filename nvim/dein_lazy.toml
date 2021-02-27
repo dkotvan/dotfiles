@@ -115,7 +115,8 @@ on_cmd = 'Denite'
 on_source = ['nerdtree']
 hook_source = 'source $MYVIMPATH/plugins/denite.vim'
 hook_add = '''
-  nnoremap <C-P> :<C-U>Denite buffer gitstatus file/rec tag<CR>
+  nnoremap <C-P> :<C-U>Denite buffer gitstatus file/rec<CR>
+  nnoremap <leader>t :<C-U>Denite buffer gitstatus file/rec tag<CR>
   nnoremap <C-_> :<C-u>Denite -buffer-name=ag grep:.<CR>
   nnoremap <leader>h :<C-U>Denite help<CR>
   nnoremap <leader>o :<C-U>Denite outline<CR>

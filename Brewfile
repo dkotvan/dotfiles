@@ -20,6 +20,7 @@ brew "rbenv-bundler"
 brew "bat"
 brew "bzip2"
 brew "curl"
+brew "csvkit"
 brew "docker-compose" unless OS.mac?
 brew "exa"
 brew "fd"
@@ -46,6 +47,7 @@ brew "zip"
 # apps
 brew "neovim"
 brew "pgcli"
+brew "litecli"
 brew "tmux"
 
 # Better ctags
@@ -70,7 +72,7 @@ if OS.mac?
 
   brew "pinentry-mac"
 
-  cask "adoptopenjdk8"
+  cask "adoptopenjdk/openjdk/adoptopenjdk8"
   cask "adoptopenjdk11"
   cask "adoptopenjdk13"
   cask "android-file-transfer"
@@ -94,7 +96,7 @@ if OS.mac?
   cask "sourcetree"
   cask "tomighty"
   cask "yed"
-  cask "zoomus"
+  cask "zoom"
 
   # Good font for terminal and programming
   cask "font-saucecodepro-nerd-font"
