@@ -242,18 +242,6 @@ on_cmd = ['Linediff', 'LinediffAdd', 'LinediffLast', 'LinediffMerge', 'LinediffP
 
 [[plugins]]
 # A fast git commit browser
-repo = 'rbong/vim-flog'
-on_cmd = ['Flog', 'FlogSplit']
-
-# Using Flog
-# Open the commit graph with :Flog or :Flogsplit. Many options can be passed in, complete with <Tab> completion.
-# Preview commits once you've opened Flog using <CR>. Jump between commits with <C-N> and <C-P>.
-# Refresh the graph with u. Toggle viewing all branches with a. Toggle bisect mode with gb. Toggle displaying no merges with gm. Quit with ZZ.
-# If you forget these bindings, press g? at any time to get help.
-# Run :Git commands in a split next to the graph using :Floggit!. Command line completion is provided to do any git command with the commits and refs under the cursor.
-
-[[plugins]]
-# A fast git commit browser
 repo = 'junegunn/gv.vim'
 on_cmd = ['GV', 'GV!', 'GV?']
 
@@ -344,17 +332,6 @@ depends = 'vim-repeat'
 repo = 'junegunn/limelight.vim'
 on_cmd = ['Limelight', 'Limelight!', 'Limelight!!']
 
-[[plugins]]
-repo = 'simplenote-vim/simplenote.vim'
-on_cmd = ['SimplenoteOpen', 'SimplenoteNew', 'SimplenoteList']
-hook_source = '''
-  source ~/.simplenoterc
-  let g:SimplenoteSingleWindow = 0
-  let g:SimplenoteFiletype = "markdown"
-  " let g:SimplenoteVertical = 1 
-  let g:SimplenoteListSize = 15
-'''
-
 ################## SEARCH PLUGINS ###################
 
 [[plugins]]
@@ -364,4 +341,14 @@ on_map = ['n', 'N']
 hook_source = '''
   map n <Plug>(is-nohl)<Plug>(anzu-n-with-echo)
   map N <Plug>(is-nohl)<Plug>(anzu-N-with-echo) 
+'''
+
+################## PREVIEW PLUGINS ###################
+
+[[plugins]]
+# Show the searches
+repo = 'previm/previm'
+on_cmd = ['PrevimOpen', 'PrevimWipeCache', 'PrevimWipeCache']
+hook_source = '''
+  let g:previm_open_cmd = 'open -a "/applications/google chrome.app/contents/macos/google chrome"'
 '''
