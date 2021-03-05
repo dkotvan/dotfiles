@@ -7,7 +7,16 @@ disabled = true
 [battery]
 disabled = true
 
+[git_commit]
+commit_hash_length = 8
+only_detached = false
+ta_disabled = false
+disabled = false
+
 [java]
+disabled = true
+
+[kotlin]
 disabled = true
 
 [kubernetes]
@@ -15,6 +24,9 @@ disabled = true
 
 [line_break]
 disabled = true
+
+[status]
+disabled = false
 
 [time]
 disabled = true
