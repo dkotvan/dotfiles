@@ -346,9 +346,10 @@ hook_source = '''
 ################## PREVIEW PLUGINS ###################
 
 [[plugins]]
-# Show the searches
-repo = 'previm/previm'
-on_cmd = ['PrevimOpen', 'PrevimWipeCache', 'PrevimWipeCache']
-hook_source = '''
-  let g:previm_open_cmd = 'open -a "/applications/google chrome.app/contents/macos/google chrome"'
+repo = 'iamcco/markdown-preview.nvim'
+on_ft = ['markdown', 'pandoc.markdown', 'rmd']
+build = 'sh -c "cd app && yarn install"'
+hook_source= '''
+let g:mkdp_preview_options = {
+    \ }
 '''
