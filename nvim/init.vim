@@ -17,7 +17,7 @@ let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
 set termguicolors " colorscheme working well on iTerm2 + tmux
 set t_ZH=^[[3m
 set t_ZR=^[[23m
-if $ITERM_PROFILE ==? "night"
+if $ITERM_PROFILE ==? "Night"
 	set background=dark
 else 
 	set background=light
