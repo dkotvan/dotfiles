@@ -89,7 +89,6 @@ if OS.mac?
   cask "kitty"
   cask "lastpass"
   cask "postman"
-  cask "simplenote"
   cask "skype"
   cask "slack"
   cask "seashore"
