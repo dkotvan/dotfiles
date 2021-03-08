@@ -191,6 +191,10 @@ repo = 'ludovicchabant/vim-gutentags'
 repo = 'roxma/vim-tmux-clipboard'
 
 [[plugins]]
+# Make FousGained and FousLost works in termibnalç vim + tmux
+repo = 'tmux-plugins/vim-tmux-focus-events'
+
+[[plugins]]
 # MakeTable! -> csv to markdown table
 # UnmakeTable  -> markdown to csv
 repo = 'mattn/vim-maketable'

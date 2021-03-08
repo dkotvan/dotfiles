@@ -11,6 +11,11 @@ repo = 'nelstrom/vim-textobj-rubyblock'
 depends = 'vim-textobj-user'
 on_ft = 'ruby'
 
+[[plugins]]
+# K make open tmux doumentation
+repo = 'tmux-plugins/vim-tmux'
+on_ft = 'tmux'
+
 ############## AUTOCOMPLETE PLUGINS ###################
 
 [[plugins]]
