@@ -53,7 +53,7 @@ hook_source = '''
   let g:gruvbox_underline=1
   let g:gruvbox_undercurl=1
   let g:gruvbox_termcolors=256
-  let g:gruvbox_contrast_dark='medium'
+  let g:gruvbox_contrast_dark='soft'
   let g:gruvbox_contrast_light='medium'
 '''
   # let g:gruvbox_sign_column='grey'
@@ -70,6 +70,7 @@ hook_source = '''
   # let g:gruvbox_improved_strings
   # let g:gruvbox_improved_warnings
   # let g:gruvbox_guisp_fallback
+
 
 ################## EDIT & MOTION PLUGINS ###################
 
