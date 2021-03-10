@@ -22,18 +22,19 @@ on_ft = 'tmux'
 repo = 'Shougo/context_filetype.vim'
 
 [[plugins]]
-repo = 'autozimu/LanguageClient-neovim'
-on_ft = ['ruby']
-build = 'bash install.sh'
-rev = 'next'
+repo = 'prabirshrestha/vim-lsp'
 hook_source = '''
-set hidden
-let g:LanguageClient_serverCommands = {
-    \ 'ruby': ['solargraph', 'stdio'],
-    \ }
-let g:LanguageClient_autoStart = 1
-nnoremap <silent> gd :call LanguageClient#textDocument_definition()<CR>
+  nnoremap <F2> <plug>(lsp-next-diagnostic)
 '''
+
+[[plugins]]
+repo = 'mattn/vim-lsp-settings'
+depends = ['vim-lsp']
+
+[[plugins]]
+repo = 'lighttiger2505/deoplete-vim-lsp'
+depends = [ 'deoplete.nvim', 'vim-lsp-settings' ]
+on_ft = ['json', 'javascript', 'kotlin', 'go', 'sql', 'java', 'css']
 
 [[plugins]]
 repo = 'zchee/deoplete-jedi'
@@ -166,6 +167,14 @@ repo = 'iyuuya/denite-ale'
 on_source = ['denite.nvim']
 hook_source = '''
   nnoremap <leader>a :<C-U>Denite ale<CR>
+'''
+
+[[plugins]]
+# Denite show vim-lsp errors
+repo = 'lighttiger2505/denite-vim-lsp'
+on_source = ['denite.nvim']
+hook_source = '''
+  " nnoremap <leader>a :<C-U>Denite ale<CR>
 '''
 
 ################## UTILITIES PLUGINS ###################
