@@ -171,7 +171,9 @@ hook_source = '''
   " There are conflicts with fugitive
   " * https://github.com/sheerun/vim-polyglot/issues/363
   " * https://github.com/tpope/vim-fugitive/issues/1174
-  let g:polyglot_disabled = ['git']
+  let g:polyglot_disabled = ['git', 'markdown']
+
+  let g:vim_json_syntax_conceal = 0
 '''
 
 [[plugins]]

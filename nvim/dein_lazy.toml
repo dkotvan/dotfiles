@@ -16,6 +16,26 @@ on_ft = 'ruby'
 repo = 'tmux-plugins/vim-tmux'
 on_ft = 'tmux'
 
+[[plugins]]
+repo = 'plasticboy/vim-markdown'
+on_ft = 'markdown'
+depends = 'tabular'
+hook_source = '''
+  " Disable auto conceal
+  let g:vim_markdown_conceal = 0
+  let g:tex_conceal = ""
+  let g:vim_markdown_conceal_code_blocks = 0
+
+  " Enable latex math
+  let g:vim_markdown_math = 1
+
+  " add automatically for link when you call with ge
+  let g:vim_markdown_no_extensions_in_markdown = 1
+  " ge go to anchor
+  let g:vim_markdown_follow_anchor = 1
+  let g:vim_markdown_toc_autofit = 1
+'''
+
 ############## AUTOCOMPLETE PLUGINS ###################
 
 [[plugins]]
@@ -326,6 +346,11 @@ on_map = 'gc'
 # align text by character -> gl and gL
 repo = 'tommcdo/vim-lion'
 on_map = ['gl', 'gL']
+
+[[plugins]]
+# align text - here because i can use the command Tbale in plasticboy/markdown
+repo = 'godlygeek/tabular'
+on_cmd = ['Tabularize']
 
 [[plugins]]
 # swap text - cx, cxx, X (visual mode) 
