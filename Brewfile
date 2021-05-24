@@ -52,7 +52,7 @@ brew "tmux"
 
 # Better ctags
 tap "universal-ctags/universal-ctags"
-brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD", "with-jansson", "without-xml"]
+brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD"]
 
 # Shell
 brew "zsh"
