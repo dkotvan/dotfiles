@@ -18,6 +18,12 @@ hook_source = '''
 '''
 
 [[plugins]]
+repo = 'Yggdroot/hiPairs'
+hook_source = '''
+let g:hiPairs_enable_matchParen = 0
+'''
+
+[[plugins]]
 repo = 'vim-airline/vim-airline'
 hook_source = '''
   let g:airline_powerline_fonts = 1
@@ -56,21 +62,6 @@ hook_source = '''
   let g:gruvbox_contrast_dark='soft'
   let g:gruvbox_contrast_light='medium'
 '''
-  # let g:gruvbox_sign_column='grey'
-  # let g:gruvbox_hls_cursor= 
-  # let g:gruvbox_number_column
-  # let g:gruvbox_color_column
-  # let g:gruvbox_vert_split=blue
-  # let g:gruvbox_italicize_comments
-  # let g:gruvbox_italicize_strings
-  # let g:gruvbox_invert_selection
-  # let g:gruvbox_invert_signs
-  # let g:gruvbox_invert_indent_guides
-  # let g:gruvbox_invert_tabline
-  # let g:gruvbox_improved_strings
-  # let g:gruvbox_improved_warnings
-  # let g:gruvbox_guisp_fallback
-
 
 ################## EDIT & MOTION PLUGINS ###################
 
@@ -82,7 +73,7 @@ repo = 'wellle/targets.vim'
 repo = 'tpope/vim-endwise'
 
 [[plugins]]
-# allow to create your own text objects
+# allow to create your own text object
 repo = 'kana/vim-textobj-user'
 
 [[plugins]]
@@ -124,7 +115,7 @@ repo = 'tpope/vim-rhubarb.git'
 depends = 'vim-fugitive'
 
 [[plugins]]
-# Gbrowse open browser in Github. use lab command
+# Gbrowse open browser in Gitlab. use lab command
 repo = 'shumphrey/fugitive-gitlab.vim'
 depends = 'vim-fugitive'
 
@@ -134,6 +125,7 @@ repo = 'tommcdo/vim-fugitive-blame-ext'
 depends = 'vim-fugitive'
 
 [[plugins]]
+# Show popup with commit of the current line
 repo = 'rhysd/git-messenger.vim'
 hook_source = '''
   let g:git_messenger_include_diff = 'current'
@@ -144,14 +136,14 @@ hook_source = '''
 ################## UTILITIES PLUGINS ###################
 
 [[plugins]]
-# BW kill buffer without closing window
+# BW kill buffer without closing window, BUN, BD, BW, BB, BF
 repo = 'qpkorr/vim-bufkill'
 hook_source = '''
   let g:BufKillOverrideCtrlCaret = 1
 '''
 
 [[plugins]]
-# Now vim recognize line numbers on errors
+# Now vim recognize line numbers on errors - open files like /a.txt:20:5
 repo = 'wsdjeg/vim-fetch'
 
 [[plugins]]
@@ -190,15 +182,17 @@ hook_source = '''
 repo = 'ludovicchabant/vim-gutentags'
 
 [[plugins]]
+# MakeTable! -> csv to markdown table
+# UnmakeTable  -> markdown to csv
+repo = 'mattn/vim-maketable'
+
+################## TMUX INTEGRATION ###################
+
+[[plugins]]
 # Integration of clipboard between tmux and vim
 repo = 'roxma/vim-tmux-clipboard'
 
 [[plugins]]
-# Make FousGained and FousLost works in termibnalç vim + tmux
+# Make FousGained and FousLost works in terminal vim + tmux
 repo = 'tmux-plugins/vim-tmux-focus-events'
-
-[[plugins]]
-# MakeTable! -> csv to markdown table
-# UnmakeTable  -> markdown to csv
-repo = 'mattn/vim-maketable'
 

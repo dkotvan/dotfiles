@@ -16,3 +16,5 @@ toggles.txt
 .overcommit.yml
 .solargraph.yml
 Session.vim
+denitevimlsp.log
+jmeter.log

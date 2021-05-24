@@ -82,7 +82,6 @@ if OS.mac?
   cask "discord"
   cask "docker"
   cask "firefox"
-  cask "google-chrome"
   cask "gifcapture"
   cask "intellij-idea-ce"
   cask "iterm2"
