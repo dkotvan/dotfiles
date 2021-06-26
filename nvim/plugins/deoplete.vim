@@ -5,15 +5,16 @@ call deoplete#custom#option({
 \ 'auto_complete_delay': 100,
 \ 'camel_case': v:true,
 \ 'smart_case': v:true,
+\ 'nofile_complete_filetypes': [],
 \ })
 
-call deoplete#custom#source('ruby', 'rank', 50)
-call deoplete#custom#source('auto-programming', 'rank', 1)
-call deoplete#custom#source('spell', 'filetypes', ['gitcommit', 'markdown'])
+  call deoplete#custom#source('ruby', 'rank', 50)
+  call deoplete#custom#source('auto-programming', 'rank', 1)
+  call deoplete#custom#source('spell', 'filetypes', ['gitcommit', 'markdown'])
 
-" change conflicting marks of around source
-call deoplete#custom#var('around', {
-\   'mark_above': '[↑]',
+  " change conflicting marks of around source
+  call deoplete#custom#var('around', {
+  \   'mark_above': '[↑]',
 \   'mark_below': '[↓]',
 \   'mark_changes': '[*]',
 \})
