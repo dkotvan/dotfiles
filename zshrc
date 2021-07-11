@@ -67,7 +67,10 @@ fi
 
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 
+zmodload zsh/zpty
+
 eval "$(rbenv init -)"
 
 eval "$(starship init zsh)"
+
 
