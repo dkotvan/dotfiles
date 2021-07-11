@@ -22,3 +22,6 @@ tnoremap <C-_> <C-\><C-N><C-_>
 " Better CTRL-L
 nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 
+" Stuff
+
+nnoremap <leader>f <cmd>:NvimTreeToggle<CR>

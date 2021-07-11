@@ -12,6 +12,11 @@ fi
 export ZSH="$(antibody home)/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh"
 source ~/.zsh_plugins.sh
 
+# Control if we are using dark or light background
+if [[ ! -a ~/.background   ]]; then
+  echo 'light' > ~/.background
+fi
+
 export EDITOR='nvim'
 
 eval "$(nodenv init -)"
@@ -67,7 +72,11 @@ fi
 
 export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 
+zmodload zsh/zpty
+
 eval "$(rbenv init -)"
 
 eval "$(starship init zsh)"
+
+export PATH=~/go/bin:~/bin:$PATH
 

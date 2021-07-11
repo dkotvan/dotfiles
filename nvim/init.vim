@@ -4,12 +4,11 @@ if &compatible
 	set nocompatible
 endif
 
-let mapleader=","                                " comma as leader key
+let mapleader=',' " comma as leader key
 
 source $MYVIMPATH/general.vim
-source $MYVIMPATH/addons.vim
-source $MYVIMPATH/keys.vim
-source $MYVIMPATH/custom.vim
+
+lua require('plugins')
 
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
@@ -17,12 +16,16 @@ let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
 set termguicolors " colorscheme working well on iTerm2 + tmux
 set t_ZH=^[[3m
 set t_ZR=^[[23m
-if $ITERM_PROFILE ==? "Night"
-	set background=dark
-else 
-	set background=light
-endif
-let g:gruvbox_italic=1
-colorscheme gruvbox
+
+lua require('config/ui')
+
 highlight Normal ctermbg=NONE
 highlight nonText ctermbg=NONE
+
+lua require('config.code')
+lua require('config.completion')
+lua require('config.finder')
+lua require('config.debug')
+lua require('config.editing')
+
+source $MYVIMPATH/keys.vim
