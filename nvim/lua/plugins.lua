@@ -21,18 +21,17 @@ return require("packer").startup {
       end
     }
 
-    use {'ojroques/nvim-hardline'}
+    use {
+      'hoob3rt/lualine.nvim',
+      requires = {'kyazdani42/nvim-web-devicons', opt = true}
+    }
 
     use {
       'adisen99/codeschool.nvim',
       requires = {'rktjmp/lush.nvim'},
       config = function()
-        vim.g.codeschool_contrast_dark = 'medium'
+        vim.g.codeschool_contrast_dark = 'hard'
       end
-    }
-
-    use {
-      'yamatsum/nvim-cursorline'
     }
 
     -- Auto complete

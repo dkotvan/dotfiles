@@ -39,7 +39,25 @@ require('codeschool').setup({
   }
 })
 
-require('hardline').setup {
-  bufferline = true,
-  theme = 'codeschool_light'
+vim.cmd [[ colorscheme codeschool ]]
+
+require('lualine').setup {
+  theme = "gruvbox",
+  options = {
+    icons_enabled= 1
+  },
+  extensions = {'fugitive', 'nvim-tree', 'quickfix' },
+  sections = {
+    lualine_a = {'mode'},
+    lualine_b = {'branch'},
+    lualine_c = {
+      {
+        'filename', 
+        path = 1
+      }
+    },
+    lualine_x = {'filetype'},
+    lualine_y = {},
+    lualine_z = {'location'}
+  }
 }
