@@ -1,4 +1,4 @@
-vim.o.background = "light"
+vim.o.background = "dark"
 
 require('codeschool').setup({
   plugins = {
@@ -52,7 +52,7 @@ require('lualine').setup {
     lualine_b = {'branch'},
     lualine_c = {
       {
-        'filename', 
+        'filename',
         path = 1
       }
     },

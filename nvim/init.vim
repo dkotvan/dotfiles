@@ -25,3 +25,5 @@ highlight nonText ctermbg=NONE
 lua require('lsp')
 lua require('completion')
 lua require('finder')
+
+source $MYVIMPATH/keys.vim

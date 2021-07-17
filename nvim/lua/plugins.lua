@@ -11,7 +11,7 @@ end
 
 return require("packer").startup {
   function(use)
-    use 'wbthomason/packer.nvim'
+    use { 'wbthomason/packer.nvim' }
 
     -- UI plugins
     use {
@@ -23,23 +23,25 @@ return require("packer").startup {
 
     use {
       'hoob3rt/lualine.nvim',
-      requires = {'kyazdani42/nvim-web-devicons', opt = true}
+      requires = {'kyazdani42/nvim-web-devicons'}
     }
 
     use {
       'adisen99/codeschool.nvim',
       requires = {'rktjmp/lush.nvim'},
+
       config = function()
         vim.g.codeschool_contrast_dark = 'hard'
       end
     }
 
-    -- Auto complete
-
     -- LSP
+
     use 'neovim/nvim-lspconfig'
     use 'kabouzeid/nvim-lspinstall'
-    use 'onsails/lspkind-nvim'
+    use 'glepnir/lspsaga.nvim'
+
+    -- Auto complete
 
     -- Snippets
     use 'rafamadriz/friendly-snippets'
@@ -168,7 +170,7 @@ return require("packer").startup {
     -- align text - here because i can use the command Table in plasticboy/markdown
     use 'godlygeek/tabular'
 
-    -- swap text - cx, cxx, X (visual mode) 
+    -- swap text - cx, cxx, X (visual mode)
     use 'tommcdo/vim-exchange'
 
     -- :%S - replace text preserving case
