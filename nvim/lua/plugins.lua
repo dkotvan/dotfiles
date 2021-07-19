@@ -130,18 +130,22 @@ return require("packer").startup {
 
     use 'haya14busa/is.vim'
 
-    -- git gutter like but with async support
-    use {
-      'mhinz/vim-signify',
-      config = function()
-        vim.g.signify_realtime = 1
-        vim.g.signify_line_highlight = 0
-        vim.g.signify_vcs_list = {'git'}
-      end
-    }
+    -- -- git gutter like but with async support
+    -- use {
+    --   'mhinz/vim-signify',
+    --   config = function()
+    --     vim.g.signify_realtime = 1
+    --     vim.g.signify_line_highlight = 0
+    --     vim.g.signify_vcs_list = {'git'}
+    --   end
+    -- }
 
     -- Blame line
     use 'tveskag/nvim-blame-line'
+
+    use 'sindrets/diffview.nvim'
+
+    use 'caenrique/nvim-toggle-terminal'
 
     -- best git plugin
     use 'tpope/vim-fugitive'
@@ -154,6 +158,8 @@ return require("packer").startup {
 
     -- Show popup with commit of the current line
     use 'rhysd/git-messenger.vim'
+
+    use { 'tanvirtin/vgit.nvim', requires = 'nvim-lua/plenary.nvim' }
 
     -- BW kill buffer without closing window, BUN, BD, BW, BB, BF
     use 'qpkorr/vim-bufkill'

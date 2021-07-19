@@ -26,6 +26,7 @@ lua require('lsp')
 lua require('completion')
 lua require('finder')
 lua require('notes')
+lua require('vcs')
 
 source $MYVIMPATH/keys.vim
 
