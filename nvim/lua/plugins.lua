@@ -35,6 +35,29 @@ return require("packer").startup {
       end
     }
 
+    use {
+      "sainnhe/gruvbox-material",
+      config = function()
+        vim.g.gruvbox_material_background = 'dark'
+      end
+    }
+
+    use {
+      'norcalli/nvim-colorizer.lua'
+    }
+
+    use 'tversteeg/registers.nvim'
+
+    --  JqxList and JqxQuery command
+    use 'gennaro-tedesco/nvim-jqx'
+
+    -- treesiter
+    
+    use {
+        'nvim-treesitter/nvim-treesitter',
+        run = ':TSUpdate'
+    }
+    use {'nvim-treesitter/playground'}
     -- LSP
 
     use 'neovim/nvim-lspconfig'
@@ -62,13 +85,21 @@ return require("packer").startup {
     -- Telescope
 
     use {
+      'nvim-lua/plenary.nvim',
+      branch='async_jobs_v2'
+    }
+    
+    use {
       'nvim-telescope/telescope.nvim',
-      requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
+      branch = 'async_v2',
+      requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim', branch='async_jobs_v2'}}
     }
 
     -- File explorer
-    use 'kyazdani42/nvim-web-devicons'
-    use 'kyazdani42/nvim-tree.lua'
+    use {
+      'kyazdani42/nvim-tree.lua',
+      requires = { 'kyazdani42/nvim-web-devicons' }
+    }
 
     -- Stuff
     use {
@@ -78,6 +109,8 @@ return require("packer").startup {
         require('rest-nvim').setup()
       end
     }
+
+    -- Edit & motion plugins
 
     use 'wellle/targets.vim'
 
@@ -106,6 +139,9 @@ return require("packer").startup {
         vim.g.signify_vcs_list = {'git'}
       end
     }
+
+    -- Blame line
+    use 'tveskag/nvim-blame-line'
 
     -- best git plugin
     use 'tpope/vim-fugitive'
@@ -174,7 +210,10 @@ return require("packer").startup {
     use 'tommcdo/vim-exchange'
 
     -- :%S - replace text preserving case
-    use 'tpope/vim-abolish'
+    use {
+      'tpope/vim-abolish',
+      requires = 'tpope/vim-repeat'
+    }
 
     -- compare directories
     use 'vim-scripts/dirdiff.vim'
@@ -187,7 +226,14 @@ return require("packer").startup {
     -- A fast git commit browser
     use 'junegunn/gv.vim'
 
-    use 'tpope/vim-repeat'
+    use {
+      'tpope/vim-eunuch'
+    }
+
+    use {
+      'tpope/vim-surround',
+      requires = 'tpope/vim-repeat'
+    }
 
     -- Show the searches
     use {
@@ -223,18 +269,33 @@ return require("packer").startup {
         let g:vim_markdown_folding_disabled = 1
         ]]
       end
-    }
-    use {
-      'iamcco/markdown-preview.nvim',
-      ft = {'markdown', 'pandoc.markdown', 'rmd', 'pullrequest', 'gitcommit'},
-      run = "cd app && yarn install",
-      config = function()
-        vim.cmd [[
-        let g:mkdp_browser = 'firefox'
-        let g:mkdp_filetypes = ['markdown', 'pullrequest', 'gitcommit']
-        let g:mkdp_preview_options = {
-          ]]
-        end
-      }
-    end
   }
+
+  use "jamestthompson3/nvim-remote-containers"
+
+  use {
+    'iamcco/markdown-preview.nvim',
+    ft = {'markdown', 'pandoc.markdown', 'rmd', 'pullrequest', 'gitcommit'},
+    run = "cd app && yarn install",
+    config = function()
+      vim.cmd [[
+      let g:mkdp_browser = 'firefox'
+      let g:mkdp_filetypes = ['markdown', 'pullrequest', 'gitcommit']
+      let g:mkdp_preview_options = {
+        ]]
+      end
+    }
+
+    -- debug
+    use "mfussenegger/nvim-dap"
+    use { "Pocco81/DAPInstall.nvim", requires = {"mfussenegger/nvim-dap"} }
+    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+
+    -- note taking
+    use {
+      "oberblastmeister/neuron.nvim",
+      requires = 'nvim-telescope/telescope.nvim'
+    }
+
+  end
+}

@@ -1,45 +1,6 @@
-vim.o.background = "dark"
+vim.o.background = vim.env.BACKGROUND
 
-require('codeschool').setup({
-  plugins = {
-    "buftabline",
-    "coc",
-    "fzf",
-    "gitgutter",
-    "gitsigns",
-    "lsp",
-    "lspsaga",
-    "nerdtree",
-    "netrw",
-    "nvimtree",
-    "signify",
-    "startify",
-    "syntastic",
-    "telescope",
-    "treesitter"
-  },
-  langs = {
-    "c",
-    "clojure",
-    "css",
-    "golang",
-    "html",
-    "java",
-    "js",
-    "json",
-    "jsx",
-    "lua",
-    "markdown",
-    "python",
-    "ruby",
-    "rust",
-    "scala",
-    "viml",
-    "xml"
-  }
-})
-
-vim.cmd [[ colorscheme codeschool ]]
+vim.cmd [[ colorscheme gruvbox-material ]]
 
 require('lualine').setup {
   theme = "gruvbox",
@@ -57,7 +18,13 @@ require('lualine').setup {
       }
     },
     lualine_x = {'filetype'},
-    lualine_y = {},
+    lualine_y = {''},
     lualine_z = {'location'}
   }
 }
+
+require("colorizer").setup({
+  '*';
+}, {
+  mode = 'foreground'
+})

@@ -26,7 +26,7 @@ alias note='nvim -c ":SimplenoteList"'
 
 # Tmux
 
-alias tm="tmux attach || tmux new"
+alias tmux='tmux new -e BACKGROUND=$BACKGROUND'
 
 # UPdate everything
 

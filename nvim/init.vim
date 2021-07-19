@@ -25,5 +25,8 @@ highlight nonText ctermbg=NONE
 lua require('lsp')
 lua require('completion')
 lua require('finder')
+lua require('notes')
 
 source $MYVIMPATH/keys.vim
+
+autocmd BufEnter * EnableBlameLine 

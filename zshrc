@@ -73,4 +73,5 @@ eval "$(rbenv init -)"
 
 eval "$(starship init zsh)"
 
+export PATH=~/bin:$PATH
 
