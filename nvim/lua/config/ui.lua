@@ -22,9 +22,3 @@ require('lualine').setup {
     lualine_z = {'location'}
   }
 }
-
-require("colorizer").setup({
-  '*';
-}, {
-  mode = 'foreground'
-})

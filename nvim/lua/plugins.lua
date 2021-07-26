@@ -13,7 +13,10 @@ return require("packer").startup {
   function(use)
     use { 'wbthomason/packer.nvim' }
 
-    -- UI plugins
+    -- make ftplugins/*.lua be loaded correctly
+    use { "tjdevries/astronauta.nvim" }
+
+    -- guide lines
     use {
       'lukas-reineke/indent-blankline.nvim',
       config = function()
@@ -21,131 +24,143 @@ return require("packer").startup {
       end
     }
 
+    -- Status and tabline
     use {
       'hoob3rt/lualine.nvim',
       requires = {'kyazdani42/nvim-web-devicons'}
     }
 
-    use {
-      'adisen99/codeschool.nvim',
-      requires = {'rktjmp/lush.nvim'},
-
-      config = function()
-        vim.g.codeschool_contrast_dark = 'hard'
-      end
-    }
-
+    -- Gruvbox colorscheme with support for treesiter
     use {
       "sainnhe/gruvbox-material",
       config = function()
+        vim.g.gruvbox_material_pallete = 'original'
         vim.g.gruvbox_material_background = 'dark'
       end
     }
 
-    use {
-      'norcalli/nvim-colorizer.lua'
-    }
+    -- Show registers when typing " or ctrl-r
+    use { 
+      "folke/which-key.nvim",
+      config = function()
+        require("which-key").setup({
+          plugins = {
+            marks = true, -- shows a list of your marks on ' and `
+            registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+            spelling = {
+              enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
+              suggestions = 20, -- how many suggestions should be shown in the list?
+            },
+            presets = {
+              operators = true, -- adds help for operators like d, y, ... and registers them for motion / text object completion
+              motions = true, -- adds help for motions
+              text_objects = true, -- help for text objects triggered after entering an operator
+              windows = true, -- default bindings on <c-w>
+              nav = true, -- misc bindings to work with windows
+              z = true, -- bindings for folds, spelling and others prefixed with z
+              g = true, -- bindings for prefixed with g
+            }, 
+          }})
+        end,
+        event = "BufWinEnter",
+      }
 
-    use 'tversteeg/registers.nvim'
+      --  JqxList and JqxQuery command with jkson
+      use 'gennaro-tedesco/nvim-jqx'
 
-    --  JqxList and JqxQuery command
-    use 'gennaro-tedesco/nvim-jqx'
-
-    -- treesiter
-    
-    use {
+      -- treesiter
+      use {
         'nvim-treesitter/nvim-treesitter',
         run = ':TSUpdate'
-    }
-    use {'nvim-treesitter/playground'}
-    -- LSP
+      }
+      --
+      -- LSP Stuff
+      use 'neovim/nvim-lspconfig'
+      use 'kabouzeid/nvim-lspinstall'
+      use 'glepnir/lspsaga.nvim'
+      use {
+        "folke/trouble.nvim",
+        requires = "kyazdani42/nvim-web-devicons",
+      }
+      use {'ray-x/navigator.lua', requires = {'ray-x/guihua.lua', run = 'cd lua/fzy && make'}}
 
-    use 'neovim/nvim-lspconfig'
-    use 'kabouzeid/nvim-lspinstall'
-    use 'glepnir/lspsaga.nvim'
+      -- Gloang
+      use { 'crispgm/nvim-go'}
+      -- Auto complete
 
-    -- Auto complete
+      -- Snippets
+      use 'rafamadriz/friendly-snippets'
+      use 'hrsh7th/vim-vsnip'
+      use 'hrsh7th/vim-vsnip-integ'
 
-    -- Snippets
-    use 'rafamadriz/friendly-snippets'
-    use 'hrsh7th/vim-vsnip'
-    use 'hrsh7th/vim-vsnip-integ'
+      --- Auto complete
+      use 'hrsh7th/nvim-compe'
+      use 'andersevenrud/compe-tmux'
+      use {
+        'tamago324/compe-zsh',
+        requires = {'nvim-lua/plenary.nvim'}
+      }
 
-    use 'hrsh7th/nvim-compe'
+      -- Auto pairs
+      use { "windwp/nvim-autopairs" }
 
-    -- External sources
+      -- Telescope
+      use {
+        'nvim-lua/plenary.nvim',
+        branch='async_jobs_v2'
+      }
+      use {
+        'nvim-telescope/telescope.nvim',
+        branch = 'async_v2',
+        requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim', branch='async_jobs_v2'}}
+      }
 
-    use 'andersevenrud/compe-tmux'
-    use {
-      'tamago324/compe-zsh',
-      requires = {'nvim-lua/plenary.nvim'}
-    }
-    use 'GoldsteinE/compe-latex-symbols'
+      use {
+        "mfussenegger/nvim-lint",
+        config = function()
+          -- require("nlint").setup()
 
-    -- Telescope
+          vim.cmd [[ au BufWritePost <buffer> lua require('lint').try_lint() ]]
+        end,
+      }
 
-    use {
-      'nvim-lua/plenary.nvim',
-      branch='async_jobs_v2'
-    }
-    
-    use {
-      'nvim-telescope/telescope.nvim',
-      branch = 'async_v2',
-      requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim', branch='async_jobs_v2'}}
-    }
+      -- File explorer
+      use {
+        'kyazdani42/nvim-tree.lua',
+        requires = { 'kyazdani42/nvim-web-devicons' }
+      }
 
-    -- File explorer
-    use {
-      'kyazdani42/nvim-tree.lua',
-      requires = { 'kyazdani42/nvim-web-devicons' }
-    }
+      -- Curl inside nvim
+      use {
+        'NTBBloodbath/rest.nvim',
+        requires = { 'nvim-lua/plenary.nvim' },
+        config = function()
+          require('rest-nvim').setup()
+          vim.cmd [[ nmap <leader>r <Plug>RestNvim ]]
+        end
+      }
 
-    -- Stuff
-    use {
-      'NTBBloodbath/rest.nvim',
-      requires = { 'nvim-lua/plenary.nvim' },
+      -- add new targets and make it seek the operator in the line
+      use 'wellle/targets.vim'
+
+      -- Insert end automatically
+      -- use 'tpope/vim-endwise'
+
+      -- allow to create your own text object
+      use 'kana/vim-textobj-user'
+
+      -- highlight when typing the search
+      use 'haya14busa/is.vim'
+
+      -- Blame line showed everytime at right
+      use { 'tveskag/nvim-blame-line',
       config = function()
-        require('rest-nvim').setup()
+        vim.cmd[[ autocmd BufEnter * EnableBlameLine ]]
       end
     }
 
-    -- Edit & motion plugins
-
-    use 'wellle/targets.vim'
-
-    -- Insert end automatically
-    use 'tpope/vim-endwise'
-
-    -- allow to create your own text object
-    use 'kana/vim-textobj-user'
-
-    -- Editor config
-    use {
-      'editorconfig/editorconfig-vim',
-      config = function()
-        vim.g.EditorConfig_exclude_patterns = {{'fugitive://.*'}, {'scp://.*'}}
-      end
-    }
-
-    use 'haya14busa/is.vim'
-
-    -- -- git gutter like but with async support
-    -- use {
-    --   'mhinz/vim-signify',
-    --   config = function()
-    --     vim.g.signify_realtime = 1
-    --     vim.g.signify_line_highlight = 0
-    --     vim.g.signify_vcs_list = {'git'}
-    --   end
-    -- }
-
-    -- Blame line
-    use 'tveskag/nvim-blame-line'
-
+    -- DiffViewOpen <git rev> to to a diff of all files
     use 'sindrets/diffview.nvim'
-
-    use 'caenrique/nvim-toggle-terminal'
 
     -- best git plugin
     use 'tpope/vim-fugitive'
@@ -156,10 +171,14 @@ return require("packer").startup {
     -- Gbrowse open browser in Gitlab. use lab command
     use 'shumphrey/fugitive-gitlab.vim'
 
-    -- Show popup with commit of the current line
-    use 'rhysd/git-messenger.vim'
-
-    use { 'tanvirtin/vgit.nvim', requires = 'nvim-lua/plenary.nvim' }
+    use {
+      'lewis6991/gitsigns.nvim',
+      requires = 'nvim-lua/plenary.nvim',
+      config = function()
+        require('gitsigns').setup()
+      end,
+      event = "BufRead",
+    }
 
     -- BW kill buffer without closing window, BUN, BD, BW, BB, BF
     use 'qpkorr/vim-bufkill'
@@ -252,6 +271,7 @@ return require("packer").startup {
       end
     }
 
+    -- Better markdown
     use {
       'plasticboy/vim-markdown',
 
@@ -275,33 +295,26 @@ return require("packer").startup {
         let g:vim_markdown_folding_disabled = 1
         ]]
       end
-  }
-
-  use "jamestthompson3/nvim-remote-containers"
-
-  use {
-    'iamcco/markdown-preview.nvim',
-    ft = {'markdown', 'pandoc.markdown', 'rmd', 'pullrequest', 'gitcommit'},
-    run = "cd app && yarn install",
-    config = function()
-      vim.cmd [[
-      let g:mkdp_browser = 'firefox'
-      let g:mkdp_filetypes = ['markdown', 'pullrequest', 'gitcommit']
-      let g:mkdp_preview_options = {
-        ]]
-      end
     }
 
-    -- debug
-    use "mfussenegger/nvim-dap"
-    use { "Pocco81/DAPInstall.nvim", requires = {"mfussenegger/nvim-dap"} }
-    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+    use "jamestthompson3/nvim-remote-containers"
 
-    -- note taking
     use {
-      "oberblastmeister/neuron.nvim",
-      requires = 'nvim-telescope/telescope.nvim'
-    }
+      'iamcco/markdown-preview.nvim',
+      ft = {'markdown', 'pandoc.markdown', 'rmd', 'pullrequest', 'gitcommit'},
+      run = "cd app && yarn install",
+      config = function()
+        vim.cmd [[
+        let g:mkdp_browser = 'firefox'
+        let g:mkdp_filetypes = ['markdown', 'pullrequest', 'gitcommit']
+        let g:mkdp_preview_options = {
+          ]]
+        end
+      }
 
-  end
-}
+      -- debug
+      use "mfussenegger/nvim-dap"
+      use { "Pocco81/DAPInstall.nvim", requires = {"mfussenegger/nvim-dap"} }
+      use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+    end
+  }

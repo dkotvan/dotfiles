@@ -17,17 +17,13 @@ set termguicolors " colorscheme working well on iTerm2 + tmux
 set t_ZH=^[[3m
 set t_ZR=^[[23m
 
-lua require('ui')
+lua require('config/ui')
 
 highlight Normal ctermbg=NONE
 highlight nonText ctermbg=NONE
 
-lua require('lsp')
-lua require('completion')
-lua require('finder')
-lua require('notes')
-lua require('vcs')
+lua require('config.code')
+lua require('config.completion')
+lua require('config.finder')
 
 source $MYVIMPATH/keys.vim
-
-autocmd BufEnter * EnableBlameLine 

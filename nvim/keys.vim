@@ -31,4 +31,4 @@ nnoremap <silent> gh <Cmd>Lspsaga lsp_finder<CR>
 
 " Stuff
 
-nnoremap <leader>f <cmd>:NvimTreeToggle<CR>:wq
+nnoremap <leader>f <cmd>:NvimTreeToggle<CR>

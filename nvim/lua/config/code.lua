@@ -1,3 +1,19 @@
+require('nvim-treesitter.configs').setup {
+  ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  highlight = { enable = true },
+  indentation = { enable = true },
+  folding = { enable = true },
+  incremental_selection = {
+    enable = true,
+    keymaps = {
+      init_selection = "gnn",
+      node_incremental = "grn",
+      scope_incremental = "grc",
+      node_decremental = "grm",
+    },
+  },
+}
+
 -- copied from https://github.com/kabouzeid/nvim-lspinstall/wiki
 -- keymaps
 
@@ -57,24 +73,22 @@ local lua_settings = {
       globals = {'vim'},
     },
     workspace = {
-      -- Make the server aware of Neovim runtime files
-      library = {
-        [vim.fn.expand('$VIMRUNTIME/lua')] = true,
-        [vim.fn.expand('$VIMRUNTIME/lua/vim/lsp')] = true,
-      },
+      checkThirdParty = false,
+      maxPreload = 100000,
+      preloadFileSize = 1000,
     },
   }
 }
 
 -- config that activates keymaps and enables snippet support
-local function make_config()
+local function make_configuration()
   local capabilities = vim.lsp.protocol.make_client_capabilities()
   capabilities.textDocument.completion.completionItem.snippetSupport = true
   return {
     -- enable snippet support
     capabilities = capabilities,
     -- map buffer local keybindings when the language server attaches
-    on_attach = on_attach,
+    -- on_attach = on_attach,
   }
 end
 
@@ -89,18 +103,23 @@ local function setup_servers()
   table.insert(servers, "sourcekit")
 
   for _, server in pairs(servers) do
-    local config = make_config()
+    local config = make_configuration()
 
     -- language specific config
     if server == "lua" then
       config.settings = lua_settings
     end
-    if server == "sourcekit" then
-      config.filetypes = {"swift", "objective-c", "objective-cpp"}; -- we don't want c and cpp!
+
+    if server == "go" then
+      require('go').setup{}
+      require('lspconfig').gopls.setup{}
     end
-    if server == "clangd" then
-      config.filetypes = {"c", "cpp"}; -- we don't want objective-c and objective-cpp!
-    end
+    --     if server == "sourcekit" then
+    --       config.filetypes = {"swift", "objective-c", "objective-cpp"}; -- we don't want c and cpp!
+    --     end
+    --     if server == "clangd" then
+    --       config.filetypes = {"c", "cpp"}; -- we don't want objective-c and objective-cpp!
+    --     end
 
     require'lspconfig'[server].setup(config)
   end
@@ -113,3 +132,25 @@ require'lspinstall'.post_install_hook = function ()
   setup_servers() -- reload installed servers
   vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
 end
+
+require('navigator').setup()
+
+require("trouble").setup()
+vim.api.nvim_set_keymap("n", "<leader>xx", "<cmd>Trouble<cr>",
+{silent = true, noremap = true}
+)
+vim.api.nvim_set_keymap("n", "<leader>xw", "<cmd>Trouble lsp_workspace_diagnostics<cr>",
+{silent = true, noremap = true}
+)
+vim.api.nvim_set_keymap("n", "<leader>xd", "<cmd>Trouble lsp_document_diagnostics<cr>",
+{silent = true, noremap = true}
+)
+vim.api.nvim_set_keymap("n", "<leader>xl", "<cmd>Trouble loclist<cr>",
+{silent = true, noremap = true}
+)
+vim.api.nvim_set_keymap("n", "<leader>xq", "<cmd>Trouble quickfix<cr>",
+{silent = true, noremap = true}
+)
+vim.api.nvim_set_keymap("n", "gR", "<cmd>Trouble lsp_references<cr>",
+{silent = true, noremap = true}
+)
