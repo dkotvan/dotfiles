@@ -271,6 +271,11 @@ return require("packer").startup {
       end
     }
 
+    -- Database support
+  use {'tpope/vim-dadbod'}
+  use { 'kristijanhusak/vim-dadbod-ui' }
+  use { 'kristijanhusak/vim-dadbod-completion' }
+
     -- Better markdown
     use {
       'plasticboy/vim-markdown',

@@ -31,11 +31,12 @@ require('compe').setup {
     nvim_lua = false,
     spell = { kind = "   (Spell)" },
     tags = false,
+    vim_dadbod_completion = true,
     tmux = {
       disabled = false;
       all_panes = true;
     };
-    zsdh= true
+    zsdh = true
   };
 }
 
