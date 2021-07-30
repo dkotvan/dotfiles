@@ -10,6 +10,7 @@ if fn.empty(fn.glob(install_path)) > 0 then
 end
 
 return require("packer").startup {
+  log = { level = 'debug '},
   function(use)
     use { 'wbthomason/packer.nvim' }
 
@@ -112,7 +113,7 @@ return require("packer").startup {
       use {
         'nvim-telescope/telescope.nvim',
         branch = 'async_v2',
-        requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim', branch='async_jobs_v2'}}
+        requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
       }
 
       use {
@@ -312,7 +313,7 @@ return require("packer").startup {
         vim.cmd [[
         let g:mkdp_browser = 'firefox'
         let g:mkdp_filetypes = ['markdown', 'pullrequest', 'gitcommit']
-        let g:mkdp_preview_options = {
+        let g:mkdp_preview_options = {}
           ]]
         end
       }
