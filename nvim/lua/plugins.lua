@@ -77,15 +77,13 @@ return require("packer").startup {
       --
       -- LSP Stuff
       use 'neovim/nvim-lspconfig'
-      use 'kabouzeid/nvim-lspinstall'
-      use 'glepnir/lspsaga.nvim'
       use {
         "folke/trouble.nvim",
         requires = "kyazdani42/nvim-web-devicons",
       }
-      use {'ray-x/navigator.lua', requires = {'ray-x/guihua.lua', run = 'cd lua/fzy && make'}}
 
-      -- Gloang
+      use { 'kosayoda/nvim-lightbulb' }
+      -- Golang
       use { 'crispgm/nvim-go'}
       -- Auto complete
 
@@ -320,7 +318,6 @@ return require("packer").startup {
 
       -- debug
       use "mfussenegger/nvim-dap"
-      use { "Pocco81/DAPInstall.nvim", requires = {"mfussenegger/nvim-dap"} }
       use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
     end
   }

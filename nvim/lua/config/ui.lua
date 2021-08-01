@@ -1,4 +1,14 @@
-vim.o.background = vim.env.BACKGROUND
+read_background_file = function ()
+  local f = io.open('/home/dkotvan/.background', "r")
+  if not f then return 'dark' end
+
+  local background = f:read("*a"):gsub("\n", "")
+
+  io.close(f)
+  return background
+end
+
+vim.o.background = read_background_file()
 
 vim.cmd [[ colorscheme gruvbox-material ]]
 
