@@ -77,14 +77,15 @@ return require("packer").startup {
       --
       -- LSP Stuff
       use 'neovim/nvim-lspconfig'
+      use 'kabouzeid/nvim-lspinstall'
       use {
         "folke/trouble.nvim",
         requires = "kyazdani42/nvim-web-devicons",
       }
 
-      use { 'kosayoda/nvim-lightbulb' }
       -- Golang
-      use { 'crispgm/nvim-go'}
+      use { 'ray-x/go.nvim'}
+
       -- Auto complete
 
       -- Snippets
@@ -271,9 +272,9 @@ return require("packer").startup {
     }
 
     -- Database support
-  use {'tpope/vim-dadbod'}
-  use { 'kristijanhusak/vim-dadbod-ui' }
-  use { 'kristijanhusak/vim-dadbod-completion' }
+    use {'tpope/vim-dadbod'}
+    use { 'kristijanhusak/vim-dadbod-ui' }
+    use { 'kristijanhusak/vim-dadbod-completion' }
 
     -- Better markdown
     use {
@@ -312,12 +313,13 @@ return require("packer").startup {
         let g:mkdp_browser = 'firefox'
         let g:mkdp_filetypes = ['markdown', 'pullrequest', 'gitcommit']
         let g:mkdp_preview_options = {}
-          ]]
-        end
-      }
+        ]]
+      end
+    }
 
-      -- debug
-      use "mfussenegger/nvim-dap"
-      use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
-    end
-  }
+    -- debug
+    use "mfussenegger/nvim-dap"
+    use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
+    use { 'theHamsta/nvim-dap-virtual-text' }
+  end
+}
