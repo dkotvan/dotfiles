@@ -3,13 +3,22 @@
 
 import asyncio
 import iterm2
+from os.path import expanduser
 
 async def changeTheme(theme_parts, connection):
+    background = ""
     # Themes have space-delimited attributes, one of which will be light or dark.
     if "dark" in theme_parts:
+        background = 'dark'
         preset = await iterm2.ColorPreset.async_get(connection, "gruvbox-dark")
     else:
+        background = 'light'
         preset = await iterm2.ColorPreset.async_get(connection, "gruvbox-light")
+
+    home = expanduser("~")
+    f = open(home + "/.background","w")
+    f.write(background)
+    f.close()
 
     # Update the list of all profiles and iterate over them.
     profiles=await iterm2.PartialProfile.async_query(connection)

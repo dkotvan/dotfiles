@@ -60,6 +60,8 @@ local lang_settings = {
     },
   },
 
+  typescript = {},
+
   yaml = {
     settings = {
       yaml = {
@@ -84,8 +86,8 @@ local function setup_servers()
     config = lang_settings[server]
     if (config ~= nil) then
       require('lspconfig')[server].setup(config)
-    else
-      print("Language " .. server .. " missing")
+    -- else
+    --   print("Language " .. server .. " missing")
     end
   end
 end

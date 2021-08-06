@@ -1,5 +1,5 @@
 read_background_file = function ()
-  local f = io.open('/home/dkotvan/.background', "r")
+  local f = io.open(vim.env.HOME .. '/.background', "r")
   if not f then return 'dark' end
 
   local background = f:read("*a"):gsub("\n", "")
