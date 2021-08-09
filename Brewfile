@@ -1,6 +1,7 @@
 tap "homebrew/core"
 tap "homebrew/bundle"
 tap "AdoptOpenJDK/openjdk"
+tap "golangci/tap"
 
 # Prerequisites
 brew "gcc"
@@ -15,6 +16,7 @@ brew "rust"
 brew "rbenv"
 brew "rbenv-binstubs"
 brew "rbenv-bundler"
+brew "golangci/tap/golangci-lint"
 
 # Utilities
 brew "bat"

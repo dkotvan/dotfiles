@@ -1,6 +1,6 @@
 require('go').setup({
-  goimport = 'gopls', -- if set to 'gopls' will use golsp format
-  gofmt = 'gopls', -- if set to gopls will use golsp format
+  goimport='gofumports', -- goimport command
+  gofmt = 'gofumpt', --gofmt cmd,
   max_line_line = 120,
   tag_transform = false,
   test_dir = '',
@@ -9,11 +9,15 @@ require('go').setup({
   lsp_gofumpt = true, -- true: set default gofmt in gopls format to gofumpt
   lsp_on_attach = true, -- use on_attach from go.nvim
   dap_debug = true,
+  dap_debug_keymap = true, -- set keymaps for debugger
+  dap_debug_gui = true, -- set to true to enable dap gui, highly recommand
+  dap_debug_vt = true, -- set to true to enable dap virtual text
 })
 
 require('lspconfig').gopls.setup{}
-
--- vim.o.buf_options.expandtab = false
--- vim.o.buf_options.tabstop = 4
--- vim.o.buf_options.shiftwidth = 4
+vim.cmd [[
+set noexpandtab
+set tabstop=4
+set shiftwidth=4
+]]
 

@@ -25,5 +25,7 @@ highlight nonText ctermbg=NONE
 lua require('config.code')
 lua require('config.completion')
 lua require('config.finder')
+lua require('config.debug')
+lua require('config.editing')
 
 source $MYVIMPATH/keys.vim

@@ -16,5 +16,5 @@ require('telescope').setup{
       '--line-number',
       '--column'
     }
-  }
+  },
 }

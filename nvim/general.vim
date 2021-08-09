@@ -33,7 +33,7 @@ set cpoptions-=m    " showmatch will wait 0.5s or until a char is typed
 " }}}
 
 " Tabs and Indents {{{
-set expandtab       " Expand tabs to spaces.
+set expandtab       " Expand tabs to spaces.fftpl
 set tabstop=2       " The number of spaces a tab is
 set softtabstop=2   " While performing editing operations
 set shiftwidth=2    " Number of spaces to use in auto(indent)

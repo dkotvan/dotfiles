@@ -31,6 +31,17 @@ return require("packer").startup {
       requires = {'kyazdani42/nvim-web-devicons'}
     }
 
+    use {
+      'nacro90/numb.nvim',
+      config = function()
+        require('numb').setup{
+          show_numbers = true, -- Enable 'number' for the window while peeking
+          show_cursorline = true, -- Enable 'cursorline' for the window while peeking
+          number_only = false, -- Peek only when the command is only a number instead of when it starts with a number
+        }
+      end
+    }
+
     -- Gruvbox colorscheme with support for treesiter
     use {
       "sainnhe/gruvbox-material",
@@ -107,11 +118,9 @@ return require("packer").startup {
       -- Telescope
       use {
         'nvim-lua/plenary.nvim',
-        branch='async_jobs_v2'
       }
       use {
         'nvim-telescope/telescope.nvim',
-        branch = 'async_v2',
         requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
       }
 
@@ -270,6 +279,9 @@ return require("packer").startup {
         ]]
       end
     }
+
+    use { "mbbill/undotree" }
+    use { "Pocco81/AutoSave.nvim" }
 
     -- Database support
     use {'tpope/vim-dadbod'}
