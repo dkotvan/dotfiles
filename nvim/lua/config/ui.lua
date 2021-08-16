@@ -9,7 +9,7 @@ read_background_file = function ()
 end
 
 vim.o.background = read_background_file()
-
+vim.g.gruvbox_material_pallete = 'original'
 vim.cmd [[ colorscheme gruvbox-material ]]
 
 require('lualine').setup {

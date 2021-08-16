@@ -1,20 +1,44 @@
-require('go').setup({
-  goimport='gofumports', -- goimport command
-  gofmt = 'gofumpt', --gofmt cmd,
-  max_line_line = 120,
-  tag_transform = false,
-  test_dir = '',
-  comment_placeholder = '   ',
-  lsp_cfg = true, -- false: use your own lspconfig
-  lsp_gofumpt = true, -- true: set default gofmt in gopls format to gofumpt
-  lsp_on_attach = true, -- use on_attach from go.nvim
-  dap_debug = true,
-  dap_debug_keymap = true, -- set keymaps for debugger
-  dap_debug_gui = true, -- set to true to enable dap gui, highly recommand
-  dap_debug_vt = true, -- set to true to enable dap virtual text
-})
+require('go').setup{
+    -- auto commands
+    auto_format = false, -- let'sd gopls do that
+    auto_lint = true,
+    -- linters: revive, errcheck, staticcheck, golangci-lint
+    linter = 'golangci-lint',
+    -- lint_prompt_style: qf (quickfix), vt (virtual text)
+    lint_prompt_style = 'vt',
+    -- formatter: goimports, gofmt, gofumpt
+    formatter = 'goimports',
+    -- test flags: -count=1 will disable cache
+    test_flags = {'-v'},
+    test_timeout = '30s',
+    test_env = {},
+    -- show test result with popup window
+    test_popup = true,
+    test_popup_width = 80,
+    test_popup_height = 10,
+    -- test open
+    test_open_cmd = 'edit',
+    -- struct tags
+    tags_name = 'json',
+    tags_options = {'json=omitempty'},
+    tags_transform = 'snakecase',
+    tags_flags = {'-skip-unexported'},
+    -- quick type
+    quick_type_flags = {'--just-types'},
+}
 
-require('lspconfig').gopls.setup{}
+vim.lsp.set_log_level("debug")
+
+require('lspconfig').gopls.setup{{
+  gopls = {
+    gofumpt = true,
+    errcheck = true,
+    usePlaceholders = true,
+    analyses = {
+      nilness = true,
+    }
+  }
+}}
 vim.cmd [[
 set noexpandtab
 set tabstop=4

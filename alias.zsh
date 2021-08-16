@@ -24,10 +24,6 @@ alias update_nvim='nvim -c "try | call dein#update() | messages | finally | qall
 alias ngst='nvim -c ":G"'
 alias note='nvim -c ":SimplenoteList"'
 
-# Tmux
-
-alias tmux='tmux new -e BACKGROUND=$BACKGROUND'
-
 # UPdate everything
 
 alias update_everything="antibody update && brew bundle && brew update && echo '===============' && brew outdated && brew upgrade && brew upgrade --cask"
