@@ -24,6 +24,23 @@
   cmd = nvim -c 'DirDiff $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [difftool]
   prompt = false
+
+[pager]
+    diff = delta
+    log = delta
+    reflog = delta
+    show = delta
+
+[interactive]
+    diffFilter = delta --color-only --features=interactive
+
+[delta]
+    syntax-theme = gruvbox-light
+    navigate = true
+
+[delta "interactive"]
+    keep-plus-minus-markers = true
+
 # User, signing keys and other local stuff are in other file that is not versioned
 [include]
   path = ~/.gitconfig.local

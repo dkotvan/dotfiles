@@ -47,6 +47,7 @@ brew "yamllint"
 brew "zip"
 
 # apps
+brew "git-delta"
 brew "neovim"
 brew "pgcli"
 brew "litecli"
