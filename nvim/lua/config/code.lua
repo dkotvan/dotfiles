@@ -29,8 +29,8 @@ vim.api.nvim_set_keymap("n", "gr", "<cmd>Telescope lsp_references<CR>", {silent 
 vim.api.nvim_set_keymap("n", "gi", "<cmd>Telescope lsp_implementations<CR>", {silent = true, noremap = true})
 vim.api.nvim_set_keymap("n", "gh", "<cmd>lua vim.lsp.buf.hover()<CR>", {silent = true, noremap = true})
 vim.api.nvim_set_keymap("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>", {silent = true, noremap = true})
-vim.api.nvim_set_keymap("n", "<C-n>", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", {silent = true, noremap = true})
-vim.api.nvim_set_keymap("n", "<C-p>", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", {silent = true, noremap = true})
+vim.api.nvim_set_keymap("n", "<C-F2>", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", {silent = true, noremap = true})
+vim.api.nvim_set_keymap("n", "<F2>", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", {silent = true, noremap = true})
 
 -- nnoremap <silent> <C-j> <Cmd>Lspsaga diagnostic_jump_next<CR>
 -- nnoremap <silent>K <Cmd>Lspsaga hover_doc<CR>
