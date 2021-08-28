@@ -5,7 +5,7 @@ require('go').setup{
     -- linters: revive, errcheck, staticcheck, golangci-lint
     linter = 'golangci-lint',
     -- lint_prompt_style: qf (quickfix), vt (virtual text)
-    lint_prompt_style = 'vt',
+    lint_prompt_style = 'qf',
     -- formatter: goimports, gofmt, gofumpt
     formatter = 'goimports',
     -- test flags: -count=1 will disable cache
