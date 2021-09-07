@@ -59,14 +59,13 @@ return require("packer").startup {
     -- LSP Stuff
     use 'neovim/nvim-lspconfig'
     use 'kabouzeid/nvim-lspinstall'
-    use 'kosayoda/nvim-lightbulb'
     use {
       "folke/trouble.nvim",
       requires = "kyazdani42/nvim-web-devicons",
     }
 
     -- Golang
-    use { 'crispgm/nvim-go' }
+    use 'ray-x/go.nvim' 
 
     -- Auto complete
 
@@ -100,7 +99,7 @@ return require("packer").startup {
       config = function()
         -- require("nlint").setup()
 
-        vim.cmd [[ au BufWritePost <buffer> lua require('lint').try_lint() ]]
+        -- vim.cmd [[ au BufWritePost <buffer> lua require('lint').try_lint() ]]
       end,
     }
 
@@ -338,7 +337,6 @@ use {
 use "mfussenegger/nvim-dap"
 use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
 use { 'theHamsta/nvim-dap-virtual-text' }
-
 
 -- Show registers when typing " or ctrl-r
 use {

@@ -2,7 +2,7 @@ require('nvim-treesitter.configs').setup {
   ensure_installed = "maintained", -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   highlight = { enable = true },
   indentation = { enable = true },
-  folding = { enable = true },
+  folding = { enable = false },
   incremental_selection = {
     enable = true,
     keymaps = {
@@ -99,8 +99,6 @@ require'lspinstall'.post_install_hook = function ()
   setup_servers() -- reload installed servers
   vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
 end
-
-vim.cmd [[autocmd CursorHold,CursorHoldI * lua require'nvim-lightbulb'.update_lightbulb()]]
 
 require "format".setup {
     ["*"] = {
