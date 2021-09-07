@@ -6,7 +6,7 @@ endif
 
 let mapleader=',' " comma as leader key
 
-source $MYVIMPATH/general.vim
+lua require('options')
 
 lua require('plugins')
 

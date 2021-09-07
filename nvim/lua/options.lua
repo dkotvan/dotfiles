@@ -1,3 +1,4 @@
+vim.cmd [[
 " General {{{
 syntax on
 set mouse=a                  " mouse working on all modes
@@ -74,3 +75,5 @@ set undofile                        " persistent undo, write undo at disk
 set spelllang=en_us,pt_br
 set spell
 
+
+]]
