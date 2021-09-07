@@ -59,6 +59,7 @@ return require("packer").startup {
     -- LSP Stuff
     use 'neovim/nvim-lspconfig'
     use 'kabouzeid/nvim-lspinstall'
+    use 'onsails/lspkind-nvim'
     use {
       "folke/trouble.nvim",
       requires = "kyazdani42/nvim-web-devicons",
@@ -71,15 +72,28 @@ return require("packer").startup {
 
     -- Snippets
     use 'rafamadriz/friendly-snippets'
-    use 'hrsh7th/vim-vsnip'
-    use 'hrsh7th/vim-vsnip-integ'
+    use { 'hrsh7th/vim-vsnip-integ',
+      requires = {
+        'hrsh7th/vim-vsnip'
+      }
+    }
 
     --- Auto complete
-    use 'hrsh7th/nvim-compe'
-    use 'andersevenrud/compe-tmux'
-    use {
-      'tamago324/compe-zsh',
-      requires = {'nvim-lua/plenary.nvim'}
+    use { 'andersevenrud/compe-tmux', branch = 'cmp'}
+    use { 'hrsh7th/nvim-cmp',
+      requires = {
+        'hrsh7th/cmp-buffer',
+        'hrsh7th/vim-vsnip',
+        'hrsh7th/cmp-nvim-lsp',
+        'hrsh7th/cmp-path',
+        'hrsh7th/cmp-vsnip',
+        'hrsh7th/cmp-nvim-lua',
+        'quangnguyen30192/cmp-nvim-tags',
+        'ray-x/cmp-treesitter',
+        'f3fora/cmp-spell',
+        'hrsh7th/cmp-emoji',
+        'hrsh7th/cmp-calc'
+      }
     }
 
     -- Auto pairs
