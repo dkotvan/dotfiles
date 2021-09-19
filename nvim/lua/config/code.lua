@@ -60,6 +60,8 @@ local lang_settings = {
     },
   },
 
+  json = {},
+  terraform = {},
   typescript = {},
 
   yaml = {

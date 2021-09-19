@@ -72,11 +72,8 @@ return require("packer").startup {
 
     -- Snippets
     use 'rafamadriz/friendly-snippets'
-    use { 'hrsh7th/vim-vsnip-integ',
-      requires = {
-        'hrsh7th/vim-vsnip'
-      }
-    }
+    use { 'hrsh7th/vim-vsnip' }
+    use { 'hrsh7th/vim-vsnip-integ'}
 
     --- Auto complete
     use { 'andersevenrud/compe-tmux', branch = 'cmp'}
