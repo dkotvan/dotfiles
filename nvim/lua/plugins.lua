@@ -66,7 +66,7 @@ return require("packer").startup {
     }
 
     -- Golang
-    use 'ray-x/go.nvim' 
+    use 'ray-x/go.nvim'
 
     -- Auto complete
 
@@ -122,7 +122,12 @@ return require("packer").startup {
     use {
       'kyazdani42/nvim-tree.lua',
       requires = { 'kyazdani42/nvim-web-devicons' },
-      config = function() require'nvim-tree'.setup {} end
+      config = function()
+        require'nvim-tree'.setup {
+          disable_netrw       = false,
+          hijack_netrw        = true,
+        }
+      end
     }
 
     -- Curl inside nvim
