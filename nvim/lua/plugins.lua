@@ -14,6 +14,9 @@ return require("packer").startup {
   function(use)
     use { 'wbthomason/packer.nvim' }
 
+    -- Editorconfig
+    use { 'editorconfig/editorconfig-vim' }
+
     -- make ftplugins/*.lua be loaded correctly
     use { "tjdevries/astronauta.nvim"}
 

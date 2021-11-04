@@ -16,6 +16,4 @@ robbyrussell/oh-my-zsh path:plugins/kubectl # k = kubectl and also autocomplete 
 robbyrussell/oh-my-zsh path:plugins/docker #auto completion for docker
 robbyrussell/oh-my-zsh path:plugins/docker-compose # auto completion for docker-compose + alias dco, dcb, dce, etc...
 zpm-zsh/clipboard # pbcopy, pbpaste and clip
-zdharma/zsh-diff-so-fancy # git dsf
 DarrinTisdale/zsh-aliases-exa # aliases for exa
-zdharma/fast-syntax-highlighting
