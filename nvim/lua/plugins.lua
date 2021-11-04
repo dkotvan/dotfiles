@@ -64,6 +64,9 @@ return require("packer").startup {
       "folke/trouble.nvim",
       requires = "kyazdani42/nvim-web-devicons",
     }
+    use {
+      'simrat39/symbols-outline.nvim'
+    }
 
     -- Golang
     use 'ray-x/go.nvim'
