@@ -37,70 +37,12 @@ vim.api.nvim_set_keymap("n", "<F2>", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR
 -- inoremap <silent> <C-k> <Cmd>Lspsaga signature_help<CR>
 -- nnoremap <silent> gh <Cmd>Lspsaga lsp_finder<CR>
 
-local lang_settings = {
-  lua = {
-    settings = {
-      Lua = {
-        runtime = {
-          version = "LuaJIT",
-          path = vim.split(package.path, ";"),
-        },
-        diagnostics = {
-          globals = { "vim"}
-        },
-        workspace = {
-          library = {
-            [vim.fn.expand "$VIMRUNTIME/lua"] = true,
-            [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
-          },
-          maxPreload = 100000,
-          preloadFileSize = 1000,
-        },
-      },
-    },
-  },
+local lsp_installer = require("nvim-lsp-installer")
 
-  json = {},
-  terraform = {},
-  typescript = {},
-
-  yaml = {
-    settings = {
-      yaml = {
-        format = {
-          enable = true,
-        },
-        validate = true,
-        hover = true,
-        completion = true
-      }
-    }
-  }
-
-}
-
-local lspinstall = require('lspinstall')
-
-local function setup_servers()
-  lspinstall.setup()
-  local servers = lspinstall.installed_servers()
-  for _, server in pairs(servers) do
-    config = lang_settings[server]
-    if (config ~= nil) then
-      require('lspconfig')[server].setup(config)
-    -- else
-    --   print("Language " .. server .. " missing")
-    end
-  end
-end
-
-setup_servers()
-
--- Automatically reload after `:LspInstall <server>` so we don't have to restart neovim
-require'lspinstall'.post_install_hook = function ()
-  setup_servers() -- reload installed servers
-  vim.cmd("bufdo e") -- this triggers the FileType autocmd that starts the server
-end
+lsp_installer.on_server_ready(function (server)
+  -- the arguments to this setup() method is exactly the same as lspconfig's setup() function
+  server:setup({})
+end)
 
 require "format".setup {
     ["*"] = {

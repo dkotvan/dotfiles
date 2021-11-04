@@ -58,7 +58,7 @@ return require("packer").startup {
     --
     -- LSP Stuff
     use 'neovim/nvim-lspconfig'
-    use 'kabouzeid/nvim-lspinstall'
+    use 'williamboman/nvim-lsp-installer'
     use 'onsails/lspkind-nvim'
     use {
       "folke/trouble.nvim",
