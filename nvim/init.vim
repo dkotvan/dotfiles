@@ -6,6 +6,8 @@ endif
 
 let mapleader=',' " comma as leader key
 
+lua require('impatient').enable_profile()
+
 lua require('options')
 
 lua require('plugins')
