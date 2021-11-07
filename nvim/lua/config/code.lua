@@ -41,7 +41,38 @@ local lsp_installer = require("nvim-lsp-installer")
 
 lsp_installer.on_server_ready(function (server)
   -- the arguments to this setup() method is exactly the same as lspconfig's setup() function
-  server:setup({})
+
+    local opts = {}
+
+    if server.name == "sumneko_lua" then
+      local lua = {
+        runtime = {
+          version = "LuaJIT",
+          path = vim.split(package.path, ";"),
+        },
+        diagnostics = {
+          globals = { "vim"}
+        },
+        workspace = {
+          -- Make the server aware of Neovim runtime files
+          -- library = vim.api.nvim_get_runtime_file("", true),
+          library = {
+            [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+            [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true,
+          },
+          maxPreload = 100000,
+          preloadFileSize = 1000,
+        },
+      }
+
+      opts = {
+        settings = { Lua = lua }
+      }
+    end
+
+    -- This setup() function is exactly the same as lspconfig's setup function.
+    -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/ADVANCED_README.md
+    server:setup(opts)
 end)
 
 require "format".setup {
