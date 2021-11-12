@@ -25,3 +25,4 @@ nnoremap <leader>l :nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>
 " Stuff
 
 nnoremap <leader>f <cmd>:NvimTreeToggle<CR>
+nnoremap <leader>F <cmd>:NvimTreeFindFile<CR>
