@@ -37,6 +37,10 @@ return require("packer").startup {
     }
 
     use {
+      'github/copilot.vim'
+    }
+
+    use {
       'nacro90/numb.nvim',
       config = function()
         require('numb').setup{
@@ -70,7 +74,7 @@ return require("packer").startup {
       requires = "kyazdani42/nvim-web-devicons",
     }
     use {
-      'simrat39/symbols-outline.nvim'
+      'simrat39/symbols-outline.nvim',
     }
 
     -- Golang
@@ -296,19 +300,6 @@ return require("packer").startup {
     ]]
   end
 }
-
-use { 'ggandor/lightspeed.nvim',
-config = function()
-  require('lightspeed').setup({
-    jump_to_first_match = true,
-    jump_on_partial_input_safety_timeout = 500,
-    highlight_unique_chars = false,
-    grey_out_search_area = true,
-    match_only_the_start_of_same_char_seqs = true,
-    limit_ft_matches = 5,
-  })
-end
-  }
 
   use { "mbbill/undotree" }
   use { "Pocco81/AutoSave.nvim" }

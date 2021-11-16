@@ -21,7 +21,7 @@ vim.api.nvim_set_keymap("n", "<leader>xd", "<cmd>Trouble lsp_document_diagnostic
 
 vim.api.nvim_set_keymap("n", "<leader>rr", "<Cmd>lua vim.lsp.buf.rename()<cr>", {silent = true, noremap = true})
 vim.api.nvim_set_keymap("n", "<leader>s", "<cmd>Telescope lsp_document_symbols<CR>", {silent = true, noremap = true})
-vim.api.nvim_set_keymap("n", "<leader>S", "<cmd>Telescope lsp_workspace_symbols<CR>", {silent = true, noremap = true})
+vim.api.nvim_set_keymap("n", "<leader>S", "<cmd>Telescope lsp_dynamic_workspace_symbols<CR>", {silent = true, noremap = true})
 vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", {silent = true, noremap = true})
 vim.api.nvim_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", {silent = true, noremap = true})
 vim.api.nvim_set_keymap("n", "gr", "<cmd>Telescope lsp_references<CR>", {silent = true, noremap = true})
@@ -70,9 +70,6 @@ lsp_installer.on_server_ready(function (server)
 end)
 
 require "format".setup {
-    ["*"] = {
-        {cmd = {"sed -i 's/[ \t]*$//'"}} -- remove trailing whitespace
-    },
     vim = {
         {
             cmd = {"luafmt -w replace"},
@@ -89,6 +86,12 @@ require "format".setup {
             }
         }
     },
+    go = {
+      {
+        cmd = {"gofmt -w", "goimports -w"},
+        tempfile_postfix = ".tmp"
+      }
+    },
     markdown = {
         {cmd = {"prettier -w"}},
         {
@@ -99,3 +102,8 @@ require "format".setup {
         }
     }
 }
+
+vim.g.symbols_outline = {
+  position = 'left',
+}
+
