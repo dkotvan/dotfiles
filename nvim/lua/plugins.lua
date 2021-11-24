@@ -78,7 +78,16 @@ return require("packer").startup {
     }
 
     -- Golang
-    use 'ray-x/go.nvim'
+    use {
+       'fatih/vim-go',
+       config = function()
+         vim.g.go_code_completion_enabled = 0
+         vim.g.go_def_mapping_enabled = 1
+         vim.g.go_term_mode = "split"
+         vim.g.go_gopls_options = { '-remote=auto' }
+       end
+     }
+     use { 'buoto/gotests-vim' }
 
     -- Auto complete
 
