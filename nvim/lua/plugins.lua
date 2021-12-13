@@ -85,9 +85,11 @@ return require("packer").startup {
          vim.g.go_def_mapping_enabled = 1
          vim.g.go_term_mode = "split"
          vim.g.go_gopls_options = { '-remote=auto' }
+         vim.g.go_metalinter_command = "golangci-lint"
        end
      }
      use { 'buoto/gotests-vim' }
+     use { 'hexdigest/gounit-vim' }
 
     -- Auto complete
 
@@ -97,7 +99,7 @@ return require("packer").startup {
     use { 'hrsh7th/vim-vsnip-integ'}
 
     --- Auto complete
-    use { 'andersevenrud/compe-tmux', branch = 'cmp'}
+    use { 'andersevenrud/cmp-tmux' }
     use { 'hrsh7th/nvim-cmp',
       requires = {
         'hrsh7th/cmp-buffer',

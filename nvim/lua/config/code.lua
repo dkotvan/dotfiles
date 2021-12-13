@@ -64,6 +64,12 @@ lsp_installer.on_server_ready(function (server)
       }
     end
 
+    if server.name == "gopls" then
+      opts = {
+        settings
+      }
+    end
+
     -- This setup() function is exactly the same as lspconfig's setup function.
     -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/ADVANCED_README.md
     server:setup(opts)
