@@ -79,9 +79,9 @@ if OS.mac?
 
   brew "pinentry-mac"
 
-  cask "adoptopenjdk/openjdk/adoptopenjdk8"
+  cask "temurin8"
   cask "adoptopenjdk11"
-  cask "adoptopenjdk13"
+  cask "adoptopenjdk"
   cask "dbeaver-community"
   cask "discord"
   cask "docker"
