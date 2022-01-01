@@ -1,7 +1,3 @@
-vim.cmd [[
-let $MYVIMPATH=expand("<sfile>:p:h")
-]]
-
 vim.g.mapleader = ','
 
 local ok, err = pcall(require, 'impatient')

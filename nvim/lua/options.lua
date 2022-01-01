@@ -45,9 +45,8 @@ vim.opt.shiftround = true -- Round indent to multiple of 'shiftwidth'
 -- set listchars=eol:$,tab:>>,nbsp:¯,trail:·,extends:»,precedes:«
 
 vim.cmd [[
-set directory=$MYVIMPATH/swapdir//    " keep swap files, extra / is to put páth with the filenames
-set undodir=$MYVIMPATH/undodir/     " directory for persistent undo
-
+set directory=~/dotfiles/nvim/swapdir//    " keep swap files, extra / is to put páth with the filenames
+set undodir=~/dotfiles/nvim/undodir/     " directory for persistent undo
 ]]
 
 -- undo & backup {{{
