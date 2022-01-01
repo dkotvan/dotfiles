@@ -1,6 +1,16 @@
+vim.cmd [[
+let $MYVIMPATH=expand("<sfile>:p:h")
+]]
+
 vim.g.mapleader = ','
 
-require('impatient').enable_profile()
+local ok, err = pcall(require, 'impatient')
+
+if ok then
+  require('impatient').enable_profile()
+else
+  warn(('impatient not installed\n%s'):format(err))
+end
 
 require('options')
 
