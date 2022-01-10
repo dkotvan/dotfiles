@@ -78,5 +78,6 @@ eval "$(rbenv init -)"
 
 eval "$(starship init zsh)"
 
+export GOPATH=~/go
 export PATH=~/go/bin:~/bin:$PATH
 
