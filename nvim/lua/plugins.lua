@@ -14,10 +14,15 @@ return require("packer").startup {
   function(use)
     use { 'wbthomason/packer.nvim' }
 
-    use 'lewis6991/impatient.nvim'
+    use { 'lewis6991/impatient.nvim' }
 
     -- Editorconfig
-    use { 'editorconfig/editorconfig-vim' }
+    use {
+      'editorconfig/editorconfig-vim',
+      config = function()
+        vim.g.EditorConfig_exclude_patterns = { 'fugitive://.*', 'scp://.*' }
+      end
+    }
 
     -- make ftplugins/*.lua be loaded correctly
     use { "tjdevries/astronauta.nvim"}
@@ -74,8 +79,9 @@ return require("packer").startup {
       requires = "kyazdani42/nvim-web-devicons",
     }
     use {
-      'simrat39/symbols-outline.nvim',
+      'simrat39/symbols-outline.nvim', -- command :SymbolsOutline
     }
+    use { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' }
 
     -- Golang
     use {
@@ -100,21 +106,20 @@ return require("packer").startup {
 
     --- Auto complete
     use { 'andersevenrud/cmp-tmux' }
-    use { 'hrsh7th/nvim-cmp',
-      requires = {
-        'hrsh7th/cmp-buffer',
-        'hrsh7th/vim-vsnip',
-        'hrsh7th/cmp-nvim-lsp',
-        'hrsh7th/cmp-path',
-        'hrsh7th/cmp-vsnip',
-        'hrsh7th/cmp-nvim-lua',
-        'quangnguyen30192/cmp-nvim-tags',
-        'ray-x/cmp-treesitter',
-        'f3fora/cmp-spell',
-        'hrsh7th/cmp-emoji',
-        'hrsh7th/cmp-calc'
-      }
-    }
+    use { 'hrsh7th/nvim-cmp'}
+    use { 'hrsh7th/cmp-buffer' }
+    use { 'hrsh7th/vim-vsnip' }
+    use { 'hrsh7th/cmp-nvim-lsp' }
+    use { 'hrsh7th/cmp-path' }
+    use { 'hrsh7th/cmp-vsnip' }
+    use { 'hrsh7th/cmp-nvim-lua' }
+    use { 'quangnguyen30192/cmp-nvim-tags' }
+    use { 'ray-x/cmp-treesitter' }
+    use { 'f3fora/cmp-spell' }
+    use { 'hrsh7th/cmp-emoji' }
+    use { 'hrsh7th/cmp-calc' }
+    use { 'hrsh7th/cmp-cmdline' }
+    use { 'AndrewRadev/tagalong.vim' }
 
     -- Auto pairs
     use { "windwp/nvim-autopairs" }
@@ -170,11 +175,7 @@ return require("packer").startup {
     use 'kana/vim-textobj-user'
 
     -- Blame line showed everytime at right
-    use { 'tveskag/nvim-blame-line',
-    config = function()
-      vim.cmd[[ autocmd BufEnter * EnableBlameLine ]]
-    end
-  }
+    use { 'tveskag/nvim-blame-line' }
 
   -- DiffViewOpen <git rev> to to a diff of all files
   use 'sindrets/diffview.nvim'
@@ -218,6 +219,8 @@ return require("packer").startup {
     event = "BufRead",
   }
 
+  use 'airblade/vim-rooter'
+
   -- BW kill buffer without closing window, BUN, BD, BW, BB, BF
   use 'qpkorr/vim-bufkill'
 
@@ -237,11 +240,6 @@ return require("packer").startup {
   -- UnmakeTable  -> markdown to csv
   use 'mattn/vim-maketable'
 
-  use {
-    'tpope/vim-bundler',
-    ft = {'ruby'}
-  }
-
   -- textobject ar | ir
   use {
     'nelstrom/vim-textobj-rubyblock',
@@ -257,9 +255,6 @@ return require("packer").startup {
   -- textobject ai | ii
   use 'kana/vim-textobj-indent'
 
-  -- Comments! gc
-  use 'tpope/vim-commentary'
-
   -- align text by character -> gl and gL
   use 'tommcdo/vim-lion'
 
@@ -268,12 +263,6 @@ return require("packer").startup {
 
   -- swap text - cx, cxx, X (visual mode)
   use 'tommcdo/vim-exchange'
-
-  -- :%S - replace text preserving case
-  use {
-    'tpope/vim-abolish',
-    requires = 'tpope/vim-repeat'
-  }
 
   -- compare directories
   use 'vim-scripts/dirdiff.vim'
@@ -285,6 +274,18 @@ return require("packer").startup {
 
   -- A fast git commit browser
   use 'junegunn/gv.vim'
+
+  -- :%S - replace text preserving case
+  use {
+    'tpope/vim-abolish',
+    requires = 'tpope/vim-repeat'
+  }
+  -- Comments! gc
+  use 'tpope/vim-commentary'
+  use {
+    'tpope/vim-bundler',
+    ft = {'ruby'}
+  }
 
   use {
     'tpope/vim-eunuch'

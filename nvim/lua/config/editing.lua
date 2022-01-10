@@ -6,7 +6,7 @@ autosave.setup({
   events = {"TextChangedI", "TextChanged"},
   conditions = {
     exists = false,
-    filetype_is_not = {},
+    filetype_is_not = {'go'},
     modifiable = true
   },
   write_all_buffers = false,
