@@ -3,6 +3,10 @@ if [[ $OSTYPE == linux* ]]; then
   eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 fi
 
+if [[ $OSTYPE == darwin* ]]; then
+  ulimit -S -n 200048
+fi
+
 DISABLE_AUTO_TITLE=”true”
 
 # Load Antibody plugins
