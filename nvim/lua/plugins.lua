@@ -85,17 +85,17 @@ return require("packer").startup {
 
     -- Golang
     use {
-       'fatih/vim-go',
-       config = function()
-         vim.g.go_code_completion_enabled = 0
-         vim.g.go_def_mapping_enabled = 1
-         vim.g.go_term_mode = "split"
-         vim.g.go_gopls_options = { '-remote=auto' }
-         vim.g.go_metalinter_command = "golangci-lint"
-       end
-     }
-     use { 'buoto/gotests-vim' }
-     use { 'hexdigest/gounit-vim' }
+      'fatih/vim-go',
+      config = function()
+        vim.g.go_code_completion_enabled = 0
+        vim.g.go_def_mapping_enabled = 1
+        vim.g.go_term_mode = "split"
+        vim.g.go_gopls_options = { '-remote=auto' }
+        vim.g.go_metalinter_command = "golangci-lint"
+      end
+    }
+    use { 'buoto/gotests-vim' }
+    use { 'hexdigest/gounit-vim' }
 
     -- Auto complete
 
@@ -134,6 +134,10 @@ return require("packer").startup {
     }
 
     use {
+      "nvim-telescope/telescope-fzf-native.nvim", run = "make"
+    }
+
+    use {
       "mfussenegger/nvim-lint",
       config = function()
         -- require("nlint").setup()
@@ -143,7 +147,7 @@ return require("packer").startup {
     }
 
     use {
-      "lukas-reineke/format.nvim"
+      "mhartington/formatter.nvim"
     }
 
     -- File explorer
@@ -177,141 +181,141 @@ return require("packer").startup {
     -- Blame line showed everytime at right
     use { 'tveskag/nvim-blame-line' }
 
-  -- DiffViewOpen <git rev> to to a diff of all files
-  use 'sindrets/diffview.nvim'
+    -- DiffViewOpen <git rev> to to a diff of all files
+    use 'sindrets/diffview.nvim'
 
-  -- best git plugin
-  use 'tpope/vim-fugitive'
+    -- best git plugin
+    use 'tpope/vim-fugitive'
 
-  -- Gbrowse open browser in Bitbucket too
-  use 'tommcdo/vim-fubitive'
+    -- Gbrowse open browser in Bitbucket too
+    use 'tommcdo/vim-fubitive'
 
-  -- Gbrowse open browser in Gitlab. use lab command
-  use 'shumphrey/fugitive-gitlab.vim'
+    -- Gbrowse open browser in Gitlab. use lab command
+    use 'shumphrey/fugitive-gitlab.vim'
 
-  use {
-    'lewis6991/gitsigns.nvim',
-    requires = 'nvim-lua/plenary.nvim',
+    use {
+      'lewis6991/gitsigns.nvim',
+      requires = 'nvim-lua/plenary.nvim',
+      config = function()
+        require('gitsigns').setup({
+          keymaps = {
+            -- Default keymap options
+            noremap = true,
+
+            ['n <F1>'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'"},
+            ['n <C-F1>'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'"},
+
+            ['n <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
+            ['v <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
+            ['n <leader>hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
+            ['n <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
+            ['v <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
+            ['n <leader>hR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
+            ['n <leader>hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
+            ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
+
+            -- Text objects
+            ['o ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
+            ['x ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
+          },
+        })
+      end,
+      event = "BufRead",
+    }
+
+    use 'airblade/vim-rooter'
+
+    -- BW kill buffer without closing window, BUN, BD, BW, BB, BF
+    use 'qpkorr/vim-bufkill'
+
+    -- Now vim recognize line numbers on errors - open files like /a.txt:20:5
+    use 'wsdjeg/vim-fetch'
+
+    -- Sudo that works with neovim
+    use 'lambdalisue/suda.vim'
+    --
+    -- Open external browsers
+    use 'tyru/open-browser.vim'
+    --
+    -- Asynchronous tag generation
+    use 'ludovicchabant/vim-gutentags'
+    --
+    -- MakeTable! -> csv to markdown table
+    -- UnmakeTable  -> markdown to csv
+    use 'mattn/vim-maketable'
+
+    -- textobject ar | ir
+    use {
+      'nelstrom/vim-textobj-rubyblock',
+      ft = {'ruby'}
+    }
+
+    -- textobject ae | ie
+    use 'kana/vim-textobj-entire'
+
+    -- textobject al | il
+    use 'kana/vim-textobj-line'
+
+    -- textobject ai | ii
+    use 'kana/vim-textobj-indent'
+
+    -- align text by character -> gl and gL
+    use 'tommcdo/vim-lion'
+
+    -- align text - here because i can use the command Table in plasticboy/markdown
+    use 'godlygeek/tabular'
+
+    -- swap text - cx, cxx, X (visual mode)
+    use 'tommcdo/vim-exchange'
+
+    -- compare directories
+    use 'vim-scripts/dirdiff.vim'
+
+    -- kill all buffers except the current
+    use 'duff/vim-bufonly'
+
+    use 'AndrewRadev/linediff.vim'
+
+    -- A fast git commit browser
+    use 'junegunn/gv.vim'
+
+    -- :%S - replace text preserving case
+    use {
+      'tpope/vim-abolish',
+      requires = 'tpope/vim-repeat'
+    }
+    -- Comments! gc
+    use 'tpope/vim-commentary'
+    use {
+      'tpope/vim-bundler',
+      ft = {'ruby'}
+    }
+
+    use {
+      'tpope/vim-eunuch'
+    }
+
+    use {
+      'tpope/vim-surround',
+      requires = 'tpope/vim-repeat'
+    }
+
+    use {'kevinhwang91/nvim-hlslens',
     config = function()
-      require('gitsigns').setup({
-        keymaps = {
-          -- Default keymap options
-          noremap = true,
-
-          ['n <F1>'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'"},
-          ['n <C-F1>'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'"},
-
-          ['n <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
-          ['v <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
-          ['n <leader>hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
-          ['n <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
-          ['v <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
-          ['n <leader>hR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
-          ['n <leader>hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
-          ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
-
-          -- Text objects
-          ['o ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
-          ['x ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
-        },
+      require('hlslens').setup({
+        calm_down = true
       })
-    end,
-    event = "BufRead",
+      vim.cmd [[
+      noremap n <Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>
+      noremap <silent> N <Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>
+      noremap * *<Cmd>lua require('hlslens').start()<CR>
+      noremap # #<Cmd>lua require('hlslens').start()<CR>
+      noremap g* g*<Cmd>lua require('hlslens').start()<CR>
+      noremap g# g#<Cmd>lua require('hlslens').start()<CR>
+      nnoremap <silent> <leader>l :noh<CR>
+      ]]
+    end
   }
-
-  use 'airblade/vim-rooter'
-
-  -- BW kill buffer without closing window, BUN, BD, BW, BB, BF
-  use 'qpkorr/vim-bufkill'
-
-  -- Now vim recognize line numbers on errors - open files like /a.txt:20:5
-  use 'wsdjeg/vim-fetch'
-
-  -- Sudo that works with neovim
-  use 'lambdalisue/suda.vim'
-  --
-  -- Open external browsers
-  use 'tyru/open-browser.vim'
-  --
-  -- Asynchronous tag generation
-  use 'ludovicchabant/vim-gutentags'
-  --
-  -- MakeTable! -> csv to markdown table
-  -- UnmakeTable  -> markdown to csv
-  use 'mattn/vim-maketable'
-
-  -- textobject ar | ir
-  use {
-    'nelstrom/vim-textobj-rubyblock',
-    ft = {'ruby'}
-  }
-
-  -- textobject ae | ie
-  use 'kana/vim-textobj-entire'
-
-  -- textobject al | il
-  use 'kana/vim-textobj-line'
-
-  -- textobject ai | ii
-  use 'kana/vim-textobj-indent'
-
-  -- align text by character -> gl and gL
-  use 'tommcdo/vim-lion'
-
-  -- align text - here because i can use the command Table in plasticboy/markdown
-  use 'godlygeek/tabular'
-
-  -- swap text - cx, cxx, X (visual mode)
-  use 'tommcdo/vim-exchange'
-
-  -- compare directories
-  use 'vim-scripts/dirdiff.vim'
-
-  -- kill all buffers except the current
-  use 'duff/vim-bufonly'
-
-  use 'AndrewRadev/linediff.vim'
-
-  -- A fast git commit browser
-  use 'junegunn/gv.vim'
-
-  -- :%S - replace text preserving case
-  use {
-    'tpope/vim-abolish',
-    requires = 'tpope/vim-repeat'
-  }
-  -- Comments! gc
-  use 'tpope/vim-commentary'
-  use {
-    'tpope/vim-bundler',
-    ft = {'ruby'}
-  }
-
-  use {
-    'tpope/vim-eunuch'
-  }
-
-  use {
-    'tpope/vim-surround',
-    requires = 'tpope/vim-repeat'
-  }
-
-  use {'kevinhwang91/nvim-hlslens',
-  config = function()
-    require('hlslens').setup({
-      calm_down = true
-    })
-    vim.cmd [[
-    noremap n <Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>
-    noremap <silent> N <Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>
-    noremap * *<Cmd>lua require('hlslens').start()<CR>
-    noremap # #<Cmd>lua require('hlslens').start()<CR>
-    noremap g* g*<Cmd>lua require('hlslens').start()<CR>
-    noremap g# g#<Cmd>lua require('hlslens').start()<CR>
-    nnoremap <silent> <leader>l :noh<CR>
-    ]]
-  end
-}
 
   use { "mbbill/undotree" }
   use { "Pocco81/AutoSave.nvim" }
@@ -392,9 +396,9 @@ use {
     event = "BufWinEnter",
   }
 
-use {
-  'abecodes/tabout.nvim'
-}
+  use {
+    'abecodes/tabout.nvim'
+  }
 
 end
 }
