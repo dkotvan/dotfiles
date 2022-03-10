@@ -9,6 +9,7 @@ vim.o.completeopt = "menuone,noselect"
       end,
     },
     sources = {
+      { name = 'cmp_nvim_lsp_signature_help' },
       { name = 'nvim_lsp'},
       { name = 'nvim_lua'},
       { name = 'vsnip'},
@@ -16,31 +17,66 @@ vim.o.completeopt = "menuone,noselect"
       { name = 'emoji'},
       { name = 'tmux'},
       { name = 'buffer'},
-      { name = 'calc'},
       { name = 'spell'},
       { name = 'treesiter'},
-      { name = 'tags'},
     },
     mapping = {
       ['<CR>'] = cmp.mapping.confirm({ select = true }),
+      ['<C-g>'] = cmp.mapping(function(_)
+        vim.api.nvim_feedkeys(vim.fn['copilot#Accept'](vim.api.nvim_replace_termcodes('<Tab>', true, true, true)), 'n', true)
+      end)
     },
-    -- formatting = {
-    --   format = function(entry, vim_item)
-    --     -- fancy icons and a name of kind
-    --     vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
+    experimental = {
+      ghost_text = false, -- this feature conflict to the copilot.vim's preview.
+    },
+    formatting = {
+      format = function(entry, vim_item)
+        -- fancy icons and a name of kind
+        vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
 
-    --     -- set a name for each source
-    --     vim_item.menu = ({
-    --       path = "  (Path)",
-    --       buffer = "  (Buffer)",
-    --       calc = "  (Calc)",
-    --       vsnip = "  (Snippet)",
-    --       spell = "  (Spell)",
-    --     })[entry.source.name]
-    --     return vim_item
-    --   end,
-    -- },
+        -- set a name for each source
+        vim_item.menu = ({
+          path = "",
+          buffer = "",
+          vsnip = "",
+          spell = "",
+          tmux = "",
+          treesiter = "",
+        })[entry.source.name]
+        return vim_item
+      end,
+    },
   }
+
+  cmp.setup.filetype('gitcommit', {
+    sources = cmp.config.sources({
+      { name = 'path'},
+      { name = 'emoji'},
+      { name = 'tmux'},
+      { name = 'buffer'},
+      { name = 'spell'},
+      { name = 'cmp_git' },
+      { name = 'buffer' },
+    })
+  })
+
+  -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline('/', {
+    sources = {
+      { name = 'nvim_lsp_document_symbol' },
+      { name = 'buffer' },
+    }
+  })
+
+  -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+  cmp.setup.cmdline(':', {
+    sources = cmp.config.sources({
+      { name = 'path' },
+      { name = 'tmux'},
+      { name = 'cmdline' },
+    })
+  })
+  require("cmp_git").setup()
 
   local npairs = require("nvim-autopairs")
 

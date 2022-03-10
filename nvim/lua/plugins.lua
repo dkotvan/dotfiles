@@ -42,7 +42,11 @@ return require("packer").startup {
     }
 
     use {
-      'github/copilot.vim'
+      'github/copilot.vim',
+      config = function()
+        vim.g.copilot_no_tab_map = true
+        vim.cmd [[ imap <expr> <Plug>(vimrc:copilot-dummy-map) copilot#Accept("\<Tab>") ]]
+      end
     }
 
     use {
@@ -60,6 +64,7 @@ return require("packer").startup {
     use {
       "sainnhe/gruvbox-material",
     }
+    use { 'luisiacc/gruvbox-baby' }
 
     --  JqxList and JqxQuery command with jkson
     use 'gennaro-tedesco/nvim-jqx'
@@ -113,12 +118,14 @@ return require("packer").startup {
     use { 'hrsh7th/cmp-path' }
     use { 'hrsh7th/cmp-vsnip' }
     use { 'hrsh7th/cmp-nvim-lua' }
-    use { 'quangnguyen30192/cmp-nvim-tags' }
+    use {'petertriho/cmp-git', requires = 'nvim-lua/plenary.nvim'}
     use { 'ray-x/cmp-treesitter' }
     use { 'f3fora/cmp-spell' }
     use { 'hrsh7th/cmp-emoji' }
-    use { 'hrsh7th/cmp-calc' }
     use { 'hrsh7th/cmp-cmdline' }
+    use { 'hrsh7th/cmp-nvim-lsp-signature-help' }
+    use { 'hrsh7th/cmp-nvim-lsp-document-symbol' }
+
     use { 'AndrewRadev/tagalong.vim' }
 
     -- Auto pairs
@@ -286,6 +293,8 @@ return require("packer").startup {
     }
     -- Comments! gc
     use 'tpope/vim-commentary'
+
+    -- Supports bundler in vim
     use {
       'tpope/vim-bundler',
       ft = {'ruby'}

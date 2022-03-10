@@ -57,6 +57,9 @@ vim.api.nvim_set_keymap("n", "<F2>", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR
 
 local lsp_installer = require("nvim-lsp-installer")
 
+local capabilities = vim.lsp.protocol.make_client_capabilities()
+capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
+
 lsp_installer.on_server_ready(
   function(server)
     -- the arguments to this setup() method is exactly the same as lspconfig's setup() function
@@ -94,6 +97,8 @@ lsp_installer.on_server_ready(
         -- settings
       }
     end
+
+    opts['capabilities'] = capabilities
 
     -- This setup() function is exactly the same as lspconfig's setup function.
     -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/ADVANCED_README.md
