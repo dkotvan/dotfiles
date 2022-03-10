@@ -39,7 +39,8 @@ unless OS.mac?
   brew "kubernetes-cli"
 end
 brew "kubectx"
-brew "zaquestion/tap/lab"
+brew "lab"
+brew "glab"
 brew "magic-wormhole"
 brew "mdcat"
 brew "mob"
