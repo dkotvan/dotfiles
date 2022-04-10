@@ -19,7 +19,7 @@
 [mergetool "vimdiff"]
   cmd = nvim -d $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [difftool "vimdirdiff"]
-  cmd = nvim -f '+next' '+execute \"DirDiff\" argv(0) argv(1)' $LOCAL $REMOTE
+  cmd = nvim -f '+next' '+execute \"ZFDirDiff\" argv(0) argv(1)' $LOCAL $REMOTE
 [mergetool "vimdirdiff"]
   cmd = nvim -c 'DirDiff $LOCAL $REMOTE $MERGED -c '$wincmd w' -c 'wincmd J'
 [difftool]

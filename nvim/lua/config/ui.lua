@@ -1,4 +1,4 @@
-read_background_file = function ()
+local read_background_file = function ()
   local f = io.open(vim.env.HOME .. '/.background', "r")
   if not f then return 'dark' end
 

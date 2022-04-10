@@ -113,7 +113,6 @@ return require("packer").startup {
     use { 'andersevenrud/cmp-tmux' }
     use { 'hrsh7th/nvim-cmp'}
     use { 'hrsh7th/cmp-buffer' }
-    use { 'hrsh7th/vim-vsnip' }
     use { 'hrsh7th/cmp-nvim-lsp' }
     use { 'hrsh7th/cmp-path' }
     use { 'hrsh7th/cmp-vsnip' }
@@ -275,6 +274,7 @@ return require("packer").startup {
 
     -- compare directories
     use 'vim-scripts/dirdiff.vim'
+    use 'ZSaberLv0/ZFVimDirDiff'
 
     -- kill all buffers except the current
     use 'duff/vim-bufonly'
