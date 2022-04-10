@@ -185,9 +185,6 @@ return require("packer").startup {
     -- allow to create your own text object
     use 'kana/vim-textobj-user'
 
-    -- Blame line showed everytime at right
-    use { 'tveskag/nvim-blame-line' }
-
     -- DiffViewOpen <git rev> to to a diff of all files
     use 'sindrets/diffview.nvim'
 
@@ -225,6 +222,7 @@ return require("packer").startup {
             ['o ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
             ['x ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
           },
+          current_line_blame = true,
         })
       end,
       event = "BufRead",
