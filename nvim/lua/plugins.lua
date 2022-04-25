@@ -24,9 +24,6 @@ return require("packer").startup {
       end
     }
 
-    -- make ftplugins/*.lua be loaded correctly
-    use { "tjdevries/astronauta.nvim"}
-
     -- guide lines
     use {
       'lukas-reineke/indent-blankline.nvim',
