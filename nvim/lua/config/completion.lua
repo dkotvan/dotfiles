@@ -29,23 +29,23 @@ vim.o.completeopt = "menuone,noselect"
     experimental = {
       ghost_text = false, -- this feature conflict to the copilot.vim's preview.
     },
-    formatting = {
-      format = function(entry, vim_item)
-        -- fancy icons and a name of kind
-        vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
+    -- formatting = {
+    --   format = function(entry, vim_item)
+    --     -- fancy icons and a name of kind
+    --     vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
 
-        -- set a name for each source
-        vim_item.menu = ({
-          path = "",
-          buffer = "",
-          vsnip = "",
-          spell = "",
-          tmux = "",
-          treesiter = "",
-        })[entry.source.name]
-        return vim_item
-      end,
-    },
+    --     -- set a name for each source
+    --     vim_item.menu = ({
+    --       path = "",
+    --       buffer = "",
+    --       vsnip = "",
+    --       spell = "",
+    --       tmux = "",
+    --       treesiter = "",
+    --     })[entry.source.name]
+    --     return vim_item
+    --   end,
+    -- },
   }
 
   cmp.setup.filetype('gitcommit', {
@@ -62,18 +62,22 @@ vim.o.completeopt = "menuone,noselect"
 
   -- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline('/', {
+    mapping = cmp.mapping.preset.cmdline(),
     sources = {
       { name = 'nvim_lsp_document_symbol' },
       { name = 'buffer' },
+      { name = 'tmux'},
     }
   })
 
   -- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
   cmp.setup.cmdline(':', {
+    mapping = cmp.mapping.preset.cmdline(),
     sources = cmp.config.sources({
       { name = 'path' },
       { name = 'tmux'},
       { name = 'cmdline' },
+      { name = 'buffer' },
     })
   })
   require("cmp_git").setup()

@@ -144,3 +144,8 @@ require "formatter".setup {
 vim.g.symbols_outline = {
   position = "left"
 }
+
+
+-- require('lspconfig').gopls.setup{}
+
+-- vim.opt.expandtab = true
