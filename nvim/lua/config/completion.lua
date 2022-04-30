@@ -20,32 +20,37 @@ vim.o.completeopt = "menuone,noselect"
       { name = 'spell'},
       { name = 'treesiter'},
     },
-    mapping = {
-      ['<CR>'] = cmp.mapping.confirm({ select = true }),
+    mapping = cmp.mapping.preset.insert({
+      ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+      ['<C-f>'] = cmp.mapping.scroll_docs(4),
+      ['<C-Space>'] = cmp.mapping.complete(),
+      ['<C-e>'] = cmp.mapping.abort(),
+      ['<esc>'] = cmp.mapping.abort(),
+      ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
       ['<C-g>'] = cmp.mapping(function(_)
         vim.api.nvim_feedkeys(vim.fn['copilot#Accept'](vim.api.nvim_replace_termcodes('<Tab>', true, true, true)), 'n', true)
       end)
-    },
+    }),
     experimental = {
       ghost_text = false, -- this feature conflict to the copilot.vim's preview.
     },
-    -- formatting = {
-    --   format = function(entry, vim_item)
-    --     -- fancy icons and a name of kind
-    --     vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
+    formatting = {
+      format = function(entry, vim_item)
+        -- fancy icons and a name of kind
+        vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
 
-    --     -- set a name for each source
-    --     vim_item.menu = ({
-    --       path = "",
-    --       buffer = "",
-    --       vsnip = "",
-    --       spell = "",
-    --       tmux = "",
-    --       treesiter = "",
-    --     })[entry.source.name]
-    --     return vim_item
-    --   end,
-    -- },
+        -- set a name for each source
+        vim_item.menu = ({
+          path = "",
+          buffer = "",
+          vsnip = "",
+          spell = "",
+          tmux = "",
+          treesiter = "",
+        })[entry.source.name]
+        return vim_item
+      end,
+    },
   }
 
   cmp.setup.filetype('gitcommit', {
