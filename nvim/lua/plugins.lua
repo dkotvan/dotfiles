@@ -38,12 +38,19 @@ return require("packer").startup {
       requires = {'kyazdani42/nvim-web-devicons'}
     }
 
-    use {
-      'github/copilot.vim',
+    use{
+      "zbirenbaum/copilot.lua",
+      event = {"VimEnter"},
       config = function()
-        vim.g.copilot_no_tab_map = true
-        vim.cmd [[ imap <expr> <Plug>(vimrc:copilot-dummy-map) copilot#Accept("\<Tab>") ]]
-      end
+        vim.defer_fn(function()
+          require("copilot").setup()
+        end, 100)
+      end,
+    }
+
+    use {
+        "zbirenbaum/copilot-cmp",
+        after = { "copilot.lua", "nvim-cmp" },
     }
 
     use {
@@ -404,5 +411,11 @@ use {
     'abecodes/tabout.nvim'
   }
 
+  use {
+    "rafcamlet/nvim-luapad"
+  }
+
 end
 }
+
+
