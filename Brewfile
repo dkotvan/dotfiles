@@ -17,41 +17,48 @@ brew "rust"
 brew "rbenv"
 brew "rbenv-binstubs"
 brew "rbenv-bundler"
+brew "go"
 brew "golangci/tap/golangci-lint"
+brew "lua"
+brew "luarocks"
+
+# Git related
+brew "git"
+brew "gnupg"
+brew "hub"
+brew "lab"
+brew "tig"
+brew "mob"
+
+# Docker & Kubernetes Related
+brew "docker-compose" unless OS.mac?
+brew "helm", branch: "add-include-file"
+unless OS.mac?\
+  brew "kubernetes-cli"
+end
+brew "kubectx"
+brew "int128/kubelogin/kubelogin"
+brew "stern"
 
 # Utilities
 brew "bat"
 brew "bzip2"
 brew "curl"
 brew "csvkit"
-brew "docker-compose" unless OS.mac?
 brew "exa"
 brew "fd"
 brew "fzf"
-brew "git"
-brew "gnupg"
-brew "helm", branch: "add-include-file"
-brew "hub"
 brew "htop"
 brew "jq"
 brew "kcat"
-unless OS.mac?
-  brew "kubernetes-cli"
-end
-brew "kubectx"
-brew "lab"
-brew "glab"
 brew "magic-wormhole"
 brew "mdcat"
-brew "mob"
 brew "the_silver_searcher"
-brew "tig"
 brew "unzip"
 brew "yamllint"
 brew "zip"
 
 # apps
-brew "git-delta"
 brew "neovim"
 brew "pgcli"
 brew "litecli"
@@ -61,7 +68,7 @@ brew "tmux"
 tap "universal-ctags/universal-ctags"
 brew "universal-ctags/universal-ctags/universal-ctags", args: ["HEAD"]
 
-# Shell
+# Shell and Completions
 brew "zsh"
 brew "zsh-completions"
 brew "starship"
