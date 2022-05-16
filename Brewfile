@@ -33,7 +33,7 @@ brew "mob"
 # Docker & Kubernetes Related
 brew "docker-compose" unless OS.mac?
 brew "helm", branch: "add-include-file"
-unless OS.mac?\
+unless OS.mac?
   brew "kubernetes-cli"
 end
 brew "kubectx"
