@@ -1,6 +1,5 @@
 tap "homebrew/core"
 tap "homebrew/bundle"
-tap "AdoptOpenJDK/openjdk"
 tap "golangci/tap"
 tap "remotemobprogramming/brew"
 
@@ -87,8 +86,8 @@ if OS.mac?
   brew "pinentry-mac"
 
   cask "temurin8"
-  cask "adoptopenjdk11"
-  cask "adoptopenjdk"
+  cask "temurin11"
+  cask "temurin17"
   cask "dbeaver-community"
   cask "discord"
   cask "docker"
