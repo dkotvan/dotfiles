@@ -11,7 +11,7 @@ alias pro="hub pr show"
 alias prco="hub pr checkout"
 alias mrl="lab mr list"
 alias mro="lab mr show"
-alias mrco="lab mr checkout -ft"
+alias mrco="lab mr checkout"
 alias brdiff="git difftool --dir-diff --tool=vimdirdiff"
 
 # Copied from https://unix.stackexchange.com/a/97922

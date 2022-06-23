@@ -3,10 +3,6 @@ if [[ $OSTYPE == linux* ]]; then
   eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
 fi
 
-if [[ $OSTYPE == darwin* ]]; then
-  ulimit -S -n 200048
-fi
-
 DISABLE_AUTO_TITLE=”true”
 
 # Load Antibody plugins
@@ -27,6 +23,9 @@ eval "$(nodenv init -)"
 
 bindkey -v
 
+if [[ $OSTYPE == darwin* ]]; then
+  source ~/dotfiles/osx/init.zsh
+fi
 source ~/dotfiles/alias.zsh
 for file in ~/dotfiles/local/*.zsh; do
     source "$file"
@@ -85,3 +84,5 @@ eval "$(starship init zsh)"
 export GOPATH=~/go
 export PATH=~/go/bin:~/bin:$PATH
 
+export PATH="/usr/local/sbin:$PATH"
+export PATH="${HOME}/.pyenv/shims:${PATH}"

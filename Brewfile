@@ -11,6 +11,7 @@ brew "make"
 brew "python"
 brew "node-build"
 brew "nodenv"
+brew "pyenv"
 brew "yarn"
 brew "rust"
 brew "rbenv"
@@ -30,11 +31,11 @@ brew "tig"
 brew "mob"
 
 # Docker & Kubernetes Related
-brew "docker-compose" unless OS.mac?
+brew "colima"
+brew "docker"
+brew "docker-compose"
 brew "helm", branch: "add-include-file"
-unless OS.mac?
-  brew "kubernetes-cli"
-end
+brew "kubernetes-cli"
 brew "kubectx"
 brew "int128/kubelogin/kubelogin"
 brew "stern"
@@ -90,7 +91,6 @@ if OS.mac?
   cask "temurin17"
   cask "dbeaver-community"
   cask "discord"
-  cask "docker"
   cask "firefox"
   cask "gifcapture"
   cask "intellij-idea-ce"
