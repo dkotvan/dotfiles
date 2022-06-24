@@ -110,7 +110,11 @@ return require("packer").startup {
 
     -- Snippets
     use 'rafamadriz/friendly-snippets'
-    use { 'hrsh7th/vim-vsnip' }
+    use { 'hrsh7th/vim-vsnip',
+      config = function()
+        vim.g.vsnip_snippet_dir = vim.fn.stdpath "config" .. "/snippets/"
+      end
+    }
     use { 'hrsh7th/vim-vsnip-integ'}
 
     --- Auto complete
@@ -359,6 +363,8 @@ use {
     let g:vim_markdown_toc_autofit = 1
 
     let g:vim_markdown_folding_disabled = 1
+
+    let g:vim_markdown_strikethrough = 1
     ]]
   end
 }
