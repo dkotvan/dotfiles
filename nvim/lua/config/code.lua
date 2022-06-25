@@ -27,24 +27,24 @@ local wk = require("which-key")
 -- and hide <leader>1
 
 wk.register(
-  {
-    x = {
-      name = "trouble", -- optional group name
-      x = {"<cmd>Trouble<cr>", "Default Trouble Diagnostics", noremap = true},
-      w = {"<cmd>Trouble workspace_diagnostics<cr>", "Trouble Workspace Diagnostics", noremap = true},
-      d = {"<cmd>Trouble document_diagnostics<cr>", "Trouble Document Diagnostics", noremap = true}
-    }
-  },
-  {prefix = "<leader>"}
+{
+  x = {
+    name = "trouble", -- optional group name
+    x = {"<cmd>Trouble<cr>", "Default Trouble Diagnostics", noremap = true},
+    w = {"<cmd>Trouble workspace_diagnostics<cr>", "Trouble Workspace Diagnostics", noremap = true},
+    d = {"<cmd>Trouble document_diagnostics<cr>", "Trouble Document Diagnostics", noremap = true}
+  }
+},
+{prefix = "<leader>"}
 )
 
 vim.api.nvim_set_keymap("n", "<leader>rr", "<Cmd>lua vim.lsp.buf.rename()<cr>", {silent = true, noremap = true})
 vim.api.nvim_set_keymap("n", "<leader>s", "<cmd>Telescope lsp_document_symbols<CR>", {silent = true, noremap = true})
 vim.api.nvim_set_keymap(
-  "n",
-  "<leader>S",
-  "<cmd>Telescope lsp_dynamic_workspace_symbols<CR>",
-  {silent = true, noremap = true}
+"n",
+"<leader>S",
+"<cmd>Telescope lsp_dynamic_workspace_symbols<CR>",
+{silent = true, noremap = true}
 )
 vim.api.nvim_set_keymap("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>", {silent = true, noremap = true})
 vim.api.nvim_set_keymap("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>", {silent = true, noremap = true})
@@ -55,56 +55,62 @@ vim.api.nvim_set_keymap("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>
 vim.api.nvim_set_keymap("n", "<C-F2>", "<cmd>lua vim.lsp.diagnostic.goto_prev()<CR>", {silent = true, noremap = true})
 vim.api.nvim_set_keymap("n", "<F2>", "<cmd>lua vim.lsp.diagnostic.goto_next()<CR>", {silent = true, noremap = true})
 
-local lsp_installer = require("nvim-lsp-installer")
+require("nvim-lsp-installer").setup {
+  log_level = vim.log.levels.DEBUG,
+  automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
+  ui = {
+    icons = {
+      server_installed = "✓",
+      server_pending = "➜",
+      server_uninstalled = "✗"
+    }
+  }
+}
+
 
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require('cmp_nvim_lsp').update_capabilities(capabilities)
 
-lsp_installer.on_server_ready(
-  function(server)
-    -- the arguments to this setup() method is exactly the same as lspconfig's setup() function
-
-    local opts = {}
-
-    if server.name == "sumneko_lua" then
-      local lua = {
-        runtime = {
-          version = "LuaJIT",
-          path = vim.split(package.path, ";")
-        },
-        diagnostics = {
-          globals = {"vim"}
-        },
-        workspace = {
-          -- Make the server aware of Neovim runtime files
-          -- library = vim.api.nvim_get_runtime_file("", true),
-          library = {
-            [vim.fn.expand "$VIMRUNTIME/lua"] = true,
-            [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true
-          },
-          maxPreload = 100000,
-          preloadFileSize = 1000
-        }
-      }
-
-      opts = {
-        settings = {Lua = lua}
-      }
-    end
-
-    if server.name == "gopls" then
-      opts = {
-        -- settings
-      }
-    end
-
-    opts['capabilities'] = capabilities
-
-    -- This setup() function is exactly the same as lspconfig's setup function.
-    -- Refer to https://github.com/neovim/nvim-lspconfig/blob/master/ADVANCED_README.md
-    server:setup(opts)
-  end
-)
+require('lspconfig').dockerls.setup{
+  capabilities = capabilities
+}
+require('lspconfig').jsonls.setup{
+  capabilities = capabilities
+}
+require('lspconfig').yamlls.setup{
+  capabilities = capabilities
+}
+require('lspconfig').bashls.setup{
+  capabilities = capabilities
+}
+require('lspconfig').gopls.setup{
+  capabilities = capabilities
+}
+require('lspconfig').sumneko_lua.setup{
+  settings = {Lua = {
+    runtime = {
+      version = "LuaJIT",
+      path = vim.split(package.path, ";")
+    },
+    diagnostics = {
+      globals = {"vim"}
+    },
+    workspace = {
+      -- Make the server aware of Neovim runtime files
+      -- library = vim.api.nvim_get_runtime_file("", true),
+      library = {
+        [vim.fn.expand "$VIMRUNTIME/lua"] = true,
+        [vim.fn.expand "$VIMRUNTIME/lua/vim/lsp"] = true
+      },
+      maxPreload = 100000,
+      preloadFileSize = 1000
+    }
+  }},
+  capabilities = capabilities
+}
+require('lspconfig').kotlin_language_server.setup{
+  capabilities = capabilities
+}
 
 require "formatter".setup {
   filetype = {
@@ -144,8 +150,5 @@ require "formatter".setup {
 vim.g.symbols_outline = {
   position = "left"
 }
-
-
--- require('lspconfig').gopls.setup{}
 
 -- vim.opt.expandtab = true
