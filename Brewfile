@@ -21,6 +21,10 @@ brew "go"
 brew "golangci/tap/golangci-lint"
 brew "lua"
 brew "luarocks"
+unless OS.mac?
+  brew "openjdk@11"
+  brew "openjdk@17"
+end
 
 # Git related
 brew "git"
@@ -32,7 +36,7 @@ brew "mob"
 brew "gitter-cli"
 
 # Docker & Kubernetes Related
-brew "colima"
+brew "colima" if OS.mac?
 brew "docker"
 brew "docker-compose"
 brew "helm", branch: "add-include-file"
