@@ -16,6 +16,14 @@ return require("packer").startup {
 
     use { 'lewis6991/impatient.nvim' }
 
+    -- Terminal
+    use {
+    's1n7ax/nvim-terminal',
+    config = function()
+        vim.o.hidden = true
+        require('nvim-terminal').setup()
+    end,
+}
     -- Editorconfig
     use {
       'editorconfig/editorconfig-vim',
