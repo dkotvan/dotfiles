@@ -2,6 +2,7 @@
 	editor = nvim
 	excludesfile = ~/.gitignore
 	pager = less -F -X
+	autocrlf = input
 [color]
 	ui = auto
 [push]
