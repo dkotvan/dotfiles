@@ -279,6 +279,9 @@ return require("packer").startup {
     -- textobject ai | ii
     use 'kana/vim-textobj-indent'
 
+    -- textobject ig | ]g [g
+    use 'andrewferrier/textobj-diagnostic.nvim'
+
     -- align text by character -> gl and gL
     use 'tommcdo/vim-lion'
 
