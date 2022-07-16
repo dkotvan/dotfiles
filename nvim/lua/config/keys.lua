@@ -19,7 +19,6 @@ mapkey('t', '<C-w><C-Down>', '<C-\\><C-N><C-w><C-Down>', {noremap = true, silent
 mapkey('t', '<C-w><C-Right>', '<C-\\><C-N><C-w><C-Right>', {noremap = true, silent = false})
 mapkey('t', '<C-w><C-Left>', '<C-\\><C-N><C-w><C-Left>', {noremap = true, silent = false})
 mapkey('t', '<C-P>', '<C-\\><C-N><Esc><C-P>', {noremap = true, silent = false})
-mapkey('t', '<C-_>', '<C-\\><C-N><C-_>', {noremap = true, silent = false})
 
 -- Better CTRL-L
 mapkey('n', '<leader>l', ':nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>', {noremap = true, silent = false})
