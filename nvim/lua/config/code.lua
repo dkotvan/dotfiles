@@ -112,41 +112,6 @@ require('lspconfig').kotlin_language_server.setup{
   capabilities = capabilities
 }
 
-require "formatter".setup {
-  filetype = {
-    lua = {
-      -- luafmt
-      function()
-        return {
-          exe = "luafmt",
-          args = {"--indent-count", 2, "--stdin"},
-          stdin = true
-        }
-      end
-    },
-    sh = {
-      -- Shell Script Formatter
-      function()
-        return {
-          exe = "shfmt",
-          args = {"-i", 2},
-          stdin = true
-        }
-      end
-    },
-    javascript = {
-      -- prettier
-      function()
-        return {
-          exe = "prettier",
-          args = {"--stdin-filepath", vim.fn.fnameescape(vim.api.nvim_buf_get_name(0)), "--single-quote"},
-          stdin = true
-        }
-      end
-    }
-  }
-}
-
 vim.g.symbols_outline = {
   position = "left"
 }
