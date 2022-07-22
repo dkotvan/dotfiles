@@ -5,7 +5,7 @@ local ok, err = pcall(require, 'impatient')
 if ok then
   require('impatient').enable_profile()
 else
-  warn(('impatient not installed\n%s'):format(err))
+  print(('impatient not installed\n%s'):format(err))
 end
 
 require('options')

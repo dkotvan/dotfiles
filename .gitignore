@@ -5,6 +5,11 @@ nvim/undodir
 nvim/swapdir
 nvim/sessions
 nvim/plugin
+vscode-nvim/bundles
+vscode-nvim/undodir
+vscode-nvim/swapdir
+vscode-nvim/sessions
+vscode-nvim/plugin
 Brewfile.lock.json
 local
 
