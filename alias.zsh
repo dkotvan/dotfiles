@@ -26,5 +26,8 @@ alias note='nvim -c ":SimplenoteList"'
 
 # UPdate everything
 
-alias update_everything="antibody update && brew bundle && brew update && echo '===============' && brew outdated && brew upgrade && brew upgrade --cask"
-
+update_everything() {
+  rm ~/.zsh_plugins.sh && antibody update && brew bundle && brew update && brew outdated && brew upgrade
+  FORCE_VSCODE=true nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+  nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+}

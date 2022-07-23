@@ -67,8 +67,6 @@ return require("packer").startup {
       'tpope/vim-abolish',
       requires = 'tpope/vim-repeat'
     }
-    -- Comments! gc
-    use 'tpope/vim-commentary'
 
     use {
       'tpope/vim-surround',
@@ -78,6 +76,9 @@ return require("packer").startup {
   config = {
     plugin_package = 'vscode-packer',
     compile_path = vim.fn.stdpath('config')..'/plugin/vscode_packer_compiled.lua',
+    log = { level = 'info' },
+    autoremove = true,
+
   },
 }
 
