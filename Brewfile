@@ -85,10 +85,6 @@ brew "pip-completion"
 brew "rake-completion"
 brew "bundler-completion"
 
-# Antibody to install ZSH plugins fast
-tap "getantibody/tap"
-brew "getantibody/tap/antibody"
-
 if OS.mac?
   tap "homebrew/cask-fonts"
 

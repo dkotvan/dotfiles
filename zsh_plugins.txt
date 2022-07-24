@@ -1,19 +1,33 @@
-robbyrussell/oh-my-zsh
-robbyrussell/oh-my-zsh path:plugins/git # nice git aliases
-willghatch/zsh-saneopt # zsh configurations
-softmoth/zsh-vim-mode # better vim mode
-okapia/zsh-viexchange # cx swap text
-zsh-users/zsh-autosuggestions # sugest completions based in command history
-zsh-users/zsh-completions # a lot of command completions
-robbyrussell/oh-my-zsh path:plugins/command-not-found # ubuntu command not found works now at brew zsh 
-robbyrussell/oh-my-zsh path:plugins/gradle # gradle or gradlew doesnt matter anymore
-robbyrussell/oh-my-zsh path:plugins/colored-man-pages
-robbyrussell/oh-my-zsh path:plugins/urltools # urlencode
-djui/alias-tips # remember if there is an alias for the command youre using
-robbyrussell/oh-my-zsh path:plugins/alias-finder # command to find alias alias-finder -l git
-robbyrussell/oh-my-zsh path:plugins/z # jumps to most used directory
-robbyrussell/oh-my-zsh path:plugins/kubectl # k = kubectl and also autocomplete work
-robbyrussell/oh-my-zsh path:plugins/docker #auto completion for docker
-robbyrussell/oh-my-zsh path:plugins/docker-compose # auto completion for docker-compose + alias dco, dcb, dce, etc...
-zpm-zsh/clipboard # pbcopy, pbpaste and clip
-DarrinTisdale/zsh-aliases-exa # aliases for exa
+ohmyzsh/ohmyzsh
+# best git aliases
+ohmyzsh/ohmyzsh path:plugins/git
+# zsh configurations
+willghatch/zsh-saneopt
+# better vim mode
+softmoth/zsh-vim-mode
+# cx swap text
+okapia/zsh-viexchange
+# sugest completions based in command history
+zsh-users/zsh-autosuggestions
+# a lot of command completions
+zsh-users/zsh-completions
+# ubuntu command not found works now at brew zsh 
+ohmyzsh/ohmyzsh path:plugins/command-not-found
+# gradle or gradlew doesnt matter anymore
+ohmyzsh/ohmyzsh path:plugins/gradle
+# urlencode
+ohmyzsh/ohmyzsh path:plugins/urltools
+# remember if there is an alias for the command youre using
+djui/alias-tips
+# command to find alias alias-finder -l git
+ohmyzsh/ohmyzsh path:plugins/alias-finder
+# jumps to most used directory
+ohmyzsh/ohmyzsh path:plugins/z
+# k = kubectl and also autocomplete work
+ohmyzsh/ohmyzsh path:plugins/kubectl
+# auto completion for docker
+ohmyzsh/ohmyzsh path:plugins/docker
+# auto completion for docker-compose + , dcb, dce, etc...
+ohmyzsh/ohmyzsh path:plugins/docker-compose
+# pbcopy, pbpaste and clip
+zpm-zsh/clipboard

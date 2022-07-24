@@ -1,3 +1,5 @@
+export DOTFILES=$HOME/dotfiles
+
 if [[ $OSTYPE == linux* ]]; then
   # Initialize Homebrew
   eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
@@ -5,12 +7,7 @@ fi
 
 DISABLE_AUTO_TITLE=”true”
 
-# Load Antibody plugins
-if [[ ! -a ~/.zsh_plugins.sh   ]]; then
-   antibody bundle < ~/dotfiles/zsh_plugins.txt > ~/.zsh_plugins.sh 
-fi
-export ZSH="$(antibody home)/https-COLON--SLASH--SLASH-github.com-SLASH-robbyrussell-SLASH-oh-my-zsh"
-source ~/.zsh_plugins.sh
+source $DOTFILES/antidote.zsh
 
 # Control if we are using dark or light background
 if [[ ! -a ~/.background   ]]; then
@@ -24,10 +21,10 @@ eval "$(nodenv init -)"
 bindkey -v
 
 if [[ $OSTYPE == darwin* ]]; then
-  source ~/dotfiles/osx/init.zsh
+  source $DOTFILES/osx/init.zsh
 fi
-source ~/dotfiles/alias.zsh
-for file in ~/dotfiles/local/*.zsh; do
+source $DOTFILES/alias.zsh
+for file in $DOTFILES/local/*.zsh; do
     source "$file"
 done
 
