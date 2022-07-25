@@ -16,9 +16,13 @@ return require("packer").startup {
 
     use { 'lewis6991/impatient.nvim' }
 
+    --Terminal
     use {
-      'nikvdp/neomux',
-      requires = { 'mhinz/neovim-remote' },
+      's1n7ax/nvim-terminal',
+      config = function()
+        vim.o.hidden = true
+        require('nvim-terminal').setup()
+      end,
     }
 
     -- Editorconfig
@@ -107,7 +111,11 @@ return require("packer").startup {
     -- -- Golang
     use {
       'ray-x/go.nvim',
-      requires = "nvim-treesitter/nvim-treesitter-textobjects"
+      requires = "nvim-treesitter/nvim-treesitter-textobjects",
+      ft = {'go'},
+      config = function()
+        require('config/go')
+      end
     }
 
     -- Snippets
@@ -140,7 +148,35 @@ return require("packer").startup {
     -- Auto pairs
     use { "windwp/nvim-autopairs" }
 
-    -- Telescope
+    -- Finders
+    use {
+      "stevearc/dressing.nvim",
+      config = function()
+        require("dressing").setup {
+          input = { relative = "editor" },
+          select = {
+            backend = { "telescope", "fzf", "builtin" },
+          },
+        }
+      end,
+      disable = false,
+    }
+    -- Legendary
+    use {
+      "mrjones2014/legendary.nvim",
+      -- opt = true,
+      -- keys = { [[<C-p>]] },
+      wants = { "dressing.nvim" },
+      config = function()
+        local default_opts = { noremap = true, silent = true }
+        require("legendary").setup {
+          include_builtin = true, auto_register_which_key = true,
+          include_legendary_cmds = true,
+        }
+        vim.api.nvim_set_keymap("n", "<leader><leader>", "<cmd>lua require('legendary').find()<CR>", default_opts)
+      end,
+      requires = { "stevearc/dressing.nvim" },
+    }
     use {
       'nvim-lua/plenary.nvim',
     }
