@@ -27,3 +27,5 @@ mapkey('n', '<leader>l', ':nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<c
 mapkey('n', '<leader>f', '<cmd>:NvimTreeToggle<CR>', {noremap = true, silent = false})
 mapkey('n', '<leader>F', '<cmd>:NvimTreeFindFile<CR>', {noremap = true, silent = false})
 mapkey('n', '<leader>o', '<cmd>:SymbolsOutline<CR>', {noremap = true, silent = false})
+
+mapkey('n', '<leader>G', '<cmd>lua require("spectre").open()<CR>', {noremap = true, silent = false})

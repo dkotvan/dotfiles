@@ -10,7 +10,6 @@ cmp.setup {
   },
   sources = {
     { name = "copilot"},
-    { name = 'cmp_nvim_lsp_signature_help' },
     { name = 'nvim_lsp'},
     { name = 'nvim_lua'},
     { name = 'vsnip'},
@@ -113,6 +112,14 @@ require("tabout").setup({
   tabkey = "",
   backwards_tabkey = "",
 })
+
+require("lsp_signature").setup {
+  log_path = vim.fn.expand("$HOME") .. "/tmp/sig.log",
+  debug = true,
+  hint_enable = false,
+  handler_opts = { border = "single" },
+  max_width = 80,
+}
 
 -- local function replace_keycodes(str)
   --   return vim.api.nvim_replace_termcodes(str, true, true, true)
