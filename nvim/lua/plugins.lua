@@ -92,13 +92,6 @@ return require("packer").startup {
     use 'neovim/nvim-lspconfig'
     use 'williamboman/nvim-lsp-installer'
     use 'onsails/lspkind-nvim'
-    use {
-      "folke/trouble.nvim",
-      requires = "kyazdani42/nvim-web-devicons",
-    }
-    use {
-      'simrat39/symbols-outline.nvim', -- command :SymbolsOutline
-    }
     use { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' }
     use {
       'ray-x/navigator.lua',
@@ -151,15 +144,6 @@ return require("packer").startup {
     -- Finders
     use {
       "stevearc/dressing.nvim",
-      config = function()
-        require("dressing").setup {
-          input = { relative = "editor" },
-          select = {
-            backend = { "telescope", "fzf", "builtin" },
-          },
-        }
-      end,
-      disable = false,
     }
     -- Legendary
     use {
@@ -167,14 +151,6 @@ return require("packer").startup {
       -- opt = true,
       -- keys = { [[<C-p>]] },
       wants = { "dressing.nvim" },
-      config = function()
-        local default_opts = { noremap = true, silent = true }
-        require("legendary").setup {
-          include_builtin = true, auto_register_which_key = true,
-          include_legendary_cmds = true,
-        }
-        vim.api.nvim_set_keymap("n", "<leader><leader>", "<cmd>lua require('legendary').find()<CR>", default_opts)
-      end,
       requires = { "stevearc/dressing.nvim" },
     }
     use {
@@ -209,7 +185,6 @@ return require("packer").startup {
       requires = { 'nvim-lua/plenary.nvim' },
       config = function()
         require('rest-nvim').setup()
-        vim.cmd [[ nmap <leader>R <Plug>RestNvim ]]
       end
     }
 
@@ -229,7 +204,12 @@ return require("packer").startup {
     use 'tommcdo/vim-fubitive'
 
     -- Gbrowse open browser in Gitlab. use lab command
-    use 'shumphrey/fugitive-gitlab.vim'
+    use {
+      'shumphrey/fugitive-gitlab.vim',
+      config = function()
+        vim.cmd [[ let g:fugitive_gitlab_domains = {'git.ifoodcorp.com.br': "https://code.ifoodcorp.com.br"} ]]
+      end
+    }
 
     use {
       'lewis6991/gitsigns.nvim',
@@ -262,7 +242,12 @@ return require("packer").startup {
       event = "BufRead",
     }
     -- BW kill buffer without closing window, BUN, BD, BW, BB, BF
-    use 'qpkorr/vim-bufkill'
+    use { 
+      'qpkorr/vim-bufkill',
+      config = function()
+        vim.g.BufKillCreateMappings = 0
+      end
+    }
 
     -- Now vim recognize line numbers on errors - open files like /a.txt:20:5
     use 'wsdjeg/vim-fetch'
@@ -309,7 +294,10 @@ return require("packer").startup {
 
     -- compare directories
     use 'vim-scripts/dirdiff.vim'
-    use 'ZSaberLv0/ZFVimDirDiff'
+    use { 
+      'ZSaberLv0/ZFVimDirDiff',
+      requires = 'ZSaberLv0/ZFVimJob'
+    }
 
     -- kill all buffers except the current
     use 'duff/vim-bufonly'
@@ -413,97 +401,77 @@ use {
 use "mfussenegger/nvim-dap"
 use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
 use { 'theHamsta/nvim-dap-virtual-text' }
+use { 'nvim-telescope/telescope-dap.nvim' }
 
 -- Show registers when typing " or ctrl-r
 use {
   "folke/which-key.nvim",
+}
+
+use {
+  'abecodes/tabout.nvim'
+}
+
+
+-- Project Related
+use {
+  'windwp/nvim-spectre',
   config = function()
-    require("which-key").setup({
-      plugins = {
-        marks = true, -- shows a list of your marks on ' and `
-        registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
-        spelling = {
-          enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
-          suggestions = 20, -- how many suggestions should be shown in the list?
-        },
-        presets = {
-          operators = true, -- adds help for operators like d, y, ... and registers them for motion / text object completion
-          motions = true, -- adds help for motions
-          text_objects = true, -- help for text objects triggered after entering an operator
-          windows = true, -- default bindings on <c-w>
-          nav = true, -- misc bindings to work with windows
-          z = true, -- bindings for folds, spelling and others prefixed with z
-          g = true, -- bindings for prefixed with g
-        },
-      }})
-    end,
-    event = "BufWinEnter",
-  }
-
-  use {
-    'abecodes/tabout.nvim'
-  }
-
-
-  -- Project Related
-  use {
-    'windwp/nvim-spectre',
-    config = function()
-      require('spectre').setup {
-        open_cmd = 'new',
-        find_engine = {
-          ['ag'] = {
-            cmd = "ag",
-            args = {
-              '--vimgrep',
-              '-s'
-            } ,
-            options = {
-              ['ignore-case'] = {
-                value= "-i",
-                icon="[I]",
-                desc="ignore case"
-              },
-              ['hidden'] = {
-                value="--hidden",
-                desc="hidden file",
-                icon="[H]"
-              },
-            },
-          },
-        },
-        replace_engine={
-          ['sed']={
-            cmd = "sed",
-            args = nil
-          },
+    require('spectre').setup {
+      open_cmd = 'new',
+      find_engine = {
+        ['ag'] = {
+          cmd = "ag",
+          args = {
+            '--vimgrep',
+            '-s'
+          } ,
           options = {
             ['ignore-case'] = {
-              value= "--ignore-case",
+              value= "-i",
               icon="[I]",
               desc="ignore case"
             },
-          }
-        },
-        default = {
-          find = {
-            cmd = "ag",
-            options = {"ignore-case"}
+            ['hidden'] = {
+              value="--hidden",
+              desc="hidden file",
+              icon="[H]"
+            },
           },
-          replace={
-            cmd = "sed"
-          }
         },
-      }
-    end
-  }
+      },
+      replace_engine={
+        ['sed']={
+          cmd = "sed",
+          args = nil
+        },
+        options = {
+          ['ignore-case'] = {
+            value= "--ignore-case",
+            icon="[I]",
+            desc="ignore case"
+          },
+        }
+      },
+      default = {
+        find = {
+          cmd = "ag",
+          options = {"ignore-case"}
+        },
+        replace={
+          cmd = "sed"
+        }
+      },
+    }
+  end
+}
 
-  use {
-    "airblade/vim-rooter",
-    config = function() -- change the location of the tab
-      vim.g.rooter_cd_cmd = 'tcd' -- change the location of the tab
-    end
-  }
+use {
+  "airblade/vim-rooter",
+  config = function() -- change the location of the tab
+    vim.g.rooter_cd_cmd = 'tcd' -- change the location of the tab
+  end
+}
 end
 }
 

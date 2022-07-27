@@ -25,8 +25,4 @@ mapkey('t', '<C-P>', '<C-\\><C-N><Esc><C-P>', {noremap = true, silent = false})
 mapkey('n', '<leader>l', ':nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<cr><c-l>', {noremap = true, silent = false})
 
 --Stuff
-mapkey('n', '<leader>f', '<cmd>:NvimTreeToggle<CR>', {noremap = true, silent = false})
-mapkey('n', '<leader>F', '<cmd>:NvimTreeFindFile<CR>', {noremap = true, silent = false})
-mapkey('n', '<leader>o', '<cmd>:SymbolsOutline<CR>', {noremap = true, silent = false})
-
 mapkey('n', '<leader>G', '<cmd>lua require("spectre").open()<CR>', {noremap = true, silent = false})
