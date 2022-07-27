@@ -2,7 +2,7 @@ local path = require 'nvim-lsp-installer.core.path'
 local install_root_dir = path.concat {vim.fn.stdpath 'data', 'lsp_servers'}
 
 require('go').setup({
-  gopls_cmd = {install_root_dir .. '/go/gopls'},
+  gopls_cmd = {install_root_dir .. '/gopls/gopls'},
   goimport='gopls', -- goimport command, can be gopls[default] or goimport
   fillstruct = 'gopls', -- can be nil (use fillstruct, slower) and gopls
   gofmt = 'gofumpt', --gofmt cmd,
@@ -77,4 +77,5 @@ require('go').setup({
 
     test_efm = false, -- errorfomat for quickfix, default mix mode, set to true will be efm only
   })
+
 

@@ -195,9 +195,19 @@ require("which-key").setup({
       v = { '<cmd>Telescope dap variables<cr>', 'debug - dap variables', noremap = true },
       f = { '<cmd>Telescope dap frames<cr>', 'debug - dap frames', noremap = true },
     },
-    h = { '<cmd>lua require("telescope.builtin").help_tags()<cr>', 'Telescope help_tags', noremap = true },
-    c = { '<cmd>lua require("telescope.builtin").commands()<cr>', 'Telescope commands', noremap = true },
-    r = { '<cmd>Telescope repo list<cr>', 'Change repo', noremap = true },
+    c = {
+      c = { '<cmd>lua require("telescope.builtin").commands()<cr>', 'Telescope commands', noremap = true },
+      h = { '<cmd>lua require("telescope.builtin").help_tags()<cr>', 'Telescope help_tags', noremap = true },
+      r = { '<cmd>Telescope repo list<cr>', 'Change repo', noremap = true },
+    },
+    r = {
+      b = { '<cmd>:BuildImage<cr>', 'DevContainer Build Image', noremap = true },
+      a = { '<cmd>:AttachToContainer<cr>', 'DevContainer Attach to container', noremap = true },
+      s = { '<cmd>:StartImage<cr>', 'DevContainer Start image', noremap = true },
+      u = { '<cmd>:ComposeUp<cr>', 'DevContainer Docker compose up', noremap = true },
+      d = { '<cmd>:ComposeDown<cr>', 'DevContainer Docker compose Down', noremap = true },
+      e = { '<cmd>:ComposeDestroy<cr>', 'DevContainer Docker compose Destroy', noremap = true },
+    },
     R = {
       R = { '<Plug>RestNvim', 'run the request under the cursor', noremap = true },
       C = { '<Plug>RestNvimPreview', 'preview the request cURL command', noremap = true },

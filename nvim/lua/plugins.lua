@@ -105,10 +105,6 @@ return require("packer").startup {
     use {
       'ray-x/go.nvim',
       requires = "nvim-treesitter/nvim-treesitter-textobjects",
-      ft = {'go'},
-      config = function()
-        require('config/go')
-      end
     }
 
     -- Snippets
@@ -472,6 +468,9 @@ use {
     vim.g.rooter_cd_cmd = 'tcd' -- change the location of the tab
   end
 }
+
+ use { "jamestthompson3/nvim-remote-containers" }
+
 end
 }
 
