@@ -1,5 +1,9 @@
 require("nvim-treesitter.configs").setup {
-  ensure_installed = { "bash", "c", "css", "clojure", "cpp", "dockerfile", "dot", "elixir", "erlang", "go", "gomod", "graphql", "html", "http", "java", "javascript", "json", "kotlin", "latex", "lua", "make", "perl", "php", "python"}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+  ensure_installed = { "bash", "c", "css", "clojure", "cpp",
+      "dockerfile", "dot", "elixir", "erlang", "go",
+       "gomod", "graphql", "html", "http", "java",
+       "javascript", "json", "kotlin", "latex", "lua",
+       "make", "perl", "php", "python", "http"}, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
   highlight = {enable = true},
   indentation = {enable = true},
   folding = {enable = false},

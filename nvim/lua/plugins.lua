@@ -289,11 +289,7 @@ return require("packer").startup {
     use 'tommcdo/vim-exchange'
 
     -- compare directories
-    use 'vim-scripts/dirdiff.vim'
-    use { 
-      'ZSaberLv0/ZFVimDirDiff',
-      requires = 'ZSaberLv0/ZFVimJob'
-    }
+    use 'will133/vim-dirdiff'
 
     -- kill all buffers except the current
     use 'duff/vim-bufonly'
