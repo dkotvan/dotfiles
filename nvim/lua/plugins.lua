@@ -101,6 +101,15 @@ return require("packer").startup {
       },
     }
 
+    -- Yaml Schemas
+use {
+  "someone-stole-my-name/yaml-companion.nvim",
+  requires = {
+      { "neovim/nvim-lspconfig" },
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-telescope/telescope.nvim" },
+  },
+}    
     -- -- Golang
     use {
       'ray-x/go.nvim',
