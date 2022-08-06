@@ -2,28 +2,19 @@
 local execute = vim.api.nvim_command
 local fn = vim.fn
 
-local install_path = fn.stdpath('data')..'/site/pack/packer/start/packer.nvim'
+local install_path = fn.stdpath('data') .. '/site/pack/packer/start/packer.nvim'
 
 if fn.empty(fn.glob(install_path)) > 0 then
-  fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
+  fn.system({ 'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path })
   execute 'packadd packer.nvim'
 end
 
 return require("packer").startup {
-  log = { level = 'debug '},
+  log = { level = 'debug ' },
   function(use)
     use { 'wbthomason/packer.nvim' }
 
     use { 'lewis6991/impatient.nvim' }
-
-    --Terminal
-    use {
-      's1n7ax/nvim-terminal',
-      config = function()
-        vim.o.hidden = true
-        require('nvim-terminal').setup()
-      end,
-    }
 
     -- Editorconfig
     use {
@@ -44,15 +35,15 @@ return require("packer").startup {
     -- Status and tabline
     use {
       'hoob3rt/lualine.nvim',
-      requires = {'kyazdani42/nvim-web-devicons'}
+      requires = { 'kyazdani42/nvim-web-devicons' }
     }
     use {
       "nanozuki/tabby.nvim"
     }
 
-    use{
+    use {
       "zbirenbaum/copilot.lua",
-      event = {"VimEnter"},
+      event = { "VimEnter" },
       config = function()
         vim.defer_fn(function()
           require("copilot").setup()
@@ -68,7 +59,7 @@ return require("packer").startup {
     use {
       'nacro90/numb.nvim',
       config = function()
-        require('numb').setup{
+        require('numb').setup {
           show_numbers = true, -- Enable 'number' for the window while peeking
           show_cursorline = true, -- Enable 'cursorline' for the window while peeking
           number_only = false, -- Peek only when the command is only a number instead of when it starts with a number
@@ -102,14 +93,14 @@ return require("packer").startup {
     }
 
     -- Yaml Schemas
-use {
-  "someone-stole-my-name/yaml-companion.nvim",
-  requires = {
-      { "neovim/nvim-lspconfig" },
-      { "nvim-lua/plenary.nvim" },
-      { "nvim-telescope/telescope.nvim" },
-  },
-}    
+    use {
+      "someone-stole-my-name/yaml-companion.nvim",
+      requires = {
+        { "neovim/nvim-lspconfig" },
+        { "nvim-lua/plenary.nvim" },
+        { "nvim-telescope/telescope.nvim" },
+      },
+    }
     -- -- Golang
     use {
       'ray-x/go.nvim',
@@ -118,23 +109,23 @@ use {
 
     -- Snippets
     use 'rafamadriz/friendly-snippets'
-    use { 
+    use {
       'hrsh7th/vim-vsnip',
       config = function()
         vim.g.vsnip_snippet_dir = vim.fn.stdpath "config" .. "/snippets/"
       end
     }
-    use { 'hrsh7th/vim-vsnip-integ'}
+    use { 'hrsh7th/vim-vsnip-integ' }
 
     --- Auto complete
     use { 'andersevenrud/cmp-tmux' }
-    use { 'hrsh7th/nvim-cmp'}
+    use { 'hrsh7th/nvim-cmp' }
     use { 'hrsh7th/cmp-buffer' }
     use { 'hrsh7th/cmp-nvim-lsp' }
     use { 'hrsh7th/cmp-path' }
     use { 'hrsh7th/cmp-vsnip' }
     use { 'hrsh7th/cmp-nvim-lua' }
-    use {'petertriho/cmp-git', requires = 'nvim-lua/plenary.nvim'}
+    use { 'petertriho/cmp-git', requires = 'nvim-lua/plenary.nvim' }
     use { 'ray-x/cmp-treesitter' }
     use { 'f3fora/cmp-spell' }
     use { 'hrsh7th/cmp-emoji' }
@@ -163,7 +154,7 @@ use {
     }
     use {
       'nvim-telescope/telescope.nvim',
-      requires = {{'nvim-lua/popup.nvim'}, {'nvim-lua/plenary.nvim'}}
+      requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } }
     }
     use {
       "nvim-telescope/telescope-fzf-native.nvim", run = "make"
@@ -177,9 +168,9 @@ use {
       'kyazdani42/nvim-tree.lua',
       requires = { 'kyazdani42/nvim-web-devicons' },
       config = function()
-        require'nvim-tree'.setup {
-          disable_netrw       = false,
-          hijack_netrw        = true,
+        require 'nvim-tree'.setup {
+          disable_netrw = false,
+          hijack_netrw  = true,
         }
       end
     }
@@ -225,8 +216,8 @@ use {
             -- Default keymap options
             noremap = true,
 
-            ['n <F1>'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'"},
-            ['n <C-F1>'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'"},
+            ['n <F1>'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'" },
+            ['n <C-F1>'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'" },
 
             ['n <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
             ['v <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
@@ -247,7 +238,7 @@ use {
       event = "BufRead",
     }
     -- BW kill buffer without closing window, BUN, BD, BW, BB, BF
-    use { 
+    use {
       'qpkorr/vim-bufkill',
       config = function()
         vim.g.BufKillCreateMappings = 0
@@ -273,7 +264,7 @@ use {
     -- textobject ar | ir
     use {
       'nelstrom/vim-textobj-rubyblock',
-      ft = {'ruby'}
+      ft = { 'ruby' }
     }
 
     -- textobject ae | ie
@@ -319,7 +310,7 @@ use {
     -- Supports bundler in vim
     use {
       'tpope/vim-bundler',
-      ft = {'ruby'}
+      ft = { 'ruby' }
     }
 
     use {
@@ -331,12 +322,12 @@ use {
       requires = 'tpope/vim-repeat'
     }
 
-    use {'kevinhwang91/nvim-hlslens',
-    config = function()
-      require('hlslens').setup({
-        calm_down = true
-      })
-      vim.cmd [[
+    use { 'kevinhwang91/nvim-hlslens',
+      config = function()
+        require('hlslens').setup({
+          calm_down = true
+        })
+        vim.cmd [[
       noremap n <Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>
       noremap <silent> N <Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>
       noremap * *<Cmd>lua require('hlslens').start()<CR>
@@ -345,25 +336,25 @@ use {
       noremap g# g#<Cmd>lua require('hlslens').start()<CR>
       nnoremap <silent> <leader>l :noh<CR>
       ]]
-    end
-  }
+      end
+    }
 
-  use { "mbbill/undotree" }
-  use { "Pocco81/AutoSave.nvim" }
+    use { "mbbill/undotree" }
+    -- use { "Pocco81/auto-save.nvim", branch = "dev" }
 
-  use { 'AllenDang/nvim-expand-expr',
-  config = function()
-    vim.cmd [[ nmap <leader>e <Cmd>lua require("expand_expr").expand()<CR> ]]
-  end
-}
+    use { 'AllenDang/nvim-expand-expr',
+      config = function()
+        vim.cmd [[ nmap <leader>e <Cmd>lua require("expand_expr").expand()<CR> ]]
+      end
+    }
 
--- Better markdown
-use {
-  'plasticboy/vim-markdown',
+    -- Better markdown
+    use {
+      'plasticboy/vim-markdown',
 
-  ft = 'markdown',
-  config = function()
-    vim.cmd [[
+      ft = 'markdown',
+      config = function()
+        vim.cmd [[
     " Disable auto conceal
     let g:vim_markdown_conceal = 0
     let g:tex_conceal = ""
@@ -382,100 +373,106 @@ use {
 
     let g:vim_markdown_strikethrough = 1
     ]]
-  end
-}
+      end
+    }
 
-use {
-  'iamcco/markdown-preview.nvim',
-  ft = {'markdown', 'pandoc.markdown', 'rmd', 'pullrequest', 'gitcommit'},
-  run = "cd app && yarn install",
-  config = function()
-    vim.cmd [[
+    use {
+      'iamcco/markdown-preview.nvim',
+      ft = { 'markdown', 'pandoc.markdown', 'rmd', 'pullrequest', 'gitcommit' },
+      run = "cd app && yarn install",
+      config = function()
+        vim.cmd [[
     let g:mkdp_browser = 'firefox'
     let g:mkdp_filetypes = ['markdown', 'pullrequest', 'gitcommit']
     let g:mkdp_preview_options = {}
     ]]
-  end
-}
-
--- debug
-use "mfussenegger/nvim-dap"
-use { "rcarriga/nvim-dap-ui", requires = {"mfussenegger/nvim-dap"} }
-use { 'theHamsta/nvim-dap-virtual-text' }
-use { 'nvim-telescope/telescope-dap.nvim' }
-
--- Show registers when typing " or ctrl-r
-use {
-  "folke/which-key.nvim",
-}
-
-use {
-  'abecodes/tabout.nvim'
-}
-
-
--- Project Related
-use {
-  'windwp/nvim-spectre',
-  config = function()
-    require('spectre').setup {
-      open_cmd = 'new',
-      find_engine = {
-        ['ag'] = {
-          cmd = "ag",
-          args = {
-            '--vimgrep',
-            '-s'
-          } ,
-          options = {
-            ['ignore-case'] = {
-              value= "-i",
-              icon="[I]",
-              desc="ignore case"
-            },
-            ['hidden'] = {
-              value="--hidden",
-              desc="hidden file",
-              icon="[H]"
-            },
-          },
-        },
-      },
-      replace_engine={
-        ['sed']={
-          cmd = "sed",
-          args = nil
-        },
-        options = {
-          ['ignore-case'] = {
-            value= "--ignore-case",
-            icon="[I]",
-            desc="ignore case"
-          },
-        }
-      },
-      default = {
-        find = {
-          cmd = "ag",
-          options = {"ignore-case"}
-        },
-        replace={
-          cmd = "sed"
-        }
-      },
+      end
     }
+
+    -- debug
+    use "mfussenegger/nvim-dap"
+    use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
+    use { 'theHamsta/nvim-dap-virtual-text' }
+    use { 'nvim-telescope/telescope-dap.nvim' }
+
+    -- Show registers when typing " or ctrl-r
+    use {
+      "folke/which-key.nvim",
+    }
+
+    use {
+      'abecodes/tabout.nvim'
+    }
+
+
+    -- Project Related
+    use {
+      'windwp/nvim-spectre',
+      config = function()
+        require('spectre').setup {
+          open_cmd = 'new',
+          find_engine = {
+            ['ag'] = {
+              cmd = "ag",
+              args = {
+                '--vimgrep',
+                '-s'
+              },
+              options = {
+                ['ignore-case'] = {
+                  value = "-i",
+                  icon = "[I]",
+                  desc = "ignore case"
+                },
+                ['hidden'] = {
+                  value = "--hidden",
+                  desc = "hidden file",
+                  icon = "[H]"
+                },
+              },
+            },
+          },
+          replace_engine = {
+            ['sed'] = {
+              cmd = "sed",
+              args = nil
+            },
+            options = {
+              ['ignore-case'] = {
+                value = "--ignore-case",
+                icon = "[I]",
+                desc = "ignore case"
+              },
+            }
+          },
+          default = {
+            find = {
+              cmd = "ag",
+              options = { "ignore-case" }
+            },
+            replace = {
+              cmd = "sed"
+            }
+          },
+        }
+      end
+    }
+
+    use {
+      "airblade/vim-rooter",
+      config = function() -- change the location of the tab
+        vim.g.rooter_cd_cmd = 'tcd' -- change the location of the tab
+      end
+    }
+
+    use {
+      "nikvdp/neomux",
+      requires = { 'hoob3rt/lualine.nvim' }
+    }
+
+    use { "jamestthompson3/nvim-remote-containers" }
+
+    -- use {"github/copilot.vim"} -- only enable to authenticate user for copilotlua and copilot.cmp
+
   end
 }
-
-use {
-  "airblade/vim-rooter",
-  config = function() -- change the location of the tab
-    vim.g.rooter_cd_cmd = 'tcd' -- change the location of the tab
-  end
-}
-
- use { "jamestthompson3/nvim-remote-containers" }
-
-end
-}
-

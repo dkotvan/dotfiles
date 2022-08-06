@@ -30,6 +30,7 @@ end
 brew "git"
 brew "gnupg"
 brew "hub"
+brew "glab"
 brew "lab"
 brew "tig"
 brew "mob"
@@ -43,6 +44,7 @@ brew "helm", branch: "add-include-file"
 brew "kubernetes-cli"
 brew "krew"
 brew "kubectx"
+tap "int128/kubelogin"
 brew "int128/kubelogin/kubelogin"
 brew "stern"
 
@@ -90,8 +92,12 @@ brew "bundler-completion"
 if OS.mac?
   tap "homebrew/cask-fonts"
 
+  brew "gnu-sed"
   brew "pinentry-mac"
 
+  cask "authy"
+
+  tap "homebrew/cask-versions"
   cask "temurin8"
   cask "temurin11"
   cask "temurin17"
@@ -99,11 +105,13 @@ if OS.mac?
   cask "discord"
   cask "firefox"
   cask "gifcapture"
+  cask "google-chrome"
   cask "intellij-idea-ce"
   cask "iterm2"
   cask "lastpass"
   cask "postman"
   cask "rectangle"
+  cask "skype"
   cask "tomighty"
   cask "visual-studio-code"
   cask "visualvm"
@@ -111,6 +119,5 @@ if OS.mac?
   cask "zoom"
 
   # Good font for terminal and programming
-  cask "font-saucecodepro-nerd-font"
   cask "font-fira-code-nerd-font"
 end

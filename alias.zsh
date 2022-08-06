@@ -34,3 +34,6 @@ update_everything() {
   brew bundle && brew update && brew outdated && brew upgrade
   update_nvim
 }
+
+
+alias nvim_server="nvim --listen /tmp/nvimsocket"

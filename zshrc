@@ -14,7 +14,7 @@ if [[ ! -a ~/.background   ]]; then
   echo 'light' > ~/.background
 fi
 
-export EDITOR='nvim'
+export EDITOR="${EDITOR:-nvim}"
 
 eval "$(nodenv init -)"
 

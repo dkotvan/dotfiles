@@ -72,9 +72,9 @@ local commands = {
   { ':GV!', description = '(GV) Git log buffer' },
   { ':G', description = 'Git status' },
   { ':Git blame', description = 'Git blame' },
-  { ':Git pull', description = 'Git pull' },
-  { ':Git push', description = 'Git push' },
-  { ':Git push --force', description = 'Git push --force' },
+  { ':Git! pull', description = 'Git pull' },
+  { ':Git! push', description = 'Git push' },
+  { ':Git! push --force', description = 'Git push --force' },
   { ':Git rebase --interactive ', description = 'Git rebase iteractive', unfinished = true },
   { ':Git rebase --interactive main', description = 'Git rebase iteractive main' },
   { 'lua require("spectre").open()', description = 'Spectre Search Replace' },
@@ -175,21 +175,15 @@ wk.register({
 )
 wk.register({
   g = {
-    name = "grep",
     g = { "<cmd>lua require('telescope.builtin').live_grep()<cr>", "Telescope live grep", noremap = true },
+    s = { "<cmd>lua require('telescope.builtin').git_stash()<cr>", "Telescope git stash", noremap = true },
+    b = { "<cmd>lua require('telescope.builtin').git_branches()<cr>", "Telescope git branches", noremap = true },
+    S = { "<cmd>lua require('telescope.builtin').git_status()<cr>", "Telescope git status", noremap = true },
+    c = { "<cmd>lua require('telescope.builtin').git_commits()<cr>", "Telescope git commits", noremap = true },
+    C = { "<cmd>lua require('telescope.builtin').git_bcommits()<cr>", "Telescope git bcommits", noremap = true },
   },
-  [","] = { "Toggle terminal" },
-  ["1"] = { "Go to terminal 1" },
-  ["2"] = { "Go to terminal 2" },
-  ["3"] = { "Go to terminal 3" },
-  ["4"] = { "Go to terminal 4" },
-  ["5"] = { "Go to terminal 5" },
   f = { '<cmd>NvimTreeToggle<cr>', 'Nvim Tree Toggle', noremap = true },
   F = { '<cmd>NvimTreeFindFile<cr>', 'Nvim Tree Focus File', noremap = true },
-  b = {
-    b = { '<cmd>lua require("telescope.builtin").buffers()<cr>', 'Telescope buffers', noremap = true },
-    n = { '<Plug>(openbrowser-open)', 'Open a browser', noremap = true },
-  },
   d = {
     c = { '<cmd>Telescope dap commands', 'dap commands', noremap = true },
     o = { '<cmd>Telescope dap configurations<cr>', 'debug - dap configurations', noremap = true },
@@ -198,6 +192,8 @@ wk.register({
     f = { '<cmd>Telescope dap frames<cr>', 'debug - dap frames', noremap = true },
   },
   c = {
+    b = { '<cmd>lua require("telescope.builtin").buffers()<cr>', 'Telescope buffers', noremap = true },
+    n = { '<Plug>(openbrowser-open)', 'Open a browser', noremap = true },
     c = { '<cmd>lua require("telescope.builtin").commands()<cr>', 'Telescope commands', noremap = true },
     h = { '<cmd>lua require("telescope.builtin").help_tags()<cr>', 'Telescope help_tags', noremap = true },
     R = { '<cmd>Telescope repo list<cr>', 'Change repo', noremap = true },
@@ -217,8 +213,40 @@ wk.register({
     C = { '<Plug>RestNvimPreview', 'preview the request cURL command', noremap = true },
     L = { '<Plug>RestNvimLast', 're-run the last request', noremap = true },
   },
+  s = {
+    h = { "Start a new neomux term in the current window." },
+    f = { "Size fix terminal" },
+    ["1"] = { "swap the current window with window 1" },
+    ["2"] = { "swap the current window with window 2" },
+    ["3"] = { "swap the current window with window 3" },
+    ["4"] = { "swap the current window with window 4" },
+    ["5"] = { "swap the current window with window 5" },
+    ["6"] = { "swap the current window with window 6" },
+    ["7"] = { "swap the current window with window 7" },
+    ["8"] = { "swap the current window with window 8" },
+    ["9"] = { "swap the current window with window 9" },
+  },
+  b = {
+    y = { "Neomux Yank Buffer" },
+    p = { "Neomux Paste Buffer" },
+  },
   u = { '<cmd>UndotreeToggle<cr>', 'Undo tree toggle', noremap = true },
 }, { prefix = "<leader>" }
+)
+
+wk.register({
+  t = { 'Neomux Split horizontal' },
+  T = { 'Neomux Split vertical' },
+  ["1"] = { "move cursor to window 1" },
+  ["2"] = { "move cursor to window 2" },
+  ["3"] = { "move cursor to window 3" },
+  ["4"] = { "move cursor to window 4" },
+  ["5"] = { "move cursor to window 5" },
+  ["6"] = { "move cursor to window 6" },
+  ["7"] = { "move cursor to window 7" },
+  ["8"] = { "move cursor to window 8" },
+  ["9"] = { "move cursor to window 9" },
+}, { prefix = "<C-w>" }
 )
 
 vim.cmd [[
