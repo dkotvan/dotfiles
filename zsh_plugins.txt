@@ -21,8 +21,6 @@ ohmyzsh/ohmyzsh path:plugins/urltools
 djui/alias-tips
 # command to find alias alias-finder -l git
 ohmyzsh/ohmyzsh path:plugins/alias-finder
-# jumps to most used directory
-ohmyzsh/ohmyzsh path:plugins/z
 # k = kubectl and also autocomplete work
 ohmyzsh/ohmyzsh path:plugins/kubectl
 # auto completion for docker

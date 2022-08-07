@@ -171,6 +171,10 @@ return require("packer").startup {
       requires = { 'nvim-telescope/telescope.nvim' }
     }
     use {
+      "LinArcX/telescope-scriptnames.nvim",
+      requires = { 'nvim-telescope/telescope.nvim' }
+    }
+    use {
       'GustavoKatel/telescope-asynctasks.nvim', -- TODO: configure asynctasks
       requires = { { 'skywind3000/asynctasks.vim' }, { 'skywind3000/asyncrun.vim' }, { 'nvim-telescope/telescope.nvim' } }
     }
@@ -185,7 +189,19 @@ return require("packer").startup {
       'renerocksai/telekasten.nvim',
       requires = { 'renerocksai/calendar-vim' }
     }
-
+    use {
+      'edolphin-ydf/goimpl.nvim',
+      requires = {
+        { 'nvim-telescope/telescope.nvim' },
+        { 'nvim-treesitter/nvim-treesitter' },
+      },
+    }
+    use {
+      'jvgrootveld/telescope-zoxide',
+      requires = {
+        { 'nvim-telescope/telescope.nvim' },
+      },
+    }
     -- File explorer
     use {
       'kyazdani42/nvim-tree.lua',
@@ -363,7 +379,7 @@ return require("packer").startup {
     }
 
     use { "mbbill/undotree" }
-    use { "Pocco81/auto-save.nvim" }
+    use { "dkotvan/auto-save.nvim", branch="fix-buffer-not-exists" }
 
     use { 'AllenDang/nvim-expand-expr',
       config = function()

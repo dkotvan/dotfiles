@@ -39,7 +39,10 @@ require('telescope').load_extension("repo")
 require('telescope').load_extension('dap')
 require("telescope").load_extension("yaml_schema")
 require("telescope").load_extension("changes")
+require('telescope').load_extension('scriptnames')
 require("telescope").load_extension("session-lens")
+require('telescope').load_extension('goimpl')
+require('telescope').load_extension('zoxide')
 
 require("dressing").setup {
   input = {
@@ -196,9 +199,11 @@ wk.register({
   c = {
     a = { '<cmd>lua require("telescope").extensions.asynctasks.all()<cr>', 'Telescope AsyncTasks', noremap = true },
     b = { '<cmd>lua require("telescope.builtin").buffers()<cr>', 'Telescope buffers', noremap = true },
+    i = { '<cmd>lua require("telescope").extensions.goimpl.goimpl{}<CR>', 'Telescope buffers', noremap = true },
     n = { '<Plug>(openbrowser-open)', 'Open a browser', noremap = true },
     c = { '<cmd>lua require("telescope.builtin").commands()<cr>', 'Telescope commands', noremap = true },
     C = { '<cmd>Telescope changes<cr>', 'Telescope Changes', noremap = true },
+    S = { '<cmd>Telescope scriptnames<cr>', 'Telescope Scriptnames', noremap = true },
     h = { '<cmd>lua require("telescope.builtin").help_tags()<cr>', 'Telescope help_tags', noremap = true },
     R = { '<cmd>Telescope repo list<cr>', 'Change repo', noremap = true },
     r = { '<cmd>Telescope repo cached_list<cr>', 'Change repo (cached_list)', noremap = true },

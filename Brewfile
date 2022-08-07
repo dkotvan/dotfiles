@@ -68,6 +68,7 @@ brew "unzip"
 brew "yamllint"
 brew "zip"
 brew "parquet-cli"
+brew "zoxide"
 
 # apps
 brew "neovim"

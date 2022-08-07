@@ -59,7 +59,8 @@ require('navigator').setup({
   },
   lsp_installer = true,
   lsp = {
-    display_diagnostic_qf = false,
+    format_on_save = false,
+    disply_diagnostic_qf = false,
   }
 })
 

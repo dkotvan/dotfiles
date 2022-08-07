@@ -85,3 +85,6 @@ export PATH="/usr/local/sbin:$PATH"
 export PATH="${HOME}/.pyenv/shims:${PATH}"
 export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 
+eval "$(zoxide init zsh)"
+test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
+
