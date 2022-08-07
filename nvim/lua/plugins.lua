@@ -157,10 +157,33 @@ return require("packer").startup {
       requires = { { 'nvim-lua/popup.nvim' }, { 'nvim-lua/plenary.nvim' } }
     }
     use {
-      "nvim-telescope/telescope-fzf-native.nvim", run = "make"
+      "nvim-telescope/telescope-fzf-native.nvim", run = "make",
+      requires = { 'nvim-telescope/telescope.nvim' }
+
     }
     use {
-      'cljoly/telescope-repo.nvim'
+      'cljoly/telescope-repo.nvim',
+      requires = { 'nvim-telescope/telescope.nvim' }
+
+    }
+    use {
+      "LinArcX/telescope-changes.nvim",
+      requires = { 'nvim-telescope/telescope.nvim' }
+    }
+    use {
+      'GustavoKatel/telescope-asynctasks.nvim', -- TODO: configure asynctasks
+      requires = { { 'skywind3000/asynctasks.vim' }, { 'skywind3000/asyncrun.vim' }, { 'nvim-telescope/telescope.nvim' } }
+    }
+    use {
+      'rmagatti/session-lens',
+      requires = { 'rmagatti/auto-session', 'nvim-telescope/telescope.nvim' },
+      config = function()
+        require('session-lens').setup({ --[[your custom config--]] })
+      end
+    }
+    use {
+      'renerocksai/telekasten.nvim',
+      requires = { 'renerocksai/calendar-vim' }
     }
 
     -- File explorer
@@ -340,7 +363,7 @@ return require("packer").startup {
     }
 
     use { "mbbill/undotree" }
-    -- use { "Pocco81/auto-save.nvim", branch = "dev" }
+    use { "Pocco81/auto-save.nvim" }
 
     use { 'AllenDang/nvim-expand-expr',
       config = function()

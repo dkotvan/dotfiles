@@ -38,6 +38,8 @@ require('telescope').load_extension("fzf")
 require('telescope').load_extension("repo")
 require('telescope').load_extension('dap')
 require("telescope").load_extension("yaml_schema")
+require("telescope").load_extension("changes")
+require("telescope").load_extension("session-lens")
 
 require("dressing").setup {
   input = {
@@ -192,13 +194,16 @@ wk.register({
     f = { '<cmd>Telescope dap frames<cr>', 'debug - dap frames', noremap = true },
   },
   c = {
+    a = { '<cmd>lua require("telescope").extensions.asynctasks.all()<cr>', 'Telescope AsyncTasks', noremap = true },
     b = { '<cmd>lua require("telescope.builtin").buffers()<cr>', 'Telescope buffers', noremap = true },
     n = { '<Plug>(openbrowser-open)', 'Open a browser', noremap = true },
     c = { '<cmd>lua require("telescope.builtin").commands()<cr>', 'Telescope commands', noremap = true },
+    C = { '<cmd>Telescope changes<cr>', 'Telescope Changes', noremap = true },
     h = { '<cmd>lua require("telescope.builtin").help_tags()<cr>', 'Telescope help_tags', noremap = true },
     R = { '<cmd>Telescope repo list<cr>', 'Change repo', noremap = true },
     r = { '<cmd>Telescope repo cached_list<cr>', 'Change repo (cached_list)', noremap = true },
     y = { '<cmd>Telescope yaml_schema<cr>', 'Change yaml schema', noremap = true },
+    s = { '<cmd>SearchSession<cr>', 'Search Session (auto-session)', noremap = true },
   },
   r = {
     b = { '<cmd>:BuildImage<cr>', 'DevContainer Build Image', noremap = true },
@@ -225,7 +230,65 @@ wk.register({
     ["7"] = { "swap the current window with window 7" },
     ["8"] = { "swap the current window with window 8" },
     ["9"] = { "swap the current window with window 9" },
+    s = { '<cmd>SaveSession<cr>', 'Save the session (auto-session)', noremap = true },
+    r = { '<cmd>RestoreSession<cr>', 'Restore the session (auto-session)', noremap = true },
+    d = { '<cmd>DeleteSession<cr>', 'Delete the session (auto-session)', noremap = true },
   },
+  t = {
+    b = { "<cmd>Telekasten browse_media<cr>", "Notes - Telekasten browse_media - Browse images / media files",
+      noremap = true },
+    f = {
+      d = { "<cmd>Telekasten find_daily_notes<cr>",
+        "Notes - Telekasten find_daily_notes - Find daily notes by title (date)", noremap = true },
+      f = { "<cmd>Telekasten find_friends<cr>",
+        "Notes - Telekasten find_friends - Show all notes linking to the link under the cursor", noremap = true },
+      n = { "<cmd>Telekasten find_notes<cr>", "Notes - Telekasten find_notes - Find notes by title (filename)",
+        noremap = true },
+      w = { "<cmd>Telekasten find_weekly_notes<cr>",
+        "Notes - Telekasten find_weekly_notes - Find weekly notes by title (calendar week)", noremap = true },
+    },
+    g = {
+      l = { "<cmd>Telekasten follow_link<cr>", "Notes - Telekasten follow_link - Follow the link under the cursor",
+        noremap = true },
+      w = { "<cmd>Telekasten goto_thisweek<cr>", "Notes - Telekasten goto_thisweek - Open this week's weekly note",
+        noremap = true },
+      g = { "<cmd>Telekasten goto_today<cr>", "Notes - Telekasten goto_today - Open today's daily note", noremap = true },
+    },
+    i = {
+      i = { "<cmd>Telekasten insert_img_link<cr>",
+        "Notes - Telekasten insert_img_link - Browse images / media files and insert a link to the selected one",
+        noremap = true },
+      l = { "<cmd>Telekasten insert_link<cr>", "Notes - Telekasten insert_link - Insert a link to a note", noremap = true },
+      p = { "<cmd>Telekasten paste_img_and_link<cr>",
+        "Notes - Telekasten paste_img_and_link - Paste an image from the clipboard into a file and inserts a link to it",
+        noremap = true },
+    },
+    n = {
+      n = { "<cmd>Telekasten new_note<cr>", "Notes - Telekasten new_note - Create a new note, prompts for title",
+        noremap = true },
+      t = { "<cmd>Telekasten new_templated_note<cr>",
+        "Notes - Telekasten new_templated_note - create a new note by template, prompts for title and template",
+        noremap = true },
+    },
+    p = { "<cmd>Telekasten panel<cr>", "Notes - Telekasten panel - brings up the command palette", noremap = true },
+    c = { "<cmd>Telekasten preview_img<cr>", "Notes - Telekasten preview_img - preview image under the cursor",
+      noremap = true },
+    r = { "<cmd>Telekasten rename_note<cr>",
+      "Notes - Telekasten rename_note - Rename current note and update the links pointing to it", noremap = true },
+    s = {
+      n = { "<cmd>Telekasten search_notes<cr>", "Notes - Telekasten search_notes - Search (grep) in all notes",
+        noremap = true },
+      b = { "<cmd>Telekasten show_backlinks<cr>",
+        "Notes - Telekasten show_backlinks - Show all notes linking to the current one", noremap = true },
+      c = { "<cmd>Telekasten show_calendar<cr>", "Notes - Telekasten show_calendar - Show the calendar", noremap = true },
+      t = { "<cmd>Telekasten show_tags<cr>", "Notes - Telekasten show_tags - Search through all tags", noremap = true },
+    },
+    t = { "<cmd>Telekasten toggle_todo<cr>", "Notes - Telekasten toggle_todo - Toggle - [ ] todo status of a line",
+      noremap = true },
+    y = { "<cmd>Telekasten yank_notelink<cr>",
+      "Notes - Telekasten yank_notelink - Yank a link to the currently open note", noremap = true },
+  },
+
   b = {
     y = { "Neomux Yank Buffer" },
     p = { "Neomux Paste Buffer" },

@@ -58,6 +58,9 @@ require('navigator').setup({
     { key = '<Space>la', mode = 'n', func = require('navigator.codelens').run_action, desc = '' },
   },
   lsp_installer = true,
+  lsp = {
+    display_diagnostic_qf = false,
+  }
 })
 
 require("nvim-lsp-installer").setup {

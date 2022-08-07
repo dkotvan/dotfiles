@@ -11,11 +11,11 @@ if ok then
     _G.__luacache_config = {
       chunks = {
         enable = true,
-        path = vim.fn.stdpath('cache')..'/vscode_luacache_chunks',
+        path = vim.fn.stdpath('cache') .. '/vscode_luacache_chunks',
       },
       modpaths = {
         enable = true,
-        path = vim.fn.stdpath('cache')..'/vscode_luacache_modpaths',
+        path = vim.fn.stdpath('cache') .. '/vscode_luacache_modpaths',
       }
     }
   end
@@ -55,4 +55,5 @@ else
   require('config.debug')
   require('config.editing')
   require('config.keys')
+  require('config.zettelkasten')
 end
