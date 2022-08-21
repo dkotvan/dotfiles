@@ -15,7 +15,11 @@ cmp.setup {
     { name = 'vsnip'},
     { name = 'path'},
     { name = 'emoji'},
-    { name = 'tmux'},
+    { name = 'tmux',
+      option = {
+          all_panes = true,
+          label = '[tmux]',
+        }},
     { name = 'buffer'},
     { name = 'spell'},
     { name = 'treesiter'},

@@ -1,3 +1,4 @@
+require("vstask").setup({})
 require('telescope').setup {
   defaults = {
     vimgrep_arguments = {
@@ -40,9 +41,11 @@ require('telescope').load_extension('dap')
 require("telescope").load_extension("yaml_schema")
 require("telescope").load_extension("changes")
 require('telescope').load_extension('scriptnames')
-require("telescope").load_extension("session-lens")
 require('telescope').load_extension('goimpl')
+require('telescope').load_extension('vstask')
 require('telescope').load_extension('zoxide')
+require('possession').setup {}
+require('telescope').load_extension('possession')
 
 require("dressing").setup {
   input = {
@@ -79,6 +82,8 @@ local commands = {
   { ':Git blame', description = 'Git blame' },
   { ':Git! pull', description = 'Git pull' },
   { ':Git! push', description = 'Git push' },
+  { ':Git! push -u origin HEAD', description = 'Git push new branch' },
+  { ':Git! push --force', description = 'Git push --force' },
   { ':Git! push --force', description = 'Git push --force' },
   { ':Git rebase --interactive ', description = 'Git rebase iteractive', unfinished = true },
   { ':Git rebase --interactive main', description = 'Git rebase iteractive main' },
@@ -203,12 +208,12 @@ wk.register({
     n = { '<Plug>(openbrowser-open)', 'Open a browser', noremap = true },
     c = { '<cmd>lua require("telescope.builtin").commands()<cr>', 'Telescope commands', noremap = true },
     C = { '<cmd>Telescope changes<cr>', 'Telescope Changes', noremap = true },
+    s = { '<cmd>lua require("telescope").extensions.possession.list()<cr>', 'Telescope Possession', noremap = true },
     S = { '<cmd>Telescope scriptnames<cr>', 'Telescope Scriptnames', noremap = true },
     h = { '<cmd>lua require("telescope.builtin").help_tags()<cr>', 'Telescope help_tags', noremap = true },
     R = { '<cmd>Telescope repo list<cr>', 'Change repo', noremap = true },
     r = { '<cmd>Telescope repo cached_list<cr>', 'Change repo (cached_list)', noremap = true },
     y = { '<cmd>Telescope yaml_schema<cr>', 'Change yaml schema', noremap = true },
-    s = { '<cmd>SearchSession<cr>', 'Search Session (auto-session)', noremap = true },
   },
   r = {
     b = { '<cmd>:BuildImage<cr>', 'DevContainer Build Image', noremap = true },
@@ -224,20 +229,12 @@ wk.register({
     L = { '<Plug>RestNvimLast', 're-run the last request', noremap = true },
   },
   s = {
-    h = { "Start a new neomux term in the current window." },
-    f = { "Size fix terminal" },
-    ["1"] = { "swap the current window with window 1" },
-    ["2"] = { "swap the current window with window 2" },
-    ["3"] = { "swap the current window with window 3" },
-    ["4"] = { "swap the current window with window 4" },
-    ["5"] = { "swap the current window with window 5" },
-    ["6"] = { "swap the current window with window 6" },
-    ["7"] = { "swap the current window with window 7" },
-    ["8"] = { "swap the current window with window 8" },
-    ["9"] = { "swap the current window with window 9" },
-    s = { '<cmd>SaveSession<cr>', 'Save the session (auto-session)', noremap = true },
-    r = { '<cmd>RestoreSession<cr>', 'Restore the session (auto-session)', noremap = true },
-    d = { '<cmd>DeleteSession<cr>', 'Delete the session (auto-session)', noremap = true },
+    l = { "<cmd>Possession List", "PossessionList" },
+    L = { "<cmd>Possession Load", "PossessionLoad" },
+    s = { "<cmd>Possession Save", "PossessionSave" },
+    S = { "<cmd>Possession Show", "PossessionShow" },
+    c = { "<cmd>Possession Close", "PossessionClose" },
+    m = { "<cmd>Possession Migrate", "PossessionMigrate" },
   },
   t = {
     b = { "<cmd>Telekasten browse_media<cr>", "Notes - Telekasten browse_media - Browse images / media files",
@@ -293,7 +290,11 @@ wk.register({
     y = { "<cmd>Telekasten yank_notelink<cr>",
       "Notes - Telekasten yank_notelink - Yank a link to the currently open note", noremap = true },
   },
-
+  v = {
+    a = { "<cmd>lua require('telescope').extensions.vstask.tasks()<CR>", "VsCode Tasks - Tasks" },
+    i = { "<cmd>lua require('telescope').extensions.vstask.inputs()<CR>", "VsCode Tasks - Inputs" },
+    t = { "<cmd>lua require('telescope').extensions.vstask.close()<CR>", "VsCode Tasks - close" },
+  },
   b = {
     y = { "Neomux Yank Buffer" },
     p = { "Neomux Paste Buffer" },

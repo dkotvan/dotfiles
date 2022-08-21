@@ -13,6 +13,7 @@ alias mrl="lab mr list"
 alias mro="lab mr show"
 alias mrco="lab mr checkout -t -f "
 alias brdiff="git difftool --dir-diff --tool=vimdirdiff"
+alias cdp="cd \$(fd -t d --hidden --no-ignore '^\\.git$' \$HOME/{Projects,Opensource} | sed -r 's/\\/.git\\/$//' | fzf)"
 
 # Copied from https://unix.stackexchange.com/a/97922
 gclonecd() {
@@ -31,9 +32,8 @@ update_everything() {
   echo "update zsh plugins"
   rm ~/.zsh_plugins.zsh && antidote update
   echo "update brew packages"
-  brew bundle && brew update && brew outdated && brew upgrade
+  (cd $HOME/dotfiles && brew bundle && brew update && brew outdated && brew upgrade)
   update_nvim
 }
-
 
 alias nvim_server="nvim --listen /tmp/nvimsocket"
