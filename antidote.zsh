@@ -16,7 +16,7 @@ if [[ ! $HOME/.zsh_plugins.zsh -nt $DOTFILES/zsh_plugins.txt ]]; then
   )
 fi
 
-autoload -Uz $HOME/.antidote/functions/antidote
+source $HOME/.antidote/antidote.zsh
 
 export ZSH="$(antidote home)/https-COLON--SLASH--SLASH-github.com-SLASH-ohmyzsh-SLASH-ohmyzsh"
 # source static plugins file
