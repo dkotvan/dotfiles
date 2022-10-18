@@ -37,3 +37,12 @@ update_everything() {
 }
 
 alias nvim_server="nvim --listen /tmp/nvimsocket"
+
+# copied from https://prefetch.net/blog/2020/07/14/decoding-json-web-tokens-jwts-from-the-linux-command-line/
+jwtd() {
+    if [[ -x $(command -v jq) ]]; then
+         jq -R 'split(".") | .[0],.[1] | @base64d | fromjson' <<< "${1}"
+         echo "Signature: $(echo "${1}" | awk -F'.' '{print $3}')"
+    fi
+}
+
