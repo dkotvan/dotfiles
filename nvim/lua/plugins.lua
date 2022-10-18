@@ -179,18 +179,21 @@ return require("packer").startup {
     'renerocksai/telekasten.nvim',
     requires = { 'renerocksai/calendar-vim' }
   }
-use {
-  'EthanJWright/vs-tasks.nvim',
-  requires = {
-    'nvim-lua/popup.nvim',
-    'nvim-lua/plenary.nvim',
-    'nvim-telescope/telescope.nvim'
+  use {
+    'alex-laycalvert/flashcards.nvim'
   }
-}
-use {
+  use {
+    'EthanJWright/vs-tasks.nvim',
+    requires = {
+      'nvim-lua/popup.nvim',
+      'nvim-lua/plenary.nvim',
+      'nvim-telescope/telescope.nvim'
+    }
+  }
+  use {
     'jedrzejboczar/possession.nvim',
     requires = { 'nvim-lua/plenary.nvim' },
-}
+  }
   use {
     'edolphin-ydf/goimpl.nvim',
     requires = {

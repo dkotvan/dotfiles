@@ -204,7 +204,8 @@ wk.register({
   c = {
     a = { '<cmd>lua require("telescope").extensions.asynctasks.all()<cr>', 'Telescope AsyncTasks', noremap = true },
     b = { '<cmd>lua require("telescope.builtin").buffers()<cr>', 'Telescope buffers', noremap = true },
-    i = { '<cmd>lua require("telescope").extensions.goimpl.goimpl{}<CR>', 'Telescope buffers', noremap = true },
+    i = { '<cmd>lua require("telescope").extensions.goimpl.goimpl{}<CR>', 'Golang implementations', noremap = true },
+    f = { '<cmd>Flashcards<CR>', 'Flashcard', noremap = true },
     n = { '<Plug>(openbrowser-open)', 'Open a browser', noremap = true },
     c = { '<cmd>lua require("telescope.builtin").commands()<cr>', 'Telescope commands', noremap = true },
     C = { '<cmd>Telescope changes<cr>', 'Telescope Changes', noremap = true },

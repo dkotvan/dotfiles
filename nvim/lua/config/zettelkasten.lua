@@ -130,3 +130,8 @@ require('telekasten').setup({
   -- should all links be updated when a file is renamed
   rename_update_links = true,
 })
+
+require('flashcards').setup({
+  dir = home .. '/flashcards',
+})
+
