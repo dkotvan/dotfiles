@@ -72,6 +72,8 @@ brew 'parquet-cli'
 brew 'zoxide'
 
 # apps
+brew 'ghostscript'
+brew 'imagemagick'
 brew 'neovim'
 brew 'octosql'
 brew 'pgcli'
