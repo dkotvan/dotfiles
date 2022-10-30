@@ -386,7 +386,7 @@ return require("packer").startup {
 }
 
 use { "mbbill/undotree" }
-use { "dkotvan/auto-save.nvim", branch="fix-buffer-not-exists" }
+use { "Pocco81/auto-save.nvim" }
 
 use { 'AllenDang/nvim-expand-expr',
 config = function()
@@ -506,7 +506,7 @@ end
 
     use {
       "airblade/vim-rooter",
-      config = function() -- change the location of the tab
+      config = function()
         vim.g.rooter_cd_cmd = 'tcd' -- change the location of the tab
       end
     }
@@ -517,8 +517,6 @@ end
     }
 
     use { "jamestthompson3/nvim-remote-containers" }
-
-    -- use {"github/copilot.vim"} -- only enable to authenticate user for copilotlua and copilot.cmp
 
     use {
       "klen/nvim-config-local",
