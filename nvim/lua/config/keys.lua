@@ -13,7 +13,7 @@ mapkey('n', '<CR>', '"+y', {noremap = true, silent = false})
 mapkey('v', '<CR>', '"+y', {noremap = true, silent = false})
 
 -- making the terminal bearable
-mapkey('t', '<C-w><ESc>', '<C-\\><C-N><Esc>', {noremap = true, silent = false})
+mapkey('t', '<C-w><Esc>', '<C-\\><C-N><Esc>', {noremap = true, silent = false})
 mapkey('t', '<C-w><C-w>', '<C-\\><C-N><C-w><C-w>', {noremap = true, silent = false})
 mapkey('t', '<C-w><C-Up>', '<C-\\><C-N><C-w><C-Up>', {noremap = true, silent = false})
 mapkey('t', '<C-w><C-Down>', '<C-\\><C-N><C-w><C-Down>', {noremap = true, silent = false})

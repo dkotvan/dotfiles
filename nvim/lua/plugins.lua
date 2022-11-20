@@ -73,7 +73,7 @@ return require("packer").startup {
   -- treesiter
   use {
     'nvim-treesitter/nvim-treesitter',
-    run = ':TSUpdate'
+    run = ':TSUpdateSync'
   }
   --
   -- LSP Stuff
@@ -199,12 +199,6 @@ return require("packer").startup {
     requires = {
       { 'nvim-telescope/telescope.nvim' },
       { 'nvim-treesitter/nvim-treesitter' },
-    },
-  }
-  use {
-    'jvgrootveld/telescope-zoxide',
-    requires = {
-      { 'nvim-telescope/telescope.nvim' },
     },
   }
   -- File explorer
@@ -511,9 +505,21 @@ end
       end
     }
 
+    use { "numToStr/FTerm.nvim" }
+
     use {
-      "nikvdp/neomux",
-      requires = { 'hoob3rt/lualine.nvim' }
+      "samjwill/nvim-unception",
+      config = function() 
+          vim.api.nvim_create_autocmd(
+              "User",
+              {
+                  pattern = "UnceptionEditRequestReceived",
+                  callback = function()
+                      require('FTerm').toggle()
+                  end
+              }
+          )
+      end
     }
 
     use { "jamestthompson3/nvim-remote-containers" }

@@ -43,7 +43,6 @@ require("telescope").load_extension("changes")
 require('telescope').load_extension('scriptnames')
 require('telescope').load_extension('goimpl')
 require('telescope').load_extension('vstask')
-require('telescope').load_extension('zoxide')
 require('possession').setup {}
 require('telescope').load_extension('possession')
 
@@ -69,7 +68,7 @@ require("dressing").setup {
 }
 
 require("legendary").setup {
-  include_builtin = true, auto_register_which_key = true,
+  include_builtin = true, which_key = { auto_register = true },
   include_legendary_cmds = true,
 }
 vim.api.nvim_set_keymap("n", "<leader><leader>", "<cmd>lua require('legendary').find()<CR>", { noremap = true })
@@ -132,7 +131,7 @@ local commands = {
 }
 
 
-require('legendary').bind_commands(commands)
+require('legendary').commands(commands)
 
 require("which-key").setup({
   plugins = {
@@ -291,32 +290,24 @@ wk.register({
     y = { "<cmd>Telekasten yank_notelink<cr>",
       "Notes - Telekasten yank_notelink - Yank a link to the currently open note", noremap = true },
   },
+  T = { "<cmd>lua require('FTerm').toggle()<CR>", "Toggle terminal" },
   v = {
     a = { "<cmd>lua require('telescope').extensions.vstask.tasks()<CR>", "VsCode Tasks - Tasks" },
     i = { "<cmd>lua require('telescope').extensions.vstask.inputs()<CR>", "VsCode Tasks - Inputs" },
     t = { "<cmd>lua require('telescope').extensions.vstask.close()<CR>", "VsCode Tasks - close" },
-  },
-  b = {
-    y = { "Neomux Yank Buffer" },
-    p = { "Neomux Paste Buffer" },
   },
   u = { '<cmd>UndotreeToggle<cr>', 'Undo tree toggle', noremap = true },
 }, { prefix = "<leader>" }
 )
 
 wk.register({
-  t = { 'Neomux Split horizontal' },
-  T = { 'Neomux Split vertical' },
-  ["1"] = { "move cursor to window 1" },
-  ["2"] = { "move cursor to window 2" },
-  ["3"] = { "move cursor to window 3" },
-  ["4"] = { "move cursor to window 4" },
-  ["5"] = { "move cursor to window 5" },
-  ["6"] = { "move cursor to window 6" },
-  ["7"] = { "move cursor to window 7" },
-  ["8"] = { "move cursor to window 8" },
-  ["9"] = { "move cursor to window 9" },
+  t = { "<cmd>lua require('FTerm').toggle()<CR>", "Toggle FTerm" },
 }, { prefix = "<C-w>" }
+)
+
+wk.register({
+  t = { "<cmd>lua require('FTerm').toggle()<CR>", "Toggle FTerm" },
+}, { prefix = "<C-w>", mode = "t" }
 )
 
 vim.cmd [[

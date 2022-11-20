@@ -69,6 +69,7 @@ brew 'unzip'
 brew 'yamllint'
 brew 'zip'
 brew 'parquet-cli'
+brew 'yq'
 brew 'zoxide'
 
 # apps
