@@ -7,6 +7,9 @@ disabled = false
 [battery]
 disabled = true
 
+[docker_context]
+disabled = true
+
 [git_commit]
 commit_hash_length = 8
 only_detached = false
@@ -23,8 +26,12 @@ disabled = true
 [kotlin]
 disabled = true
 
+[directory]
+style = '#A5A5B0 bold'
+
 [kubernetes]
 disabled = false
+style = '#A5A5B0 bold'
 
 [line_break]
 disabled = false
@@ -39,4 +46,4 @@ disabled = false
 disabled = false
 
 [time]
-disabled = true
+disabled = false

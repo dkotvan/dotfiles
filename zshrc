@@ -6,6 +6,7 @@ if [[ $OSTYPE == linux* ]]; then
 fi
 
 DISABLE_AUTO_TITLE=”true”
+DISABLE_AUTO_UPDATE=true
 
 source $DOTFILES/antidote.zsh
 

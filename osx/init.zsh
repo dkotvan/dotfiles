@@ -11,3 +11,5 @@ if [ ! -d "~/.docker/cli-plugins/docker-compose" ]; then
   ln -sfh $(brew --prefix)/opt/docker-compose ~/.docker/cli-plugins/docker-compose
 fi
 
+# Export DOCKER_HOST for Colima, make some utils to work, like ctop and lazydocker
+export DOCKER_HOST="unix:///Users/$USER/.colima/docker.sock"

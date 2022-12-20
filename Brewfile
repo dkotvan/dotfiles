@@ -35,6 +35,7 @@ brew 'lab'
 brew 'tig'
 brew 'mob'
 brew 'gitter-cli'
+brew 'pre-commit'
 
 # Docker & Kubernetes Related
 brew 'colima' if OS.mac?
@@ -48,6 +49,14 @@ brew 'k9s'
 tap 'int128/kubelogin'
 brew 'int128/kubelogin/kubelogin'
 brew 'stern'
+brew 'lazydocker'
+brew 'ctop'
+
+# IaC
+brew 'shellcheck'
+brew 'terragrunt'
+brew 'terraform-docs'
+brew 'terraform'
 
 # Utilities
 brew 'bat'
@@ -71,6 +80,7 @@ brew 'zip'
 brew 'parquet-cli'
 brew 'yq'
 brew 'zoxide'
+brew 'cookiecutter'
 
 # apps
 brew 'ghostscript'
@@ -127,4 +137,5 @@ if OS.mac?
 
   # Good font for terminal and programming
   cask 'font-fira-code-nerd-font'
+  cask 'font-victor-mono-nerd-font'
 end

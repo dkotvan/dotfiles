@@ -1,4 +1,3 @@
-require("vstask").setup({})
 require('telescope').setup {
   defaults = {
     vimgrep_arguments = {
@@ -42,7 +41,7 @@ require("telescope").load_extension("yaml_schema")
 require("telescope").load_extension("changes")
 require('telescope').load_extension('scriptnames')
 require('telescope').load_extension('goimpl')
-require('telescope').load_extension('vstask')
+-- require('telescope').load_extension('vstask')
 require('possession').setup {}
 require('telescope').load_extension('possession')
 
@@ -118,13 +117,13 @@ local commands = {
   { ':GoAlt', description = 'GoAlt' },
   { ':GoDoc', description = 'GoDoc', unfinished = true },
   { ':GoMockGen', description = 'GoMockGen' },
-  { ':GoPkgOutline', description = 'GoPkgOutline' },
+  { ':GoPkgOutline', description = 'Go Package Outline' },
   { ':GoImpl', description = 'GoImpl', unfinished = true },
   { ':GoToggleInlay', description = 'GoToggleInlay' },
   { ':GoTermClose', description = 'GoTermClose' },
   { ':OpenBrowserSearch', description = 'Search in web browser', unfinished = true },
   { ':MakeTable', description = 'CSV to markdown table' },
-  { ':UnmakeTable', description = 'Markdow tablen to CSV' },
+  { ':UnmakeTable', description = 'Markdow table to CSV' },
   { ':ASToggle', description = 'ASToggle: toggles AutoSave.nvim on and off.' },
   { ':MarkdownPreview', description = 'Start the markdown preview' },
   { ':MarkdownPreviewStop', description = 'Stop the markdown preview' },
@@ -236,7 +235,7 @@ wk.register({
     c = { "<cmd>Possession Close", "PossessionClose" },
     m = { "<cmd>Possession Migrate", "PossessionMigrate" },
   },
-  t = {
+  q = {
     b = { "<cmd>Telekasten browse_media<cr>", "Notes - Telekasten browse_media - Browse images / media files",
       noremap = true },
     f = {
@@ -290,12 +289,9 @@ wk.register({
     y = { "<cmd>Telekasten yank_notelink<cr>",
       "Notes - Telekasten yank_notelink - Yank a link to the currently open note", noremap = true },
   },
-  T = { "<cmd>lua require('FTerm').toggle()<CR>", "Toggle terminal" },
-  v = {
-    a = { "<cmd>lua require('telescope').extensions.vstask.tasks()<CR>", "VsCode Tasks - Tasks" },
-    i = { "<cmd>lua require('telescope').extensions.vstask.inputs()<CR>", "VsCode Tasks - Inputs" },
-    t = { "<cmd>lua require('telescope').extensions.vstask.close()<CR>", "VsCode Tasks - close" },
-  },
+  -- T = { "<cmd>lua require('FTerm').toggle()<CR>", "Toggle terminal" },
+  t = { "<cmd>Greyjoy<CR>", "Greyjoy - makefile and vstasks" },
+  T = { "<cmd>ToggleTerm<CR>", "Toggle terminal" },
   u = { '<cmd>UndotreeToggle<cr>', 'Undo tree toggle', noremap = true },
 }, { prefix = "<leader>" }
 )

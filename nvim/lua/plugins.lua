@@ -51,11 +51,6 @@ return require("packer").startup {
     }
 
     use {
-      "zbirenbaum/copilot-cmp",
-      after = { "copilot.lua", "nvim-cmp" },
-    }
-
-    use {
       'nacro90/numb.nvim', config = function() require('numb').setup {
         show_numbers = true, -- Enable 'number' for the window while peeking
         show_cursorline = true, -- Enable 'cursorline' for the window while peeking
@@ -69,16 +64,41 @@ return require("packer").startup {
     "sainnhe/gruvbox-material",
   }
   use { 'luisiacc/gruvbox-baby' }
+  use {
+      "mcchrish/zenbones.nvim",
+      requires = "rktjmp/lush.nvim"
+  }
+use {'ray-x/starry.nvim', setup = function() 
+vim.g.starry_italic_comments = true
+vim.g.starry_darker_contrast = true 
+end}
 
+  use {'srcery-colors/srcery-vim', as = 'srcery', setup = function()
+vim.g.srcery_italic = 1
+  end}
+
+  use {'mhartington/oceanic-next', setup = function()
+vim.g.oceanic_next_terminal_bold = 1
+vim.g.oceanic_next_terminal_italic = 1
+  end}
+
+use({
+    'rose-pine/neovim',
+    as = 'rose-pine'
+})
   -- treesiter
   use {
     'nvim-treesitter/nvim-treesitter',
     run = ':TSUpdateSync'
   }
-  --
+
+  use {
+      "williamboman/mason.nvim",
+      "williamboman/mason-lspconfig.nvim",
+  }
+
   -- LSP Stuff
   use 'neovim/nvim-lspconfig'
-  use 'williamboman/nvim-lsp-installer'
   use 'onsails/lspkind-nvim'
   use { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' }
   use {
@@ -182,14 +202,13 @@ return require("packer").startup {
   use {
     'alex-laycalvert/flashcards.nvim'
   }
-  use {
-    'EthanJWright/vs-tasks.nvim',
-    requires = {
-      'nvim-lua/popup.nvim',
-      'nvim-lua/plenary.nvim',
-      'nvim-telescope/telescope.nvim'
-    }
-  }
+
+  use {"akinsho/toggleterm.nvim", config = function()
+    require("toggleterm").setup()
+  end}
+
+  use {"desdic/greyjoy.nvim" }
+
   use {
     'jedrzejboczar/possession.nvim',
     requires = { 'nvim-lua/plenary.nvim' },

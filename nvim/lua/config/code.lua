@@ -18,6 +18,9 @@ require("nvim-treesitter.configs").setup {
   }
 }
 
+require("mason").setup()
+require("mason-lspconfig").setup()
+
 local on_attach = require("navigator.lspclient.attach").on_attach
 
 require('navigator').setup({
@@ -57,24 +60,24 @@ require('navigator').setup({
     -- { key = '<Space>wl', func = require('navigator.workspace').list_workspace_folders, desc = 'list_workspace_folders' },
     { key = '<Space>la', mode = 'n', func = require('navigator.codelens').run_action, desc = '' },
   },
-  lsp_installer = true,
+  mason = true,
   lsp = {
     format_on_save = false,
     disply_diagnostic_qf = false,
   }
 })
 
-require("nvim-lsp-installer").setup {
-  log_level = vim.log.levels.DEBUG,
-  automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
-  ui = {
-    icons = {
-      server_installed = "✓",
-      server_pending = "➜",
-      server_uninstalled = "✗"
-    }
-  }
-}
+-- require("nvim-lsp-installer").setup {
+--   log_level = vim.log.levels.DEBUG,
+--   automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
+--   ui = {
+--     icons = {
+--       server_installed = "✓",
+--       server_pending = "➜",
+--       server_uninstalled = "✗"
+--     }
+--   }
+-- }
 
 vim.g.symbols_outline = {
   position = "left"

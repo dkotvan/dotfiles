@@ -10,14 +10,23 @@ alias prl="hub pr list"
 alias pro="hub pr show"
 alias prco="hub pr checkout"
 alias mrl="lab mr list"
-alias mro="lab mr show"
+alias mro="lab mr browse"
 alias mrco="lab mr checkout -t -f "
 alias brdiff="git difftool --dir-diff --tool=vimdirdiff"
-alias cdp="cd \$(fd -t d --hidden --no-ignore '^\\.git$' \$HOME/{Projects,Opensource} | sed -r 's/\\/.git\\/$//' | fzf)"
-
 # Copied from https://unix.stackexchange.com/a/97922
 gclonecd() {
   git clone "$1" && cd "$(basename "$1" .git)"
+}
+
+cdp() {
+  local cmd="fzf"
+  if [[ -n "$1" ]]; then
+    cmd="fzf -q $1"
+  fi
+
+  echo "<$1> <$cmd>"
+
+  cd $(fd -t d --hidden --no-ignore '^\.git$' $HOME/{Projects,Opensource,dotfiles} | sed -r 's/\/.git\/$//' | eval $cmd)
 }
 
 alias ngst='nvim -c ":G"'

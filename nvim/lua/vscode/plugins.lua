@@ -28,9 +28,6 @@ return require("packer").startup {
     -- allow to create your own text object
     use 'kana/vim-textobj-user'
 
-    -- Asynchronous tag generation
-    use 'ludovicchabant/vim-gutentags'
-
     -- MakeTable! -> csv to markdown table
     -- UnmakeTable  -> markdown to csv
     use 'mattn/vim-maketable'
