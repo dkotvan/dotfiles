@@ -2,18 +2,18 @@ require("nvim-treesitter.configs").setup {
   ensure_installed = { "bash", "c", "css", "clojure", "cpp",
     "dockerfile", "dot", "elixir", "erlang", "go",
     "gomod", "graphql", "hcl", "html", "http", "java",
-    "javascript", "json", "kotlin", "latex", "lua", 
-    "make", "perl", "php", "python", "http" }, -- one of "all", "maintained" (parsers with maintainers), or a list of languages
+    "javascript", "json", "jsonc", "kotlin", "latex", "lua",
+    "make", "perl", "php", "python", "http" },
   highlight = { enable = true },
   indentation = { enable = true },
   folding = { enable = false },
   incremental_selection = {
     enable = true,
     keymaps = {
-      init_selection = "gnn",
-      node_incremental = "grn",
-      scope_incremental = "grc",
-      node_decremental = "grm"
+      init_selection = "gni",
+      node_incremental = "gnn",
+      scope_incremental = "gnc",
+      node_decremental = "gnm"
     }
   }
 }

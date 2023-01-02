@@ -24,8 +24,6 @@ cdp() {
     cmd="fzf -q $1"
   fi
 
-  echo "<$1> <$cmd>"
-
   cd $(fd -t d --hidden --no-ignore '^\.git$' $HOME/{Projects,Opensource,dotfiles} | sed -r 's/\/.git\/$//' | eval $cmd)
 }
 
