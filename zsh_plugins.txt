@@ -29,3 +29,5 @@ ohmyzsh/ohmyzsh path:plugins/docker
 ohmyzsh/ohmyzsh path:plugins/docker-compose
 # pbcopy, pbpaste and clip
 zpm-zsh/clipboard
+# forgit - FZ  git
+wfxr/forgit
