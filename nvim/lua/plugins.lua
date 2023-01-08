@@ -41,13 +41,7 @@ return require("packer").startup {
     }
 
     use {
-      "zbirenbaum/copilot.lua",
-      event = { "VimEnter" },
-      config = function()
-        vim.defer_fn(function()
-          require("copilot").setup()
-        end, 100)
-      end,
+      "zbirenbaum/copilot.lua"
     }
 
     use {
@@ -100,7 +94,7 @@ return require("packer").startup {
     -- LSP Stuff
     use 'neovim/nvim-lspconfig'
     use 'onsails/lspkind-nvim'
-    use { 'weilbith/nvim-code-action-menu', cmd = 'CodeActionMenu' }
+    use { 'weilbith/nvim-code-action-menu' }
     use {
       'ray-x/navigator.lua',
       requires = {
@@ -150,6 +144,14 @@ return require("packer").startup {
     use { 'hrsh7th/cmp-nvim-lsp-signature-help' }
     use { 'hrsh7th/cmp-nvim-lsp-document-symbol' }
     use { 'ray-x/lsp_signature.nvim' }
+    use {
+      "zbirenbaum/copilot-cmp",
+      after = { "copilot.lua" },
+      config = function()
+        require("copilot").setup()
+        require("copilot_cmp").setup()
+      end
+    }
 
     -- Auto pairs
     use { "windwp/nvim-autopairs" }
@@ -470,7 +472,13 @@ return require("packer").startup {
       'abecodes/tabout.nvim'
     }
 
-
+    use {
+      'phaazon/mind.nvim',
+      requires = { 'nvim-lua/plenary.nvim' },
+      config = function()
+        require 'mind'.setup()
+      end
+    }
     -- Project Related
     use {
       'windwp/nvim-spectre',
