@@ -198,6 +198,8 @@ wk.register({
     l = { '<cmd>Telescope dap list_breakpoints<cr>', 'debug - dap list_breakpoints', noremap = true },
     v = { '<cmd>Telescope dap variables<cr>', 'debug - dap variables', noremap = true },
     f = { '<cmd>Telescope dap frames<cr>', 'debug - dap frames', noremap = true },
+    b = { '<cmd>lua require("dap").toggle_breakpoint()<cr>', 'debug - toggle breakpoint', noremap = true },
+    t = { '<cmd>lua require("dap-go").debug_test()<cr>', 'debug go test', noremap = true },
   },
   c = {
     a = { '<cmd>lua require("telescope").extensions.asynctasks.all()<cr>', 'Telescope AsyncTasks', noremap = true },

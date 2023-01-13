@@ -83,7 +83,7 @@ export GOPATH=~/go
 export PATH=~/go/bin:~/bin:$PATH
 
 export PATH="/usr/local/sbin:$PATH"
-export PATH="${HOME}/.pyenv/shims:${PATH}"
+export PATH="${HOME}/.local/bin:${HOME}/.pyenv/shims:${PATH}"
 export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 
 eval "$(zoxide init zsh)"

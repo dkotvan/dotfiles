@@ -234,15 +234,6 @@ return require("packer").startup {
       end
     }
 
-    -- Curl inside nvim
-    use {
-      'NTBBloodbath/rest.nvim',
-      requires = { 'nvim-lua/plenary.nvim' },
-      config = function()
-        require('rest-nvim').setup()
-      end
-    }
-
     -- add new targets and make it seek the operator in the line
     use 'wellle/targets.vim'
 
@@ -460,6 +451,7 @@ return require("packer").startup {
     -- debug
     use "mfussenegger/nvim-dap"
     use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
+    use { "leoluz/nvim-dap-go", requires =  { "mfussenegger/nvim-dap" }}
     use { 'theHamsta/nvim-dap-virtual-text' }
     use { 'nvim-telescope/telescope-dap.nvim' }
 

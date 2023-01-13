@@ -63,3 +63,5 @@ nnoremap <leader>tl Vy<cr>:action ActivateTerminalToolWindow<cr>
 vnoremap <leader>tl y<cr>:action ActivateTerminalToolWindow<cr>
 nnoremap ]e :action GotoNextError<cr>
 nnoremap [e :action GotoPreviousError<cr>
+
+Plug 'tommcdo/vim-exchange'
