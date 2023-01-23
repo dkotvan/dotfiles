@@ -41,10 +41,6 @@ return require("packer").startup {
     }
 
     use {
-      "zbirenbaum/copilot.lua"
-    }
-
-    use {
       'nacro90/numb.nvim', config = function() require('numb').setup {
           show_numbers = true, -- Enable 'number' for the window while peeking
           show_cursorline = true, -- Enable 'cursorline' for the window while peeking
@@ -58,6 +54,10 @@ return require("packer").startup {
       "sainnhe/gruvbox-material",
     }
     use { 'luisiacc/gruvbox-baby' }
+    use {
+      "phha/zenburn.nvim",
+      config = function() require("zenburn").setup() end
+    }
     use {
       "mcchrish/zenbones.nvim",
       requires = "rktjmp/lush.nvim"
@@ -144,15 +144,7 @@ return require("packer").startup {
     use { 'hrsh7th/cmp-nvim-lsp-signature-help' }
     use { 'hrsh7th/cmp-nvim-lsp-document-symbol' }
     use { 'ray-x/lsp_signature.nvim' }
-    use {
-      "zbirenbaum/copilot-cmp",
-      after = { "copilot.lua" },
-      config = function()
-        require("copilot").setup()
-        require("copilot_cmp").setup()
-      end
-    }
-
+    --
     -- Auto pairs
     use { "windwp/nvim-autopairs" }
 
@@ -451,7 +443,7 @@ return require("packer").startup {
     -- debug
     use "mfussenegger/nvim-dap"
     use { "rcarriga/nvim-dap-ui", requires = { "mfussenegger/nvim-dap" } }
-    use { "leoluz/nvim-dap-go", requires =  { "mfussenegger/nvim-dap" }}
+    use { "leoluz/nvim-dap-go", requires = { "mfussenegger/nvim-dap" } }
     use { 'theHamsta/nvim-dap-virtual-text' }
     use { 'nvim-telescope/telescope-dap.nvim' }
 

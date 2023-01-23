@@ -17,7 +17,7 @@ ohmyzsh/ohmyzsh path:plugins/command-not-found
 ohmyzsh/ohmyzsh path:plugins/gradle
 # urlencode
 ohmyzsh/ohmyzsh path:plugins/urltools
-# remember if there is an alias for the command youre using
+# remember if there is an alias for the command you're using
 djui/alias-tips
 # command to find alias alias-finder -l git
 ohmyzsh/ohmyzsh path:plugins/alias-finder

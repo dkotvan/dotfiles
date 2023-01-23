@@ -10,8 +10,8 @@ require('rose-pine').setup({
 vim.cmd('colorscheme kanagawabones')
 
 require('lualine').setup {
-  theme = "srcery",
   options = {
+  theme = "zenburn",
     icons_enabled= 1
   },
   extensions = {'fugitive', 'nvim-tree', 'quickfix' },

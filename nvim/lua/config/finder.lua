@@ -165,22 +165,22 @@ wk.register({
   },
 }, { prefix = "<Space>" }
 )
-wk.register({
-  g = {
-    ["0"] = { "LSP Navigator list document symbols" },
-    r = { 'LSP Navigator reference' },
-    k = { 'LSP Navigator signature_help' },
-    W = { 'LSP Navigator workspace_symbol_live' },
-    d = { 'LSP Navigator definition' },
-    D = { 'LSP Navigator declaration' },
-    p = { 'LSP Navigator definition_preview' },
-    K = { 'LSP Navigator hover' },
-    i = { 'LSP Navigator implementation' },
-    L = { 'LSP Navigator diagnostics' },
-    G = { 'LSP Navigator buffer diagnostics' },
-  },
-}, {}
-)
+-- wk.register({
+--   g = {
+--     ["0"] = { "LSP Navigator list document symbols" },
+--     r = { 'LSP Navigator reference' },
+--     k = { 'LSP Navigator signature_help' },
+--     W = { 'LSP Navigator workspace_symbol_live' },
+--     d = { 'LSP Navigator definition' },
+--     D = { 'LSP Navigator declaration' },
+--     p = { 'LSP Navigator definition_preview' },
+--     K = { 'LSP Navigator hover' },
+--     i = { 'LSP Navigator implementation' },
+--     L = { 'LSP Navigator diagnostics' },
+--     G = { 'LSP Navigator buffer diagnostics' },
+--   },
+-- }, {}
+-- )
 wk.register({
   g = {
     g = { "<cmd>lua require('telescope.builtin').live_grep()<cr>", "Telescope live grep", noremap = true },
@@ -193,8 +193,7 @@ wk.register({
   f = { '<cmd>NvimTreeToggle<cr>', 'Nvim Tree Toggle', noremap = true },
   F = { '<cmd>NvimTreeFindFile<cr>', 'Nvim Tree Focus File', noremap = true },
   d = {
-    c = { '<cmd>Telescope dap commands', 'dap commands', noremap = true },
-    o = { '<cmd>Telescope dap configurations<cr>', 'debug - dap configurations', noremap = true },
+    c = { '<cmd>Telescope dap commands<cr>', 'dap commands', noremap = true },
     l = { '<cmd>Telescope dap list_breakpoints<cr>', 'debug - dap list_breakpoints', noremap = true },
     v = { '<cmd>Telescope dap variables<cr>', 'debug - dap variables', noremap = true },
     f = { '<cmd>Telescope dap frames<cr>', 'debug - dap frames', noremap = true },
@@ -307,6 +306,10 @@ wk.register({
   t = { "<cmd>lua require('FTerm').toggle()<CR>", "Toggle FTerm" },
 }, { prefix = "<C-w>", mode = "t" }
 )
+
+wk.register({
+  ["<F12>"] = { "<cmd>lua require('dap_ui').toggle()<CR>", "Toggle FTerm" }
+})
 
 vim.cmd [[
 nnoremap <C-P> <cmd>lua require('telescope.builtin').find_files()<cr>
