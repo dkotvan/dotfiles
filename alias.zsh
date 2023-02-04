@@ -27,6 +27,16 @@ cdp() {
   cd $(fd -t d --hidden --no-ignore '^\.git$' $HOME/{Projects,Opensource,dotfiles} | sed -r 's/\/.git\/$//' | eval $cmd)
 }
 
+cdgo() {
+  local cmd="fzf"
+  if [[ -n "$1" ]]; then
+    cmd="fzf -q $1"
+  fi
+
+  cd $(fd --hidden --no-ignore '^go\.mod$' $HOME/{Projects} | sed -r 's/\/go.mod$//' | eval $cmd)
+}
+
+
 alias ngst='nvim -c ":G"'
 
 update_nvim() {
@@ -53,3 +63,10 @@ jwtd() {
     fi
 }
 
+aws_env() {
+export AWS_ACCESS_KEY_ID=$(aws configure get aws_access_key_id --profile $1);
+export AWS_SECRET_ACCESS_KEY=$(aws configure get aws_secret_access_key --profile $1);
+export AWS_DEFAULT_REGION=$(aws configure get region --profile $1);
+export AWS_SESSION_TOKEN=$(aws configure get aws_session_token --profile $1);
+echo "$1 environment variables exported";
+}

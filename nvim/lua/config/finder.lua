@@ -127,6 +127,10 @@ local commands = {
   { ':ASToggle', description = 'ASToggle: toggles AutoSave.nvim on and off.' },
   { ':MarkdownPreview', description = 'Start the markdown preview' },
   { ':MarkdownPreviewStop', description = 'Stop the markdown preview' },
+  { ':MarkdownPreviewStop', description = 'Stop the markdown preview' },
+  { ':MarkdownPreviewStop', description = 'Stop the markdown preview' },
+  { ':HexToggle', description = 'Toggle the hex view' },
+
 }
 
 

@@ -9,6 +9,7 @@ cmp.setup {
     end,
   },
   sources = {
+    { name = "codeium" },
     { name = 'nvim_lsp' },
     { name = 'nvim_lua' },
     { name = 'vsnip' },
@@ -37,8 +38,8 @@ cmp.setup {
   formatting = {
     format = function(entry, vim_item)
 
-      if (entry.source.name == "copilot") then
-        vim_item.kind = " copilot"
+      if (entry.source.name == "codeium") then
+        vim_item.kind = " codeium"
       else
         -- fancy icons and a name of kind
         vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
@@ -46,7 +47,7 @@ cmp.setup {
 
       -- set a name for each source
       vim_item.menu = ({
-        copilot = "",
+        codeium = "",
         path = "",
         buffer = "",
         vsnip = "",

@@ -49,6 +49,12 @@ return require("packer").startup {
       end
     }
 
+    use {
+      'RaafatTurki/hex.nvim', config = function()
+        require('hex').setup()
+      end
+    }
+
     -- Gruvbox colorscheme with support for treesiter
     use {
       "sainnhe/gruvbox-material",
@@ -554,6 +560,19 @@ return require("packer").startup {
           silent = false, -- Disable plugin messages (Config loaded/ignored)
           lookup_parents = false, -- Lookup config files in parent directories
         }
+      end
+    }
+
+    use {
+      "jcdickinson/codeium.nvim",
+      requires = {
+        "nvim-lua/plenary.nvim",
+        "MunifTanjim/nui.nvim",
+        "hrsh7th/nvim-cmp",
+      },
+      config = function()
+        require("codeium").setup({
+        })
       end
     }
   end

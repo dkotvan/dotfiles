@@ -5,7 +5,7 @@ require('go').setup({
   -- gopls_cmd = {install_root_dir .. '/gopls/gopls'},
   goimport='gopls', -- goimport command, can be gopls[default] or goimport
   fillstruct = 'gopls', -- can be nil (use fillstruct, slower) and gopls
-  gofmt = 'gofumpt', --gofmt cmd,
+  gofmt = 'goimports', --gofmt cmd,
   max_line_len = 128, -- max line length in golines format, Target maximum line length for golines
   tag_transform = false, -- can be transform option("snakecase", "camelcase", etc) check gomodifytags for details and more options
   comment_placeholder = 'ﳑ' ,  -- comment_placeholder your cool placeholder e.g. ﳑ       
@@ -15,7 +15,7 @@ require('go').setup({
   -- false: do nothing
   -- if lsp_cfg is a table, merge table with with non-default gopls setup in go/lsp.lua, e.g.
   --   lsp_cfg = {settings={gopls={matcher='CaseInsensitive', ['local'] = 'your_local_module_path', gofumpt = true }}}
-  lsp_gofumpt = false, -- true: set default gofmt in gopls format to gofumpt
+  lsp_gofumpt = true, -- true: set default gofmt in gopls format to gofumpt
   lsp_on_attach = nil, -- nil: use on_attach function defined in go/lsp.lua,
   --      when lsp_cfg is true
   -- if lsp_on_attach is a function: use this function as on_attach function for gopls
@@ -78,4 +78,11 @@ require('go').setup({
     test_efm = false, -- errorfomat for quickfix, default mix mode, set to true will be efm only
   })
 
-
+local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.go",
+  callback = function()
+   require('go.format').goimport()
+  end,
+  group = format_sync_grp,
+})
