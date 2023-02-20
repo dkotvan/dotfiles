@@ -86,25 +86,13 @@ require('navigator').setup({
   lsp = {
     format_on_save = false,
     disply_diagnostic_qf = false,
+    disable_lsp = {"sumneko_lua"},
   }
 })
-
--- require("nvim-lsp-installer").setup {
---   log_level = vim.log.levels.DEBUG,
---   automatic_installation = true, -- automatically detect which servers to install (based on which servers are set up via lspconfig)
---   ui = {
---     icons = {
---       server_installed = "✓",
---       server_pending = "➜",
---       server_uninstalled = "✗"
---     }
---   }
--- }
 
 vim.g.symbols_outline = {
   position = "left"
 }
-
 
 local cfg = require("yaml-companion").setup({
   schemas = {

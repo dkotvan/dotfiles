@@ -1,31 +1,22 @@
 local autosave = require("auto-save")
 
-local function has_value (tab, val)
-    for _, value in ipairs(tab) do
-        if value == val then
-            return true
-        end
-    end
-
-    return false
-end
-
 autosave.setup({
   enabled = true,
   execution_message = {
     dim = 0,
   },
   trigger_events = { "InsertLeave", "TextChanged" },
-  condition = function(buf)
-    local fn = vim.fn
-    -- local utils = require("auto-save.utils.data")
-    --     utils._in(fn.getbufvar(buf, "&filetype"), { "go" }) then
+	condition = function(buf)
+		local fn = vim.fn
+		local utils = require("auto-save.utils.data")
 
-    if fn.getbufvar(buf, "&modifiable") == 1 then
-      return true
-    end
-    return false
-  end,
+		if
+			fn.getbufvar(buf, "&modifiable") == 1 and
+			utils.not_in(fn.getbufvar(buf, "&filetype"), {"go"}) then
+			return true -- met condition(s), can save
+		end
+		return false -- can't save
+	end,
   write_all_buffers = false,
   debounce_delay = 20000,
   callbacks = { -- functions to be executed at different intervals

@@ -130,7 +130,7 @@ local commands = {
   { ':MarkdownPreviewStop', description = 'Stop the markdown preview' },
   { ':MarkdownPreviewStop', description = 'Stop the markdown preview' },
   { ':HexToggle', description = 'Toggle the hex view' },
-
+  { ':ChatGPT', description = 'ChatGPT' },
 }
 
 

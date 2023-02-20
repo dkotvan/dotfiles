@@ -28,6 +28,7 @@ return require("packer").startup {
       'lukas-reineke/indent-blankline.nvim',
       config = function()
         vim.g.indent_blankline_use_treesitter = true
+        require("indent_blankline").setup()
       end
     }
 
@@ -36,23 +37,32 @@ return require("packer").startup {
       'hoob3rt/lualine.nvim',
       requires = { 'kyazdani42/nvim-web-devicons' }
     }
+    use({
+      "utilyre/barbecue.nvim",
+      tag = "*",
+      requires = {
+        "SmiteshP/nvim-navic",
+        "nvim-tree/nvim-web-devicons", -- optional dependency
+      },
+      after = "nvim-web-devicons", -- keep this if you're using NvChad
+      config = function()
+        require("barbecue").setup()
+      end,
+    })
     use {
-      "nanozuki/tabby.nvim"
-    }
-
-    use {
-      'nacro90/numb.nvim', config = function() require('numb').setup {
-          show_numbers = true, -- Enable 'number' for the window while peeking
-          show_cursorline = true, -- Enable 'cursorline' for the window while peeking
-          number_only = false, -- Peek only when the command is only a number instead of when it starts with a number
-        }
-      end
+      'nacro90/numb.nvim', config = function()
+      require('numb').setup {
+        show_numbers = true, -- Enable 'number' for the window while peeking
+        show_cursorline = true, -- Enable 'cursorline' for the window while peeking
+        number_only = false, -- Peek only when the command is only a number instead of when it starts with a number
+      }
+    end
     }
 
     use {
       'RaafatTurki/hex.nvim', config = function()
-        require('hex').setup()
-      end
+      require('hex').setup()
+    end
     }
 
     -- Gruvbox colorscheme with support for treesiter
@@ -101,13 +111,8 @@ return require("packer").startup {
     use 'neovim/nvim-lspconfig'
     use 'onsails/lspkind-nvim'
     use { 'weilbith/nvim-code-action-menu' }
-    use {
-      'ray-x/navigator.lua',
-      requires = {
-        { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' },
-        { 'neovim/nvim-lspconfig' },
-      },
-    }
+    use { 'ray-x/guihua.lua', run = 'cd lua/fzy && make' }
+    use { 'ray-x/navigator.lua' }
 
     -- Yaml Schemas
     use {
@@ -349,13 +354,6 @@ return require("packer").startup {
     -- A fast git commit browser
     use 'junegunn/gv.vim'
 
-    use {
-      'ray-x/forgit.nvim',
-      config = function()
-        require('forgit').setup()
-      end
-    }
-
     -- :%S - replace text preserving case
     use {
       'tpope/vim-abolish',
@@ -563,6 +561,8 @@ return require("packer").startup {
       end
     }
 
+    -- AI relatedf
+
     use {
       "jcdickinson/codeium.nvim",
       requires = {
@@ -575,5 +575,20 @@ return require("packer").startup {
         })
       end
     }
+
+    use({
+      "jackMort/ChatGPT.nvim",
+        config = function()
+          require("chatgpt").setup({
+            -- optional configuration
+          })
+        end,
+        requires = {
+          "MunifTanjim/nui.nvim",
+          "nvim-lua/plenary.nvim",
+          "nvim-telescope/telescope.nvim"
+        }
+    })
+
   end
 }
