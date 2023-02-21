@@ -4,26 +4,6 @@ function isVsCode()
   return vim.env.FORCE_VSCODE == 'true' or vim.fn.exists("g:vscode") == 1
 end
 
-local ok, err = pcall(require, 'impatient')
-
-if ok then
-  if isVsCode() then
-    _G.__luacache_config = {
-      chunks = {
-        enable = true,
-        path = vim.fn.stdpath('cache') .. '/vscode_luacache_chunks',
-      },
-      modpaths = {
-        enable = true,
-        path = vim.fn.stdpath('cache') .. '/vscode_luacache_modpaths',
-      }
-    }
-  end
-  require('impatient').enable_profile()
-else
-  print(('impatient not installed\n%s'):format(err))
-end
-
 if isVsCode() then
   require('vscode/options')
   require('vscode/plugins')
@@ -31,7 +11,7 @@ if isVsCode() then
 else
   require('options')
 
-  require('plugins')
+  require('plugins-lazy')
 
   vim.cmd [[
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1

@@ -40,9 +40,8 @@ cdgo() {
 alias ngst='nvim -c ":G"'
 
 update_nvim() {
-  echo "update vim"
-  FORCE_VSCODE=true nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
-  nvim --headless -c 'autocmd User PackerComplete quitall' -c 'PackerSync'
+  echo "update neovim"
+  nvim --headless "+Lazy! sync" +qa
 }
 
 update_everything() {

@@ -3,7 +3,7 @@ require("nvim-treesitter.configs").setup {
     "dockerfile", "dot", "elixir", "erlang", "go",
     "gomod", "graphql", "hcl", "html", "http", "java",
     "javascript", "json", "jsonc", "kotlin", "latex", "lua",
-    "make", "perl", "php", "python", "http", "terraform" },
+    "make", "perl", "php", "python", "terraform", "vim" },
   highlight = { enable = true },
   indentation = { enable = true },
   folding = { enable = false },

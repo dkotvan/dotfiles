@@ -1,17 +1,8 @@
-require('rose-pine').setup({
-	dark_variant = 'main',
-	bold_vert_split = false,
-	dim_nc_background = false,
-	disable_background = false,
-	disable_float_background = false,
-	disable_italics = false,
-})
-
-vim.cmd('colorscheme kanagawabones')
+vim.cmd('colorscheme gruvbox-material')
 
 require('lualine').setup {
   options = {
-  theme = "zenburn",
+  theme = "gruvbox",
     icons_enabled= 1
   },
   extensions = {'fugitive', 'nvim-tree', 'quickfix' },
