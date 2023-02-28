@@ -1,3 +1,4 @@
+vim.cmd('set background=light')
 vim.cmd('colorscheme gruvbox-material')
 
 require('lualine').setup {

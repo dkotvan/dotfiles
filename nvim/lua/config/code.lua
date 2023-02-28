@@ -19,7 +19,9 @@ require("nvim-treesitter.configs").setup {
 }
 
 require("mason").setup()
-require("mason-lspconfig").setup()
+require("mason-lspconfig").setup({
+    ensure_installed = { "dockerls", "lua_ls", "pyright", "tsserver", "terraformls","tflint", "yamlls" }
+})
 
 -- Fix hcl filetype and terraformls and tflint
 require("lspconfig").terraformls.setup({filetypes = { 'terraform', 'terraform-vars', 'hcl' },})

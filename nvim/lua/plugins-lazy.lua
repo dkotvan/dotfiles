@@ -91,8 +91,11 @@ require('lazy').setup({
      build = ':TSUpdateSync'
    },
 
+   -- install stuff
   "williamboman/mason.nvim",
   "williamboman/mason-lspconfig.nvim",
+
+  'mfussenegger/nvim-lint',
 
    -- LSP Stuff
    'neovim/nvim-lspconfig',
