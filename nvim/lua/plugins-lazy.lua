@@ -95,7 +95,7 @@ require('lazy').setup({
   "williamboman/mason.nvim",
   "williamboman/mason-lspconfig.nvim",
 
-  'mfussenegger/nvim-lint',
+  'mhartington/formatter.nvim',
 
    -- LSP Stuff
    'neovim/nvim-lspconfig',
@@ -212,6 +212,9 @@ require('lazy').setup({
        require 'nvim-tree'.setup {
          disable_netrw = false,
          hijack_netrw  = true,
+         view = {
+           preserve_window_proportions = true,
+         }
        }
      end
    },
