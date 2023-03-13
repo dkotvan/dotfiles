@@ -26,6 +26,12 @@ require('lazy').setup({
    -- Gruvbox colorscheme with support for treesiter
    "sainnhe/gruvbox-material",
 
+   -- Zenburn low contrast themes
+   {
+      "mcchrish/zenbones.nvim",
+      dependencies = { "rktjmp/lush.nvim" }
+    },
+
    -- guide lines
    {
      'lukas-reineke/indent-blankline.nvim',
@@ -162,13 +168,12 @@ require('lazy').setup({
 
    {
      'nvim-telescope/telescope.nvim',
-     dependencies = { 'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim', 'cljoly/telescope-repo.nvim', "LinArcX/telescope-changes.nvim", "LinArcX/telescope-scriptnames.nvim"}
+     dependencies = { 'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim', 'cljoly/telescope-repo.nvim', "LinArcX/telescope-changes.nvim", "LinArcX/telescope-scriptnames.nvim", "aaronhallaert/advanced-git-search.nvim"} 
    },
    
    {
      "nvim-telescope/telescope-fzf-native.nvim", build = "make",
      dependencies = { 'nvim-telescope/telescope.nvim' }
-
    },
    
    {
@@ -502,6 +507,7 @@ require('lazy').setup({
    {
      "airblade/vim-rooter",
      config = function()
+       vim.g.rooter_patterns = {'_git/', 'go.mod'}
        vim.g.rooter_cd_cmd = 'tcd' -- change the location of the tab
      end
    },

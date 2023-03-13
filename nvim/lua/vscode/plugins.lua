@@ -1,82 +1,93 @@
--- install packer if is not here
-local execute = vim.api.nvim_command
-local fn = vim.fn
-
-local install_path = fn.stdpath('data')..'/site/neovim-pack/packer-vscode/start/packer.nvim'
-
-if fn.empty(fn.glob(install_path)) > 0 then
-  fn.system({'git', 'clone', 'https://github.com/wbthomason/packer.nvim', install_path})
-  execute 'packadd packer.nvim'
+-- Install package manager
+--    https://github.com/folke/lazy.nvim
+--    `:help lazy.nvim.txt` for more info
+local lazypath = vim.fn.stdpath 'data' .. '/lazy/lazy.nvim'
+if not vim.loop.fs_stat(lazypath) then
+  vim.fn.system {
+    'git',
+    'clone',
+    '--filter=blob:none',
+    'https://github.com/folke/lazy.nvim.git',
+    '--branch=stable', -- latest stable release
+    lazypath,
+  }
 end
+vim.opt.rtp:prepend(lazypath)
 
-return require("packer").startup {
-  function(use)
-    -------------------------------------------------------------
-    -- Plugins loaded in both native and vscode
-    -------------------------------------------------------------
+require('lazy').setup({
+   -- add new targets and make it seek the operator in the line
+   'wellle/targets.vim',
 
-    -- Packer can manage itself
-    use {
-      'wbthomason/packer.nvim',
-    }
+   -- DiffViewOpen <git rev> to to a diff of all files
+   'sindrets/diffview.nvim',
 
-    use { 'lewis6991/impatient.nvim' }
+   -- best git plugin
+   'tpope/vim-fugitive',
 
-    -- add new targets and make it seek the operator in the line
-    use 'wellle/targets.vim'
+   -- Gbrowse open browser in Bitbucket too
+   'tommcdo/vim-fubitive',
 
-    -- allow to create your own text object
-    use 'kana/vim-textobj-user'
+   -- Gbrowse open browser in Gitlab. use lab command
+   {
+     'shumphrey/fugitive-gitlab.vim',
+     config = function()
+       vim.cmd [[ let g:fugitive_gitlab_domains = {'git.ifoodcorp.com.br': "https://code.ifoodcorp.com.br"} ]]
+     end
+   },
 
-    -- MakeTable! -> csv to markdown table
-    -- UnmakeTable  -> markdown to csv
-    use 'mattn/vim-maketable'
+   -- textobject ar | ir
+   {
+     'nelstrom/vim-textobj-rubyblock',
+     ft = { 'ruby' }
+   },
 
-    -- textobject ar | ir
-    use {
-      'nelstrom/vim-textobj-rubyblock',
-      ft = {'ruby'}
-    }
+   -- textobject ae | ie
+   { 'kana/vim-textobj-entire', dependencies = { 'kana/vim-textobj-user' } },
 
-    -- textobject ae | ie
-    use 'kana/vim-textobj-entire'
+   -- textobject al | il
+   { 'kana/vim-textobj-line', dependencies = { 'kana/vim-textobj-user' } },
 
-    -- textobject al | il
-    use 'kana/vim-textobj-line'
+   -- textobject ai | ii
+   { 'kana/vim-textobj-indent', dependencies = { 'kana/vim-textobj-user' } },
 
-    -- textobject ai | ii
-    use 'kana/vim-textobj-indent'
+   -- textobject ig | ]g [g
+   'andrewferrier/textobj-diagnostic.nvim',
 
-    -- textobject ig | ]g [g
-    use 'andrewferrier/textobj-diagnostic.nvim'
+   -- align text by character -> gl and gL
+   'tommcdo/vim-lion',
 
-    -- align text by character -> gl and gL
-    use 'tommcdo/vim-lion'
+   -- align text - here becai can use the command Table in plasticboy/markdown,
+   'godlygeek/tabular',
 
-    -- align text - here because i can use the command Table in plasticboy/markdown
-    use 'godlygeek/tabular'
+   -- swap text - cx, cxx, X (visual mode)
+   'tommcdo/vim-exchange',
 
-    -- swap text - cx, cxx, X (visual mode)
-    use 'tommcdo/vim-exchange'
+   -- A fast git commit browser
+   'junegunn/gv.vim',
 
-    -- :%S - replace text preserving case
-    use {
-      'tpope/vim-abolish',
-      requires = 'tpope/vim-repeat'
-    }
+   -- :%S - replace text preserving case
+   {
+     'tpope/vim-abolish',
+     dependencies = 'tpope/vim-repeat'
+   },
 
-    use {
-      'tpope/vim-surround',
-      requires = 'tpope/vim-repeat'
-    }
-  end,
-  config = {
-    plugin_package = 'vscode-packer',
-    compile_path = vim.fn.stdpath('config')..'/plugin/vscode_packer_compiled.lua',
-    log = { level = 'info' },
-    autoremove = true,
+   -- Comments! gc
+   'tpope/vim-commentary',
 
-  },
-}
+   -- Supports bundler in vim
+   {
+     'tpope/vim-bundler',
+     ft = { 'ruby' }
+   },
 
+   'tpope/vim-eunuch',
 
+   {
+     'tpope/vim-surround',
+     dependencies = 'tpope/vim-repeat'
+   },
+
+}, {
+  root = vim.fn.stdpath("data") .. "/lazy-vscode",
+  lockfile = vim.fn.stdpath("config") .. "/vscode-lazy-lock.json"
+})

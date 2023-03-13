@@ -1,6 +1,5 @@
 tap 'homebrew/core'
 tap 'homebrew/bundle'
-tap 'golangci/tap'
 tap 'remotemobprogramming/brew'
 
 # Prerequisites
@@ -18,7 +17,6 @@ brew 'rbenv'
 brew 'rbenv-binstubs'
 brew 'rbenv-bundler'
 brew 'go'
-brew 'golangci/tap/golangci-lint'
 brew 'lua'
 brew 'luarocks'
 unless OS.mac?

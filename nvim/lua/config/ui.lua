@@ -1,9 +1,9 @@
-vim.cmd('set background=light')
-vim.cmd('colorscheme gruvbox-material')
+vim.cmd('set background=dark')
+vim.cmd('colorscheme kanagawabones')
 
 require('lualine').setup {
   options = {
-  theme = "gruvbox",
+  theme = "kanagawabones",
     icons_enabled= 1
   },
   extensions = {'fugitive', 'nvim-tree', 'quickfix' },

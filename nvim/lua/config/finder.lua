@@ -41,6 +41,7 @@ require("telescope").load_extension("yaml_schema")
 require("telescope").load_extension("changes")
 require('telescope').load_extension('scriptnames')
 require('telescope').load_extension('goimpl')
+require('telescope').load_extension('advanced_git_search')
 -- require('telescope').load_extension('vstask')
 require('possession').setup {}
 require('telescope').load_extension('possession')
@@ -188,6 +189,7 @@ wk.register({
 wk.register({
   g = {
     g = { "<cmd>lua require('telescope.builtin').live_grep()<cr>", "Telescope live grep", noremap = true },
+    f = { "<cmd>Telescope advanced_git_search show_custom_functions<cr>", "Telescope advanced git search", noremap = true },
     s = { "<cmd>lua require('telescope.builtin').git_stash()<cr>", "Telescope git stash", noremap = true },
     b = { "<cmd>lua require('telescope.builtin').git_branches()<cr>", "Telescope git branches", noremap = true },
     S = { "<cmd>lua require('telescope.builtin').git_status()<cr>", "Telescope git status", noremap = true },
@@ -251,7 +253,7 @@ wk.register({
       n = { "<cmd>Telekasten find_notes<cr>", "Notes - Telekasten find_notes - Find notes by title (filename)",
         noremap = true },
       w = { "<cmd>Telekasten find_weekly_notes<cr>",
-        "Notes - Telekasten find_weekly_notes - Find weekly notes by title (calendar week)", noremap = true },
+        "Notes - Telekasten find_weekly_notes - Find weekly notes by title", noremap = true },
     },
     g = {
       l = { "<cmd>Telekasten follow_link<cr>", "Notes - Telekasten follow_link - Follow the link under the cursor",
