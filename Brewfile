@@ -11,6 +11,7 @@ brew 'python'
 brew 'node-build'
 brew 'nodenv'
 brew 'pyenv'
+brew 'goenv'
 brew 'yarn'
 brew 'rust'
 brew 'rbenv'
@@ -139,6 +140,8 @@ if OS.mac?
   cask 'zoom'
 
   # Good font for terminal and programming
+  cask 'font-fira-code'
+  cask 'font-victor-mono'
   cask 'font-fira-code-nerd-font'
   cask 'font-victor-mono-nerd-font'
 end

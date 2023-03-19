@@ -79,8 +79,13 @@ eval "$(rbenv init -)"
 
 eval "$(starship init zsh)"
 
-export GOPATH=~/go
-export PATH=~/go/bin:~/bin:$PATH
+export GOENV_ROOT=$HOME/.goenv
+export PATH="$GOENV_ROOT/bin:$PATH" 
+
+eval "$(goenv init -)" 
+
+export PATH="$GOROOT/bin:$PATH"
+export PATH="$PATH:$GOPATH/bin"
 
 export PATH="/usr/local/sbin:$PATH"
 export PATH="${HOME}/.local/bin:${HOME}/.pyenv/shims:${PATH}"
