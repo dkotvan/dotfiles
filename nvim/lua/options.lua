@@ -15,7 +15,7 @@ vim.opt.showmode = false         -- not showing mode at message, airline will be
 vim.opt.number = true            -- always show line numbers
 vim.opt.splitbelow = true        -- splits the way I like
 vim.opt.splitright = true        -- splits the way I like
-vim.opt.lazyredraw = true        -- to be able to run a macro several times more quickly
+vim.opt.lazyredraw = false       -- to be able to run a macro several times more quickly
 
 -- Searching
 vim.opt.magic = true  -- Magic

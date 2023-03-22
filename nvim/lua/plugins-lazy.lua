@@ -15,361 +15,376 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
-    -- Editorconfig
-    {
-      'editorconfig/editorconfig-vim',
-      config = function()
-        vim.g.EditorConfig_exclude_patterns = { 'fugitive://.*', 'scp://.*' }
-      end
+  -- Editorconfig
+  {
+    'editorconfig/editorconfig-vim',
+    config = function()
+      vim.g.EditorConfig_exclude_patterns = { 'fugitive://.*', 'scp://.*' }
+    end
+  },
+
+  -- Gruvbox colorscheme with support for treesiter
+  "sainnhe/gruvbox-material",
+
+  -- Zenburn low contrast themes
+  {
+    "mcchrish/zenbones.nvim",
+    dependencies = { "rktjmp/lush.nvim" }
+  },
+
+  -- guide lines
+  {
+    'lukas-reineke/indent-blankline.nvim',
+    config = function()
+      vim.g.indent_blankline_use_treesitter = false
+      require("indent_blankline").setup()
+    end
+  },
+
+  -- Status and tabline
+  {
+    'hoob3rt/lualine.nvim',
+    dependencies = { 'nvim-tree/nvim-web-devicons' }
+  },
+
+  -- Show breadcrumb using lsp
+  {
+    "utilyre/barbecue.nvim",
+    version = "*",
+    dependencies = {
+      "SmiteshP/nvim-navic",
+      "nvim-tree/nvim-web-devicons",
     },
+    config = function()
+      require("barbecue").setup()
+    end,
+  },
 
-   -- Gruvbox colorscheme with support for treesiter
-   "sainnhe/gruvbox-material",
+  --  Show line when typing number with :<number>
+  {
+    'nacro90/numb.nvim',
+    config = function()
+      require('numb').setup {
+        show_numbers = true,    -- Enable 'number' for the window while peeking
+        show_cursorline = true, -- Enable 'cursorline' for the window while peeking
+        number_only = false,    -- Peek only when the command is only a number instead of when it starts with a number
+      }
+    end
+  },
 
-   -- Zenburn low contrast themes
-   {
-      "mcchrish/zenbones.nvim",
-      dependencies = { "rktjmp/lush.nvim" }
-    },
+  -- Hex editor / viewer -> :HexDump, :HexAssemble, :HexToggle
+  {
+    'RaafatTurki/hex.nvim',
+    config = function()
+      require('hex').setup()
+    end
+  },
 
-   -- guide lines
-   {
-     'lukas-reineke/indent-blankline.nvim',
-     config = function()
-       vim.g.indent_blankline_use_treesitter = true
-       require("indent_blankline").setup()
-     end
-   },
+  -- Colorschemes
+  {
+    'srcery-colors/srcery-vim',
+    as = 'srcery',
+    setup = function()
+      vim.g.srcery_italic = 1
+    end
+  },
+  {
+    'mhartington/oceanic-next',
+    setup = function()
+      vim.g.oceanic_next_terminal_bold = 1
+      vim.g.oceanic_next_terminal_italic = 1
+    end
+  },
+  {
+    'rose-pine/neovim',
+    name = 'rose-pine'
+  },
 
-   -- Status and tabline
-   {
-     'hoob3rt/lualine.nvim',
-     dependencies = { 'nvim-tree/nvim-web-devicons' }
-   },
+  -- treesiter
+  {
+    'nvim-treesitter/nvim-treesitter',
+    build = ':TSUpdateSync'
+  },
 
-   -- Show breadcrumb using lsp
-   {
-     "utilyre/barbecue.nvim",
-     version = "*",
-     dependencies = {
-       "SmiteshP/nvim-navic",
-       "nvim-tree/nvim-web-devicons",
-     },
-     config = function()
-       require("barbecue").setup()
-     end,
-   },
-
-   --  Show line when typing number with :<number>
-   {
-     'nacro90/numb.nvim', config = function()
-     require('numb').setup {
-       show_numbers = true, -- Enable 'number' for the window while peeking
-       show_cursorline = true, -- Enable 'cursorline' for the window while peeking
-       number_only = false, -- Peek only when the command is only a number instead of when it starts with a number
-     }
-   end
-   },
-
-   -- Hex editor / viewer -> :HexDump, :HexAssemble, :HexToggle
-   {
-     'RaafatTurki/hex.nvim', config = function()
-     require('hex').setup()
-   end
-   },
-
-   -- Colorschemes
-   { 'srcery-colors/srcery-vim', as = 'srcery', setup = function()
-     vim.g.srcery_italic = 1
-   end },
-   { 'mhartington/oceanic-next', setup = function()
-     vim.g.oceanic_next_terminal_bold = 1
-     vim.g.oceanic_next_terminal_italic = 1
-   end },
-   {
-     'rose-pine/neovim',
-     name = 'rose-pine'
-   },
-
-   -- treesiter
-   {
-     'nvim-treesitter/nvim-treesitter',
-     build = ':TSUpdateSync'
-   },
-
-   -- install stuff
+  -- install stuff
   "williamboman/mason.nvim",
   "williamboman/mason-lspconfig.nvim",
 
   'mhartington/formatter.nvim',
 
-   -- LSP Stuff
-   'neovim/nvim-lspconfig',
-   'onsails/lspkind-nvim',
-   'weilbith/nvim-code-action-menu',
-   { 'ray-x/guihua.lua', build = 'cd lua/fzy && make' },
-   'ray-x/navigator.lua',
+  -- LSP Stuff
+  'neovim/nvim-lspconfig',
+  'onsails/lspkind-nvim',
+  'weilbith/nvim-code-action-menu',
+  { 'ray-x/guihua.lua',   build = 'cd lua/fzy && make' },
+  'ray-x/navigator.lua',
 
-   -- Yaml Schemas
-   {
-     "someone-stole-my-name/yaml-companion.nvim",
-     dependencies = {
-       { "neovim/nvim-lspconfig" },
-       { "nvim-lua/plenary.nvim" },
-       { "nvim-telescope/telescope.nvim" },
-     },
-   },
+  -- Yaml Schemas
+  {
+    "someone-stole-my-name/yaml-companion.nvim",
+    dependencies = {
+      { "neovim/nvim-lspconfig" },
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-telescope/telescope.nvim" },
+    },
+  },
 
   -- Golang
-   {
-     'ray-x/go.nvim',
-     dependencies = "nvim-treesitter/nvim-treesitter-textobjects",
-   },
+  {
+    'ray-x/go.nvim',
+    dependencies = "nvim-treesitter/nvim-treesitter-textobjects",
+  },
 
-   -- Snippets
-   'rafamadriz/friendly-snippets',
-   {
-     'hrsh7th/vim-vsnip',
-     config = function()
-       vim.g.vsnip_snippet_dir = vim.fn.stdpath "config" .. "/snippets/"
-     end
-   },
-   'hrsh7th/vim-vsnip-integ',
+  -- Snippets
+  'rafamadriz/friendly-snippets',
+  {
+    'hrsh7th/vim-vsnip',
+    config = function()
+      vim.g.vsnip_snippet_dir = vim.fn.stdpath "config" .. "/snippets/"
+    end
+  },
+  'hrsh7th/vim-vsnip-integ',
 
-   --- Auto complete
-   'andersevenrud/cmp-tmux' ,
-   'hrsh7th/nvim-cmp' ,
-   'hrsh7th/cmp-buffer' ,
-   'hrsh7th/cmp-nvim-lsp' ,
-   'hrsh7th/cmp-path' ,
-   'hrsh7th/cmp-vsnip' ,
-   'hrsh7th/cmp-nvim-lua' ,
-   { 'petertriho/cmp-git', dependencies = 'nvim-lua/plenary.nvim' },
-   'ray-x/cmp-treesitter' ,
-   'f3fora/cmp-spell' ,
-   'hrsh7th/cmp-emoji' ,
-   'hrsh7th/cmp-cmdline' ,
-   'hrsh7th/cmp-nvim-lsp-signature-help' ,
-   'hrsh7th/cmp-nvim-lsp-document-symbol' ,
-   'ray-x/lsp_signature.nvim' ,
-   
-   -- Auto pairs
-   "windwp/nvim-autopairs" ,
+  --- Auto complete
+  'andersevenrud/cmp-tmux',
+  'hrsh7th/nvim-cmp',
+  'hrsh7th/cmp-buffer',
+  'hrsh7th/cmp-nvim-lsp',
+  'hrsh7th/cmp-path',
+  'hrsh7th/cmp-vsnip',
+  'hrsh7th/cmp-nvim-lua',
+  { 'petertriho/cmp-git', dependencies = 'nvim-lua/plenary.nvim' },
+  'ray-x/cmp-treesitter',
+  'f3fora/cmp-spell',
+  'hrsh7th/cmp-emoji',
+  'hrsh7th/cmp-cmdline',
+  'hrsh7th/cmp-nvim-lsp-signature-help',
+  'hrsh7th/cmp-nvim-lsp-document-symbol',
+  'ray-x/lsp_signature.nvim',
 
-   -- Finders
-   "stevearc/dressing.nvim",
+  -- Auto pairs
+  "windwp/nvim-autopairs",
 
-   -- Legendary
-   {
-     "mrjones2014/legendary.nvim",
-     dependencies = { "stevearc/dressing.nvim" },
-   },
-   'nvim-lua/plenary.nvim',
+  -- Finders
+  "stevearc/dressing.nvim",
 
-   {
-     'nvim-telescope/telescope.nvim',
-     dependencies = { 'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim', 'cljoly/telescope-repo.nvim', "LinArcX/telescope-changes.nvim", "LinArcX/telescope-scriptnames.nvim", "aaronhallaert/advanced-git-search.nvim"} 
-   },
-   
-   {
-     "nvim-telescope/telescope-fzf-native.nvim", build = "make",
-     dependencies = { 'nvim-telescope/telescope.nvim' }
-   },
-   
-   {
-     'GustavoKatel/telescope-asynctasks.nvim', -- TODO: configure asynctasks
-     dependencies = { 'skywind3000/asynctasks.vim', 'skywind3000/asyncrun.vim', 'nvim-telescope/telescope.nvim' }
-   },
-   
-   {
-     'renerocksai/telekasten.nvim',
-     dependencies = { 'renerocksai/calendar-vim' }
-   },
+  -- Legendary
+  {
+    "mrjones2014/legendary.nvim",
+    dependencies = { "stevearc/dressing.nvim" },
+  },
+  'nvim-lua/plenary.nvim',
 
-   {
-     'alex-laycalvert/flashcards.nvim'
-   },
+  {
+    'nvim-telescope/telescope.nvim',
+    dependencies = { 'nvim-lua/popup.nvim', 'nvim-lua/plenary.nvim', 'cljoly/telescope-repo.nvim',
+      "LinArcX/telescope-changes.nvim", "LinArcX/telescope-scriptnames.nvim", "aaronhallaert/advanced-git-search.nvim" }
+  },
 
-   { "akinsho/toggleterm.nvim", config = function()
-     require("toggleterm").setup()
-   end },
+  {
+    "nvim-telescope/telescope-fzf-native.nvim",
+    build = "make",
+    dependencies = { 'nvim-telescope/telescope.nvim' }
+  },
 
-   "desdic/greyjoy.nvim",
+  {
+    'GustavoKatel/telescope-asynctasks.nvim', -- TODO: configure asynctasks
+    dependencies = { 'skywind3000/asynctasks.vim', 'skywind3000/asyncrun.vim', 'nvim-telescope/telescope.nvim' }
+  },
 
-   {
-     'jedrzejboczar/possession.nvim',
-     dependencies = { 'nvim-lua/plenary.nvim' },
-   },
+  {
+    'renerocksai/telekasten.nvim',
+    dependencies = { 'renerocksai/calendar-vim' }
+  },
 
-   {
-     'edolphin-ydf/goimpl.nvim',
-     dependencies = {
-       { 'nvim-telescope/telescope.nvim' },
-       { 'nvim-treesitter/nvim-treesitter' },
-     },
-   },
+  {
+    'alex-laycalvert/flashcards.nvim'
+  },
 
-   -- File explorer
-   {
-     'nvim-tree/nvim-tree.lua',
-     dependencies = { 'nvim-tree/nvim-web-devicons' },
-     config = function()
-       require 'nvim-tree'.setup {
-         disable_netrw = false,
-         hijack_netrw  = true,
-         view = {
-           preserve_window_proportions = true,
-         }
-       }
-     end
-   },
+  {
+    "akinsho/toggleterm.nvim",
+    config = function()
+      require("toggleterm").setup()
+    end
+  },
 
-   -- add new targets and make it seek the operator in the line
-   'wellle/targets.vim',
+  "desdic/greyjoy.nvim",
 
-   -- DiffViewOpen <git rev> to to a diff of all files
-   'sindrets/diffview.nvim',
+  {
+    'jedrzejboczar/possession.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+  },
 
-   -- best git plugin
-   'tpope/vim-fugitive',
+  {
+    'edolphin-ydf/goimpl.nvim',
+    dependencies = {
+      { 'nvim-telescope/telescope.nvim' },
+      { 'nvim-treesitter/nvim-treesitter' },
+    },
+  },
 
-   -- Gbrowse open browser in Bitbucket too
-   'tommcdo/vim-fubitive',
+  -- File explorer
+  {
+    'nvim-tree/nvim-tree.lua',
+    dependencies = { 'nvim-tree/nvim-web-devicons' },
+    config = function()
+      require 'nvim-tree'.setup {
+        disable_netrw = false,
+        hijack_netrw  = true,
+        view          = {
+          preserve_window_proportions = true,
+        }
+      }
+    end
+  },
 
-   -- Gbrowse open browser in Gitlab. use lab command
-   {
-     'shumphrey/fugitive-gitlab.vim',
-     config = function()
-       vim.cmd [[ let g:fugitive_gitlab_domains = {'git.ifoodcorp.com.br': "https://code.ifoodcorp.com.br"} ]]
-     end
-   },
+  -- add new targets and make it seek the operator in the line
+  'wellle/targets.vim',
 
-   {
-     'lewis6991/gitsigns.nvim',
-     dependencies = 'nvim-lua/plenary.nvim',
-     config = function()
-       require('gitsigns').setup({
-         keymaps = {
-           -- Default keymap options
-           noremap = true,
+  -- DiffViewOpen <git rev> to to a diff of all files
+  'sindrets/diffview.nvim',
 
-           ['n <F1>'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'" },
-           ['n <C-F1>'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'" },
+  -- best git plugin
+  'tpope/vim-fugitive',
 
-           ['n <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
-           ['v <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
-           ['n <leader>hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
-           ['n <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
-           ['v <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
-           ['n <leader>hR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
-           ['n <leader>hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
-           ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
+  -- Gbrowse open browser in Bitbucket too
+  'tommcdo/vim-fubitive',
 
-           -- Text objects
-           ['o ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
-           ['x ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
-         },
-         current_line_blame = true,
-       })
-     end,
-   },
+  -- Gbrowse open browser in Github too
+  'tpope/vim-rhubarb',
 
-   -- BW kill buffer without closing window, BUN, BD, BW, BB, BF
-   {
-     'qpkorr/vim-bufkill',
-     config = function()
-       vim.g.BufKillCreateMappings = 0
-     end
-   },
+  -- Gbrowse open browser in Gitlab. use lab command
+  {
+    'shumphrey/fugitive-gitlab.vim',
+    config = function()
+      vim.cmd [[ let g:fugitive_gitlab_domains = {'git.ifoodcorp.com.br': "https://code.ifoodcorp.com.br"} ]]
+    end
+  },
 
-   -- Permit editing code inside markdown using correct syntax coloring
-   {
-     'AckslD/nvim-FeMaco.lua',
-     config = 'require("femaco").setup()',
-   },
+  {
+    'lewis6991/gitsigns.nvim',
+    dependencies = 'nvim-lua/plenary.nvim',
+    config = function()
+      require('gitsigns').setup({
+        keymaps = {
+          -- Default keymap options
+          noremap = true,
+          ['n <F1>'] = { expr = true, "&diff ? ']c' : '<cmd>lua require\"gitsigns.actions\".next_hunk()<CR>'" },
+          ['n <C-F1>'] = { expr = true, "&diff ? '[c' : '<cmd>lua require\"gitsigns.actions\".prev_hunk()<CR>'" },
+          ['n <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk()<CR>',
+          ['v <leader>hs'] = '<cmd>lua require"gitsigns".stage_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
+          ['n <leader>hu'] = '<cmd>lua require"gitsigns".undo_stage_hunk()<CR>',
+          ['n <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk()<CR>',
+          ['v <leader>hr'] = '<cmd>lua require"gitsigns".reset_hunk({vim.fn.line("."), vim.fn.line("v")})<CR>',
+          ['n <leader>hR'] = '<cmd>lua require"gitsigns".reset_buffer()<CR>',
+          ['n <leader>hp'] = '<cmd>lua require"gitsigns".preview_hunk()<CR>',
+          ['n <leader>hb'] = '<cmd>lua require"gitsigns".blame_line(true)<CR>',
+          -- Text objects
+          ['o ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>',
+          ['x ih'] = ':<C-U>lua require"gitsigns.actions".select_hunk()<CR>'
+        },
+        current_line_blame = true,
+      })
+    end,
+  },
 
-   -- Now vim recognize line numbers on errors - open files like /a.txt:20:5
-   'wsdjeg/vim-fetch',
+  -- BW kill buffer without closing window, BUN, BD, BW, BB, BF
+  {
+    'qpkorr/vim-bufkill',
+    config = function()
+      vim.g.BufKillCreateMappings = 0
+    end
+  },
 
-   -- Sudo that works with neovim
-   'lambdalisue/suda.vim',
-   
-   -- Open external browsers
-   'tyru/open-browser.vim',
-   
-   -- Asynchronous tag generation
-   'ludovicchabant/vim-gutentags',
-  
-   -- MakeTable! -> csv to markdown table
-   -- UnmakeTable  -> markdown to csv
-   'mattn/vim-maketable',
+  -- Permit editing code inside markdown using correct syntax coloring
+  {
+    'AckslD/nvim-FeMaco.lua',
+    config = 'require("femaco").setup()',
+  },
 
-   -- textobject ar | ir
-   {
-     'nelstrom/vim-textobj-rubyblock',
-     ft = { 'ruby' }
-   },
+  -- Now vim recognize line numbers on errors - open files like /a.txt:20:5
+  'wsdjeg/vim-fetch',
 
-   -- textobject ae | ie
-   { 'kana/vim-textobj-entire', dependencies = { 'kana/vim-textobj-user' } },
+  -- Sudo that works with neovim
+  'lambdalisue/suda.vim',
 
-   -- textobject al | il
-   { 'kana/vim-textobj-line', dependencies = { 'kana/vim-textobj-user' } },
+  -- Open external browsers
+  'tyru/open-browser.vim',
 
-   -- textobject ai | ii
-   { 'kana/vim-textobj-indent', dependencies = { 'kana/vim-textobj-user' } },
+  -- Asynchronous tag generation
+  'ludovicchabant/vim-gutentags',
 
-   -- textobject ig | ]g [g
-   'andrewferrier/textobj-diagnostic.nvim',
+  -- MakeTable! -> csv to markdown table
+  -- UnmakeTable  -> markdown to csv
+  'mattn/vim-maketable',
 
-   -- align text by character -> gl and gL
-   'tommcdo/vim-lion',
+  -- textobject ar | ir
+  {
+    'nelstrom/vim-textobj-rubyblock',
+    ft = { 'ruby' }
+  },
 
-   -- align text - here becai can use the command Table in plasticboy/markdown,
-   'godlygeek/tabular',
+  -- textobject ae | ie
+  { 'kana/vim-textobj-entire', dependencies = { 'kana/vim-textobj-user' } },
 
-   -- swap text - cx, cxx, X (visual mode)
-   'tommcdo/vim-exchange',
+  -- textobject al | il
+  { 'kana/vim-textobj-line',   dependencies = { 'kana/vim-textobj-user' } },
 
-   -- compare directories
-   'will133/vim-dirdiff',
+  -- textobject ai | ii
+  { 'kana/vim-textobj-indent', dependencies = { 'kana/vim-textobj-user' } },
 
-   -- kill all buffers except the current
-   'duff/vim-bufonly',
+  -- textobject ig | ]g [g
+  'andrewferrier/textobj-diagnostic.nvim',
 
-   'AndrewRadev/linediff.vim',
+  -- align text by character -> gl and gL
+  'tommcdo/vim-lion',
 
-   -- A fast git commit browser
-   'junegunn/gv.vim',
+  -- align text - here becai can use the command Table in plasticboy/markdown,
+  'godlygeek/tabular',
 
-   -- :%S - replace text preserving case
-   {
-     'tpope/vim-abolish',
-     dependencies = 'tpope/vim-repeat'
-   },
+  -- swap text - cx, cxx, X (visual mode)
+  'tommcdo/vim-exchange',
 
-   -- Comments! gc
-   'tpope/vim-commentary',
+  -- compare directories
+  'will133/vim-dirdiff',
 
-   -- Supports bundler in vim
-   {
-     'tpope/vim-bundler',
-     ft = { 'ruby' }
-   },
+  -- kill all buffers except the current
+  'duff/vim-bufonly',
 
-   'tpope/vim-eunuch',
+  'AndrewRadev/linediff.vim',
 
-   {
-     'tpope/vim-surround',
-     dependencies = 'tpope/vim-repeat'
-   },
+  -- A fast git commit browser
+  'junegunn/gv.vim',
 
-   { 'kevinhwang91/nvim-hlslens',
-     config = function()
-       require('hlslens').setup({
-         calm_down = true
-       })
-       vim.cmd [[
+  -- :%S - replace text preserving case
+  {
+    'tpope/vim-abolish',
+    dependencies = 'tpope/vim-repeat'
+  },
+
+  -- Comments! gc
+  'tpope/vim-commentary',
+
+  -- Supports bundler in vim
+  {
+    'tpope/vim-bundler',
+    ft = { 'ruby' }
+  },
+
+  'tpope/vim-eunuch',
+
+  {
+    'tpope/vim-surround',
+    dependencies = 'tpope/vim-repeat'
+  },
+
+  {
+    'kevinhwang91/nvim-hlslens',
+    config = function()
+      require('hlslens').setup({
+        calm_down = true
+      })
+      vim.cmd [[
    noremap n <Cmd>execute('normal! ' . v:count1 . 'n')<CR><Cmd>lua require('hlslens').start()<CR>
    noremap <silent> N <Cmd>execute('normal! ' . v:count1 . 'N')<CR><Cmd>lua require('hlslens').start()<CR>
    noremap * *<Cmd>lua require('hlslens').start()<CR>
@@ -378,25 +393,25 @@ require('lazy').setup({
    noremap g# g#<Cmd>lua require('hlslens').start()<CR>
    nnoremap <silent> <leader>l :noh<CR>
    ]]
-     end
-   },
+    end
+  },
 
-   "mbbill/undotree",
-   "Pocco81/auto-save.nvim",
+  "mbbill/undotree",
+  "Pocco81/auto-save.nvim",
 
-   { 'AllenDang/nvim-expand-expr',
-     config = function()
-       vim.cmd [[ nmap <leader>e <Cmd>lua require("expand_expr").expand()<CR> ]]
-     end
-   },
+  {
+    'AllenDang/nvim-expand-expr',
+    config = function()
+      vim.cmd [[ nmap <leader>e <Cmd>lua require("expand_expr").expand()<CR> ]]
+    end
+  },
 
-   -- Better markdown
-   {
-     'plasticboy/vim-markdown',
-
-     ft = 'markdown',
-     config = function()
-       vim.cmd [[
+  -- Better markdown
+  {
+    'plasticboy/vim-markdown',
+    ft = 'markdown',
+    config = function()
+      vim.cmd [[
        " Disable auto conceal
        let g:vim_markdown_conceal = 0
        let g:tex_conceal = ""
@@ -415,164 +430,211 @@ require('lazy').setup({
 
        let g:vim_markdown_strikethrough = 1
        ]]
-     end
-   },
+    end
+  },
 
-   {
-     'iamcco/markdown-preview.nvim',
-     -- ft = { 'markdown', 'pandoc.markdown', 'rmd', 'pullrequest', 'gitcommit' },
-     build ="cd app && yarn install",
-     config = function()
-       vim.cmd [[
+  {
+    'iamcco/markdown-preview.nvim',
+    -- ft = { 'markdown', 'pandoc.markdown', 'rmd', 'pullrequest', 'gitcommit' },
+    build = "cd app && yarn install",
+    config = function()
+      vim.cmd [[
        let g:mkdp_browser = 'firefox'
        let g:mkdp_filetypes = ['markdown', 'pullrequest', 'gitcommit']
        let g:mkdp_preview_options = {}
        ]]
-     end
-   },
+    end
+  },
 
-   -- debug
-   "mfussenegger/nvim-dap",
-   { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" } },
-   { "leoluz/nvim-dap-go", dependencies = { "mfussenegger/nvim-dap" } },
-   'theHamsta/nvim-dap-virtual-text',
-   'nvim-telescope/telescope-dap.nvim',
+  -- debug
+  "mfussenegger/nvim-dap",
+  { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" } },
+  { "leoluz/nvim-dap-go",   dependencies = { "mfussenegger/nvim-dap" } },
+  'theHamsta/nvim-dap-virtual-text',
+  'nvim-telescope/telescope-dap.nvim',
 
-   -- Show registers when typing " or ctrl-r
-   "folke/which-key.nvim",
+  -- Show registers when typing " or ctrl-r
+  "folke/which-key.nvim",
 
-   'abecodes/tabout.nvim',
+  'abecodes/tabout.nvim',
 
-   {
-     'phaazon/mind.nvim',
-     dependencies = { 'nvim-lua/plenary.nvim' },
-     config = function()
-       require 'mind'.setup()
-     end
-   },
-  
-   -- Project Related
-   {
-     'windwp/nvim-spectre',
-     config = function()
-       require('spectre').setup {
-         open_cmd = 'new',
-         find_engine = {
-           ['ag'] = {
-             cmd = "ag",
-             args = {
-               '--vimgrep',
-               '-s'
-             },
-             options = {
-               ['ignore-case'] = {
-                 value = "-i",
-                 icon = "[I]",
-                 desc = "ignore case"
-               },
-               ['hidden'] = {
-                 value = "--hidden",
-                 desc = "hidden file",
-                 icon = "[H]"
-               },
-             },
-           },
-         },
-         replace_engine = {
-           ['sed'] = {
-             cmd = "sed",
-             args = nil
-           },
-           options = {
-             ['ignore-case'] = {
-               value = "--ignore-case",
-               icon = "[I]",
-               desc = "ignore case"
-             },
-           }
-         },
-         default = {
-           find = {
-             cmd = "ag",
-             options = { "ignore-case" }
-           },
-           replace = {
-             cmd = "sed"
-           }
-         },
-       }
-     end
-   },
+  {
+    'phaazon/mind.nvim',
+    dependencies = { 'nvim-lua/plenary.nvim' },
+    config = function()
+      require 'mind'.setup()
+    end
+  },
 
-   {
-     "airblade/vim-rooter",
-     config = function()
-       vim.g.rooter_patterns = {'_git/', 'go.mod'}
-       vim.g.rooter_cd_cmd = 'tcd' -- change the location of the tab
-     end
-   },
+  -- Project Related
+  {
+    'windwp/nvim-spectre',
+    config = function()
+      require('spectre').setup {
+        open_cmd = 'new',
+        find_engine = {
+          ['ag'] = {
+            cmd = "ag",
+            args = {
+              '--vimgrep',
+              '-s'
+            },
+            options = {
+              ['ignore-case'] = {
+                value = "-i",
+                icon = "[I]",
+                desc = "ignore case"
+              },
+              ['hidden'] = {
+                value = "--hidden",
+                desc = "hidden file",
+                icon = "[H]"
+              },
+            },
+          },
+        },
+        replace_engine = {
+          ['sed'] = {
+            cmd = "sed",
+            args = nil
+          },
+          options = {
+            ['ignore-case'] = {
+              value = "--ignore-case",
+              icon = "[I]",
+              desc = "ignore case"
+            },
+          }
+        },
+        default = {
+          find = {
+            cmd = "ag",
+            options = { "ignore-case" }
+          },
+          replace = {
+            cmd = "sed"
+          }
+        },
+      }
+    end
+  },
 
-   "numToStr/FTerm.nvim",
+  {
+    "airblade/vim-rooter",
+    config = function()
+      vim.g.rooter_patterns = { '_git/', 'go.mod' }
+      vim.g.rooter_cd_cmd = 'tcd' -- change the location of the tab
+    end
+  },
 
-   {
-     "samjwill/nvim-unception",
-     config = function()
-       vim.api.nvim_create_autocmd(
-         "User",
-         {
-           pattern = "UnceptionEditRequestReceived",
-           callback = function()
-             require('FTerm').toggle()
-           end
-         }
-       )
-     end
-   },
+  "numToStr/FTerm.nvim",
 
-   "jamestthompson3/nvim-remote-containers",
+  {
+    "samjwill/nvim-unception",
+    config = function()
+      vim.api.nvim_create_autocmd(
+        "User",
+        {
+          pattern = "UnceptionEditRequestReceived",
+          callback = function()
+            require('FTerm').toggle()
+          end
+        }
+      )
+    end
+  },
 
-   {
-     "klen/nvim-config-local",
-     config = function()
-       require('config-local').setup {
-         -- Default configuration (optional)
-         config_files = { ".vimrc.lua", ".vimrc" }, -- Config file patterns to load (lua supported)
-         hashfile = vim.fn.stdpath("data") .. "/config-local", -- Where the plugin keeps files data
-         autocommands_create = true, -- Create autocommands (VimEnter, DirectoryChanged)
-         commands_create = true, -- Create commands (ConfigSource, ConfigEdit, ConfigTrust, ConfigIgnore)
-         silent = false, -- Disable plugin messages (Config loaded/ignored)
-         lookup_parents = false, -- Lookup config files in parent directories
-       }
-     end
-   },
+  "jamestthompson3/nvim-remote-containers",
 
-   -- AI relatedf
+  {
+    "klen/nvim-config-local",
+    config = function()
+      require('config-local').setup {
+        -- Default configuration (optional)
+        config_files = { ".vimrc.lua", ".vimrc" },            -- Config file patterns to load (lua supported)
+        hashfile = vim.fn.stdpath("data") .. "/config-local", -- Where the plugin keeps files data
+        autocommands_create = true,                           -- Create autocommands (VimEnter, DirectoryChanged)
+        commands_create = true,                               -- Create commands (ConfigSource, ConfigEdit, ConfigTrust, ConfigIgnore)
+        silent = false,                                       -- Disable plugin messages (Config loaded/ignored)
+        lookup_parents = false,                               -- Lookup config files in parent directories
+      }
+    end
+  },
 
-   {
-     "jcdickinson/codeium.nvim",
-     dependencies = {
-       "nvim-lua/plenary.nvim",
-       "MunifTanjim/nui.nvim",
-       "hrsh7th/nvim-cmp",
-     },
-     config = function()
-       require("codeium").setup({
-       })
-     end
-   },
+  -- AI relatedf
 
-   {
-     "jackMort/ChatGPT.nvim",
-     config = function()
-       require("chatgpt").setup({
-         -- optional configuration
-       })
-     end,
-     dependencies = {
-       "MunifTanjim/nui.nvim",
-       "nvim-lua/plenary.nvim",
-       "nvim-telescope/telescope.nvim"
-     }
-   },
+  {
+    "jcdickinson/codeium.nvim",
+    dependencies = {
+      "nvim-lua/plenary.nvim",
+      "MunifTanjim/nui.nvim",
+      "hrsh7th/nvim-cmp",
+    },
+    config = function()
+      require("codeium").setup({
+      })
+    end
+  },
+
+  {
+    "jackMort/ChatGPT.nvim",
+    config = function()
+      require("chatgpt").setup({
+        -- optional configuration
+      })
+    end,
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "nvim-lua/plenary.nvim",
+      "nvim-telescope/telescope.nvim"
+    }
+  },
+
+  -- Got from LazyVIM
+  {
+    "RRethy/vim-illuminate",
+  },
+  {
+    "folke/noice.nvim",
+    dependencies = {
+      "MunifTanjim/nui.nvim",
+      "rcarriga/nvim-notify",
+    },
+    config = function()
+      require("noice").setup({
+          cmdline = {
+            view = 'cmdline'
+          },
+        lsp = {
+          hover = {
+            enabled = false
+          },
+          signature = {
+            enabled = false
+          },
+          -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
+          override = {
+            ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
+            ["vim.lsp.util.stylize_markdown"] = true,
+            ["cmp.entry.get_documentation"] = true,
+          },
+        },
+        -- you can enable a preset for easier configuration
+        presets = {
+          bottom_search = false,         -- use a classic bottom cmdline for search
+          long_message_to_split = true, -- long messages will be sent to a split
+          inc_rename = true,           -- enables an input dialog for inc-rename.nvim
+          lsp_doc_border = false,       -- add a border to hover docs and signature help
+        },
+      })
+    end,
+  },
+
+  {
+    "jose-elias-alvarez/null-ls.nvim",
+    dependencies = {
+      "mason.nvim"
+    }
+  }
 
 })

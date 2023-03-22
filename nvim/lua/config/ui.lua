@@ -1,5 +1,5 @@
-vim.cmd('set background=dark')
-vim.cmd('colorscheme kanagawabones')
+vim.cmd('set background=light')
+vim.cmd('colorscheme gruvbox-material')
 
 require('lualine').setup {
   options = {

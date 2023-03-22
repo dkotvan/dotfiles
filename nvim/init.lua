@@ -11,8 +11,6 @@ if isVsCode() then
 else
   require('options')
 
-  require('plugins-lazy')
-
   vim.cmd [[
   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
   let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
@@ -22,6 +20,7 @@ else
   set t_ZR=^[[23m
   ]]
 
+  require('plugins-lazy')
   require('config/ui')
 
   vim.cmd [[
