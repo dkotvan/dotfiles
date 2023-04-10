@@ -144,13 +144,15 @@ local cfg = require("yaml-companion").setup({
 		},
 	},
 	-- Add any options here, or leave empty to use the default settings
-	-- lspconfig = {
-	--   cmd = {"yaml-language-server"}
-	-- },
+	lspconfig = {
+      settings = {
+        yaml = { format = { enable = false}, keyOrdering = false },
+      }
+	},
 })
-require("lspconfig")["yamlls"].setup(cfg)
+require("lspconfig").yamlls.setup(cfg)
 
--- formatter
+-- formatter````,
 local util = require("formatter.util")
 
 -- Provides the Format, FormatWrite, FormatLock, and FormatWriteLock commands
@@ -212,3 +214,4 @@ require("formatter").setup({
 		},
 	},
 })
+

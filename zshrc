@@ -88,7 +88,7 @@ export PATH="$GOROOT/bin:$PATH"
 export PATH="$PATH:$GOPATH/bin"
 
 export PATH="/usr/local/sbin:$PATH"
-export PATH="${HOME}/.local/bin:${HOME}/.pyenv/shims:${PATH}"
+export PATH="${HOME}/.local/bin:${PATH}"
 export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 
 eval "$(zoxide init zsh)"

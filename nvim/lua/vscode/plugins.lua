@@ -18,9 +18,6 @@ require('lazy').setup({
    -- add new targets and make it seek the operator in the line
    'wellle/targets.vim',
 
-   -- DiffViewOpen <git rev> to to a diff of all files
-   'sindrets/diffview.nvim',
-
    -- best git plugin
    'tpope/vim-fugitive',
 

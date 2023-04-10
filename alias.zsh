@@ -18,13 +18,13 @@ gclonecd() {
   git clone "$1" && cd "$(basename "$1" .git)"
 }
 
-cdp() {
+cdl() {
   local cmd="fzf"
   if [[ -n "$1" ]]; then
     cmd="fzf -q $1"
   fi
 
-  cd $(fd -t d --hidden --no-ignore '^\.git$' $HOME/{Projects,Opensource,dotfiles} | sed -r 's/\/.git\/$//' | eval $cmd)
+  cd $(locate -r '/\.git$' | sed -r 's/\/.git$//' | eval $cmd)
 }
 
 cdgo() {
