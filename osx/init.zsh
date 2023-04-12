@@ -14,3 +14,4 @@ fi
 # Export DOCKER_HOST for Colima, make some utils to work, like ctop and lazydocker
 export DOCKER_HOST="unix:///Users/$USER/.colima/docker.sock"
 export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
+export PATH="$PATH:/Applications/IntelliJ IDEA CE.app/Contents/MacOS"
