@@ -570,31 +570,49 @@ require("lazy").setup({
 
   -- AI relatedf
 
+  --   {
+  --     "jcdickinson/codeium.nvim",
+  --     dependencies = {
+  --       "nvim-lua/plenary.nvim",
+  --       "MunifTanjim/nui.nvim",
+  --       "hrsh7th/nvim-cmp",
+  --     },
+  --     config = function()
+  --       require("codeium").setup({})
+  --     end,
+  --   },
+
   {
-    "jcdickinson/codeium.nvim",
-    dependencies = {
-      "nvim-lua/plenary.nvim",
-      "MunifTanjim/nui.nvim",
-      "hrsh7th/nvim-cmp",
-    },
+    "zbirenbaum/copilot.lua",
     config = function()
-      require("codeium").setup({})
+      require("copilot").setup({
+        suggestion = { enabled = false },
+        panel = { enabled = true, auto_refresh = true  },
+      })
     end,
   },
 
   {
-    "jackMort/ChatGPT.nvim",
-    config = function()
-      require("chatgpt").setup({
-        -- optional configuration
-      })
-    end,
-    dependencies = {
-      "MunifTanjim/nui.nvim",
-      "nvim-lua/plenary.nvim",
-      "nvim-telescope/telescope.nvim",
-    },
+    "zbirenbaum/copilot-cmp",
+    dependencies = { "copilot.lua" },
+    config       = function()
+      require("copilot_cmp").setup()
+    end
   },
+
+  --   {
+  --     "jackMort/ChatGPT.nvim",
+  --     config = function()
+  --       require("chatgpt").setup({
+  --         -- optional configuration
+  --       })
+  --     end,
+  --     dependencies = {
+  --       "MunifTanjim/nui.nvim",
+  --       "nvim-lua/plenary.nvim",
+  --       "nvim-telescope/telescope.nvim",
+  --     },
+  --
 
   -- Got from LazyVIM
   {

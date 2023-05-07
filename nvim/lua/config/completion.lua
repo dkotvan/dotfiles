@@ -9,17 +9,20 @@ cmp.setup {
     end,
   },
   sources = {
-    { name = "codeium" },
+    -- { name = "codeium" },
+    { name = "copilot" },
     { name = 'nvim_lsp' },
     { name = 'nvim_lua' },
     { name = 'vsnip' },
     { name = 'path' },
     { name = 'emoji' },
-    { name = 'tmux',
+    {
+      name = 'tmux',
       option = {
         all_panes = true,
         label = '[tmux]',
-      } },
+      }
+    },
     { name = 'buffer' },
     { name = 'spell' },
     { name = 'treesiter' },
@@ -30,16 +33,20 @@ cmp.setup {
     ['<C-Space>'] = cmp.mapping.complete(),
     ['<C-e>'] = cmp.mapping.abort(),
     ['<esc>'] = cmp.mapping.abort(),
-    ['<CR>'] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+    ['<CR>'] = cmp.mapping.confirm({
+      behavior = cmp.ConfirmBehavior.Replace,
+      select = true
+    }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
   }),
   experimental = {
     ghost_text = true,
   },
   formatting = {
     format = function(entry, vim_item)
-
       if (entry.source.name == "codeium") then
         vim_item.kind = " codeium"
+      elseif (entry.source.name == "copilot") then
+        vim_item.kind = " copilot"
       else
         -- fancy icons and a name of kind
         vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
@@ -100,7 +107,7 @@ npairs.setup({
   ts_config = {
     lua = { 'string' }, -- it will not add pair on that treesitter node
     javascript = { 'template_string' },
-    java = false, -- don't check treesitter on java
+    java = false,       -- don't check treesitter on java
   }
 })
 
@@ -120,6 +127,7 @@ require("lsp_signature").setup {
   handler_opts = { border = "single" },
   max_width = 80,
 }
+
 
 -- local function replace_keycodes(str)
 --   return vim.api.nvim_replace_termcodes(str, true, true, true)
