@@ -7,6 +7,7 @@ brew 'gcc'
 brew 'make'
 
 # Languages
+brew 'asdf'
 brew 'python'
 brew 'node-build'
 brew 'nodenv'
@@ -68,6 +69,7 @@ brew 'csvkit'
 brew 'exa'
 brew 'fd'
 brew 'findutils' if OS.mac?
+brew 'atuin'
 brew 'fzf'
 brew 'glow'
 brew 'htop'

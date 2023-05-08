@@ -10,11 +10,6 @@ DISABLE_AUTO_UPDATE=true
 
 source $DOTFILES/antidote.zsh
 
-# Control if we are using dark or light background
-if [[ ! -a ~/.background   ]]; then
-  echo 'light' > ~/.background
-fi
-
 export EDITOR="${EDITOR:-nvim}"
 
 eval "$(nodenv init -)"
@@ -94,5 +89,5 @@ export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 eval "$(zoxide init zsh)"
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-
-. /opt/homebrew/opt/asdf/libexec/asdf.sh
+. $HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh
+eval "$(atuin init zsh)"
