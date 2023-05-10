@@ -12,4 +12,5 @@ vscode-nvim/sessions
 vscode-nvim/plugin
 Brewfile.lock.json
 local
-
+nvim/lazy-lock.json
+nvim/vscode-lazy-lock.json
