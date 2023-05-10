@@ -39,7 +39,7 @@ cmp.setup {
     }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
   }),
   experimental = {
-    ghost_text = true,
+    ghost_text = false,
   },
   formatting = {
     format = function(entry, vim_item)

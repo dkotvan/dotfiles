@@ -230,9 +230,9 @@ wk.register({
     e = { '<cmd>:ComposeDestroy<cr>', 'DevContainer Docker compose Destroy', noremap = true },
   },
   R = {
-    R = { '<Plug>RestNvim', 'run the request under the cursor', noremap = true },
-    C = { '<Plug>RestNvimPreview', 'preview the request cURL command', noremap = true },
-    L = { '<Plug>RestNvimLast', 're-run the last request', noremap = true },
+    R = { '<Plug>RestNvim', 'RestNvim - the request under the cursor', noremap = true },
+    C = { '<Plug>RestNvimPreview', 'RestNvim - preview the request cURL command', noremap = true },
+    L = { '<Plug>RestNvimLast', 'RestNvim - re-run the last request', noremap = true },
   },
   s = {
     l = { "<cmd>Possession List", "PossessionList" },

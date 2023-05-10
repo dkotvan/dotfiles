@@ -90,4 +90,4 @@ eval "$(zoxide init zsh)"
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
 . $HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh
-eval "$(atuin init zsh)"
+eval "$(atuin init zsh --disable-up-arrow)"
