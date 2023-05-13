@@ -45,10 +45,11 @@ require("nvim-treesitter.configs").setup({
 
 require("mason").setup()
 require("mason-lspconfig").setup({
-	ensure_installed = { "dockerls", "lua_ls", "pyright", "tsserver", "terraformls", "tflint", "yamlls" },
+  ensure_installed = { "bashls", "dockerls", "lua_ls", "pyright", "tsserver", "terraformls", "tflint", "yamlls" },
 })
 
 -- Fix hcl filetype and terraformls and tflint
+require("lspconfig").bashls.setup({ filetypes = { "bash", "sh"} })
 require("lspconfig").terraformls.setup({ filetypes = { "terraform", "terraform-vars", "hcl" } })
 require("lspconfig").tflint.setup({ filetypes = { "terraform", "terraform-vars", "hcl" } })
 
@@ -146,10 +147,11 @@ local cfg = require("yaml-companion").setup({
 	-- Add any options here, or leave empty to use the default settings
 	lspconfig = {
       settings = {
-        yaml = { format = { enable = false}, keyOrdering = false },
+        yaml = { keyOrdering = false },
       }
 	},
 })
+
 require("lspconfig").yamlls.setup(cfg)
 
 -- formatter````,
