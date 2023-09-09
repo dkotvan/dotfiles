@@ -91,3 +91,9 @@ test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell
 
 . $HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh
 eval "$(atuin init zsh --disable-up-arrow)"
+
+eval "$(navi widget zsh)"
+
+autoload -Uz compinit
+zstyle ':completion:*' menu select
+fpath+=~/.zfunc

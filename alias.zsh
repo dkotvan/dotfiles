@@ -27,16 +27,6 @@ cdl() {
   cd $(locate -r '/\.git$' | sed -r 's/\/.git$//' | eval $cmd)
 }
 
-cdgo() {
-  local cmd="fzf"
-  if [[ -n "$1" ]]; then
-    cmd="fzf -q $1"
-  fi
-
-  cd $(fd --hidden --no-ignore '^go\.mod$' $HOME/{Projects} | sed -r 's/\/go.mod$//' | eval $cmd)
-}
-
-
 alias ngst='nvim -c ":G"'
 
 update_nvim() {

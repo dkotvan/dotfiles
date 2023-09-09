@@ -12,7 +12,6 @@ brew 'python'
 brew 'node-build'
 brew 'nodenv'
 brew 'virtualenv'
-brew 'goenv'
 brew 'yarn'
 brew 'rust'
 brew 'rbenv'
@@ -37,6 +36,7 @@ brew 'tig'
 brew 'mob'
 brew 'gitter-cli'
 brew 'pre-commit'
+brew 'lazygit'
 
 # Docker & Kubernetes Related
 brew 'colima' if OS.mac?
@@ -70,6 +70,7 @@ brew 'exa'
 brew 'fd'
 brew 'findutils' if OS.mac?
 brew 'atuin'
+brew 'navi'
 brew 'fzf'
 brew 'glow'
 brew 'htop'

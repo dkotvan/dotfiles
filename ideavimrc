@@ -65,3 +65,4 @@ nnoremap ]e :action GotoNextError<cr>
 nnoremap [e :action GotoPreviousError<cr>
 
 Plug 'tommcdo/vim-exchange'
+set ideajoin

@@ -15,3 +15,20 @@ fi
 export DOCKER_HOST="unix:///Users/$USER/.colima/docker.sock"
 export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
 export PATH="$PATH:/Applications/IntelliJ IDEA CE.app/Contents/MacOS"
+
+# Open current directory on IDE
+
+alias idea_here='open -a IntelliJ\ IDEA\ CE .'
+alias pycharm_here='open -a PyCharm .'
+alias webstorm_here='open -a WebStorm .'
+alias goland_here='open -a GoLand .'
+
+open_in_goland() {
+  local cmd="fzf"
+  if [[ -n "$1" ]]; then
+    cmd="fzf -q $1"
+  fi
+
+  open -a GoLand  $(locate -r '/\.git$' | sed -r 's/\/.git$//' | eval $cmd)
+}
+
