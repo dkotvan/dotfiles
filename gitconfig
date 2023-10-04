@@ -35,3 +35,5 @@
 	ff = only
 [init]
 	defaultBranch = main
+[credential]
+	helper = kwallet

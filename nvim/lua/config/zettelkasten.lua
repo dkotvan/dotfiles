@@ -135,3 +135,6 @@ require('flashcards').setup({
   dir = home .. '/flashcards',
 })
 
+require("smp").setup({
+  home = home
+})

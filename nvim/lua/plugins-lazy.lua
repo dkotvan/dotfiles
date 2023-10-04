@@ -35,9 +35,10 @@ require("lazy").setup({
   -- guide lines
   {
     "lukas-reineke/indent-blankline.nvim",
+    main = 'ibl',
     config = function()
       vim.g.indent_blankline_use_treesitter = false
-      require("indent_blankline").setup()
+      require("ibl").setup()
     end,
   },
 
@@ -427,12 +428,19 @@ require("lazy").setup({
     -- ft = { 'markdown', 'pandoc.markdown', 'rmd', 'pullrequest', 'gitcommit' },
     build = "cd app && yarn install",
     config = function()
-      vim.g.mkdp_browser = 'safari'
+      vim.g.mkdp_browser = 'firefox'
       vim.g.mkdp_filetypes = { 'markdown', 'pullrequest', 'gitcommit' }
       vim.g.mkdp_preview_options = {}
     end,
   },
-
+  {
+    'cnshsliu/smp.nvim',
+    build = "cd lua/server && npm install", -- yes, we should have node & npm installed.
+    dependencies = {
+      "nvim-telescope/telescope.nvim",
+      "MunifTanjim/nui.nvim",
+    },
+  },
   -- debug
   "mfussenegger/nvim-dap",
   { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" } },
@@ -460,19 +468,19 @@ require("lazy").setup({
       require("spectre").setup({
         open_cmd = "new",
         find_engine = {
-          ["ag"] = {
+              ["ag"] = {
             cmd = "ag",
             args = {
               "--vimgrep",
               "-s",
             },
             options = {
-              ["ignore-case"] = {
+                  ["ignore-case"] = {
                 value = "-i",
                 icon = "[I]",
                 desc = "ignore case",
               },
-              ["hidden"] = {
+                  ["hidden"] = {
                 value = "--hidden",
                 desc = "hidden file",
                 icon = "[H]",
@@ -481,12 +489,12 @@ require("lazy").setup({
           },
         },
         replace_engine = {
-          ["sed"] = {
+              ["sed"] = {
             cmd = "sed",
             args = nil,
           },
           options = {
-            ["ignore-case"] = {
+                ["ignore-case"] = {
               value = "--ignore-case",
               icon = "[I]",
               desc = "ignore case",
@@ -547,17 +555,17 @@ require("lazy").setup({
 
   -- AI relatedf
 
---     {
---       "jcdickinson/codeium.nvim",
---       dependencies = {
---         "nvim-lua/plenary.nvim",
---         "MunifTanjim/nui.nvim",
---         "hrsh7th/nvim-cmp",
---       },
---       config = function()
---         require("codeium").setup({})
---       end,
---     },
+  --     {
+  --       "jcdickinson/codeium.nvim",
+  --       dependencies = {
+  --         "nvim-lua/plenary.nvim",
+  --         "MunifTanjim/nui.nvim",
+  --         "hrsh7th/nvim-cmp",
+  --       },
+  --       config = function()
+  --         require("codeium").setup({})
+  --       end,
+  --     },
 
   {
     "zbirenbaum/copilot.lua",
