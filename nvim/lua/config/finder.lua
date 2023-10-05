@@ -131,6 +131,7 @@ local commands = {
   { ':MarkdownPreviewStop', description = 'Stop the markdown preview' },
   { ':MarkdownPreviewStop', description = 'Stop the markdown preview' },
   { ':HexToggle', description = 'Toggle the hex view' },
+  { 'lua require("barbecue.ui").toggle()', description = 'BARBECUE: toggle breadcumb' },
   { 'lua require("smp").preview()', description = 'SMP: preview current markdown file' },
   { 'lua require("smp").book()', description = 'SMP: open the markdown book in a splitted window on right' },
   { 'lua require("smp").synctodo()', description = 'SMP: Sync all todos in Markdown to MacOS Reminder' },

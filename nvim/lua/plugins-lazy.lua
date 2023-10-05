@@ -36,10 +36,6 @@ require("lazy").setup({
   {
     "lukas-reineke/indent-blankline.nvim",
     main = 'ibl',
-    config = function()
-      vim.g.indent_blankline_use_treesitter = false
-      require("ibl").setup()
-    end,
   },
 
   -- Status and tabline

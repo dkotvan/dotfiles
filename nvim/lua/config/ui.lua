@@ -21,3 +21,20 @@ require('lualine').setup {
     lualine_z = {'location'}
   }
 }
+
+local highlight = {
+    "dark4",
+    "dark3",
+    "dark2",
+}
+
+local hooks = require "ibl.hooks"
+-- create the highlight groups in the highlight setup hook, so they are reset
+-- every time the colorscheme changes
+hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
+    vim.api.nvim_set_hl(0, "dark2", { fg = '#504945' })
+    vim.api.nvim_set_hl(0, "dark3", { fg = '#665c54' })
+    vim.api.nvim_set_hl(0, "dark4", { fg = '#7c6f64' })
+end)
+
+require("ibl").setup { indent = { highlight = highlight } }
