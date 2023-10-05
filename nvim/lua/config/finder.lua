@@ -1,4 +1,4 @@
-  require('telescope').setup {
+require('telescope').setup {
   defaults = {
     vimgrep_arguments = {
       'ag',
@@ -21,30 +21,16 @@
       override_file_sorter = true,
       case_mode = "smart_case",
     },
-    repo = {
-      list = {
-        fd_opts = {
-          "--no-ignore",
-        },
-        search_dirs = {
-          "~/Projects/",
-          "~/Opensource/",
-        }
-      }
-    }
   },
 }
 require('telescope').load_extension("fzf")
-require('telescope').load_extension("repo")
 require('telescope').load_extension('dap')
 require("telescope").load_extension("yaml_schema")
 require("telescope").load_extension("changes")
 require('telescope').load_extension('scriptnames')
 require('telescope').load_extension('goimpl')
 require('telescope').load_extension('advanced_git_search')
--- require('telescope').load_extension('vstask')
-require('possession').setup {}
-require('telescope').load_extension('possession')
+require('telescope').load_extension('media_files')
 
 require("dressing").setup {
   input = {
@@ -74,109 +60,117 @@ require("legendary").setup {
 vim.api.nvim_set_keymap("n", "<leader><leader>", "<cmd>lua require('legendary').find()<CR>", { noremap = true })
 
 local commands = {
-  { ':PackerSync', description = 'Packer Sync' },
-  { ':GV', description = '(GV) Git log' },
-  { ':GV!', description = '(GV) Git log buffer' },
-  { ':G', description = 'Git status' },
-  { ':Git blame', description = 'Git blame' },
-  { ':Git! pull', description = 'Git pull' },
-  { ':Git! push', description = 'Git push' },
-  { ':Git! push -u origin HEAD', description = 'Git push new branch' },
-  { ':Git! push --force', description = 'Git push --force' },
-  { ':Git! push --force', description = 'Git push --force' },
-  { ':Git rebase --interactive ', description = 'Git rebase iteractive', unfinished = true },
+  { ':GV',                            description = '(GV) Git log' },
+  { ':GV!',                           description = '(GV) Git log buffer' },
+  { ':G',                             description = 'Git status' },
+  { ':Git blame',                     description = 'Git blame' },
+  { ':Git! pull',                     description = 'Git pull' },
+  { ':Git! pull --rebase',            description = 'Git pull with rebase' },
+  { ':Git! push',                     description = 'Git push' },
+  { ':Git! push -u origin HEAD',      description = 'Git push new branch' },
+  { ':Git! push --force',             description = 'Git push --force' },
+  { ':Git rebase --interactive ',     description = 'Git rebase iteractive',                      unfinished = true },
   { ':Git rebase --interactive main', description = 'Git rebase iteractive main' },
-  { 'lua require("spectre").open()', description = 'Spectre Search Replace' },
-  { ':GoInstallBinaries', description = 'GoInstallBinaries' },
-  { ':GoUpdateBinaries', description = 'GoUpdateBinaries' },
-  { ':GoInstallBinary', description = 'GoInstallBinary', unfinished = true },
-  { ':GoUpdateBinary', description = 'GoUpdateBinary', unfinished = true },
-  { ':GoCoverage', description = 'GoCoverage', unfinished = true },
-  { ':GoImport', description = 'GoImport', unfinished = true },
-  { ':GoBuild', description = 'GoBuild', unfinished = true },
-  { ':GoRun', description = 'GoRun' },
-  { ':GoRun', description = 'GoRun with args', unfinished = true },
-  { ':GoStop', description = 'GoStop', unfinished = true },
-  { ':GoTest', description = 'GoTest', unfinished = true },
-  { ':GoTestFile', description = 'GoTestFile' },
-  { ':GoTestFunc', description = 'GoTestFunc' },
-  { ':GoAddTest', description = 'GoAddTest' },
-  { ':GoFmt', description = 'GoFmt' },
-  { ':GoVet', description = 'GoVet' },
-  { ':GoCheat', description = 'GoCheat', unfinished = true },
-  { ':GoGet', description = 'GoGet', unfinished = true },
-  { ':GoDebug', description = 'GoDebug' },
-  { ':GoDbgConfig', description = 'GoDbgConfig' },
-  { ':GoDbgKeys', description = 'GoDbgKeys' },
-  { ':GoDbgStop', description = 'GoDbgStop' },
-  { ':GoDbgContinue', description = 'GoDbgContinue' },
-  { ':GoCreateLaunch', description = 'GoCreateLaunch' },
-  { ':GoBreakToggle', description = 'GoBreakToggle' },
-  { ':GoBreakSave', description = 'GoBreakSave' },
-  { ':GoBreakLoad', description = 'GoBreakLoad' },
-  { ':GoEnv', description = 'GoEnv', unfinished = true },
-  { ':GoAlt', description = 'GoAlt' },
-  { ':GoDoc', description = 'GoDoc', unfinished = true },
-  { ':GoMockGen', description = 'GoMockGen' },
-  { ':GoPkgOutline', description = 'Go Package Outline' },
-  { ':GoImpl', description = 'GoImpl', unfinished = true },
-  { ':GoToggleInlay', description = 'GoToggleInlay' },
-  { ':GoTermClose', description = 'GoTermClose' },
-  { ':OpenBrowserSearch', description = 'Search in web browser', unfinished = true },
-  { ':MakeTable', description = 'CSV to markdown table' },
-  { ':UnmakeTable', description = 'Markdow table to CSV' },
-  { ':ASToggle', description = 'ASToggle: toggles AutoSave.nvim on and off.' },
-  { ':MarkdownPreview', description = 'Start the markdown preview' },
-  { ':MarkdownPreviewStop', description = 'Stop the markdown preview' },
-  { ':MarkdownPreviewStop', description = 'Stop the markdown preview' },
-  { ':MarkdownPreviewStop', description = 'Stop the markdown preview' },
-  { ':HexToggle', description = 'Toggle the hex view' },
-  { 'lua require("barbecue.ui").toggle()', description = 'BARBECUE: toggle breadcumb' },
-  { 'lua require("smp").preview()', description = 'SMP: preview current markdown file' },
-  { 'lua require("smp").book()', description = 'SMP: open the markdown book in a splitted window on right' },
-  { 'lua require("smp").synctodo()', description = 'SMP: Sync all todos in Markdown to MacOS Reminder' },
-  { 'lua require("smp").expand_snippet()', description = 'SMP: Expand current snippet in place' },
+  { 'lua require("spectre").open()',  description = 'Spectre Search Replace' },
+  { ':GoInstallBinaries',             description = 'GoInstallBinaries' },
+  { ':GoUpdateBinaries',              description = 'GoUpdateBinaries' },
+  { ':GoInstallBinary',               description = 'GoInstallBinary',                            unfinished = true },
+  { ':GoUpdateBinary',                description = 'GoUpdateBinary',                             unfinished = true },
+  { ':GoCoverage',                    description = 'GoCoverage',                                 unfinished = true },
+  { ':GoImport',                      description = 'GoImport',                                   unfinished = true },
+  { ':GoBuild',                       description = 'GoBuild',                                    unfinished = true },
+  { ':GoRun',                         description = 'GoRun' },
+  { ':GoRun',                         description = 'GoRun with args',                            unfinished = true },
+  { ':GoStop',                        description = 'GoStop',                                     unfinished = true },
+  { ':GoTest',                        description = 'GoTest',                                     unfinished = true },
+  { ':GoTestFile',                    description = 'GoTestFile' },
+  { ':GoTestFunc',                    description = 'GoTestFunc' },
+  { ':GoAddTest',                     description = 'GoAddTest' },
+  { ':GoFmt',                         description = 'GoFmt' },
+  { ':GoVet',                         description = 'GoVet' },
+  { ':GoCheat',                       description = 'GoCheat',                                    unfinished = true },
+  { ':GoGet',                         description = 'GoGet',                                      unfinished = true },
+  { ':GoDebug',                       description = 'GoDebug' },
+  { ':GoDbgConfig',                   description = 'GoDbgConfig' },
+  { ':GoDbgKeys',                     description = 'GoDbgKeys' },
+  { ':GoDbgStop',                     description = 'GoDbgStop' },
+  { ':GoDbgContinue',                 description = 'GoDbgContinue' },
+  { ':GoCreateLaunch',                description = 'GoCreateLaunch' },
+  { ':GoBreakToggle',                 description = 'GoBreakToggle' },
+  { ':GoBreakSave',                   description = 'GoBreakSave' },
+  { ':GoBreakLoad',                   description = 'GoBreakLoad' },
+  { ':GoEnv',                         description = 'GoEnv',                                      unfinished = true },
+  { ':GoAlt',                         description = 'GoAlt' },
+  { ':GoDoc',                         description = 'GoDoc',                                      unfinished = true },
+  { ':GoMockGen',                     description = 'GoMockGen' },
+  { ':GoPkgOutline',                  description = 'Go Package Outline' },
+  { ':GoImpl',                        description = 'GoImpl',                                     unfinished = true },
+  { ':GoToggleInlay',                 description = 'GoToggleInlay' },
+  { ':GoTermClose',                   description = 'GoTermClose' },
+  { ':OpenBrowserSearch',             description = 'Search in web browser',                      unfinished = true },
+  { ':MakeTable',                     description = 'CSV to markdown table' },
+  { ':UnmakeTable',                   description = 'Markdow table to CSV' },
+  { ':ASToggle',                      description = 'ASToggle: toggles AutoSave.nvim on and off.' },
+  { ':HexToggle',                     description = 'Toggle the hex view' },
+  { 'lua require("smp").preview()',   description = 'SMP: preview current markdown file' },
+  {
+    'lua require("smp").book()',
+    description =
+    'SMP: open the markdown book in a splitted window on right'
+  },
+  { 'lua require("smp").expand_snippet()',      description = 'SMP: Expand current snippet in place' },
   { 'lua require("smp").expand_all_snippets()', description = 'SMP: Expand all snippets in place' },
-  { 'lua require("smp").breakIfLong()', description = 'SMP: Break line length if its too long for easier editting' },
-  { 'lua require("smp").insert_blank_line()', description = 'SMP: Insert blank lines between multiple lines of text' },
-  { 'lua require("smp").bookthis()', description = 'SMP: Show book of this markdown file' },
-  { 'lua require("smp").search_text()', description = 'SMP: Incremental search all markdown files by content' },
-  { 'lua require("smp").search_tag()', description = 'SMP: Incremental search all markdown files by tags' },
-  { 'lua require("smp").insert_toc_here()', description = 'SMP: Insert TOC here' },
-  { 'lua require("smp").indicator_on()', description = 'SMP: Show current line indicator in previewer' },
-  { 'lua require("smp").indicator_off()', description = 'SMP: Dont show line indicator in previewer' },
-  { 'lua require("smp").indicator_as_config()', description = 'SMP: Show line indicator in previewer as configured' },
-  { 'lua require("smp").wrapwiki_visual()', description = 'SMP: Wrap selected text into a wiki link' },
-  { 'lua require("smp").wrapwiki_word()', description = 'SMP: Wrap word under cursor into a wiki link' },
-  { 'lua require("smp").wrapwiki_line()', description = 'SMP: Wrap current line into a wiki link' },
-  { 'lua require("smp").paste_url()', description = 'SMP: Paste url from clipboard into a link' },
-  { 'lua require("smp").paste_wiki_word()', description = 'SMP: Paste word from clipboard into a link' },
-  { 'lua require("smp").open_file_in_this_line()', description = 'SMP: System open the linked file in this line' },
+  {
+    'lua require("smp").breakIfLong()',
+    description =
+    'SMP: Break line length if its too long for easier editting'
+  },
+  {
+    'lua require("smp").insert_blank_line()',
+    description =
+    'SMP: Insert blank lines between multiple lines of text'
+  },
+  { 'lua require("smp").bookthis()',                 description = 'SMP: Show book of this markdown file' },
+  {
+    'lua require("smp").search_text()',
+    description =
+    'SMP: Incremental search all markdown files by content'
+  },
+  { 'lua require("smp").search_tag()',               description = 'SMP: Incremental search all markdown files by tags' },
+  { 'lua require("smp").insert_toc_here()',          description = 'SMP: Insert TOC here' },
+  { 'lua require("smp").indicator_on()',             description = 'SMP: Show current line indicator in previewer' },
+  { 'lua require("smp").indicator_off()',            description = 'SMP: Dont show line indicator in previewer' },
+  { 'lua require("smp").indicator_as_config()',      description = 'SMP: Show line indicator in previewer as configured' },
+  { 'lua require("smp").wrapwiki_visual()',          description = 'SMP: Wrap selected text into a wiki link' },
+  { 'lua require("smp").wrapwiki_word()',            description = 'SMP: Wrap word under cursor into a wiki link' },
+  { 'lua require("smp").wrapwiki_line()',            description = 'SMP: Wrap current line into a wiki link' },
+  { 'lua require("smp").paste_url()',                description = 'SMP: Paste url from clipboard into a link' },
+  { 'lua require("smp").paste_wiki_word()',          description = 'SMP: Paste word from clipboard into a link' },
+  { 'lua require("smp").open_file_in_this_line()',   description = 'SMP: System open the linked file in this line' },
   { 'lua require("smp").locate_file_in_this_line()', description = 'SMP: System locate the linked file in this line' },
-  { 'lua require("smp").gotoHeaderFromTocEntry()', description = 'SMP: Jump to header from TOC entry' },
-  { 'lua require("smp").start()', description = 'SMP: Start background server' },
-  { 'lua require("smp").stop()', description = 'SMP: Stop background server' },
+  { 'lua require("smp").gotoHeaderFromTocEntry()',   description = 'SMP: Jump to header from TOC entry' },
+  { 'lua require("smp").start()',                    description = 'SMP: Start background server' },
+  { 'lua require("smp").stop()',                     description = 'SMP: Stop background server' },
 }
-
 
 require('legendary').commands(commands)
 
 require("which-key").setup({
   plugins = {
-    marks = true, -- shows a list of your marks on ' and `
-    registers = true, -- shows your registers on " in NORMAL or <C-r> in INSERT mode
+    marks = true,       -- shows a list of your marks on ' and `
+    registers = true,   -- shows your registers on " in NORMAL or <C-r> in INSERT mode
     spelling = {
-      enabled = true, -- enabling this will show WhichKey when pressing z= to select spelling suggestions
+      enabled = true,   -- enabling this will show WhichKey when pressing z= to select spelling suggestions
       suggestions = 20, -- how many suggestions should be shown in the list?
     },
     presets = {
-      operators = true, -- adds help for operators like d, y, ... and registers them for motion / text object completion
-      motions = true, -- adds help for motions
+      operators = true,    -- adds help for operators like d, y, ... and registers them for motion / text object completion
+      motions = true,      -- adds help for motions
       text_objects = true, -- help for text objects triggered after entering an operator
-      windows = true, -- default bindings on <c-w>
-      nav = true, -- misc bindings to work with windows
-      z = true, -- bindings for folds, spelling and others prefixed with z
-      g = true, -- bindings for prefixed with g
+      windows = true,      -- default bindings on <c-w>
+      nav = true,          -- misc bindings to work with windows
+      z = true,            -- bindings for folds, spelling and others prefixed with z
+      g = true,            -- bindings for prefixed with g
     },
   }
 })
@@ -238,11 +232,10 @@ wk.register({
     n = { '<Plug>(openbrowser-open)', 'Open a browser', noremap = true },
     c = { '<cmd>lua require("telescope.builtin").commands()<cr>', 'Telescope commands', noremap = true },
     C = { '<cmd>Telescope changes<cr>', 'Telescope Changes', noremap = true },
-    s = { '<cmd>lua require("telescope").extensions.possession.list()<cr>', 'Telescope Possession', noremap = true },
+    P = { '<cmd>:Telescope neovim-project discover<cr>', 'Telescope Project Discovery', noremap = true },
+    p = { '<cmd>:Telescope neovim-project history<cr>', 'Telescope Project History', noremap = true },
     S = { '<cmd>Telescope scriptnames<cr>', 'Telescope Scriptnames', noremap = true },
     h = { '<cmd>lua require("telescope.builtin").help_tags()<cr>', 'Telescope help_tags', noremap = true },
-    R = { '<cmd>Telescope repo list<cr>', 'Change repo', noremap = true },
-    r = { '<cmd>Telescope repo cached_list<cr>', 'Change repo (cached_list)', noremap = true },
     y = { '<cmd>Telescope yaml_schema<cr>', 'Change yaml schema', noremap = true },
   },
   r = {
@@ -258,72 +251,114 @@ wk.register({
     C = { '<Plug>RestNvimPreview', 'RestNvim - preview the request cURL command', noremap = true },
     L = { '<Plug>RestNvimLast', 'RestNvim - re-run the last request', noremap = true },
   },
-  s = {
-    l = { "<cmd>Possession List", "PossessionList" },
-    L = { "<cmd>Possession Load", "PossessionLoad" },
-    s = { "<cmd>Possession Save", "PossessionSave" },
-    S = { "<cmd>Possession Show", "PossessionShow" },
-    c = { "<cmd>Possession Close", "PossessionClose" },
-    m = { "<cmd>Possession Migrate", "PossessionMigrate" },
-  },
   q = {
-    b = { "<cmd>Telekasten browse_media<cr>", "Notes - Telekasten browse_media - Browse images / media files",
-      noremap = true },
+    b = {
+      "<cmd>Telekasten browse_media<cr>",
+      "Notes - Telekasten browse_media - Browse images / media files",
+      noremap = true
+    },
     f = {
-      d = { "<cmd>Telekasten find_daily_notes<cr>",
-        "Notes - Telekasten find_daily_notes - Find daily notes by title (date)", noremap = true },
-      f = { "<cmd>Telekasten find_friends<cr>",
-        "Notes - Telekasten find_friends - Show all notes linking to the link under the cursor", noremap = true },
-      n = { "<cmd>Telekasten find_notes<cr>", "Notes - Telekasten find_notes - Find notes by title (filename)",
-        noremap = true },
-      w = { "<cmd>Telekasten find_weekly_notes<cr>",
-        "Notes - Telekasten find_weekly_notes - Find weekly notes by title", noremap = true },
+      d = {
+        "<cmd>Telekasten find_daily_notes<cr>",
+        "Notes - Telekasten find_daily_notes - Find daily notes by title (date)",
+        noremap = true
+      },
+      f = {
+        "<cmd>Telekasten find_friends<cr>",
+        "Notes - Telekasten find_friends - Show all notes linking to the link under the cursor",
+        noremap = true
+      },
+      n = {
+        "<cmd>Telekasten find_notes<cr>",
+        "Notes - Telekasten find_notes - Find notes by title (filename)",
+        noremap = true
+      },
+      w = {
+        "<cmd>Telekasten find_weekly_notes<cr>",
+        "Notes - Telekasten find_weekly_notes - Find weekly notes by title",
+        noremap = true
+      },
     },
     g = {
-      l = { "<cmd>Telekasten follow_link<cr>", "Notes - Telekasten follow_link - Follow the link under the cursor",
-        noremap = true },
-      w = { "<cmd>Telekasten goto_thisweek<cr>", "Notes - Telekasten goto_thisweek - Open this week's weekly note",
-        noremap = true },
+      l = {
+        "<cmd>Telekasten follow_link<cr>",
+        "Notes - Telekasten follow_link - Follow the link under the cursor",
+        noremap = true
+      },
+      w = {
+        "<cmd>Telekasten goto_thisweek<cr>",
+        "Notes - Telekasten goto_thisweek - Open this week's weekly note",
+        noremap = true
+      },
       g = { "<cmd>Telekasten goto_today<cr>", "Notes - Telekasten goto_today - Open today's daily note", noremap = true },
     },
     i = {
-      i = { "<cmd>Telekasten insert_img_link<cr>",
+      i = {
+        "<cmd>Telekasten insert_img_link<cr>",
         "Notes - Telekasten insert_img_link - Browse images / media files and insert a link to the selected one",
-        noremap = true },
+        noremap = true
+      },
       l = { "<cmd>Telekasten insert_link<cr>", "Notes - Telekasten insert_link - Insert a link to a note", noremap = true },
-      p = { "<cmd>Telekasten paste_img_and_link<cr>",
+      p = {
+        "<cmd>Telekasten paste_img_and_link<cr>",
         "Notes - Telekasten paste_img_and_link - Paste an image from the clipboard into a file and inserts a link to it",
-        noremap = true },
+        noremap = true
+      },
     },
     n = {
-      n = { "<cmd>Telekasten new_note<cr>", "Notes - Telekasten new_note - Create a new note, prompts for title",
-        noremap = true },
-      t = { "<cmd>Telekasten new_templated_note<cr>",
+      n = {
+        "<cmd>Telekasten new_note<cr>",
+        "Notes - Telekasten new_note - Create a new note, prompts for title",
+        noremap = true
+      },
+      t = {
+        "<cmd>Telekasten new_templated_note<cr>",
         "Notes - Telekasten new_templated_note - create a new note by template, prompts for title and template",
-        noremap = true },
+        noremap = true
+      },
     },
     p = { "<cmd>Telekasten panel<cr>", "Notes - Telekasten panel - brings up the command palette", noremap = true },
-    c = { "<cmd>Telekasten preview_img<cr>", "Notes - Telekasten preview_img - preview image under the cursor",
-      noremap = true },
-    r = { "<cmd>Telekasten rename_note<cr>",
-      "Notes - Telekasten rename_note - Rename current note and update the links pointing to it", noremap = true },
+    c = {
+      "<cmd>Telekasten preview_img<cr>",
+      "Notes - Telekasten preview_img - preview image under the cursor",
+      noremap = true
+    },
+    r = {
+      "<cmd>Telekasten rename_note<cr>",
+      "Notes - Telekasten rename_note - Rename current note and update the links pointing to it",
+      noremap = true
+    },
     s = {
-      n = { "<cmd>Telekasten search_notes<cr>", "Notes - Telekasten search_notes - Search (grep) in all notes",
-        noremap = true },
-      b = { "<cmd>Telekasten show_backlinks<cr>",
-        "Notes - Telekasten show_backlinks - Show all notes linking to the current one", noremap = true },
+      n = {
+        "<cmd>Telekasten search_notes<cr>",
+        "Notes - Telekasten search_notes - Search (grep) in all notes",
+        noremap = true
+      },
+      b = {
+        "<cmd>Telekasten show_backlinks<cr>",
+        "Notes - Telekasten show_backlinks - Show all notes linking to the current one",
+        noremap = true
+      },
       c = { "<cmd>Telekasten show_calendar<cr>", "Notes - Telekasten show_calendar - Show the calendar", noremap = true },
       t = { "<cmd>Telekasten show_tags<cr>", "Notes - Telekasten show_tags - Search through all tags", noremap = true },
     },
-    t = { "<cmd>Telekasten toggle_todo<cr>", "Notes - Telekasten toggle_todo - Toggle - [ ] todo status of a line",
-      noremap = true },
-    y = { "<cmd>Telekasten yank_notelink<cr>",
-      "Notes - Telekasten yank_notelink - Yank a link to the currently open note", noremap = true },
+    t = {
+      "<cmd>Telekasten toggle_todo<cr>",
+      "Notes - Telekasten toggle_todo - Toggle - [ ] todo status of a line",
+      noremap = true
+    },
+    y = {
+      "<cmd>Telekasten yank_notelink<cr>",
+      "Notes - Telekasten yank_notelink - Yank a link to the currently open note",
+      noremap = true
+    },
   },
   -- T = { "<cmd>lua require('FTerm').toggle()<CR>", "Toggle terminal" },
   t = { "<cmd>Greyjoy<CR>", "Greyjoy - makefile and vstasks" },
   T = { "<cmd>ToggleTerm<CR>", "Toggle terminal" },
   u = { '<cmd>UndotreeToggle<cr>', 'Undo tree toggle', noremap = true },
+  M = { '<cmd>SMP<cr>', "SMP", noremap = true },
+  m = { b = { '<cmd>SMP<cr>', "SMP", noremap = true }, },
 }, { prefix = "<leader>" }
 )
 
@@ -338,7 +373,7 @@ wk.register({
 )
 
 wk.register({
-  ["<F12>"] = { "<cmd>lua require('dap_ui').toggle()<CR>", "Toggle FTerm" }
+      ["<F12>"] = { "<cmd>lua require('dap_ui').toggle()<CR>", "Toggle FTerm" }
 })
 
 vim.cmd [[

@@ -177,10 +177,10 @@ require("lazy").setup({
     dependencies = {
       "nvim-lua/popup.nvim",
       "nvim-lua/plenary.nvim",
-      "cljoly/telescope-repo.nvim",
       "LinArcX/telescope-changes.nvim",
       "LinArcX/telescope-scriptnames.nvim",
       "aaronhallaert/advanced-git-search.nvim",
+      "nvim-telescope/telescope-media-files.nvim",
     },
   },
 
@@ -212,11 +212,6 @@ require("lazy").setup({
   },
 
   "desdic/greyjoy.nvim",
-
-  {
-    "jedrzejboczar/possession.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
-  },
 
   {
     "edolphin-ydf/goimpl.nvim",
@@ -420,16 +415,6 @@ require("lazy").setup({
   },
 
   {
-    "iamcco/markdown-preview.nvim",
-    -- ft = { 'markdown', 'pandoc.markdown', 'rmd', 'pullrequest', 'gitcommit' },
-    build = "cd app && yarn install",
-    config = function()
-      vim.g.mkdp_browser = 'firefox'
-      vim.g.mkdp_filetypes = { 'markdown', 'pullrequest', 'gitcommit' }
-      vim.g.mkdp_preview_options = {}
-    end,
-  },
-  {
     'cnshsliu/smp.nvim',
     build = "cd lua/server && npm install", -- yes, we should have node & npm installed.
     dependencies = {
@@ -437,6 +422,7 @@ require("lazy").setup({
       "MunifTanjim/nui.nvim",
     },
   },
+
   -- debug
   "mfussenegger/nvim-dap",
   { "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" } },
@@ -448,14 +434,6 @@ require("lazy").setup({
   "folke/which-key.nvim",
 
   "abecodes/tabout.nvim",
-
-  {
-    "phaazon/mind.nvim",
-    dependencies = { "nvim-lua/plenary.nvim" },
-    config = function()
-      require("mind").setup()
-    end,
-  },
 
   -- Project Related
   {
@@ -682,5 +660,26 @@ require("lazy").setup({
         yank_dry_run = true,
       })
     end
-  }
+  },
+  {
+    "coffebar/neovim-project",
+    opts = {
+      projects = { -- define project roots
+        "~/Projects/*",
+        "~/dotfiles/*",
+        "~/Opensource/*",
+      },
+    },
+    init = function()
+      -- enable saving the state of plugins in the session
+      vim.opt.sessionoptions:append("globals") -- save global variables that start with an uppercase letter and contain at least one lowercase letter.
+    end,
+    dependencies = {
+      { "nvim-lua/plenary.nvim" },
+      { "nvim-telescope/telescope.nvim", tag = "0.1.0" },
+      { "Shatur/neovim-session-manager" },
+    },
+    lazy = false,
+    priority = 100,
+  },
 })

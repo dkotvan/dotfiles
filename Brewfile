@@ -88,6 +88,8 @@ brew 'watch'
 brew 'yq'
 brew 'zoxide'
 brew 'cookiecutter'
+brew 'viu'
+brew 'chafa'
 
 # apps
 brew 'ghostscript'
