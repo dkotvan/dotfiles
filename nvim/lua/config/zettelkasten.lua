@@ -43,7 +43,7 @@ require('telekasten').setup({
   template_new_note           = nil,
   -- template for newly created daily notes (goto_today)
   -- set to `nil` or do not specify if you do not want a template
-  template_new_daily          = nil,
+  template_new_daily = home .. '/' .. 'templates/daily-template.md',
   -- template for newly created weekly notes (goto_thisweek)
   -- set to `nil` or do not specify if you do not want a template
   template_new_weekly         = home .. '/' .. 'templates/weekly-template.md',
