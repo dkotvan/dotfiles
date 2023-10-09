@@ -112,6 +112,7 @@ local commands = {
   { ':UnmakeTable',                   description = 'Markdow table to CSV' },
   { ':ASToggle',                      description = 'ASToggle: toggles AutoSave.nvim on and off.' },
   { ':HexToggle',                     description = 'Toggle the hex view' },
+  { ':Lazy sync',                     description = 'Lazy: Sync plugins' },
   { 'lua require("smp").preview()',   description = 'SMP: preview current markdown file' },
   {
     'lua require("smp").book()',
@@ -258,24 +259,9 @@ wk.register({
       noremap = true
     },
     f = {
-      d = {
-        "<cmd>Telekasten find_daily_notes<cr>",
-        "Notes - Telekasten find_daily_notes - Find daily notes by title (date)",
-        noremap = true
-      },
       f = {
         "<cmd>Telekasten find_friends<cr>",
         "Notes - Telekasten find_friends - Show all notes linking to the link under the cursor",
-        noremap = true
-      },
-      n = {
-        "<cmd>Telekasten find_notes<cr>",
-        "Notes - Telekasten find_notes - Find notes by title (filename)",
-        noremap = true
-      },
-      w = {
-        "<cmd>Telekasten find_weekly_notes<cr>",
-        "Notes - Telekasten find_weekly_notes - Find weekly notes by title",
         noremap = true
       },
     },
