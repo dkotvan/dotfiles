@@ -354,10 +354,22 @@ require("lazy").setup({
 
   "tpope/vim-eunuch",
 
+  --   {
+  --     "tpope/vim-surround",
+  --     dependencies = "tpope/vim-repeat",
+  --   },
+
   {
-    "tpope/vim-surround",
-    dependencies = "tpope/vim-repeat",
+    "kylechui/nvim-surround",
+    version = "*", -- Use for stability; omit to use `main` branch for the latest features
+    event = "VeryLazy",
+    config = function()
+      require("nvim-surround").setup({
+        -- Configuration here, or leave empty to use defaults
+      })
+    end
   },
+
 
   {
     "kevinhwang91/nvim-hlslens",
@@ -669,6 +681,7 @@ require("lazy").setup({
         "~/dotfiles/*",
         "~/Opensource/*",
       },
+      last_session_on_startup = falsealse,
     },
     init = function()
       -- enable saving the state of plugins in the session

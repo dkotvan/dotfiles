@@ -152,6 +152,7 @@ local commands = {
   { 'lua require("smp").gotoHeaderFromTocEntry()',   description = 'SMP: Jump to header from TOC entry' },
   { 'lua require("smp").start()',                    description = 'SMP: Start background server' },
   { 'lua require("smp").stop()',                     description = 'SMP: Stop background server' },
+  { ':NeovimProjectLoadRecent',                      description = 'neovim-project load recent project session' },
 }
 
 require('legendary').commands(commands)
