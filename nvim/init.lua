@@ -29,7 +29,6 @@ else
   ]]
 
   require('config.code')
-  require('config.tasks')
   require('config.completion')
   require('config.finder')
   require('config.debug')

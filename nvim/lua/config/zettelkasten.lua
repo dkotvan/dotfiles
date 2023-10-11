@@ -110,10 +110,6 @@ require('telekasten').setup({
   rename_update_links         = true,
 })
 
-require('flashcards').setup({
-  dir = home .. '/flashcards',
-})
-
 require("smp").setup({
   home = home
 })

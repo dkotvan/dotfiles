@@ -21,9 +21,21 @@ require('telescope').setup {
       override_file_sorter = true,
       case_mode = "smart_case",
     },
+    repo = {
+      list = {
+        fd_opts = {
+          "--no-ignore",
+        },
+        search_dirs = {
+          "~/Projects/",
+          "~/Opensource/",
+        }
+      }
+    }
   },
 }
 require('telescope').load_extension("fzf")
+require('telescope').load_extension("repo")
 require('telescope').load_extension('dap')
 require("telescope").load_extension("yaml_schema")
 require("telescope").load_extension("changes")
@@ -54,9 +66,18 @@ require("dressing").setup {
 }
 
 require("legendary").setup {
-  include_builtin = true, which_key = { auto_register = true },
+  include_builtin = true,
+  extensions = {
+    lazy_nvim = true,
+    which_key = {
+      auto_register = true,
+    },
+    nvim_tree = true,
+    diffview = true,
+  },
   include_legendary_cmds = true,
 }
+
 vim.api.nvim_set_keymap("n", "<leader><leader>", "<cmd>lua require('legendary').find()<CR>", { noremap = true })
 
 local commands = {
@@ -152,7 +173,6 @@ local commands = {
   { 'lua require("smp").gotoHeaderFromTocEntry()',   description = 'SMP: Jump to header from TOC entry' },
   { 'lua require("smp").start()',                    description = 'SMP: Start background server' },
   { 'lua require("smp").stop()',                     description = 'SMP: Stop background server' },
-  { ':NeovimProjectLoadRecent',                      description = 'neovim-project load recent project session' },
 }
 
 require('legendary').commands(commands)
@@ -190,22 +210,6 @@ wk.register({
   },
 }, { prefix = "<Space>" }
 )
--- wk.register({
---   g = {
---     ["0"] = { "LSP Navigator list document symbols" },
---     r = { 'LSP Navigator reference' },
---     k = { 'LSP Navigator signature_help' },
---     W = { 'LSP Navigator workspace_symbol_live' },
---     d = { 'LSP Navigator definition' },
---     D = { 'LSP Navigator declaration' },
---     p = { 'LSP Navigator definition_preview' },
---     K = { 'LSP Navigator hover' },
---     i = { 'LSP Navigator implementation' },
---     L = { 'LSP Navigator diagnostics' },
---     G = { 'LSP Navigator buffer diagnostics' },
---   },
--- }, {}
--- )
 wk.register({
   g = {
     g = { "<cmd>lua require('telescope.builtin').live_grep()<cr>", "Telescope live grep", noremap = true },
@@ -227,15 +231,14 @@ wk.register({
     t = { '<cmd>lua require("dap-go").debug_test()<cr>', 'debug go test', noremap = true },
   },
   c = {
-    a = { '<cmd>lua require("telescope").extensions.asynctasks.all()<cr>', 'Telescope AsyncTasks', noremap = true },
     b = { '<cmd>lua require("telescope.builtin").buffers()<cr>', 'Telescope buffers', noremap = true },
     i = { '<cmd>lua require("telescope").extensions.goimpl.goimpl{}<CR>', 'Golang implementations', noremap = true },
     f = { '<cmd>Flashcards<CR>', 'Flashcard', noremap = true },
     n = { '<Plug>(openbrowser-open)', 'Open a browser', noremap = true },
     c = { '<cmd>lua require("telescope.builtin").commands()<cr>', 'Telescope commands', noremap = true },
     C = { '<cmd>Telescope changes<cr>', 'Telescope Changes', noremap = true },
-    P = { '<cmd>:Telescope neovim-project discover<cr>', 'Telescope Project Discovery', noremap = true },
-    p = { '<cmd>:Telescope neovim-project history<cr>', 'Telescope Project History', noremap = true },
+    R = { '<cmd>Telescope repo list<cr>', 'Change repo', noremap = true },
+    r = { '<cmd>Telescope repo cached_list<cr>', 'Change repo (cached_list)', noremap = true },
     S = { '<cmd>Telescope scriptnames<cr>', 'Telescope Scriptnames', noremap = true },
     h = { '<cmd>lua require("telescope.builtin").help_tags()<cr>', 'Telescope help_tags', noremap = true },
     y = { '<cmd>Telescope yaml_schema<cr>', 'Change yaml schema', noremap = true },
@@ -341,8 +344,6 @@ wk.register({
     },
   },
   -- T = { "<cmd>lua require('FTerm').toggle()<CR>", "Toggle terminal" },
-  t = { "<cmd>Greyjoy<CR>", "Greyjoy - makefile and vstasks" },
-  T = { "<cmd>ToggleTerm<CR>", "Toggle terminal" },
   u = { '<cmd>UndotreeToggle<cr>', 'Undo tree toggle', noremap = true },
   M = { '<cmd>SMP<cr>', "SMP", noremap = true },
   m = { b = { '<cmd>SMP<cr>', "SMP", noremap = true }, },
@@ -360,7 +361,7 @@ wk.register({
 )
 
 wk.register({
-      ["<F12>"] = { "<cmd>lua require('dap_ui').toggle()<CR>", "Toggle FTerm" }
+  ["<F12>"] = { "<cmd>lua require('dap_ui').toggle()<CR>", "Toggle FTerm" }
 })
 
 vim.cmd [[

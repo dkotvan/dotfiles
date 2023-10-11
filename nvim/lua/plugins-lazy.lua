@@ -177,6 +177,7 @@ require("lazy").setup({
     dependencies = {
       "nvim-lua/popup.nvim",
       "nvim-lua/plenary.nvim",
+      "cljoly/telescope-repo.nvim",
       "LinArcX/telescope-changes.nvim",
       "LinArcX/telescope-scriptnames.nvim",
       "aaronhallaert/advanced-git-search.nvim",
@@ -191,27 +192,9 @@ require("lazy").setup({
   },
 
   {
-    "GustavoKatel/telescope-asynctasks.nvim", -- TODO: configure asynctasks
-    dependencies = { "skywind3000/asynctasks.vim", "skywind3000/asyncrun.vim", "nvim-telescope/telescope.nvim" },
-  },
-
-  {
     "renerocksai/telekasten.nvim",
     dependencies = { "renerocksai/calendar-vim" },
   },
-
-  {
-    "alex-laycalvert/flashcards.nvim",
-  },
-
-  {
-    "akinsho/toggleterm.nvim",
-    config = function()
-      require("toggleterm").setup()
-    end,
-  },
-
-  "desdic/greyjoy.nvim",
 
   {
     "edolphin-ydf/goimpl.nvim",
@@ -454,19 +437,19 @@ require("lazy").setup({
       require("spectre").setup({
         open_cmd = "new",
         find_engine = {
-              ["ag"] = {
+          ["ag"] = {
             cmd = "ag",
             args = {
               "--vimgrep",
               "-s",
             },
             options = {
-                  ["ignore-case"] = {
+              ["ignore-case"] = {
                 value = "-i",
                 icon = "[I]",
                 desc = "ignore case",
               },
-                  ["hidden"] = {
+              ["hidden"] = {
                 value = "--hidden",
                 desc = "hidden file",
                 icon = "[H]",
@@ -475,12 +458,12 @@ require("lazy").setup({
           },
         },
         replace_engine = {
-              ["sed"] = {
+          ["sed"] = {
             cmd = "sed",
             args = nil,
           },
           options = {
-                ["ignore-case"] = {
+            ["ignore-case"] = {
               value = "--ignore-case",
               icon = "[I]",
               desc = "ignore case",
@@ -672,27 +655,5 @@ require("lazy").setup({
         yank_dry_run = true,
       })
     end
-  },
-  {
-    "coffebar/neovim-project",
-    opts = {
-      projects = { -- define project roots
-        "~/Projects/*",
-        "~/dotfiles/*",
-        "~/Opensource/*",
-      },
-      last_session_on_startup = falsealse,
-    },
-    init = function()
-      -- enable saving the state of plugins in the session
-      vim.opt.sessionoptions:append("globals") -- save global variables that start with an uppercase letter and contain at least one lowercase letter.
-    end,
-    dependencies = {
-      { "nvim-lua/plenary.nvim" },
-      { "nvim-telescope/telescope.nvim", tag = "0.1.0" },
-      { "Shatur/neovim-session-manager" },
-    },
-    lazy = false,
-    priority = 100,
   },
 })
