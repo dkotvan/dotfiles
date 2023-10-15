@@ -28,7 +28,7 @@ require('go').setup({
   -- to setup a table of codelens
   diagnostic = {
                      -- set diagnostic to false to disable vim.diagnostic setup
-    hdlr = true,     -- hook lsp diag handler
+    hdlr = false,     -- hook lsp diag handler
     underline = true,
     -- virtual text setup
     virtual_text = { space = 0, prefix = "" },

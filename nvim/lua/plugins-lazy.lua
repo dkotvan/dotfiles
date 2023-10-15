@@ -26,12 +26,6 @@ require("lazy").setup({
   -- Gruvbox colorscheme with support for treesiter
   "sainnhe/gruvbox-material",
 
-  -- Zenburn low contrast themes
-  {
-    "mcchrish/zenbones.nvim",
-    dependencies = { "rktjmp/lush.nvim" },
-  },
-
   -- guide lines
   {
     "lukas-reineke/indent-blankline.nvim",
@@ -54,18 +48,6 @@ require("lazy").setup({
     },
     config = function()
       require("barbecue").setup()
-    end,
-  },
-
-  --  Show line when typing number with :<number>
-  {
-    "nacro90/numb.nvim",
-    config = function()
-      require("numb").setup({
-        show_numbers = true,    -- Enable 'number' for the window while peeking
-        show_cursorline = true, -- Enable 'cursorline' for the window while peeking
-        number_only = false,    -- Peek only when the command is only a number instead of when it starts with a number
-      })
     end,
   },
 
@@ -101,18 +83,19 @@ require("lazy").setup({
   {
     "nvim-treesitter/nvim-treesitter",
     build = ":TSUpdateSync",
+    dependencies = {
+      'JoosepAlviste/nvim-ts-context-commentstring',
+    }
   },
 
   -- install stuff
   "williamboman/mason.nvim",
   "williamboman/mason-lspconfig.nvim",
 
-  "mhartington/formatter.nvim",
-
   -- LSP Stuff
   "neovim/nvim-lspconfig",
   "onsails/lspkind-nvim",
-  "weilbith/nvim-code-action-menu",
+  "kosayoda/nvim-lightbulb",
   { "ray-x/guihua.lua",   build = "cd lua/fzy && make" },
   "ray-x/navigator.lua",
 
@@ -182,6 +165,7 @@ require("lazy").setup({
       "LinArcX/telescope-scriptnames.nvim",
       "aaronhallaert/advanced-git-search.nvim",
       "nvim-telescope/telescope-media-files.nvim",
+      "debugloop/telescope-undo.nvim",
     },
   },
 
@@ -266,9 +250,6 @@ require("lazy").setup({
     config = 'require("femaco").setup()',
   },
 
-  -- Now vim recognize line numbers on errors - open files like /a.txt:20:5
-  "wsdjeg/vim-fetch",
-
   -- Sudo that works with neovim
   "lambdalisue/suda.vim",
 
@@ -327,7 +308,13 @@ require("lazy").setup({
   },
 
   -- Comments! gc
-  "tpope/vim-commentary",
+  {
+    'numToStr/Comment.nvim',
+    opts = {
+      -- add any options here
+    },
+    lazy = false,
+  },
 
   -- Supports bundler in vim
   {
@@ -336,11 +323,6 @@ require("lazy").setup({
   },
 
   "tpope/vim-eunuch",
-
-  --   {
-  --     "tpope/vim-surround",
-  --     dependencies = "tpope/vim-repeat",
-  --   },
 
   {
     "kylechui/nvim-surround",
@@ -352,7 +334,6 @@ require("lazy").setup({
       })
     end
   },
-
 
   {
     "kevinhwang91/nvim-hlslens",
@@ -372,15 +353,7 @@ require("lazy").setup({
     end,
   },
 
-  "mbbill/undotree",
   "Pocco81/auto-save.nvim",
-
-  {
-    "AllenDang/nvim-expand-expr",
-    config = function()
-      vim.cmd([[ nmap <leader>e <Cmd>lua require("expand_expr").expand()<CR> ]])
-    end,
-  },
 
   -- Better markdown
   {
@@ -437,19 +410,19 @@ require("lazy").setup({
       require("spectre").setup({
         open_cmd = "new",
         find_engine = {
-          ["ag"] = {
+              ["ag"] = {
             cmd = "ag",
             args = {
               "--vimgrep",
               "-s",
             },
             options = {
-              ["ignore-case"] = {
+                  ["ignore-case"] = {
                 value = "-i",
                 icon = "[I]",
                 desc = "ignore case",
               },
-              ["hidden"] = {
+                  ["hidden"] = {
                 value = "--hidden",
                 desc = "hidden file",
                 icon = "[H]",
@@ -458,12 +431,12 @@ require("lazy").setup({
           },
         },
         replace_engine = {
-          ["sed"] = {
+              ["sed"] = {
             cmd = "sed",
             args = nil,
           },
           options = {
-            ["ignore-case"] = {
+                ["ignore-case"] = {
               value = "--ignore-case",
               icon = "[I]",
               desc = "ignore case",

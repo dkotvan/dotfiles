@@ -31,7 +31,31 @@ require('telescope').setup {
           "~/Opensource/",
         }
       }
-    }
+    },
+    undo = {
+      use_delta = true,
+      use_custom_command = nil, -- setting this implies `use_delta = false`. Accepted format is: { "bash", "-c", "echo '$DIFF' | delta" }
+      side_by_side = true,
+      -- layout_strategy = "vertical",
+      layout_config = {
+        preview_height = 0.8,
+      },
+      diff_context_lines = vim.o.scrolloff,
+      entry_format = "state #$ID, $STAT, $TIME",
+      time_format = "",
+      mappings = {
+        i = {
+          -- IMPORTANT: Note that telescope-undo must be available when telescope is configured if
+          -- you want to replicate these defaults and use the following actions. This means
+          -- installing as a dependency of telescope in it's `requirements` and loading this
+          -- extension from there instead of having the separate plugin definition as outlined
+          -- above.
+              ["<cr>"] = require("telescope-undo.actions").yank_additions,
+              ["<S-cr>"] = require("telescope-undo.actions").yank_deletions,
+              ["<C-cr>"] = require("telescope-undo.actions").restore,
+        },
+      },
+    },
   },
 }
 require('telescope').load_extension("fzf")
@@ -43,6 +67,7 @@ require('telescope').load_extension('scriptnames')
 require('telescope').load_extension('goimpl')
 require('telescope').load_extension('advanced_git_search')
 require('telescope').load_extension('media_files')
+require("telescope").load_extension("undo")
 
 require("dressing").setup {
   input = {
@@ -197,19 +222,84 @@ require("which-key").setup({
   }
 })
 
+
 local wk = require("which-key")
 
+-- Bindings with <Space> prefix
 wk.register({
+  c = {
+    name = "code",
+    a = { require("navigator.codeAction").code_action, "code_action" },
+  },
+  w = {
+    name = "workspace",
+    a = { require("navigator.workspace").add_workspace_folder, "add_workspace_folder" },
+    r = { require("navigator.workspace").remove_workspace_folder, "remove_workspace_folder" },
+    l = { require("navigator.workspace").list_workspace_folders, "list_workspace_folders" },
+  },
+  l = {
+    name = "lens",
+    a = { require("navigator.codelens").run_action, "run code lens action" },
+  },
+  D = { vim.lsp.buf.type_definition, "type_definition" },
   f = {
-    name = "lsp format",
-    f = { 'LSP Navigator format' },
+    name = "format",
+    f = { vim.lsp.buf.format, "format" },
   },
-  r = {
-    name = "lsp rename",
-    n = { 'LSP Navigator format' },
+  m = {
+    name = "navigator format",
+    m = { require("navigator.formatting").range_format, "range format operator e.g gmip" },
   },
-}, { prefix = "<Space>" }
-)
+  rn = { require("navigator.rename").rename, "rename" },
+}, { prefix = "<Space>" })
+
+-- Bindings with <Leader> prefix
+wk.register({
+  g = {
+    name = "go to",
+    r = { require("navigator.reference").reference, "reference" },
+    t = { require("navigator.treesitter").buf_ts, "buf_ts" },
+    T = { require("navigator.treesitter").bufs_ts, "bufs_ts" },
+    i = { vim.lsp.buf.incoming_calls, "incoming_calls" },
+    o = { vim.lsp.buf.outgoing_calls, "outgoing_calls" },
+  },
+  c = {
+    t = { require("navigator.ctags").ctags, "ctags" },
+  },
+  d = {
+    t = { require("navigator.diagnostics").toggle_diagnostics, "toggle_diagnostics" },
+  },
+  k = { require("navigator.dochighlight").hi_symbol, "hi_symbol" },
+}, { prefix = "<Leader>" })
+
+-- Adding individual bindings (without prefix or with other prefixes)
+wk.register({
+  g = {
+    name = "go to",
+    r = { require("navigator.reference").async_ref, "async_ref" },
+    ["0"] = { require("navigator.symbols").document_symbols, "document_symbols" },
+    W = { require("navigator.workspace").workspace_symbol_live, "workspace_symbol_live" },
+    d = { require("navigator.definition").definition, "definition" },
+    D = { vim.lsp.buf.declaration, "declaration" },
+    p = { require("navigator.definition").definition_preview, "definition_preview" },
+    i = { vim.lsp.buf.implementation, "implementation" },
+    L = { require("navigator.diagnostics").show_diagnostics, "show_diagnostics" },
+    G = { require("navigator.diagnostics").show_buf_diagnostics, "show_buf_diagnostics" },
+  },
+  ['[d'] = { vim.diagnostic.goto_prev, "prev diagnostics" },
+  [']d'] = { vim.diagnostic.goto_next, "next diagnostics" },
+  ['[r'] = { require("navigator.treesitter").goto_previous_usage, "goto_previous_usage" },
+  [']r'] = { require("navigator.treesitter").goto_next_usage, "goto_next_usage" },
+  ['<C-k>'] = { vim.lsp.buf.signature_help, "signature_help" },
+  ['<M-k>'] = { vim.lsp.signature_help, "signature_help" },
+  ['<C-]>'] = { require("navigator.definition").definition, "definition" },
+}, { prefix = "" })
+
+wk.register({
+  ['ca'] = { require("navigator.codeAction").range_code_action, "range code action" },
+  ['ff'] = { vim.lsp.buf.range_formatting, "range format" },
+}, { mode = "v", prefix = "<Space>" })
+
 wk.register({
   g = {
     g = { "<cmd>lua require('telescope.builtin').live_grep()<cr>", "Telescope live grep", noremap = true },
@@ -343,10 +433,8 @@ wk.register({
       noremap = true
     },
   },
-  -- T = { "<cmd>lua require('FTerm').toggle()<CR>", "Toggle terminal" },
-  u = { '<cmd>UndotreeToggle<cr>', 'Undo tree toggle', noremap = true },
-  M = { '<cmd>SMP<cr>', "SMP", noremap = true },
-  m = { b = { '<cmd>SMP<cr>', "SMP", noremap = true }, },
+  u = { '<cmd>Telescope undo<cr>', 'Telescope undo', noremap = true },
+  M = { '<cmd>Smp<cr>', "SMP Panel", noremap = true },
 }, { prefix = "<leader>" }
 )
 
@@ -361,7 +449,7 @@ wk.register({
 )
 
 wk.register({
-  ["<F12>"] = { "<cmd>lua require('dap_ui').toggle()<CR>", "Toggle FTerm" }
+      ["<F12>"] = { "<cmd>lua require('dap_ui').toggle()<CR>", "Toggle FTerm" }
 })
 
 vim.cmd [[

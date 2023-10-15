@@ -3,7 +3,7 @@ vim.cmd('colorscheme gruvbox-material')
 
 require('lualine').setup {
   options = {
-  theme = "kanagawabones",
+  theme = "gruvbox",
     icons_enabled= 1
   },
   extensions = {'fugitive', 'nvim-tree', 'quickfix' },
