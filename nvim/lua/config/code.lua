@@ -60,11 +60,15 @@ require("lspconfig").terraformls.setup({ filetypes = { "terraform", "terraform-v
 require("lspconfig").tflint.setup({ filetypes = { "terraform", "terraform-vars", "hcl" } })
 
 require("navigator").setup({
+  debug = true,
   default_mapping = false,
+  keymaps = {}, -- e.g keymaps={{key = "GR", func = vim.lsp.buf.references}, } this replace gr default mapping
   mason = true,
   lsp = {
+    code_action = { enable = true, sign = true, sign_priority = 40, virtual_text = true },
+    code_lens_action = { enable = true, sign = true, sign_priority = 40, virtual_text = true },
     format_on_save = false,
-    disply_diagnostic_qf = false,
+    display_diagnostic_qf = 'trouble',
     disable_lsp = { "sumneko_lua" },
   },
 })
@@ -91,8 +95,3 @@ local cfg = require("yaml-companion").setup({
 })
 
 require("lspconfig").yamlls.setup(cfg)
-
-require("nvim-lightbulb").setup({
-  autocmd = { enabled = true }
-})
-

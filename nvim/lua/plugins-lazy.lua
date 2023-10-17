@@ -95,9 +95,18 @@ require("lazy").setup({
   -- LSP Stuff
   "neovim/nvim-lspconfig",
   "onsails/lspkind-nvim",
-  "kosayoda/nvim-lightbulb",
   { "ray-x/guihua.lua",   build = "cd lua/fzy && make" },
   "ray-x/navigator.lua",
+
+  {
+    "folke/trouble.nvim",
+    dependencies = { "nvim-tree/nvim-web-devicons" },
+    opts = {
+      -- your configuration comes here
+      -- or leave it empty to use the default settings
+      -- refer to the configuration section below
+    },
+  },
 
   -- Yaml Schemas
   {
@@ -410,19 +419,19 @@ require("lazy").setup({
       require("spectre").setup({
         open_cmd = "new",
         find_engine = {
-              ["ag"] = {
+          ["ag"] = {
             cmd = "ag",
             args = {
               "--vimgrep",
               "-s",
             },
             options = {
-                  ["ignore-case"] = {
+              ["ignore-case"] = {
                 value = "-i",
                 icon = "[I]",
                 desc = "ignore case",
               },
-                  ["hidden"] = {
+              ["hidden"] = {
                 value = "--hidden",
                 desc = "hidden file",
                 icon = "[H]",
@@ -431,12 +440,12 @@ require("lazy").setup({
           },
         },
         replace_engine = {
-              ["sed"] = {
+          ["sed"] = {
             cmd = "sed",
             args = nil,
           },
           options = {
-                ["ignore-case"] = {
+            ["ignore-case"] = {
               value = "--ignore-case",
               icon = "[I]",
               desc = "ignore case",
@@ -513,8 +522,49 @@ require("lazy").setup({
     "zbirenbaum/copilot.lua",
     config = function()
       require("copilot").setup({
-        suggestion = { enabled = false },
-        panel = { enabled = true, auto_refresh = true },
+        panel = {
+          enabled = true,
+          auto_refresh = false,
+          keymap = {
+            jump_prev = "[[",
+            jump_next = "]]",
+            accept = "<CR>",
+            refresh = "gr",
+            open = "<M-CR>"
+          },
+          layout = {
+            position = "bottom", -- | top | left | right
+            ratio = 0.4
+          },
+        },
+        suggestion = {
+          enabled = false,
+          auto_trigger = false,
+          debounce = 75,
+          keymap = {
+            accept = "<M-l>",
+            accept_word = false,
+            accept_line = false,
+            next = "<M-]>",
+            prev = "<M-[>",
+            dismiss = "<C-]>",
+          },
+        },
+        filetypes = {
+          go = false,
+          yaml = false,
+          markdown = false,
+          help = false,
+          gitcommit = false,
+          gitrebase = false,
+          hgcommit = false,
+          svn = false,
+          cvs = false,
+          telekasten = false,
+          ["."] = false,
+        },
+        copilot_node_command = 'node', -- Node.js version must be > 16.x
+        server_opts_overrides = {}
       })
     end,
   },

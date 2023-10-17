@@ -253,52 +253,46 @@ wk.register({
   rn = { require("navigator.rename").rename, "rename" },
 }, { prefix = "<Space>" })
 
--- Bindings with <Leader> prefix
-wk.register({
-  g = {
-    name = "go to",
-    r = { require("navigator.reference").reference, "reference" },
-    t = { require("navigator.treesitter").buf_ts, "buf_ts" },
-    T = { require("navigator.treesitter").bufs_ts, "bufs_ts" },
-    i = { vim.lsp.buf.incoming_calls, "incoming_calls" },
-    o = { vim.lsp.buf.outgoing_calls, "outgoing_calls" },
-  },
-  c = {
-    t = { require("navigator.ctags").ctags, "ctags" },
-  },
-  d = {
-    t = { require("navigator.diagnostics").toggle_diagnostics, "toggle_diagnostics" },
-  },
-  k = { require("navigator.dochighlight").hi_symbol, "hi_symbol" },
-}, { prefix = "<Leader>" })
-
 -- Adding individual bindings (without prefix or with other prefixes)
 wk.register({
   g = {
     name = "go to",
-    r = { require("navigator.reference").async_ref, "async_ref" },
-    ["0"] = { require("navigator.symbols").document_symbols, "document_symbols" },
-    W = { require("navigator.workspace").workspace_symbol_live, "workspace_symbol_live" },
-    d = { require("navigator.definition").definition, "definition" },
-    D = { vim.lsp.buf.declaration, "declaration" },
-    p = { require("navigator.definition").definition_preview, "definition_preview" },
-    i = { vim.lsp.buf.implementation, "implementation" },
-    L = { require("navigator.diagnostics").show_diagnostics, "show_diagnostics" },
-    G = { require("navigator.diagnostics").show_buf_diagnostics, "show_buf_diagnostics" },
+    R = { function() require("trouble").toggle("lsp_references") end, "LSP async reference (Trouble)", noremap = true },
+    ["0"] = { require("navigator.symbols").document_symbols, "LSP document symbols" },
+    W = { require("navigator.workspace").workspace_symbol_live, "LSP workspace symbols live" },
+    d = { require("navigator.definition").definition, "LSP definition" },
+    D = { vim.lsp.buf.declaration, "LSP declaration" },
+    p = { require("navigator.definition").definition_preview, "LSP definition preview" },
+    i = { vim.lsp.buf.implementation, "LSP implementation" },
+    L = { require("navigator.diagnostics").show_diagnostics, "LSP show diagnostics" },
+    G = { require("navigator.diagnostics").show_buf_diagnostics, "LSP show buf_diagnostics" },
   },
+  ['<F2>'] = { vim.diagnostic.goto_prev, "prev diagnostics" },
+  ['S-<F2>'] = { vim.diagnostic.goto_next, "next diagnostics" },
   ['[d'] = { vim.diagnostic.goto_prev, "prev diagnostics" },
   [']d'] = { vim.diagnostic.goto_next, "next diagnostics" },
   ['[r'] = { require("navigator.treesitter").goto_previous_usage, "goto_previous_usage" },
   [']r'] = { require("navigator.treesitter").goto_next_usage, "goto_next_usage" },
-  ['<C-k>'] = { vim.lsp.buf.signature_help, "signature_help" },
-  ['<M-k>'] = { vim.lsp.signature_help, "signature_help" },
-  ['<C-]>'] = { require("navigator.definition").definition, "definition" },
+  ['<C-k>'] = { vim.lsp.buf.signature_help, "lsp buf signature help" },
+  ['<M-k>'] = { vim.lsp.signature_help, "lsp buf signature help" },
 }, { prefix = "" })
 
+
 wk.register({
-  ['ca'] = { require("navigator.codeAction").range_code_action, "range code action" },
+  x = {
+    name = 'show trouble with',
+    x = { function() require("trouble").toggle() end, "default" },
+    w = { function() require("trouble").toggle("workspace_diagnostics") end, "workspace diagnostics" },
+    d = { function() require("trouble").toggle("document_diagnostics") end, "document diagnostics" },
+    q = { function() require("trouble").toggle("quickfix") end, "quickfix" },
+    l = { function() require("trouble").toggle("loclist") end, "loclist" },
+  },
+}, { prefix = "<leader>" })
+
+wk.register({
+  ['ca'] = { require("navigator.codeaction").range_code_action, "range code action" },
   ['ff'] = { vim.lsp.buf.range_formatting, "range format" },
-}, { mode = "v", prefix = "<Space>" })
+}, { mode = "v", prefix = "<space>" })
 
 wk.register({
   g = {

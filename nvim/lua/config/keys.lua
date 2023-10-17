@@ -9,7 +9,7 @@ mapkey('n', '[t', ':tabprevious<CR>', {noremap = true, silent = true})
 mapkey('n', ']t', ':tabnext<CR>', {noremap = true, silent = true})
 
 -- make copying to clipboard easier
-mapkey('n', '<CR>', '"+y', {noremap = true, silent = false})
+-- mapkey('n', '<CR>', '"+y', {noremap = true, silent = false})
 mapkey('v', '<CR>', '"+y', {noremap = true, silent = false})
 
 -- making the terminal bearable
@@ -26,3 +26,4 @@ mapkey('n', '<leader>l', ':nohlsearch<cr>:diffupdate<cr>:syntax sync fromstart<c
 
 --Stuff
 mapkey('n', '<leader>G', '<cmd>lua require("spectre").open()<CR>', {noremap = true, silent = false})
+
