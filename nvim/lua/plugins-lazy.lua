@@ -31,19 +31,6 @@ require("lazy").setup({
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
 
-  -- Show breadcrumb using lsp
-  {
-    "utilyre/barbecue.nvim",
-    version = "*",
-    dependencies = {
-      "SmiteshP/nvim-navic",
-      "nvim-tree/nvim-web-devicons",
-    },
-    config = function()
-      require("barbecue").setup()
-    end,
-  },
-
   -- Hex editor / viewer -> :HexDump, :HexAssemble, :HexToggle
   {
     "RaafatTurki/hex.nvim",
@@ -51,27 +38,7 @@ require("lazy").setup({
       require("hex").setup()
     end,
   },
-
-  -- Colorschemes
-  {
-    "srcery-colors/srcery-vim",
-    as = "srcery",
-    setup = function()
-      vim.g.srcery_italic = 1
-    end,
-  },
-  {
-    "mhartington/oceanic-next",
-    setup = function()
-      vim.g.oceanic_next_terminal_bold = 1
-      vim.g.oceanic_next_terminal_italic = 1
-    end,
-  },
-  {
-    "rose-pine/neovim",
-    name = "rose-pine",
-  },
-
+  
   -- treesiter
   {
     "nvim-treesitter/nvim-treesitter",
