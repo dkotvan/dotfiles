@@ -59,3 +59,6 @@ vim.opt.undofile = true                  -- persistent undo, write undo at disk
 -- linguagem
 vim.opt.spelllang={ 'en_us','pt_br' }
 vim.opt.spell = true
+
+-- editorconfig
+vim.g.editorconfig = true

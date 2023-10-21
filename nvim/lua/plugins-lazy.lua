@@ -15,14 +15,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-  -- Editorconfig
-  {
-    "editorconfig/editorconfig-vim",
-    config = function()
-      vim.g.EditorConfig_exclude_patterns = { "fugitive://.*", "scp://.*" }
-    end,
-  },
-
   -- Gruvbox colorscheme with support for treesiter
   "sainnhe/gruvbox-material",
 
