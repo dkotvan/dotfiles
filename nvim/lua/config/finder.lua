@@ -106,6 +106,14 @@ require("legendary").setup {
 vim.api.nvim_set_keymap("n", "<leader><leader>", "<cmd>lua require('legendary').find()<CR>", { noremap = true })
 
 local commands = {
+  -- plugin indent-blankline
+  { ':IBLEnable', description = 'Enables indent-blankline' },
+  { ':IBLDisable', description = 'Disables indent-blankline' },
+  { ':IBLToggle', description = 'Toggles indent-blankline on and off' },
+  { ':IBLEnableScope', description = 'Enables indent-blanklines scope' },
+  { ':IBLDisableScope', description = 'Disables indent-blanklines scope' },
+  { ':IBLToggleScope', description = 'Toggles indent-blanklines scope on and off' },
+  -- plugin fugitive
   { ':GV',                            description = '(GV) Git log' },
   { ':GV!',                           description = '(GV) Git log buffer' },
   { ':G',                             description = 'Git status' },
@@ -227,10 +235,10 @@ local wk = require("which-key")
 
 -- Bindings with <Space> prefix
 wk.register({
-  c = {
-    name = "code",
-    a = { require("navigator.codeAction").code_action, "code_action" },
-  },
+  -- c = {
+  --   name = "code",
+  --   a = { require("navigator.codeAction").code_action, "code_action" },
+  -- },
   w = {
     name = "workspace",
     a = { require("navigator.workspace").add_workspace_folder, "add_workspace_folder" },
@@ -290,7 +298,7 @@ wk.register({
 }, { prefix = "<leader>" })
 
 wk.register({
-  ['ca'] = { require("navigator.codeaction").range_code_action, "range code action" },
+  -- ['ca'] = { require("navigator.codeaction").range_code_action, "range code action" },
   ['ff'] = { vim.lsp.buf.range_formatting, "range format" },
 }, { mode = "v", prefix = "<space>" })
 

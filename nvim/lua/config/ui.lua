@@ -1,4 +1,3 @@
-
 vim.cmd [[
 let $NVIM_TUI_ENABLE_TRUE_COLOR=1
 let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
@@ -13,38 +12,48 @@ vim.cmd('colorscheme gruvbox-material')
 
 require('lualine').setup {
   options = {
-  theme = "gruvbox-material",
-    icons_enabled= 1
+    theme = "gruvbox-material",
+    icons_enabled = 1
   },
-  extensions = {'aerial', 'lazy', 'mason', 'fugitive', 'nvim-tree', 'quickfix', 'trouble' },
+  extensions = { 'aerial', 'lazy', 'mason', 'fugitive', 'nvim-tree', 'quickfix', 'trouble' },
   sections = {
-    lualine_a = {'mode'},
-    lualine_b = {'branch', 'diagnostics'},
+    lualine_a = { 'mode' },
+    lualine_b = { 'branch', 'diagnostics' },
     lualine_c = {
       {
         'filename',
         path = 1
       }
     },
-    lualine_x = {'encoding', 'fileformat', 'filetype'},
-    lualine_y = {''},
-    lualine_z = {'location', 'searchcount'}
+    lualine_x = { 'encoding', 'fileformat', 'filetype' },
+    lualine_y = { '' },
+    lualine_z = { 'location', 'searchcount' }
   }
 }
 
 local highlight = {
-    "dark4",
-    "dark3",
-    "dark2",
+  "dark4",
+  "dark3",
+  "dark2",
 }
 
 local hooks = require "ibl.hooks"
 -- create the highlight groups in the highlight setup hook, so they are reset
 -- every time the colorscheme changes
 hooks.register(hooks.type.HIGHLIGHT_SETUP, function()
-    vim.api.nvim_set_hl(0, "dark2", { fg = '#504945' })
-    vim.api.nvim_set_hl(0, "dark3", { fg = '#665c54' })
-    vim.api.nvim_set_hl(0, "dark4", { fg = '#7c6f64' })
+  vim.api.nvim_set_hl(0, "dark2", { fg = '#504945' })
+  vim.api.nvim_set_hl(0, "dark3", { fg = '#665c54' })
+  vim.api.nvim_set_hl(0, "dark4", { fg = '#7c6f64' })
 end)
 
-require("ibl").setup { indent = { highlight = highlight } }
+require("ibl").setup({
+  indent = { highlight = highlight },
+  scope = { -- configure scope to higglight beginning of scope
+    enabled = true,
+    show_start = true,
+    show_end = true,
+    injected_languages = true,
+    highlight = { "Function", "Label" },
+    priority = 500,
+  },
+})
