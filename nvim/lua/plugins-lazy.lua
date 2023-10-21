@@ -31,14 +31,6 @@ require("lazy").setup({
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
 
-  -- Hex editor / viewer -> :HexDump, :HexAssemble, :HexToggle
-  {
-    "RaafatTurki/hex.nvim",
-    config = function()
-      require("hex").setup()
-    end,
-  },
-  
   -- treesiter
   {
     "nvim-treesitter/nvim-treesitter",

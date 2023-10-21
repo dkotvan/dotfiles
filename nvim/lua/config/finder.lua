@@ -165,7 +165,6 @@ local commands = {
   { ':MakeTable',                     description = 'CSV to markdown table' },
   { ':UnmakeTable',                   description = 'Markdow table to CSV' },
   { ':ASToggle',                      description = 'ASToggle: toggles AutoSave.nvim on and off.' },
-  { ':HexToggle',                     description = 'Toggle the hex view' },
   { ':Lazy sync',                     description = 'Lazy: Sync plugins' },
   { 'lua require("smp").preview()',   description = 'SMP: preview current markdown file' },
   {
