@@ -15,6 +15,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+  -- ###### UI related
   -- Gruvbox colorscheme with support for treesiter
   "sainnhe/gruvbox-material",
 

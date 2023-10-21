@@ -16,10 +16,10 @@ require('lualine').setup {
   theme = "gruvbox-material",
     icons_enabled= 1
   },
-  extensions = {'fugitive', 'nvim-tree', 'quickfix' },
+  extensions = {'aerial', 'lazy', 'mason', 'fugitive', 'nvim-tree', 'quickfix', 'trouble' },
   sections = {
     lualine_a = {'mode'},
-    lualine_b = {'branch'},
+    lualine_b = {'branch', 'diagnostics'},
     lualine_c = {
       {
         'filename',
@@ -28,7 +28,7 @@ require('lualine').setup {
     },
     lualine_x = {'encoding', 'fileformat', 'filetype'},
     lualine_y = {''},
-    lualine_z = {'location'}
+    lualine_z = {'location', 'searchcount'}
   }
 }
 
