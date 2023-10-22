@@ -1,33 +1,11 @@
 require("nvim-treesitter.configs").setup({
   ensure_installed = {
-    "bash",
-    "c",
-    "css",
-    "clojure",
-    "cpp",
-    "dockerfile",
-    "dot",
-    "elixir",
-    "erlang",
-    "go",
-    "gomod",
-    "graphql",
-    "hcl",
-    "html",
-    "http",
-    "java",
-    "javascript",
-    "json",
-    "jsonc",
-    "kotlin",
-    "latex",
-    "lua",
-    "make",
-    "perl",
-    "php",
-    "python",
-    "terraform",
-    "vim",
+    "bash", "c", "css", "csv", "clojure", "cpp", "diff", "dockerfile", "dot", "elixir",
+    "git_config", "git_rebase", "gitattributes", "gitcommit", "gitignore",
+    "go", "gomod", "gosum", "gowork", "graphql", "hcl", "html", "http", "java", "javascript",
+    "jq", "json", "json5", "jsonc", "kotlin", "latex", "lua", "make", "markdown_inline",
+    "perl", "php", "python", "ruby", "sql", "terraform", "toml",
+    "typescript", "vim", "xml", "yaml", "zig"
   },
   highlight = { enable = true },
   indentation = { enable = true },
@@ -50,8 +28,51 @@ require('Comment').setup {
 }
 
 require("mason").setup()
-require("mason-lspconfig").setup({
-  ensure_installed = { "bashls", "dockerls", "lua_ls", "pyright", "tsserver", "terraformls", "tflint", "yamlls" },
+require("mason-lspconfig").setup()
+require('mason-tool-installer').setup {
+  ensure_installed = {
+    -- LSP Servers
+    "bashls", "docker_compose_language_service", "dockerls", "gradle_ls",
+    "graphql", "jqls", "lua_ls", "pyright", "tsserver", "terraformls",
+    "tflint", "yamlls",
+    -- Linters
+    "eslint_d", "shellcheck", "vacuum",
+    -- Format
+    "cbfmt", "jq", "shfmt", "sqlfluff",
+  },
+  auto_update = true,
+  run_on_start = true,
+  start_delay = 10000,
+  debounce_hours = 8,
+}
+
+local nls = require("null-ls")
+
+nls.setup({
+  debug = false,
+  sources = {
+    -- Code Actions
+    nls.builtins.code_actions.eslint_d,
+    nls.builtins.code_actions.gitrebase,
+    nls.builtins.code_actions.gitsigns,
+    -- Diagnostics
+    nls.builtins.diagnostics.eslint_d,
+    nls.builtins.diagnostics.shellcheck,
+    nls.builtins.diagnostics.sqlfluff.with({
+        extra_args = { "--config", "/home/dkotvan/dotfiles/nvim/sqlfluff.toml" },
+    }),
+    nls.builtins.diagnostics.vacuum, -- TODO: create a recomended ruleset
+    nls.builtins.diagnostics.zsh,
+    -- Formatting.
+    nls.builtins.formatting.beautysh,
+    nls.builtins.formatting.cbfmt,
+    nls.builtins.formatting.eslint_d,
+    nls.builtins.formatting.jq,
+    nls.builtins.formatting.shfmt,
+    nls.builtins.formatting.sqlfluff.with({
+        extra_args = { "--config", "/home/dkotvan/dotfiles/nvim/sqlfluff.toml" },
+    }),
+  },
 })
 
 -- Fix hcl filetype and terraformls and tflint
@@ -60,12 +81,13 @@ require("lspconfig").terraformls.setup({ filetypes = { "terraform", "terraform-v
 require("lspconfig").tflint.setup({ filetypes = { "terraform", "terraform-vars", "hcl" } })
 
 require("navigator").setup({
-  debug = true,
+  debug = false,
   default_mapping = false,
-  keymaps = {}, -- e.g keymaps={{key = "GR", func = vim.lsp.buf.references}, } this replace gr default mapping
+  keymaps = {},
   mason = true,
+  lines_show_prompt = 20,
   lsp = {
-    code_action = { enable = true, sign = true, sign_priority = 40, virtual_text = true },
+    code_action = { enable = true, sign = true, sign_priority = 40, virtual_text = true, virtual_text_icon = true },
     code_lens_action = { enable = true, sign = true, sign_priority = 40, virtual_text = true },
     format_on_save = false,
     display_diagnostic_qf = 'trouble',

@@ -234,10 +234,10 @@ local wk = require("which-key")
 
 -- Bindings with <Space> prefix
 wk.register({
-  -- c = {
-  --   name = "code",
-  --   a = { require("navigator.codeAction").code_action, "code_action" },
-  -- },
+  c = {
+    name = "code",
+    a = { require("navigator.codeAction").code_action, "code_action" },
+  },
   w = {
     name = "workspace",
     a = { require("navigator.workspace").add_workspace_folder, "add_workspace_folder" },
@@ -297,7 +297,7 @@ wk.register({
 }, { prefix = "<leader>" })
 
 wk.register({
-  -- ['ca'] = { require("navigator.codeaction").range_code_action, "range code action" },
+  ['ca'] = { require("navigator.codeAction").range_code_action, "range code action" },
   ['ff'] = { vim.lsp.buf.range_formatting, "range format" },
 }, { mode = "v", prefix = "<space>" })
 

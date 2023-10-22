@@ -31,6 +31,7 @@ require("lazy").setup({
     dependencies = { "nvim-tree/nvim-web-devicons" },
   },
 
+  -- ##### LSP & Treesitter
   -- treesiter
   {
     "nvim-treesitter/nvim-treesitter",
@@ -43,6 +44,9 @@ require("lazy").setup({
   -- install stuff
   "williamboman/mason.nvim",
   "williamboman/mason-lspconfig.nvim",
+  "WhoIsSethDaniel/mason-tool-installer.nvim",
+  "nvimtools/none-ls.nvim",
+
 
   -- LSP Stuff
   "neovim/nvim-lspconfig",
@@ -371,19 +375,19 @@ require("lazy").setup({
       require("spectre").setup({
         open_cmd = "new",
         find_engine = {
-          ["ag"] = {
+              ["ag"] = {
             cmd = "ag",
             args = {
               "--vimgrep",
               "-s",
             },
             options = {
-              ["ignore-case"] = {
+                  ["ignore-case"] = {
                 value = "-i",
                 icon = "[I]",
                 desc = "ignore case",
               },
-              ["hidden"] = {
+                  ["hidden"] = {
                 value = "--hidden",
                 desc = "hidden file",
                 icon = "[H]",
@@ -392,12 +396,12 @@ require("lazy").setup({
           },
         },
         replace_engine = {
-          ["sed"] = {
+              ["sed"] = {
             cmd = "sed",
             args = nil,
           },
           options = {
-            ["ignore-case"] = {
+                ["ignore-case"] = {
               value = "--ignore-case",
               icon = "[I]",
               desc = "ignore case",
@@ -513,7 +517,7 @@ require("lazy").setup({
           svn = false,
           cvs = false,
           telekasten = false,
-          ["."] = false,
+              ["."] = false,
         },
         copilot_node_command = 'node', -- Node.js version must be > 16.x
         server_opts_overrides = {}
@@ -526,70 +530,6 @@ require("lazy").setup({
     config       = function()
       require("copilot_cmp").setup()
     end
-  },
-
-  --   {
-  --     "jackMort/ChatGPT.nvim",
-  --     config = function()
-  --       require("chatgpt").setup({
-  --         -- optional configuration
-  --       })
-  --     end,
-  --     dependencies = {
-  --       "MunifTanjim/nui.nvim",
-  --       "nvim-lua/plenary.nvim",
-  --       "nvim-telescope/telescope.nvim",
-  --     },
-  --   },
-
-  -- Got from LazyVIM
-  {
-    "RRethy/vim-illuminate", -- Vim plugin for automatically highlighting other uses of the word under the cursor using either LSP, Tree-sitter, or regex matching.
-  },
-  -- {
-  --   "folke/noice.nvim",
-  --   dependencies = {
-  --     "MunifTanjim/nui.nvim",
-  --     "rcarriga/nvim-notify",
-  --   },
-  --     config = function()
-  --       require("noice").setup({
-  --       cmdline = {
-  --         view = "cmdline",
-  --       },
-  --       messages = {
-  --         enabled = false,
-  --       },
-  --       lsp = {
-  --         hover = {
-  --           enabled = false,
-  --         },
-  --         signature = {
-  --           enabled = false,
-  --         },
-  --         -- override markdown rendering so that **cmp** and other plugins use **Treesitter**
-  --         override = {
-  --           ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
-  --           ["vim.lsp.util.stylize_markdown"] = true,
-  --           ["cmp.entry.get_documentation"] = true,
-  --         },
-  --       },
-  --       -- you can enable a preset for easier configuration
-  --       presets = {
-  --         bottom_search = false,        -- use a classic bottom cmdline for search
-  --         long_message_to_split = true, -- long messages will be sent to a split
-  --         inc_rename = true,            -- enables an input dialog for inc-rename.nvim
-  --         lsp_doc_border = false,       -- add a border to hover docs and signature help
-  --       },
-  --     })
-  --   end,
-  -- },
-
-  {
-    "jose-elias-alvarez/null-ls.nvim",
-    dependencies = {
-      "mason.nvim",
-    },
   },
 
   {
