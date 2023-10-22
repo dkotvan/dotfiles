@@ -229,7 +229,6 @@ require("which-key").setup({
   }
 })
 
-
 local wk = require("which-key")
 
 -- Bindings with <Space> prefix
@@ -264,6 +263,7 @@ wk.register({
 wk.register({
   g = {
     name = "go to",
+    r = { require('navigator.reference').async_ref, "LSP async reference (Navigator)", noremap = true },
     R = { function() require("trouble").toggle("lsp_references") end, "LSP async reference (Trouble)", noremap = true },
     ["0"] = { require("navigator.symbols").document_symbols, "LSP document symbols" },
     W = { require("navigator.workspace").workspace_symbol_live, "LSP workspace symbols live" },
@@ -283,7 +283,6 @@ wk.register({
   ['<C-k>'] = { vim.lsp.buf.signature_help, "lsp buf signature help" },
   ['<M-k>'] = { vim.lsp.signature_help, "lsp buf signature help" },
 }, { prefix = "" })
-
 
 wk.register({
   x = {

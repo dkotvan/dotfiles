@@ -46,33 +46,69 @@ require('mason-tool-installer').setup {
   debounce_hours = 8,
 }
 
+local go_home = vim.fn.expand("$HOME/go")
+
+require('go').setup({
+  gopls_cmd = { go_home .. '/bin/gopls' },
+  goimport = 'gopls', -- if set to 'gopls' will use golsp format
+  gofmt = 'gopls',    -- if set to gopls will use golsp format
+  max_line_len = 120,
+  tag_transform = false,
+  test_dir = '',
+  comment_placeholder = '   ',
+  lsp_cfg = true,      -- false: use your own lspconfig
+  lsp_gofumpt = true,   -- true: set default gofmt in gopls format to gofumpt
+  lsp_on_attach = true, -- use on_attach from go.nvim
+  lsp_keymaps = false, -- use our keymaps instead
+  dap_debug = true,
+})
+
+local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = "*.go",
+  callback = function()
+    require('go.format').goimport()
+  end,
+  group = format_sync_grp,
+})
+
+local cfg = require 'go.lsp'.config() -- config() return the go.nvim gopls setup
+require('lspconfig').gopls.setup(cfg)
+
 local nls = require("null-ls")
 
+local sqlfluff_with = {
+    extra_args = { "--config", vim.fn.expand("$HOME/dotfiles/nvim/sqlfluff.toml") },
+  }
+
+local sources = {
+  -- Code Actions
+  nls.builtins.code_actions.eslint_d,
+  nls.builtins.code_actions.gitrebase,
+  nls.builtins.code_actions.gitsigns,
+  -- Diagnostics
+  nls.builtins.diagnostics.eslint_d,
+  nls.builtins.diagnostics.shellcheck,
+  nls.builtins.diagnostics.sqlfluff.with(sqlfluff_with),
+  nls.builtins.diagnostics.vacuum,   -- TODO: create a recomended ruleset
+  nls.builtins.diagnostics.zsh,
+  -- Formatting.
+  nls.builtins.formatting.beautysh,
+  nls.builtins.formatting.cbfmt,
+  nls.builtins.formatting.eslint_d,
+  nls.builtins.formatting.jq,
+  nls.builtins.formatting.shfmt,
+  nls.builtins.formatting.sqlfluff.with(sqlfluff_with),
+}
+local gotest = require("go.null_ls").gotest()
+local gotest_codeaction = require("go.null_ls").gotest_action()
+local golangci_lint = require("go.null_ls").golangci_lint()
+table.insert(sources, gotest)
+table.insert(sources, golangci_lint)
+table.insert(sources, gotest_codeaction)
 nls.setup({
   debug = false,
-  sources = {
-    -- Code Actions
-    nls.builtins.code_actions.eslint_d,
-    nls.builtins.code_actions.gitrebase,
-    nls.builtins.code_actions.gitsigns,
-    -- Diagnostics
-    nls.builtins.diagnostics.eslint_d,
-    nls.builtins.diagnostics.shellcheck,
-    nls.builtins.diagnostics.sqlfluff.with({
-        extra_args = { "--config", "/home/dkotvan/dotfiles/nvim/sqlfluff.toml" },
-    }),
-    nls.builtins.diagnostics.vacuum, -- TODO: create a recomended ruleset
-    nls.builtins.diagnostics.zsh,
-    -- Formatting.
-    nls.builtins.formatting.beautysh,
-    nls.builtins.formatting.cbfmt,
-    nls.builtins.formatting.eslint_d,
-    nls.builtins.formatting.jq,
-    nls.builtins.formatting.shfmt,
-    nls.builtins.formatting.sqlfluff.with({
-        extra_args = { "--config", "/home/dkotvan/dotfiles/nvim/sqlfluff.toml" },
-    }),
-  },
+  sources = sources,
 })
 
 -- Fix hcl filetype and terraformls and tflint
