@@ -30,7 +30,7 @@ vim.opt.showmatch = true -- Jump to matching bracket
 -- set cpoptions-=m    " showmatch will wait 0.5s or until a char is typed
 
 -- Tabs and Indents {{{
-vim.opt.expandtab = true -- Expand tabs to spaces.fftpl
+vim.opt.expandtab = false -- Expand tabs to spaces.fftpl
 vim.opt.tabstop=4       -- The number of spaces a tab is
 vim.opt.softtabstop=4   -- While performing editing operations
 vim.opt.shiftwidth=2    -- Number of spaces to use in auto(indent)

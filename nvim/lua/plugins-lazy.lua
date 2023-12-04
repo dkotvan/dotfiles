@@ -168,9 +168,6 @@ require("lazy").setup({
     end,
   },
 
-  -- add new targets and make it seek the operator in the line
-  "wellle/targets.vim",
-
   -- DiffViewOpen <git rev> to to a diff of all files
   "sindrets/diffview.nvim",
 
@@ -228,11 +225,7 @@ require("lazy").setup({
   -- UnmakeTable  -> markdown to csv
   "mattn/vim-maketable",
 
-  -- textobject ar | ir
-  {
-    "nelstrom/vim-textobj-rubyblock",
-    ft = { "ruby" },
-  },
+  { 'echasnovski/mini.ai', version = false },
 
   -- textobject ae | ie
   { "kana/vim-textobj-entire", dependencies = { "kana/vim-textobj-user" } },
@@ -571,4 +564,10 @@ require("lazy").setup({
       })
     end
   },
+
+  {
+    "RRethy/nvim-treesitter-textsubjects"
+  },
 })
+
+
