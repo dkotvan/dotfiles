@@ -10,7 +10,7 @@ cmp.setup {
   },
   sources = {
     -- { name = "codeium" },
-    { name = "copilot" },
+    -- { name = "copilot" },
     { name = 'nvim_lsp' },
     { name = 'nvim_lua' },
     { name = 'vsnip' },
