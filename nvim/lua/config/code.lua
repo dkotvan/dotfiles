@@ -61,6 +61,7 @@ require('go').setup({
   lsp_on_attach = true, -- use on_attach from go.nvim
   lsp_keymaps = false, -- use our keymaps instead
   dap_debug = true,
+  trouble = true,
 })
 
 local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})

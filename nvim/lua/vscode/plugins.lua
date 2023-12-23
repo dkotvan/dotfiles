@@ -16,7 +16,10 @@ vim.opt.rtp:prepend(lazypath)
 
 require('lazy').setup({
    -- add new targets and make it seek the operator in the line
-   'wellle/targets.vim',
+   -- 'wellle/targets.vim',
+
+   { 'echasnovski/mini.ai', version = false },
+
 
    -- best git plugin
    'tpope/vim-fugitive',
