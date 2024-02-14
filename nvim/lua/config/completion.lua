@@ -9,8 +9,8 @@ cmp.setup {
     end,
   },
   sources = {
-    { name = "codeium" },
-    -- { name = "copilot" },
+    -- { name = "codeium" },
+    { name = "copilot" },
     { name = 'nvim_lsp' },
     { name = 'nvim_lua' },
     { name = 'vsnip' },
@@ -54,6 +54,7 @@ cmp.setup {
 
       -- set a name for each source
       vim_item.menu = ({
+        copilot = "",
         codeium = "",
         path = "",
         buffer = "",
