@@ -351,7 +351,7 @@ require("lazy").setup({
 
 	-- debug
 	"mfussenegger/nvim-dap",
-	{ "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap" } },
+	{ "rcarriga/nvim-dap-ui", dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} },
 	{ "leoluz/nvim-dap-go",   dependencies = { "mfussenegger/nvim-dap" } },
 	"theHamsta/nvim-dap-virtual-text",
 	"nvim-telescope/telescope-dap.nvim",
@@ -443,12 +443,12 @@ require("lazy").setup({
 		config = function()
 			require("config-local").setup({
 				-- Default configuration (optional)
-				config_files = { ".vimrc.lua", ".vimrc" },            -- Config file patterns to load (lua supported)
+				config_files = { ".vimrc.lua", ".vimrc" },        -- Config file patterns to load (lua supported)
 				hashfile = vim.fn.stdpath("data") .. "/config-local", -- Where the plugin keeps files data
-				autocommands_create = true,                           -- Create autocommands (VimEnter, DirectoryChanged)
-				commands_create = true,                               -- Create commands (ConfigSource, ConfigEdit, ConfigTrust, ConfigIgnore)
-				silent = false,                                       -- Disable plugin messages (Config loaded/ignored)
-				lookup_parents = false,                               -- Lookup config files in parent directories
+				autocommands_create = true,                       -- Create autocommands (VimEnter, DirectoryChanged)
+				commands_create = true,                           -- Create commands (ConfigSource, ConfigEdit, ConfigTrust, ConfigIgnore)
+				silent = false,                                   -- Disable plugin messages (Config loaded/ignored)
+				lookup_parents = false,                           -- Lookup config files in parent directories
 			})
 		end,
 	},
@@ -528,4 +528,34 @@ require("lazy").setup({
 	{
 		"RRethy/nvim-treesitter-textsubjects"
 	},
+
+	{
+		"jellydn/hurl.nvim",
+		dependencies = { "MunifTanjim/nui.nvim" },
+		ft = "hurl",
+		opts = {
+			-- Show debugging info
+			debug = false,
+			-- Show notification on run
+			show_notification = false,
+			-- Show response in popup or split
+			mode = "split",
+			-- Default formatter
+			formatters = {
+				json = { 'jq' }, -- Make sure you have install jq in your system, e.g: brew install jq
+			},
+		},
+		keys = {
+			-- Run API request
+			{ "<leader>A",  "<cmd>HurlRunner<CR>",        desc = "HURL: Run All requests" },
+			{ "<leader>a",  "<cmd>HurlRunnerAt<CR>",      desc = "HURL: Run Api request" },
+			{ "<leader>te", "<cmd>HurlRunnerToEntry<CR>", desc = "HURL: Run Api request to entry" },
+			{ "<leader>tm", "<cmd>HurlToggleMode<CR>",    desc = "HURL: Hurl Toggle Mode" },
+			{ "<leader>tv", "<cmd>HurlVerbose<CR>",       desc = "HURL: Run Api in verbose mode" },
+			-- Run Hurl request in visual mode
+			{ "<leader>h",  ":HurlRunner<CR>",            desc = "HURL: Hurl Runner",             mode = "v" },
+		},
+	},
+
+
 })

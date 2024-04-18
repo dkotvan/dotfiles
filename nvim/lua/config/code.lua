@@ -2,7 +2,7 @@ require("nvim-treesitter.configs").setup({
   ensure_installed = {
     "bash", "c", "css", "csv", "clojure", "cpp", "diff", "dockerfile", "dot", "elixir",
     "git_config", "git_rebase", "gitattributes", "gitcommit", "gitignore",
-    "go", "gomod", "gosum", "gowork", "graphql", "hcl", "html", "http", "java", "javascript",
+    "go", "gomod", "gosum", "gowork", "graphql", "hcl", "html", "http", "hurl", "java", "javascript",
     "jq", "json", "json5", "jsonc", "kotlin", "latex", "lua", "make", "markdown_inline",
     "perl", "php", "python", "ruby", "sql", "terraform", "toml",
     "typescript", "vim", "xml", "yaml", "zig"
@@ -50,9 +50,9 @@ local go_home = vim.fn.expand("$HOME/go")
 
 require('go').setup({
   gopls_cmd = { go_home .. '/bin/gopls' },
-  goimport = 'gopls', -- if set to 'gopls' will use golsp format
+  goimports = 'gopls', -- if set to 'gopls' will use golsp format
   gofmt = 'gopls',    -- if set to gopls will use golsp format
-  max_line_len = 120,
+  -- max_line_len = 120,
   tag_transform = false,
   test_dir = '',
   comment_placeholder = '   ',
@@ -84,20 +84,14 @@ local sqlfluff_with = {
 
 local sources = {
   -- Code Actions
-  nls.builtins.code_actions.eslint_d,
   nls.builtins.code_actions.gitrebase,
   nls.builtins.code_actions.gitsigns,
   -- Diagnostics
-  nls.builtins.diagnostics.eslint_d,
-  nls.builtins.diagnostics.shellcheck,
   nls.builtins.diagnostics.sqlfluff.with(sqlfluff_with),
   nls.builtins.diagnostics.vacuum,   -- TODO: create a recomended ruleset
   nls.builtins.diagnostics.zsh,
   -- Formatting.
-  nls.builtins.formatting.beautysh,
   nls.builtins.formatting.cbfmt,
-  nls.builtins.formatting.eslint_d,
-  nls.builtins.formatting.jq,
   nls.builtins.formatting.shfmt,
   nls.builtins.formatting.sqlfluff.with(sqlfluff_with),
 }

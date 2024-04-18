@@ -28,7 +28,7 @@ end
 # Git related
 brew 'git'
 brew 'gnupg'
-brew 'hub'
+brew 'gh'
 brew 'glab'
 brew 'git-delta'
 brew 'lab'
@@ -90,6 +90,7 @@ brew 'zoxide'
 brew 'cookiecutter'
 brew 'viu'
 brew 'chafa'
+brew 'hurl'
 
 # apps
 brew 'ghostscript'
@@ -126,6 +127,7 @@ if OS.mac?
   cask 'zulu8'
   cask 'temurin11'
   cask 'temurin17'
+  cask 'temurin21'
   cask 'dbeaver-community'
   cask 'discord'
   cask 'drawio'
