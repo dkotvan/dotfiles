@@ -1,5 +1,8 @@
 ohmyzsh/ohmyzsh
-# best git aliases
+# help with history issues?
+ohmyzsh/ohmyzsh path:plugins/safe-paste
+ohmyzsh/ohmyzsh path:plugins/history-substring-search
+# zsh configurations
 ohmyzsh/ohmyzsh path:plugins/git
 # zsh configurations
 willghatch/zsh-saneopt
