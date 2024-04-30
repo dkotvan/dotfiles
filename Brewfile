@@ -1,4 +1,3 @@
-tap 'homebrew/core'
 tap 'homebrew/bundle'
 tap 'remotemobprogramming/brew'
 
@@ -34,7 +33,6 @@ brew 'git-delta'
 brew 'lab'
 brew 'tig'
 brew 'mob'
-brew 'gitter-cli'
 brew 'pre-commit'
 brew 'lazygit'
 
@@ -72,7 +70,6 @@ brew 'findutils' if OS.mac?
 brew 'atuin'
 brew 'navi'
 brew 'fzf'
-brew 'glow'
 brew 'htop'
 brew 'jq'
 brew 'kcat'
@@ -83,13 +80,10 @@ brew 'the_silver_searcher'
 brew 'unzip'
 brew 'yamllint'
 brew 'zip'
-brew 'parquet-cli'
 brew 'watch'
 brew 'yq'
 brew 'zoxide'
 brew 'cookiecutter'
-brew 'viu'
-brew 'chafa'
 brew 'hurl'
 
 # apps
@@ -101,10 +95,6 @@ brew 'pgcli'
 brew 'litecli'
 brew 'tmux'
 brew 'vault'
-
-# Better ctags
-tap 'universal-ctags/universal-ctags'
-brew 'universal-ctags/universal-ctags/universal-ctags', args: ['HEAD']
 
 # Shell and Completions
 brew 'zsh'
