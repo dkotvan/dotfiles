@@ -95,10 +95,10 @@ local sources = {
   nls.builtins.formatting.shfmt,
   nls.builtins.formatting.sqlfluff.with(sqlfluff_with),
 }
-local gotest = require("go.null_ls").gotest()
-local gotest_codeaction = require("go.null_ls").gotest_action()
-table.insert(sources, gotest)
-table.insert(sources, gotest_codeaction)
+-- local gotest = require("go.null_ls").gotest()
+-- local gotest_codeaction = require("go.null_ls").gotest_action()
+-- table.insert(sources, gotest)
+-- table.insert(sources, gotest_codeaction)
 nls.setup({
   debug = false,
   sources = sources,

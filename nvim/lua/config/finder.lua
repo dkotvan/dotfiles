@@ -447,10 +447,10 @@ wk.register({
   t = { "<cmd>lua require('FTerm').toggle()<CR>", "Toggle FTerm" },
 }, { prefix = "<C-w>", mode = "t" }
 )
-
-wk.register({
-      ["<F12>"] = { "<cmd>lua require('dap_ui').toggle()<CR>", "Toggle FTerm" }
-})
+--
+-- wk.register({
+--       ["<F12>"] = { "<cmd>lua require('dap_ui').toggle()<CR>", "Toggle FTerm" }
+-- })
 
 vim.cmd [[
 nnoremap <C-P> <cmd>lua require('telescope.builtin').find_files()<cr>

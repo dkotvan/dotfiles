@@ -58,9 +58,8 @@ require("lazy").setup({
 		"folke/trouble.nvim",
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {
-			-- your configuration comes here
-			-- or leave it empty to use the default settings
-			-- refer to the configuration section below
+			auto_jump = {},
+			auto_preview = false,
 		},
 	},
 
@@ -218,9 +217,6 @@ require("lazy").setup({
 	-- Open external browsers
 	"tyru/open-browser.vim",
 
-	-- Asynchronous tag generation
-	"ludovicchabant/vim-gutentags",
-
 	-- MakeTable! -> csv to markdown table
 	-- UnmakeTable  -> markdown to csv
 	"mattn/vim-maketable",
@@ -351,7 +347,7 @@ require("lazy").setup({
 
 	-- debug
 	"mfussenegger/nvim-dap",
-	{ "rcarriga/nvim-dap-ui", dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"} },
+	{ "rcarriga/nvim-dap-ui", dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" } },
 	{ "leoluz/nvim-dap-go",   dependencies = { "mfussenegger/nvim-dap" } },
 	"theHamsta/nvim-dap-virtual-text",
 	"nvim-telescope/telescope-dap.nvim",
@@ -500,7 +496,7 @@ require("lazy").setup({
 					},
 				},
 				filetypes = {
-					go = false,
+					go = true,
 					yaml = false,
 					markdown = false,
 					help = false,
@@ -523,6 +519,20 @@ require("lazy").setup({
 		config       = function()
 			require("copilot_cmp").setup()
 		end
+	},
+
+	{
+		"CopilotC-Nvim/CopilotChat.nvim",
+		branch = "canary",
+		dependencies = {
+			{ "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
+			{ "nvim-lua/plenary.nvim" },  -- for curl, log wrapper
+		},
+		opts = {
+			debug = true, -- Enable debugging
+			-- See Configuration section for rest
+		},
+		-- See Commands section for default commands if you want to lazy load on them
 	},
 
 	{
@@ -557,5 +567,11 @@ require("lazy").setup({
 		},
 	},
 
-
+	-- Hex editor / viewer -> :HexDump, :HexAssemble, :HexToggle
+	{
+		"RaafatTurki/hex.nvim",
+		config = function()
+			require("hex").setup()
+		end,
+	},
 })
