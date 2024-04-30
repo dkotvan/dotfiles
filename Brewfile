@@ -68,7 +68,6 @@ brew 'exa'
 brew 'fd'
 brew 'findutils' if OS.mac?
 brew 'atuin'
-brew 'navi'
 brew 'fzf'
 brew 'htop'
 brew 'jq'
