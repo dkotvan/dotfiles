@@ -140,6 +140,11 @@ return {
 		'<cmd>lua require("telescope.builtin").git_branches()<cr>',
 		desc = "show git branches",
 	  },
+	  {
+		"<leader>gl",
+		'<cmd>lua require("telescope.builtin").live_grep()<cr>',
+		desc = "show git branches",
+	  },
 	},
 	config = function()
 	  require('telescope').setup {

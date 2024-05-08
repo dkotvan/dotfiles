@@ -13,7 +13,7 @@ return {
   {
 	-- Auto pairs
 	"windwp/nvim-autopairs",
-	config = function() 
+	config = function()
 	  local npairs = require("nvim-autopairs")
 
 	  npairs.setup({
