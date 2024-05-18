@@ -15,7 +15,7 @@ return {
 		  "go", "gomod", "gosum", "gowork", "graphql", "hcl", "html", "http", "hurl",
 		  "java", "javascript", "jq", "json", "json5", "jsonc", "kotlin", "latex", "lua", "make",
 		  "markdown_inline", "perl", "php", "python", "ruby", "sql", "terraform", "toml", "typescript", "vim",
-		  "xml", "yaml", "zig"
+		  "vimdoc", "xml", "yaml", "zig"
 		},
 		highlight = { enable = true },
 		indentation = { enable = true },

@@ -286,7 +286,7 @@ return {
 		disable_netrw = false,
 		hijack_netrw = true,
 		view = {
-		  preserve_window_proportions = true,
+		  preserve_window_proportions = false,
 		},
 	  })
 	end,

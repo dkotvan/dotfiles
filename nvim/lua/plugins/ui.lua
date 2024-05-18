@@ -51,11 +51,22 @@ return {
   end,
 },
 
+{
+  'akinsho/bufferline.nvim',
+  version = "*",
+  dependencies = 'nvim-tree/nvim-web-devicons',
+  opts = {
+  },
+  config = function(_,opts)
+	vim.opt.termguicolors = true
+	require('bufferline').setup(opts)
+  end,
+},
 -- Status and tabline
 {
   "hoob3rt/lualine.nvim",
   dependencies = { "nvim-tree/nvim-web-devicons" },
-  oprts ={
+  opts ={
 	options = {
 	  theme = "gruvbox-material",
 	  icons_enabled = 1
@@ -67,17 +78,18 @@ return {
 	  lualine_c = {
 		{
 		  'filename',
-		  path = 1
+		  path = 1,
+		  newfile_status = true,
 		}
 	  },
 	  lualine_x = { 'encoding', 'fileformat', 'filetype' },
 	  lualine_y = { '' },
 	  lualine_z = { 'location', 'searchcount' }
 	}
-  }, 
+  },
   config = function(_,opts)
 	require('lualine').setup(opts)
-  end, 
+  end,
 },
 
 {
@@ -103,6 +115,7 @@ return {
 	},
   },
   config = function(_,opts)
+	require('dressing').setup(opts)
   end,
 },
 }
