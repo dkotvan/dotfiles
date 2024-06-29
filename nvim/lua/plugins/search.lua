@@ -38,6 +38,7 @@ return {
 			args = {
 			  "--vimgrep",
 			  "-s",
+			  "--depth=35"
 			},
 			options = {
 			  ["ignore-case"] = {

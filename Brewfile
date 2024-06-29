@@ -111,6 +111,7 @@ if OS.mac?
   brew 'pinentry-mac'
 
   cask 'zulu@8'
+  cask 'zulu@17'
   cask 'temurin@11'
   cask 'temurin@17'
   cask 'temurin@21'
@@ -136,4 +137,5 @@ if OS.mac?
   cask 'font-victor-mono'
   cask 'font-fira-code-nerd-font'
   cask 'font-victor-mono-nerd-font'
+  cask "font-symbols-only-nerd-font"
 end
