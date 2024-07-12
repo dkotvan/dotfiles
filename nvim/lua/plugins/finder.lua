@@ -116,6 +116,25 @@ return {
 				{ 'lua require("smp").gotoHeaderFromTocEntry()',   description = 'SMP: Jump to header from TOC entry' },
 				{ 'lua require("smp").start()',                    description = 'SMP: Start background server' },
 				{ 'lua require("smp").stop()',                     description = 'SMP: Stop background server' },
+				{ ':Copilot toggle',                               description = 'Copilot toggle' },
+				{ ':CopilotChat ', description = 'Open chat window with optional input' , unfinished = true},
+				{ ':CopilotChatOpen' , description = 'Copilot: Open chat window' },
+				{ ':CopilotChatClose' , description = 'Copilot: Close chat window' },
+				{ ':CopilotChatToggle' , description = 'Copilot: Toggle chat window' },
+				{ ':CopilotChatStop' , description = 'Copilot: Stop current copilot output' },
+				{ ':CopilotChatReset' , description = 'Copilot: Reset chat window' },
+				{ ':CopilotChatSave ' , description = 'Copilot: Save chat history to file', unfinished = true },
+				{ ':CopilotChatLoad ' , description = 'Copilot: Load chat history from file', unfinished = true },
+				{ ':CopilotChatDebugInfo' , description = 'Copilot: Show debug information' },
+				{ ':CopilotChatExplain' , description = 'Copilot: Write an explanation for the active selection as paragraphs of text' },
+				{ ':CopilotChatReview' , description = 'Copilot: Review the selected code' },
+				{ ':CopilotChatFix' , description = 'Copilot: There is a problem in this code. Rewrite the code to show it with the bug fixed' },
+				{ ':CopilotChatOptimize' , description = 'Copilot: Optimize the selected code to improve performance and readablilty' },
+				{ ':CopilotChatDocs' , description = 'Copilot: Please add documentation comment for the selection' },
+				{ ':CopilotChatTests' , description = 'Copilot: Please generate tests for my code' },
+				{ ':CopilotChatFixDiagnostic' , description = 'Copilot: Please assist with the following diagnostic issue in file' },
+				{ ':CopilotChatCommit' , description = 'Copilot: Write commit message for the change with commitizen convention' },
+				{ ':CopilotChatCommitStaged' , description = 'Copilot: Write commit message for the change with commitizen convention' },
 			}
 
 			require('legendary').commands(commands)
@@ -180,7 +199,8 @@ return {
 						layout_config = {
 							preview_height = 0.8,
 						},
-						diff_context_lines = vim.o.scrolloff,
+						vim_diff_opts = { ctxlen = 0 },
+						-- diff_context_lines = vim.o.scrolloff,
 						entry_format = "state #$ID, $STAT, $TIME",
 						time_format = "",
 						mappings = {

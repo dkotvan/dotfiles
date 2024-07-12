@@ -92,7 +92,7 @@ return {
 		nls.builtins.code_actions.gitrebase,
 		nls.builtins.code_actions.gitsigns,
 		-- Diagnostics
-		nls.builtins.diagnostics.sqlfluff.with(sqlfluff_with),
+		-- nls.builtins.diagnostics.sqlfluff.with(sqlfluff_with),
 		nls.builtins.diagnostics.vacuum, -- TODO: create a recomended ruleset
 		nls.builtins.diagnostics.zsh,
 		-- Formatting.
