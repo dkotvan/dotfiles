@@ -12,8 +12,6 @@ source $DOTFILES/antidote.zsh
 
 export EDITOR="${EDITOR:-nvim}"
 
-eval "$(nodenv init -)"
-
 bindkey -v
 
 if [[ $OSTYPE == darwin* ]]; then
@@ -23,6 +21,8 @@ source $DOTFILES/alias.zsh
 for file in $DOTFILES/local/*.zsh; do
     source "$file"
 done
+
+eval "$(nodenv init -)"
 
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=10000000
@@ -53,7 +53,7 @@ FZF_DEFAULT_COMMAND='fd --type f --hidden --follow --exclude .git'
 FZF_CTRL_T_COMMAND="$FZF_DEFAULT_COMMAND"
 FZF_CTRL_T_OPTS="--border --preview='bat --paging=never {}'"
 
-[ -f ~/.fzf.zsh ] && source ~/.fzf.zsh
+ source <(fzf --zsh)
 
 MODE_CURSOR_VIINS="#00ff00 blinking block"
 MODE_CURSOR_REPLACE="$MODE_CURSOR_VIINS #ff0000"
@@ -89,7 +89,7 @@ export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 eval "$(zoxide init zsh)"
 test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-. $HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh
+# . $HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh
 eval "$(atuin init zsh --disable-up-arrow)"
 
 autoload -Uz compinit

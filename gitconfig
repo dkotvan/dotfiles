@@ -29,8 +29,6 @@
 # User, signing keys and other local stuff are in other file that is not versioned
 [include]
   path = ~/.gitconfig.local
-[commit]
-	gpgsign = true
 [pull]
 	ff = only
 [init]

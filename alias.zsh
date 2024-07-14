@@ -24,7 +24,7 @@ cdl() {
     cmd="fzf -q $1"
   fi
 
-  cd $(locate -r '/\.git$' | sed -r 's/\/.git$//' | eval $cmd)
+  cd $(fd -t d --no-ignore --hidden --prune '\.git$' ~/Projects/ | sed -r 's/\/.git\/$//' | eval $cmd)
 }
 
 alias ngst='nvim -c ":G"'
