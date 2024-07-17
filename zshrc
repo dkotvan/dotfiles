@@ -74,13 +74,11 @@ eval "$(rbenv init -)"
 
 eval "$(starship init zsh)"
 
-export GOENV_ROOT=$HOME/.goenv
-export PATH="$GOENV_ROOT/bin:$HOME/go/bin:$PATH" 
+echo "A - $GOPATH"
 
 eval "$(goenv init -)" 
 
-export PATH="$GOROOT/bin:$PATH"
-export PATH="$PATH:$GOPATH/bin"
+echo "B - $GOPATH"
 
 export PATH="/usr/local/sbin:$PATH"
 export PATH="${HOME}/.local/bin:${PATH}"

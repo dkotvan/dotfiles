@@ -360,10 +360,7 @@ return {
 	  "ray-x/go.nvim",
 	  dependencies = "nvim-treesitter/nvim-treesitter-textobjects",
 	  config = function()
-		local go_home = vim.fn.expand("$HOME/go")
-
 		require('go').setup({
-		  gopls_cmd = { go_home .. '/bin/gopls' },
 		  goimports = 'gopls', -- if set to 'gopls' will use golsp format
 		  gofmt = 'gopls',    -- if set to gopls will use golsp format
 		  -- max_line_len = 120,
