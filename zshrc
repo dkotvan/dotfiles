@@ -74,11 +74,7 @@ eval "$(rbenv init -)"
 
 eval "$(starship init zsh)"
 
-echo "A - $GOPATH"
-
 eval "$(goenv init -)" 
-
-echo "B - $GOPATH"
 
 export PATH="/usr/local/sbin:$PATH"
 export PATH="${HOME}/.local/bin:${PATH}"
