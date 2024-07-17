@@ -84,6 +84,7 @@ brew 'zoxide'
 brew 'cookiecutter'
 brew 'hurl'
 brew 'lsd'
+brew 'wget'
 
 # apps
 brew 'ghostscript'
@@ -96,6 +97,7 @@ brew 'tmux'
 brew 'vault'
 
 # Shell and Completions
+brew "bash"
 brew 'zsh'
 brew 'zsh-completions'
 brew 'starship'
@@ -105,8 +107,6 @@ brew 'rake-completion'
 brew 'bundler-completion'
 
 if OS.mac?
-  tap 'homebrew/cask-fonts'
-
   brew 'gnu-sed'
   brew 'pinentry-mac'
 
