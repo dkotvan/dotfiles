@@ -1,5 +1,7 @@
 -- Set leader key to space
 vim.g.mapleader = ','
 
-require('loader')
+if not vim.g.vscode then
+  require('loader')
+end
 require('options')

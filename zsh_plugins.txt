@@ -1,3 +1,5 @@
+# kubctx autocomplete
+ahmetb/kubectx path:completion kind:fpath
 ohmyzsh/ohmyzsh
 # help with history issues?
 ohmyzsh/ohmyzsh path:plugins/safe-paste

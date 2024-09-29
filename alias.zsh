@@ -19,19 +19,15 @@ gclonecd() {
 }
 
 cdl() {
+  local param="$1"
   local cmd="fzf"
   local results=$(fd -t d --no-ignore --hidden --prune '\.git$' ~/Projects/ | sed -r 's/\/.git\/$//')
-  local count=$(echo "$results" | wc -l)
 
-  if [[ -n "$1" ]]; then
-    cmd="fzf -q $1"
+  if [[ -n "$param" ]]; then
+    cmd="fzf -q $param"
   fi
 
-  if [[ "$count" -gt 1 ]]; then
-    cd "$(echo "$results" | eval $cmd)"
-  else
-    cd "$results"
-  fi
+  cd "$(echo "$results" | eval $cmd)"
 
   local pane_count=$(tmux list-panes -t "$(tmux display -p '#S:#I')" | wc -l)
 
@@ -40,6 +36,23 @@ cdl() {
   fi
 }
 
+fcdl() {
+  local param="$1"
+  local cmd="fzf"
+  local results=$(find ~/Projects/ -type d -name ".git" -prune -exec dirname {} \;)
+
+  if [[ -n "$param" ]]; then
+    cmd="fzf -q $param"
+  fi
+
+  cd "$(echo "$results" | eval $cmd)"
+
+  local pane_count=$(tmux list-panes -t "$(tmux display -p '#S:#I')" | wc -l)
+
+  if [[ "$pane_count" -eq 1 ]]; then
+    tmux rename-window "$(basename "$PWD")"
+  fi
+}
 alias ngst='nvim -c ":G"'
 
 update_nvim() {

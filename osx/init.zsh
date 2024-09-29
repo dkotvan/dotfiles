@@ -1,9 +1,5 @@
 export PATH=/opt/homebrew/sbin:/opt/homebrew/bin:$PATH
 
-# Load Java 17 - java 18 is still messy
-export JAVA_HOME=`/usr/libexec/java_home -v 17`
-export GRAALVM_HOME=`/usr/libexec/java_home -V 2>&1 | grep GraalVM | sed -r 's/^.+(\/Library.+)$/\1/'`
-
 # Fix problem with Packer nvim plugin trying to update a lot of plugins at the same time
 ulimit -S -n 200048
 
@@ -16,6 +12,6 @@ fi
 # Export DOCKER_HOST for Colima, make some utils to work, like ctop and lazydocker
 export DOCKER_HOST="unix:///Users/$USER/.colima/docker.sock"
 export TESTCONTAINERS_DOCKER_SOCKET_OVERRIDE=/var/run/docker.sock
-export PATH="$PATH:/Applications/IntelliJ IDEA CE.app/Contents/MacOS"
+export PATH="$PATH:/Applications/IntelliJ IDEA CE.app/Contents/MacOS:/Applications/GoLand 2024.2 EAP.app/Contents/MacOS"
 export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 

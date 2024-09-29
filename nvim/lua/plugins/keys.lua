@@ -90,7 +90,7 @@ return {
 		['[r'] = { require("navigator.treesitter").goto_previous_usage, "goto_previous_usage" },
 		[']r'] = { require("navigator.treesitter").goto_next_usage, "goto_next_usage" },
 		['<C-k>'] = { vim.lsp.buf.signature_help, "lsp buf signature help" },
-		['<M-k>'] = { vim.lsp.signature_help, "lsp buf signature help" },
+		-- ['<M-k>'] = { vim.lsp.signature_help, "lsp buf signature help" },
 	  }, { prefix = "" })
 
 	  wk.register({
@@ -104,10 +104,10 @@ return {
 		},
 	  }, { prefix = "<leader>" })
 
-	  wk.register({
-		['ca'] = { require("navigator.codeAction").range_code_action, "range code action" },
-		['ff'] = { vim.lsp.buf.range_formatting, "range format" },
-	  }, { mode = "v", prefix = "<space>" })
+		--  wk.register({
+		-- ['ca'] = { require("navigator.codeAction").range_code_action, "range code action" },
+		-- ['ff'] = { vim.lsp.buf.range_formatting, "range format" },
+		--  }, { mode = "v", prefix = "<space>" })
 	end,
   },
 }

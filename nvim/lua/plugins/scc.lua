@@ -47,4 +47,8 @@ return {
 	  },
 	},
   },
+
+  {
+	"junegunn/gv.vim"
+  }
 }

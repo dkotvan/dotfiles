@@ -58,7 +58,7 @@ return {
 		ensure_installed = {
 		  -- LSP Servers
 		  "autotools_ls", "bashls", "docker_compose_language_service", "dockerls",
-		  "jqls", "lua_ls", "pyright", "solargraph", "tsserver", "terraformls",
+		  "jqls", "lua_ls", "pyright", "solargraph", "terraformls",
 		  "tflint", "yamlls",
 		  -- Linters
 		  "eslint_d", "shellcheck", "vacuum",
@@ -146,77 +146,6 @@ return {
 	},
   },
 
-  {
-	"zbirenbaum/copilot.lua",
-	config = function()
-	  require("copilot").setup({
-		panel = {
-		  enabled = true,
-		  auto_refresh = false,
-		  keymap = {
-			jump_prev = "[[",
-			jump_next = "]]",
-			accept = "<CR>",
-			refresh = "gr",
-			open = "<M-CR>"
-		  },
-		  layout = {
-			position = "bottom", -- | top | left | right
-			ratio = 0.4
-		  },
-		},
-		suggestion = {
-		  enabled = false,
-		  auto_trigger = false,
-		  debounce = 75,
-		  keymap = {
-			accept = "<M-l>",
-			accept_word = false,
-			accept_line = false,
-			next = "<M-]>",
-			prev = "<M-[>",
-			dismiss = "<C-]>",
-		  },
-		},
-		filetypes = {
-		  go = true,
-		  yaml = false,
-		  markdown = false,
-		  help = false,
-		  gitcommit = false,
-		  gitrebase = false,
-		  hgcommit = false,
-		  svn = false,
-		  cvs = false,
-		  ["."] = false,
-		},
-		copilot_node_command = 'node', -- Node.js version must be > 16.x
-		server_opts_overrides = {}
-	  })
-	end,
-  },
-  {
-	"zbirenbaum/copilot-cmp",
-	dependencies = { "copilot.lua", "hrsh7th/nvim-cmp", },
-	config       = function()
-	  require("copilot_cmp").setup()
-	end
-  },
-
-  {
-	"CopilotC-Nvim/CopilotChat.nvim",
-	branch = "canary",
-	dependencies = {
-	  { "zbirenbaum/copilot.lua" }, -- or github/copilot.vim
-	  { "nvim-lua/plenary.nvim" }, -- for curl, log wrapper
-	},
-	opts = {
-	  debug = true, -- Enable debugging
-	  -- See Configuration section for rest
-	},
-	-- See Commands section for default commands if you want to lazy load on them
-  },
-
   -- Supports bundler in vim
   {
 	"tpope/vim-bundler",
@@ -264,7 +193,6 @@ return {
 		},
 		sources = {
 		  -- { name = "codeium" },
-		  { name = "copilot" },
 		  { name = 'nvim_lsp' },
 		  { name = 'nvim_lua' },
 		  { name = 'vsnip' },
@@ -298,8 +226,6 @@ return {
 		  format = function(entry, vim_item)
 			if (entry.source.name == "codeium") then
 			  vim_item.kind = " codeium"
-			elseif (entry.source.name == "copilot") then
-			  vim_item.kind = " copilot"
 			else
 			  -- fancy icons and a name of kind
 			  vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
@@ -307,7 +233,6 @@ return {
 
 			-- set a name for each source
 			vim_item.menu = ({
-			  copilot = "",
 			  codeium = "",
 			  path = "",
 			  buffer = "",

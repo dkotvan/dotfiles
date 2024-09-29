@@ -27,6 +27,7 @@ end
 
 # Git related
 brew 'git'
+brew 'git-lfs'
 brew 'gnupg'
 brew 'gh'
 brew 'glab'
@@ -85,6 +86,7 @@ brew 'cookiecutter'
 brew 'hurl'
 brew 'lsd'
 brew 'wget'
+brew 'awscli'
 
 # apps
 brew 'ghostscript'
@@ -134,6 +136,9 @@ if OS.mac?
   cask 'visualvm'
   cask 'yed'
   cask 'zoom'
+
+  # iOS Development
+  cask 'swiftformat-for-xcode'
 
   # Good font for terminal and programming
   cask 'font-fira-code'
