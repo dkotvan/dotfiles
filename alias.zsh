@@ -18,41 +18,49 @@ gclonecd() {
   git clone "$1" && cd "$(basename "$1" .git)"
 }
 
+__get_cached_results() {
+  local results_cache="$HOME/.cdl_results_cache"
+
+  # Check if the cache file exists and is not older than 1 hour
+  if [[ -f "$results_cache" && $(find "$results_cache" -mmin -60) ]]; then
+    cat "$results_cache"
+  else
+    local results=$(fd -t d --no-ignore --hidden --prune '\.git$' ~/Projects/ | sed -r 's/\/.git\/$//')
+    echo "$results" > "$results_cache"  # Cache the results
+    echo "$results"
+  fi
+}
+
+__rename_tmux_window() {
+  local pane_count=$(tmux list-panes -t "$(tmux display -p '#S:#I')" | wc -l)
+
+  if [[ "$pane_count" -eq 1 ]]; then
+    tmux rename-window "$(basename "$PWD")"
+  fi
+}
+
 cdl() {
   local param="$1"
   local cmd="fzf"
-  local results=$(fd -t d --no-ignore --hidden --prune '\.git$' ~/Projects/ | sed -r 's/\/.git\/$//')
+  local results=$(__get_cached_results)  # Use the new function
+
+  if [[ -n "$param" ]]; then
+    local matched_dir=$(echo "$results" | grep -E "/$param$")
+    if [[ -n "$matched_dir" ]]; then
+      cd "$matched_dir"
+      __rename_tmux_window  # Call the rename function
+      return
+    fi
+  fi
 
   if [[ -n "$param" ]]; then
     cmd="fzf -q $param"
   fi
 
   cd "$(echo "$results" | eval $cmd)"
-
-  local pane_count=$(tmux list-panes -t "$(tmux display -p '#S:#I')" | wc -l)
-
-  if [[ "$pane_count" -eq 1 ]]; then
-    tmux rename-window "$(basename "$PWD")"
-  fi
+  __rename_tmux_window  # Call the rename function
 }
 
-fcdl() {
-  local param="$1"
-  local cmd="fzf"
-  local results=$(find ~/Projects/ -type d -name ".git" -prune -exec dirname {} \;)
-
-  if [[ -n "$param" ]]; then
-    cmd="fzf -q $param"
-  fi
-
-  cd "$(echo "$results" | eval $cmd)"
-
-  local pane_count=$(tmux list-panes -t "$(tmux display -p '#S:#I')" | wc -l)
-
-  if [[ "$pane_count" -eq 1 ]]; then
-    tmux rename-window "$(basename "$PWD")"
-  fi
-}
 alias ngst='nvim -c ":G"'
 
 update_nvim() {
