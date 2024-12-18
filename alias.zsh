@@ -21,14 +21,19 @@ gclonecd() {
 __get_cached_results() {
   local results_cache="$HOME/.cdl_results_cache"
 
-  # Check if the cache file exists and is not older than 1 hour
-  if [[ -f "$results_cache" && $(find "$results_cache" -mmin -60) ]]; then
+  if [[ -f "$results_cache" && $(find "$results_cache" -mmin -960) ]]; then
     cat "$results_cache"
   else
     local results=$(fd -t d --no-ignore --hidden --prune '\.git$' ~/Projects/ | sed -r 's/\/.git\/$//')
     echo "$results" > "$results_cache"  # Cache the results
     echo "$results"
   fi
+}
+
+__force_update_cached_results() {
+  local results_cache="$HOME/.cdl_results_cache"
+  rm "$results_cache"
+  __get_cached_results
 }
 
 __rename_tmux_window() {
@@ -39,16 +44,16 @@ __rename_tmux_window() {
   fi
 }
 
-cdl() {
+__cd_with_action() {
   local param="$1"
+  local action="$2"
   local cmd="fzf"
-  local results=$(__get_cached_results)  # Use the new function
+  local results=$(__get_cached_results)
 
   if [[ -n "$param" ]]; then
     local matched_dir=$(echo "$results" | grep -E "/$param$")
     if [[ -n "$matched_dir" ]]; then
-      cd "$matched_dir"
-      __rename_tmux_window  # Call the rename function
+      eval "$action \"$matched_dir\""
       return
     fi
   fi
@@ -57,8 +62,20 @@ cdl() {
     cmd="fzf -q $param"
   fi
 
-  cd "$(echo "$results" | eval $cmd)"
-  __rename_tmux_window  # Call the rename function
+  local selected_dir="$(echo "$results" | eval $cmd)"
+  eval "$action \"$selected_dir\""
+}
+
+cdl() {
+  __cd_with_action "$1" "cd && __rename_tmux_window"
+}
+
+cdi() {
+  __cd_with_action "$1" "idea"
+}
+
+cdc() {
+  __cd_with_action "$1" "cursor"
 }
 
 alias ngst='nvim -c ":G"'
