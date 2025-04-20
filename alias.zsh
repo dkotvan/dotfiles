@@ -6,6 +6,7 @@ else
   alias prci='xdg-open `hub ci-status -f %U`'
   SED_EXEC='sed'
 fi
+
 alias prl="hub pr list"
 alias pro="hub pr show"
 alias prco="hub pr checkout"
@@ -13,6 +14,7 @@ alias mrl="lab mr list"
 alias mro="lab mr browse"
 alias mrco="lab mr checkout -t -f "
 alias brdiff="git difftool --dir-diff --tool=vimdirdiff"
+
 # Copied from https://unix.stackexchange.com/a/97922
 gclonecd() {
   git clone "$1" && cd "$(basename "$1" .git)"
@@ -36,11 +38,12 @@ __force_update_cached_results() {
   __get_cached_results
 }
 
-__rename_tmux_window() {
+__cd_and_rename_tmux_window() {
+  cd "$1"
   local pane_count=$(tmux list-panes -t "$(tmux display -p '#S:#I')" | wc -l)
 
   if [[ "$pane_count" -eq 1 ]]; then
-    tmux rename-window "$(basename "$PWD")"
+    tmux rename-window "$(basename "$1")"
   fi
 }
 
@@ -67,7 +70,7 @@ __cd_with_action() {
 }
 
 cdl() {
-  __cd_with_action "$1" "cd && __rename_tmux_window"
+  __cd_with_action "$1" "__cd_and_rename_tmux_window"
 }
 
 cdi() {
@@ -76,6 +79,10 @@ cdi() {
 
 cdc() {
   __cd_with_action "$1" "cursor"
+}
+
+cdz() {
+  __cd_with_action "$1" "zed"
 }
 
 alias ngst='nvim -c ":G"'

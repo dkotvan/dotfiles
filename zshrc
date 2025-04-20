@@ -89,3 +89,6 @@ eval "$(atuin init zsh --disable-up-arrow)"
 autoload -Uz compinit
 zstyle ':completion:*' menu select
 fpath+=~/.zfunc
+
+# Added by Windsurf
+export PATH="/Users/dimas.kotvan/.codeium/windsurf/bin:$PATH"
