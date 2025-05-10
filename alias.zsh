@@ -85,6 +85,10 @@ cdz() {
   __cd_with_action "$1" "zed"
 }
 
+cdv() {
+  __cd_with_action "$1" "code"
+}
+
 alias ngst='nvim -c ":G"'
 
 update_nvim() {
