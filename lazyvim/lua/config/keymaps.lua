@@ -63,14 +63,13 @@ end
 
 -- define your custom commands here:
 local custom_cmds = {
-  {
-    desc = "Git push",
-    cmd = ":!git push",
-  },
-  {
-    desc = "Git push force",
-    cmd = ":!git push --force",
-  },
+  { cmd = ":Git blame", desc = "Git blame" },
+  { cmd = ":Git! pull", desc = "Git pull" },
+  { cmd = ":Git! pull --rebase", desc = "Git pull with rebase" },
+  { cmd = ":Git! push", desc = "Git push" },
+  { cmd = ":Git! push -u origin HEAD", desc = "Git push new branch" },
+  { cmd = ":Git! push --force", desc = "Git push --force" },
+  { cmd = ":Git rebase --interactive main", desc = "Git rebase iteractive main" },
 }
 
 -- Combined picker for buffers, git files and regular files

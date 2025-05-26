@@ -42,6 +42,9 @@ return {
     },
   },
 
+  -- timn pope's fugitive
+  { "tpope/vim-fugitive" },
+
   -- Piin mason om v1
   { "mason-org/mason.nvim", version = "^1.0.0" },
   { "mason-org/mason-lspconfig.nvim", version = "^1.0.0" },

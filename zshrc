@@ -92,3 +92,4 @@ fpath+=~/.zfunc
 
 # Added by Windsurf
 export PATH="/Users/dimas.kotvan/.codeium/windsurf/bin:$PATH"
+export PATH=/Users/dimas.kotvan/Library/Python/3.13/bin:${PATH}
