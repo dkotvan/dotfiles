@@ -74,8 +74,6 @@ eval "$(rbenv init -)"
 
 eval "$(starship init zsh)"
 
-eval "$(goenv init -)" 
-
 export PATH="/usr/local/sbin:$PATH"
 export PATH="${HOME}/.local/bin:${PATH}"
 export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
@@ -92,3 +90,6 @@ fpath+=~/.zfunc
 
 # Added by Windsurf
 export PATH="/Users/dimas.kotvan/.codeium/windsurf/bin:$PATH"
+export PATH=/Users/dimas.kotvan/Library/Python/3.13/bin:${PATH}
+
+eval "$(goenv init -)" 
