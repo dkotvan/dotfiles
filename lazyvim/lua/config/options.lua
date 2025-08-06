@@ -4,6 +4,9 @@
 
 vim.g.lazyvim_picker = "fzf"
 
+-- Stop lazyvim crazyness of yanking to the clipboard
+vim.opt.clipboard = ""
+
 vim.opt.mouse = "a" -- mouse working on all modes
 vim.opt.modeline = false -- automatically setting options from modelines
 vim.opt.report = 0 -- Don't report on line changes
