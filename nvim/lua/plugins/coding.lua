@@ -71,10 +71,10 @@ return {
 				debounce_hours = 8,
 			}
 
-			require("lspconfig").lua_ls.setup({ filetypes = { "lua" } })
-			require("lspconfig").bashls.setup({ filetypes = { "bash", "sh" } })
-			require("lspconfig").terraformls.setup({ filetypes = { "terraform", "terraform-vars", "hcl" } })
-			require("lspconfig").tflint.setup({ filetypes = { "terraform", "terraform-vars", "hcl" } })
+			vim.lsp.config.lua_ls = { filetypes = { "lua" } }
+			vim.lsp.config.bashls = { filetypes = { "bash", "sh" } }
+			vim.lsp.config.terraformls = { filetypes = { "terraform", "terraform-vars", "hcl" } }
+			vim.lsp.config.tflint = { filetypes = { "terraform", "terraform-vars", "hcl" } }
 		end
 	},
 
@@ -179,7 +179,7 @@ return {
 			"hrsh7th/cmp-nvim-lsp-document-symbol",
 			"ray-x/lsp_signature.nvim",
 			"davidsierradz/cmp-conventionalcommits",
-			"zbirenbaum/copilot-cmp",
+			-- "zbirenbaum/copilot-cmp",
 		},
 		config = function()
 			vim.o.completeopt = "menuone,noselect"
@@ -193,7 +193,7 @@ return {
 					end,
 				},
 				sources = {
-					{ name = "copilot-cmp" },
+					-- { name = "copilot-cmp" },
 					{ name = 'nvim_lsp' },
 					{ name = 'nvim_lua' },
 					{ name = 'vsnip' },
@@ -281,6 +281,37 @@ return {
 		end,
 	},
 
+	{
+		"coder/claudecode.nvim",
+		dependencies = { "folke/snacks.nvim" },
+		config = true,
+		opts = {
+		  terminal_cmd = "ccr code",
+		  terminal = {
+			provider = "snacks",
+		  },
+		},
+		keys = {
+			{ "<leader>a",  nil,                              desc = "AI/Claude Code" },
+			{ "<leader>ac", "<cmd>ClaudeCode<cr>",            desc = "Toggle Claude" },
+			{ "<leader>af", "<cmd>ClaudeCodeFocus<cr>",       desc = "Focus Claude" },
+			{ "<leader>ar", "<cmd>ClaudeCode --resume<cr>",   desc = "Resume Claude" },
+			{ "<leader>aC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
+			{ "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
+			{ "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>",       desc = "Add current buffer" },
+			{ "<leader>as", "<cmd>ClaudeCodeSend<cr>",        mode = "v",                  desc = "Send to Claude" },
+			{
+				"<leader>as",
+				"<cmd>ClaudeCodeTreeAdd<cr>",
+				desc = "Add file",
+				ft = { "NvimTree", "neo-tree", "oil", "minifiles", "netrw" },
+			},
+			-- Diff management
+			{ "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
+			{ "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>",   desc = "Deny diff" },
+		},
+	},
+
 	-- Golang
 	{
 		"ray-x/go.nvim",
@@ -311,7 +342,7 @@ return {
 			})
 
 			local cfg = require 'go.lsp'.config() -- config() return the go.nvim gopls setup
-			require('lspconfig').gopls.setup(cfg)
+			vim.lsp.config.gopls = cfg
 		end,
 	},
 	{
@@ -327,88 +358,88 @@ return {
 		end
 	},
 
-	{
-		"zbirenbaum/copilot.lua",
-		config = function()
-			require("copilot").setup({
-				panel = {
-					enabled = true,
-					auto_refresh = false,
-					keymap = {
-						jump_prev = "[[",
-						jump_next = "]]",
-						accept = "<CR>",
-						refresh = "gr",
-						open = "<M-CR>"
-					},
-					layout = {
-						position = "bottom", -- | top | left | right
-						ratio = 0.4
-					},
-					suggestion = {
-						enabled = false,
-						auto_trigger = false,
-						debounce = 75,
-						keymap = {
-							accept = "<M-l>",
-							accept_word = false,
-							accept_line = false,
-							next = "<M-]>",
-							prev = "<M-[>",
-							dismiss = "<C-]>",
-						},
-					},
-				},
-				filetypes = {
-					sh = function()
-						if string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), '^%.env.*') then
-							return false
-						end
-						return true
-					end,
-					['*'] = function()
-						local home = os.getenv("HOME")
-						local ignored_paths = {
-							home .. "/.ssh/",
-							home .. "/.aws/",
-							home .. "/.config/lab",
-							home .. "/.netrc",
-							home .. "/.kube",
-							home .. "/.docker",
-						}
-						local current_path = vim.api.nvim_buf_get_name(0)
-						for _, path in ipairs(ignored_paths) do
-							if string.match(current_path, path) then
-								return false
-							end
-						end
-						return true
-					end,
-				},
-				copilot_node_command = 'node', -- Node.js version must be > 16.x
-				server_opts_overrides = {}
-			})
-		end,
-	},
-	{
-		"zbirenbaum/copilot-cmp",
-		dependencies = { "copilot.lua" },
-		config       = function()
-			require("copilot_cmp").setup()
-		end
-	},
-	{
-		"CopilotC-Nvim/CopilotChat.nvim",
-		dependencies = {
-			{ "github/copilot.vim" },                    -- or zbirenbaum/copilot.lua
-			{ "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
-		},
-		build = "make tiktoken",                       -- Only on MacOS or Linux
-		opts = {
-			-- See Configuration section for options
-		},
-		-- See Commands section for default commands if you want to lazy load on them
-	},
+	-- {
+	-- 	"zbirenbaum/copilot.lua",
+	-- 	config = function()
+	-- 		require("copilot").setup({
+	-- 			panel = {
+	-- 				enabled = true,
+	-- 				auto_refresh = false,
+	-- 				keymap = {
+	-- 					jump_prev = "[[",
+	-- 					jump_next = "]]",
+	-- 					accept = "<CR>",
+	-- 					refresh = "gr",
+	-- 					open = "<M-CR>"
+	-- 				},
+	-- 				layout = {
+	-- 					position = "bottom", -- | top | left | right
+	-- 					ratio = 0.4
+	-- 				},
+	-- 				suggestion = {
+	-- 					enabled = false,
+	-- 					auto_trigger = false,
+	-- 					debounce = 75,
+	-- 					keymap = {
+	-- 						accept = "<M-l>",
+	-- 						accept_word = false,
+	-- 						accept_line = false,
+	-- 						next = "<M-]>",
+	-- 						prev = "<M-[>",
+	-- 						dismiss = "<C-]>",
+	-- 					},
+	-- 				},
+	-- 			},
+	-- 			filetypes = {
+	-- 				sh = function()
+	-- 					if string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), '^%.env.*') then
+	-- 						return false
+	-- 					end
+	-- 					return true
+	-- 				end,
+	-- 				['*'] = function()
+	-- 					local home = os.getenv("HOME")
+	-- 					local ignored_paths = {
+	-- 						home .. "/.ssh/",
+	-- 						home .. "/.aws/",
+	-- 						home .. "/.config/lab",
+	-- 						home .. "/.netrc",
+	-- 						home .. "/.kube",
+	-- 						home .. "/.docker",
+	-- 					}
+	-- 					local current_path = vim.api.nvim_buf_get_name(0)
+	-- 					for _, path in ipairs(ignored_paths) do
+	-- 						if string.match(current_path, path) then
+	-- 							return false
+	-- 						end
+	-- 					end
+	-- 					return true
+	-- 				end,
+	-- 			},
+	-- 			copilot_node_command = 'node', -- Node.js version must be > 16.x
+	-- 			server_opts_overrides = {}
+	-- 		})
+	-- 	end,
+	-- },
+	-- {
+	-- 	"zbirenbaum/copilot-cmp",
+	-- 	dependencies = { "copilot.lua" },
+	-- 	config       = function()
+	-- 		require("copilot_cmp").setup()
+	-- 	end
+	-- },
+	-- {
+	-- 	"CopilotC-Nvim/CopilotChat.nvim",
+	-- 	dependencies = {
+	-- 		{ "github/copilot.vim" },                    -- or zbirenbaum/copilot.lua
+	-- 		{ "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
+	-- 	},
+	-- 	build = "make tiktoken",                       -- Only on MacOS or Linux
+	-- 	opts = {
+	-- 		-- See Configuration section for options
+	-- 	},
+	-- 	-- See Commands section for default commands if you want to lazy load on them
+	-- },
 
 
 	{

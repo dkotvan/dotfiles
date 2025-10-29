@@ -92,8 +92,11 @@ fpath+=~/.zfunc
 export PATH="/Users/dimas.kotvan/.codeium/windsurf/bin:$PATH"
 export PATH=/Users/dimas.kotvan/Library/Python/3.13/bin:${PATH}
 
-eval "$(goenv init -)" 
-export PATH=/Users/dimas.kotvan/Library/Python/3.13/bin:${PATH}
+export PATH="/opt/homebrew/bin:$PATH"
+export GOENV_PATH_ORDER=front
+export PATH="/Users/dimas.kotvan/.goenv/shims:$PATH"
+eval "$(goenv init -)"
 
-# Added by Windsurf
-export PATH="/Users/dimas.kotvan/.codeium/windsurf/bin:$PATH"
+# export NVM_DIR="$HOME/.nvm"
+# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
+# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion

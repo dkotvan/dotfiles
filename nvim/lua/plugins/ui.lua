@@ -2,6 +2,40 @@ return {
 	-- Gruvbox colorscheme with support for treesiter
 	{
 		"sainnhe/gruvbox-material",
+		-- config = function()
+		-- 	vim.cmd [[
+		--  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+		--  let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+		--  let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+		--  set termguicolors " colorscheme working well on iTerm2 + tmux
+		--  set t_ZH=^[[3m
+		--  set t_ZR=^[[23m
+		--  ]]
+		--
+		-- 	vim.o.background = "dark"
+		-- 	vim.cmd('colorscheme gruvbox-material')
+		-- end,
+	},
+	-- { "calind/selenized.nvim",
+	-- 	config = function()
+	-- 		vim.cmd [[
+	--   let $NVIM_TUI_ENABLE_TRUE_COLOR=1
+	--   let &t_8f="\<Esc>[38;2;%lu;%lu;%lum"
+	--   let &t_8b="\<Esc>[48;2;%lu;%lu;%lum"
+	--   set termguicolors " colorscheme working well on iTerm2 + tmux
+	--   set t_ZH=^[[3m
+	--   set t_ZR=^[[23m
+	--   ]]
+	--
+	-- 		vim.o.background = "dark"
+	-- 		vim.cmd('colorscheme selenized')
+	-- 	end,
+	-- },
+{
+  "folke/tokyonight.nvim",
+  lazy = false,
+  priority = 1000,
+  opts = {},
 		config = function()
 			vim.cmd [[
 	  let $NVIM_TUI_ENABLE_TRUE_COLOR=1
@@ -13,9 +47,9 @@ return {
 	  ]]
 
 			vim.o.background = "dark"
-			vim.cmd('colorscheme gruvbox-material')
+			vim.cmd('colorscheme tokyonight')
 		end,
-	},
+},
 	{
 		"f-person/auto-dark-mode.nvim",
 		opts = {
@@ -80,7 +114,7 @@ return {
 		dependencies = { "nvim-tree/nvim-web-devicons" },
 		opts = {
 			options = {
-				theme = "gruvbox-material",
+				theme = "tokyonight",
 				icons_enabled = 1
 			},
 			extensions = { 'aerial', 'lazy', 'mason', 'fugitive', 'nvim-tree', 'quickfix', 'trouble' },
