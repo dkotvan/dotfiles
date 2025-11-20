@@ -17,15 +17,15 @@ zsh-users/zsh-autosuggestions
 # a lot of command completions
 zsh-users/zsh-completions
 # ubuntu command not found works now at brew zsh 
-ohmyzsh/ohmyzsh path:plugins/command-not-found
+# ohmyzsh/ohmyzsh path:plugins/command-not-found
 # gradle or gradlew doesnt matter anymore
 ohmyzsh/ohmyzsh path:plugins/gradle
 # urlencode
-ohmyzsh/ohmyzsh path:plugins/urltools
+# ohmyzsh/ohmyzsh path:plugins/urltools
 # remember if there is an alias for the command you're using
 djui/alias-tips
 # command to find alias alias-finder -l git
-ohmyzsh/ohmyzsh path:plugins/alias-finder
+# ohmyzsh/ohmyzsh path:plugins/alias-finder
 # k = kubectl and also autocomplete work
 ohmyzsh/ohmyzsh path:plugins/kubectl
 # auto completion for docker

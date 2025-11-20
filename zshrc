@@ -22,8 +22,6 @@ for file in $DOTFILES/local/*.zsh; do
     source "$file"
 done
 
-eval "$(nodenv init -)"
-
 HISTFILE="$HOME/.zsh_history"
 HISTSIZE=10000000
 SAVEHIST=10000000
@@ -70,7 +68,7 @@ export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
 
 zmodload zsh/zpty
 
-eval "$(rbenv init -)"
+
 
 eval "$(starship init zsh)"
 
@@ -79,24 +77,14 @@ export PATH="${HOME}/.local/bin:${PATH}"
 export PATH="/opt/homebrew/opt/gnu-sed/libexec/gnubin:$PATH"
 
 eval "$(zoxide init zsh)"
-test -e "${HOME}/.iterm2_shell_integration.zsh" && source "${HOME}/.iterm2_shell_integration.zsh"
 
-# . $HOMEBREW_PREFIX/opt/asdf/libexec/asdf.sh
 eval "$(atuin init zsh --disable-up-arrow)"
 
 autoload -Uz compinit
 zstyle ':completion:*' menu select
 fpath+=~/.zfunc
 
-# Added by Windsurf
-export PATH="/Users/dimas.kotvan/.codeium/windsurf/bin:$PATH"
 export PATH=/Users/dimas.kotvan/Library/Python/3.13/bin:${PATH}
 
 export PATH="/opt/homebrew/bin:$PATH"
-export GOENV_PATH_ORDER=front
-export PATH="/Users/dimas.kotvan/.goenv/shims:$PATH"
-eval "$(goenv init -)"
-
-# export NVM_DIR="$HOME/.nvm"
-# [ -s "$NVM_DIR/nvm.sh" ] && \. "$NVM_DIR/nvm.sh"  # This loads nvm
-# [ -s "$NVM_DIR/bash_completion" ] && \. "$NVM_DIR/bash_completion"  # This loads nvm bash_completion
+export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"

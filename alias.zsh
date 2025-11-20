@@ -81,14 +81,6 @@ cdc() {
   __cd_with_action "$1" "cursor"
 }
 
-cdz() {
-  __cd_with_action "$1" "zed"
-}
-
-cdv() {
-  __cd_with_action "$1" "code"
-}
-
 alias ngst='nvim -c ":G"'
 
 update_nvim() {
@@ -121,3 +113,59 @@ export AWS_DEFAULT_REGION=$(aws configure get region --profile $1);
 export AWS_SESSION_TOKEN=$(aws configure get aws_session_token --profile $1);
 echo "$1 environment variables exported";
 }
+
+# Completion function for cdl, cdc, and cdi
+__cd_completion() {
+  local results=$(__get_cached_results)
+  local -a repos
+  local query="${words[2]}"
+  
+  # Extract just the repo names (basenames) and store in array
+  while IFS= read -r line; do
+    [[ -n "$line" ]] && repos+=($(basename "$line"))
+  done <<< "$results"
+  
+  # Standard zsh completion with filtering (works for tab completion)
+  # This provides tab completion that filters as you type
+  # Example: cdc service-ac<tab> will complete to service-account if unique
+  _describe 'repository' repos
+}
+
+# Register completion for cdl, cdc, and cdi
+compdef __cd_completion cdl cdc cdi
+
+# Enhanced tab completion with fzf support
+# When fzf is available, Tab will show fzf for cdl/cdc/cdi commands
+if command -v fzf &> /dev/null; then
+  # Widget that intercepts Tab and uses fzf for cdl/cdc/cdi commands
+  __cd_fzf_complete_widget() {
+    local cmd="${BUFFER%% *}"
+    # Check if we're completing for cdl, cdc, or cdi
+    if [[ "$cmd" =~ ^(cdl|cdc|cdi)$ ]]; then
+      # Extract the query (everything after the command and space)
+      local query="${BUFFER#${cmd} }"
+      query="${query## }"  # Remove leading spaces
+      
+      local results=$(__get_cached_results)
+      local selected=$(echo "$results" | while IFS= read -r line; do
+        basename "$line"
+      done | fzf -q "$query" --height=40% --reverse --border --select-1 --exit-0 2>/dev/null)
+      
+      if [[ -n "$selected" ]]; then
+        BUFFER="${cmd} ${selected}"
+        CURSOR=${#BUFFER}
+        zle redisplay
+        return
+      fi
+    fi
+    
+    # For other commands or if fzf was cancelled, use standard completion
+    zle expand-or-complete
+  }
+  zle -N __cd_fzf_complete_widget
+  
+  # Bind Tab to use fzf for cdl/cdc/cdi commands
+  # This makes Tab show fzf when typing these commands
+  # Note: This only affects cdl/cdc/cdi, other commands use standard completion
+  bindkey '^I' __cd_fzf_complete_widget
+fi
