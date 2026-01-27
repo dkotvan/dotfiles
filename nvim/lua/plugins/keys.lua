@@ -14,7 +14,7 @@ return {
 	  local wk = require("which-key")
 
 	  wk.register({
-		['<CR>'] = { '"+y', 'copy to clippboard using enter'},
+		['<CR>'] = { '"+y', 'copy to clipboard using enter'},
 	  }, { mode= 'v' })
 
 	  wk.register({
@@ -24,10 +24,30 @@ return {
 		['[t'] = { ':tabprevious<cr>', 'previous tab' },
 	  }, { mode = 'n' })
 
+	  -- Window navigation
+	  wk.register({
+		['<C-w>'] = {
+		  w = { '<C-w>w', 'next window' },
+		  h = { '<C-w>h', 'window left' },
+		  j = { '<C-w>j', 'window down' },
+		  k = { '<C-w>k', 'window up' },
+		  l = { '<C-w>l', 'window right' },
+		  c = { '<C-w>c', 'close window' },
+		  s = { '<C-w>s', 'split window' },
+		  v = { '<C-w>v', 'split window vertical' },
+		},
+	  }, { mode = 'n' })
+
 	  wk.register({
 		['<C-w>'] = {
 		  ['<Esc>'] = { '<C-\\><C-N><Esc>', {noremap = true, silent = false}},
 		  ['<C-w>'] = { '<C-\\><C-N><C-w><C-w>', {noremap = true, silent = false}},
+		  w = { '<C-\\><C-N><C-w>w', {noremap = true, silent = false}},  -- next window
+		  h = { '<C-\\><C-N><C-w>h', {noremap = true, silent = false}},  -- left window
+		  j = { '<C-\\><C-N><C-w>j', {noremap = true, silent = false}},  -- down window
+		  k = { '<C-\\><C-N><C-w>k', {noremap = true, silent = false}},  -- up window
+		  l = { '<C-\\><C-N><C-w>l', {noremap = true, silent = false}},  -- right window
+		  c = { '<C-\\><C-N><C-w>c', {noremap = true, silent = false}},  -- close window
 		  ['<C-Up>'] = { '<C-\\><C-N><C-w><C-Up>', {noremap = true, silent = false}},
 		  ['<C-Down>'] = { '<C-\\><C-N><C-w><C-Down>', {noremap = true, silent = false}},
 		  ['<C-Right>'] = { '<C-\\><C-N><C-w><C-Right>', {noremap = true, silent = false}},
@@ -96,6 +116,15 @@ return {
 	  }, { prefix = "" })
 
 	  wk.register({
+		a = {
+		  name = "Claude Code",
+		  c = { "<cmd>ClaudeCode<cr>", "Toggle Claude" },
+		  f = { "<cmd>ClaudeCodeFocus<cr>", "Focus Claude" },
+		  b = { "<cmd>ClaudeCodeAdd %<cr>", "Add current buffer" },
+		  s = { "<cmd>ClaudeCodeSend<cr>", "Send to Claude (visual)" },
+		  a = { "<cmd>ClaudeCodeDiffAccept<cr>", "Accept diff" },
+		  d = { "<cmd>ClaudeCodeDiffDeny<cr>", "Deny diff" },
+		},
 		x = {
 		  name = 'show trouble with',
 		  x = { function() require("trouble").toggle() end, "default" },
