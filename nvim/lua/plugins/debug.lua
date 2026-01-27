@@ -1,6 +1,17 @@
 local function setup_debug()
+	local dap = require('dap')
+
+	-- Setup Go DAP adapter first (before dap-go setup)
+	if not dap.adapters.go then
+		dap.adapters.go = {
+			type = 'executable',
+			command = 'dlv',
+			args = { 'dap', '--listen=127.0.0.1:38697' },
+		}
+	end
+
 	require("dapui").setup({
-		icons = { expanded = "", collapsed = "", current_frame = "" },
+		icons = { expanded = "", collapsed = "", current_frame = "" },
 		mappings = {
 			-- Use a table to apply multiple mappings
 			expand = { "<CR>", "<2-LeftMouse>" },
@@ -55,14 +66,14 @@ local function setup_debug()
 			-- Display controls in this element
 			element = "repl",
 			icons = {
-				pause = "",
-				play = "",
-				step_into = "",
-				step_over = "",
-				step_out = "",
-				step_back = "",
-				run_last = "",
-				terminate = "",
+				pause = "",
+				play = "",
+				step_into = "",
+				step_over = "",
+				step_out = "",
+				step_back = "",
+				run_last = "",
+				terminate = "",
 			},
 		},
 		floating = {
@@ -92,14 +103,43 @@ local function setup_debug()
 			},
 		},
 	})
+
+	-- Setup keybindings
+	local dapui = require('dapui')
+
+	-- Auto open/close UI
+	dap.listeners.after.event_initialized['dapui_config'] = function()
+		dapui.open()
+	end
+	dap.listeners.before.event_terminated['dapui_config'] = function()
+		dapui.close()
+	end
+	dap.listeners.before.event_exited['dapui_config'] = function()
+		dapui.close()
+	end
 end
 
 return {
 	{
 		"mfussenegger/nvim-dap",
-		dependencies = {
-			"theHamsta/nvim-dap-virtual-text",
-			-- "nvim-telescope/telescope-dap.nvim",
+		-- dependencies = {
+		-- 	"theHamsta/nvim-dap-virtual-text",
+		-- 	-- "nvim-telescope/telescope-dap.nvim",
+		-- },
+		keys = {
+			-- Function keys (like VS Code)
+			{ "<F5>", "<cmd>DapContinue<cr>", desc = "Continue" },
+			{ "<F9>", "<cmd>DapToggleBreakpoint<cr>", desc = "Toggle breakpoint" },
+			{ "<F10>", "<cmd>DapStepOver<cr>", desc = "Step over" },
+			{ "<F11>", "<cmd>DapStepInto<cr>", desc = "Step into" },
+			{ "<S-F11>", "<cmd>DapStepOut<cr>", desc = "Step out" },
+			{ "<S-F5>", "<cmd>DapTerminate<cr>", desc = "Terminate" },
+			-- Leader key alternatives (for convenience)
+			{ "<leader>db", "<cmd>DapToggleBreakpoint<cr>", desc = "Toggle breakpoint" },
+			{ "<leader>dc", "<cmd>DapContinue<cr>", desc = "Continue" },
+			{ "<leader>dt", "<cmd>DapTerminate<cr>", desc = "Terminate" },
+			{ "<leader>dR", "<cmd>DapToggleRepl<cr>", desc = "Toggle REPL" },
+			{ "<leader>dE", "<cmd>DapSetExceptionBreakpoints<cr>", desc = "Set exception breakpoints" },
 		},
 	},
 	{
@@ -107,18 +147,50 @@ return {
 		dependencies = { "mfussenegger/nvim-dap" },
 		keys = {
 			{
-				'<leader>rg',
+				'<leader>dg',
 				function()
 					require('dap-go').debug_test()
 				end,
 				mode = { 'n' },
-				desc = 'Debug Go Test'
-			}
+				desc = 'Debug Go test'
+			},
+			{
+				'<leader>dG',
+				function()
+					require('dap-go').debug_last_test()
+				end,
+				mode = { 'n' },
+				desc = 'Debug last Go test'
+			},
 		},
 	},
 	{
 		"rcarriga/nvim-dap-ui",
 		dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
-		config = setup_debug
+		config = setup_debug,
+		keys = {
+			{
+				'<leader>dU',
+				function()
+					require('dapui').toggle()
+				end,
+				mode = { 'n' },
+				desc = 'Toggle debug UI'
+			},
+			{
+				'<leader>dH',
+				function()
+					require('dapui').eval()
+				end,
+				mode = { 'n', 'v' },
+				desc = 'Evaluate under cursor'
+			},
+		},
 	},
+	-- {
+	-- 	"theHamsta/nvim-dap-virtual-text",
+	-- 	config = function()
+	-- 		require("nvim-dap-virtual-text").setup()
+	-- 	end,
+	-- },
 }

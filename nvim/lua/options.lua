@@ -7,7 +7,7 @@ vim.opt.fileformats = { 'unix', 'dos', 'mac' } -- Use Unix as the standard file 
 vim.opt.synmaxcol = 1000                       -- Don't syntax highlight long lines
 vim.opt.encoding = 'utf-8'                     -- utf-8 please
 vim.opt.cursorline = true                      -- makes easier to find cursor on big monitor
-vim.opt.history = 10000                        -- keeep 10000 last commands in memory
+vim.opt.history = 10000                        -- keep 10000 last commands in memory
 vim.opt.laststatus = 2                         -- always show a status line
 vim.opt.showmode = false                       -- not showing mode at message, airline will be already showing it
 vim.opt.number = true                          -- always show line numbers
@@ -24,22 +24,22 @@ vim.opt.hlsearch = true   -- Highlight search results
 vim.opt.wrapscan = true   -- Searches wrap around the end of the file
 vim.opt.showmatch = true  -- Jump to matching bracket
 
--- Tabs and Indents {{{
-vim.opt.expandtab = false  -- Expand tabs to spaces.fftpl
+-- Tabs and Indents - 4 spaces for consistency across languages
+vim.opt.expandtab = true   -- Expand tabs to spaces
 vim.opt.tabstop = 4        -- The number of spaces a tab is
 vim.opt.softtabstop = 4    -- While performing editing operations
-vim.opt.shiftwidth = 2     -- Number of spaces to use in auto(indent)
+vim.opt.shiftwidth = 4     -- Number of spaces to use in auto(indent)
 vim.opt.smarttab = true    -- Tab insert blanks according to 'shiftwidth'
 vim.opt.autoindent = true  -- Use same indenting on new lines
 vim.opt.smartindent = true -- Smart autoindenting on new lines
 vim.opt.shiftround = true  -- Round indent to multiple of 'shiftwidth'
 
 vim.cmd [[
-set directory=~/.cache/swapdir//    " keep swap files, extra / is to put páth with the filenames
-set undodir=~/.cache/undodir/     " directory for persistent undo
+set directory=~/.cache/swapdir//    " keep swap files, extra / is to put path with the filenames
+set undodir=~/.cache/undodir/       " directory for persistent undo
 ]]
 
--- undo & backup {{{
+-- undo & backup
 vim.opt.backup = false        -- git and persistent undo should be enough
 vim.opt.writebackup = true    -- protect against crashes
 vim.opt.swapfile = true       -- avoid that two different instances of vim write the same file

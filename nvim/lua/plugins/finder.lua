@@ -25,7 +25,6 @@ return {
 				},
 				include_legendary_cmds = true,
 			})
-			-- TODO: move all comands to each plugin
 			local commands = {
 				-- plugin fugitive
 				{ ':GV',                            description = '(GV) Git log' },
@@ -37,9 +36,10 @@ return {
 				{ ':Git! push',                     description = 'Git push' },
 				{ ':Git! push -u origin HEAD',      description = 'Git push new branch' },
 				{ ':Git! push --force',             description = 'Git push --force' },
-				{ ':Git rebase --interactive ',     description = 'Git rebase iteractive',             unfinished = true },
-				{ ':Git rebase --interactive main', description = 'Git rebase iteractive main' },
+				{ ':Git rebase --interactive ',     description = 'Git rebase interactive',             unfinished = true },
+				{ ':Git rebase --interactive main', description = 'Git rebase interactive main' },
 				{ 'lua require("spectre").open()',  description = 'spectre search replace' },
+				-- Go commands
 				{ ':GoInstallBinaries',             description = 'GoInstallBinaries' },
 				{ ':GoUpdateBinaries',              description = 'GoUpdateBinaries' },
 				{ ':GoInstallBinary',               description = 'GoInstallBinary',                   unfinished = true },
@@ -74,32 +74,30 @@ return {
 				{ ':GoPkgOutline',                  description = 'Go Package Outline' },
 				{ ':GoToggleInlay',                 description = 'GoToggleInlay' },
 				{ ':GoTermClose',                   description = 'GoTermClose' },
+				-- Utility commands
 				{ ':MakeTable',                     description = 'CSV to markdown table' },
-				{ ':UnmakeTable',                   description = 'Markdow table to CSV' },
+				{ ':UnmakeTable',                   description = 'Markdown table to CSV' },
 				{ ':Lazy sync',                     description = 'Lazy: Sync plugins' },
+				-- SMP (markdown) commands
 				{ 'lua require("smp").preview()',   description = 'SMP: preview current markdown file' },
 				{
 					'lua require("smp").book()',
-					description =
-					'SMP: open the markdown book in a splitted window on right'
+					description = 'SMP: open the markdown book in a splitted window on right'
 				},
 				{ 'lua require("smp").expand_snippet()',      description = 'SMP: Expand current snippet in place' },
 				{ 'lua require("smp").expand_all_snippets()', description = 'SMP: Expand all snippets in place' },
 				{
 					'lua require("smp").breakIfLong()',
-					description =
-					'SMP: Break line length if its too long for easier editting'
+					description = 'SMP: Break line length if its too long for easier editing'
 				},
 				{
 					'lua require("smp").insert_blank_line()',
-					description =
-					'SMP: Insert blank lines between multiple lines of text'
+					description = 'SMP: Insert blank lines between multiple lines of text'
 				},
 				{ 'lua require("smp").bookthis()',                 description = 'SMP: Show book of this markdown file' },
 				{
 					'lua require("smp").search_text()',
-					description =
-					'SMP: Incremental search all markdown files by content'
+					description = 'SMP: Incremental search all markdown files by content'
 				},
 				{ 'lua require("smp").search_tag()',               description = 'SMP: Incremental search all markdown files by tags' },
 				{ 'lua require("smp").insert_toc_here()',          description = 'SMP: Insert TOC here' },
@@ -116,25 +114,6 @@ return {
 				{ 'lua require("smp").gotoHeaderFromTocEntry()',   description = 'SMP: Jump to header from TOC entry' },
 				{ 'lua require("smp").start()',                    description = 'SMP: Start background server' },
 				{ 'lua require("smp").stop()',                     description = 'SMP: Stop background server' },
-				-- { ':Copilot toggle',                               description = 'Copilot toggle' },
-				-- { ':CopilotChat ', description = 'Open chat window with optional input' , unfinished = true},
-				-- { ':CopilotChatOpen' , description = 'Copilot: Open chat window' },
-				-- { ':CopilotChatClose' , description = 'Copilot: Close chat window' },
-				-- { ':CopilotChatToggle' , description = 'Copilot: Toggle chat window' },
-				-- { ':CopilotChatStop' , description = 'Copilot: Stop current copilot output' },
-				-- { ':CopilotChatReset' , description = 'Copilot: Reset chat window' },
-				-- { ':CopilotChatSave ' , description = 'Copilot: Save chat history to file', unfinished = true },
-				-- { ':CopilotChatLoad ' , description = 'Copilot: Load chat history from file', unfinished = true },
-				-- { ':CopilotChatDebugInfo' , description = 'Copilot: Show debug information' },
-				-- { ':CopilotChatExplain' , description = 'Copilot: Write an explanation for the active selection as paragraphs of text' },
-				-- { ':CopilotChatReview' , description = 'Copilot: Review the selected code' },
-				-- { ':CopilotChatFix' , description = 'Copilot: There is a problem in this code. Rewrite the code to show it with the bug fixed' },
-				-- { ':CopilotChatOptimize' , description = 'Copilot: Optimize the selected code to improve performance and readablilty' },
-				-- { ':CopilotChatDocs' , description = 'Copilot: Please add documentation comment for the selection' },
-				-- { ':CopilotChatTests' , description = 'Copilot: Please generate tests for my code' },
-				-- { ':CopilotChatFixDiagnostic' , description = 'Copilot: Please assist with the following diagnostic issue in file' },
-				-- { ':CopilotChatCommit' , description = 'Copilot: Write commit message for the change with commitizen convention' },
-				-- { ':CopilotChatCommitStaged' , description = 'Copilot: Write commit message for the change with commitizen convention' },
 			}
 
 			require('legendary').commands(commands)
@@ -162,7 +141,7 @@ return {
 			{
 				"<leader>gl",
 				'<cmd>lua require("telescope.builtin").live_grep()<cr>',
-				desc = "show git branches",
+				desc = "live grep search files",
 			},
 		},
 		config = function()
@@ -200,16 +179,10 @@ return {
 							preview_height = 0.8,
 						},
 						vim_diff_opts = { ctxlen = 0 },
-						-- diff_context_lines = vim.o.scrolloff,
 						entry_format = "state #$ID, $STAT, $TIME",
 						time_format = "",
 						mappings = {
 							i = {
-								-- IMPORTANT: Note that telescope-undo must be available when telescope is configured if
-								-- you want to replicate these defaults and use the following actions. This means
-								-- installing as a dependency of telescope in it's `requirements` and loading this
-								-- extension from there instead of having the separate plugin definition as outlined
-								-- above.
 								["<cr>"] = require("telescope-undo.actions").yank_additions,
 								["<S-cr>"] = require("telescope-undo.actions").yank_deletions,
 								["<C-cr>"] = require("telescope-undo.actions").restore,
@@ -223,7 +196,6 @@ return {
 			require("telescope").load_extension("undo")
 			require("telescope").load_extension("advanced_git_search")
 			require('telescope').load_extension('goimpl')
-			-- require('telescope').load_extension('dap')
 		end
 	},
 
@@ -245,7 +217,6 @@ return {
 			},
 		},
 	},
-
 
 	{
 		"nvim-telescope/telescope-fzf-native.nvim",

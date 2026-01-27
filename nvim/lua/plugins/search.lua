@@ -18,7 +18,7 @@ return {
 
   {
 	"windwp/nvim-spectre",
-	dependecies = { 'nvim-lua/plenary.nvim' },
+	dependencies = { 'nvim-lua/plenary.nvim' },
 	keys = {
 	  {
 		"<leader>G",

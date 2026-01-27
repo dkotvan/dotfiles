@@ -104,6 +104,18 @@ return {
 		  q = { function() require("trouble").toggle("quickfix") end, "quickfix" },
 		  l = { function() require("trouble").toggle("loclist") end, "loclist" },
 		},
+		d = {
+		  name = "debug",
+		  b = { "<cmd>DapToggleBreakpoint<cr>", "Toggle breakpoint (F9)" },
+		  c = { "<cmd>DapContinue<cr>", "Continue (F5)" },
+		  t = { "<cmd>DapTerminate<cr>", "Terminate (Shift+F5)" },
+		  R = { "<cmd>DapToggleRepl<cr>", "Toggle REPL" },
+		  E = { "<cmd>DapSetExceptionBreakpoints<cr>", "Set exception breakpoints" },
+		  g = { function() require('dap-go').debug_test() end, "Debug Go test" },
+		  G = { function() require('dap-go').debug_last_test() end, "Debug last Go test" },
+		  U = { function() require('dapui').toggle() end, "Toggle debug UI" },
+		  H = { function() require('dapui').eval() end, "Evaluate under cursor" },
+		},
 	  }, { prefix = "<leader>" })
 
 		--  wk.register({

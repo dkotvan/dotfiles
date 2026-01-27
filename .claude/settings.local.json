@@ -3,7 +3,8 @@
     "allow": [
       "Read(//Users/dimas.kotvan/Projects/dimas.kotvan/scripts-ops/init/**)",
       "Bash(asdf:*)",
-      "Bash(goenv global:*)"
+      "Bash(goenv global:*)",
+      "Bash(cat:*)"
     ],
     "deny": [],
     "ask": []
