@@ -84,7 +84,7 @@ autoload -Uz compinit
 zstyle ':completion:*' menu select
 fpath+=~/.zfunc
 
-export PATH=/Users/dimas.kotvan/Library/Python/3.13/bin:${PATH}
-
 export PATH="/opt/homebrew/bin:$PATH"
 export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+# Added by Antigravity
+export PATH="/Users/dkotvan/.antigravity/antigravity/bin:$PATH"
