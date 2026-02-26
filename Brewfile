@@ -122,7 +122,6 @@ if OS.mac?
   cask 'dbeaver-community'
   cask 'discord'
   cask 'drawio'
-  cask 'firefox'
   cask 'gifcapture'
   cask 'google-chrome'
   cask 'iterm2'

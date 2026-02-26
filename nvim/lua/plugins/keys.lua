@@ -124,6 +124,7 @@ return {
 		  s = { "<cmd>ClaudeCodeSend<cr>", "Send to Claude (visual)" },
 		  a = { "<cmd>ClaudeCodeDiffAccept<cr>", "Accept diff" },
 		  d = { "<cmd>ClaudeCodeDiffDeny<cr>", "Deny diff" },
+		  m = { "<cmd>ClaudeCodeSelectModel<cr>", "Select model" },
 		},
 		x = {
 		  name = 'show trouble with',

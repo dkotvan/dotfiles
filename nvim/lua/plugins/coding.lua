@@ -298,14 +298,38 @@ return {
 		"coder/claudecode.nvim",
 		dependencies = { "folke/snacks.nvim" },
 		lazy = false,
-		config = true,
+		opts = {
+			-- Behavior
+			auto_start = false,             -- Manual start only
+			track_selection = true,         -- Send selection context in real-time
+
+			-- Working directory
+			git_repo_cwd = true,            -- Use git root as working directory
+
+			-- Logging (set to "debug" for troubleshooting)
+			log_level = "warn",
+
+			-- Terminal configuration
+			terminal = {
+				provider = "snacks",            -- Explicitly use snacks.nvim
+				split_side = "right",
+				split_width_percentage = 0.35,
+				snacks_win_opts = {
+					keys = {
+						nav_w = { "<C-w><C-w>", function() vim.cmd("wincmd w") end, mode = "t", desc = "Go to next window" },
+					},
+				},
+			},
+		},
 		keys = {
 			{ "<leader>ac", "<cmd>ClaudeCode<cr>",            desc = "Toggle Claude" },
+			{ "<leader>ar", "<cmd>ClaudeCode --resume<cr>",   desc = "Resume Claude" },
 			{ "<leader>af", "<cmd>ClaudeCodeFocus<cr>",       desc = "Focus Claude" },
 			{ "<leader>as", "<cmd>ClaudeCodeSend<cr>",        mode = "v", desc = "Send to Claude" },
 			{ "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>",       desc = "Add current buffer" },
 			{ "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>",  desc = "Accept diff" },
 			{ "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>",    desc = "Deny diff" },
+			{ "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select model" },
 		},
 	},
 
