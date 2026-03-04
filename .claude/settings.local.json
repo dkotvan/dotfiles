@@ -5,7 +5,15 @@
       "Bash(asdf:*)",
       "Bash(goenv global:*)",
       "Bash(cat:*)",
-      "WebFetch(domain:github.com)"
+      "WebFetch(domain:github.com)",
+      "Bash(grep:*)",
+      "Bash(claude mcp --help:*)",
+      "WebFetch(domain:medium.com)",
+      "WebSearch",
+      "Bash(claude mcp remove:*)",
+      "Bash(claude mcp add:*)",
+      "Bash(claude mcp list:*)",
+      "Bash(claude mcp:*)"
     ],
     "deny": [],
     "ask": []

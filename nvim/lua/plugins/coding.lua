@@ -147,6 +147,19 @@ return {
 					disable_lsp = { "sumneko_lua" },
 				},
 			})
+			-- Wrap navigator's on_filetype to skip Claude Code diff buffers
+			-- navigator.lua:314 calls require('navigator.lspclient.clients').on_filetype()
+			-- which crashes on buffers named "✻ [Claude Code] ..." (E474: Invalid argument)
+			local clients = require("navigator.lspclient.clients")
+			local orig_on_filetype = clients.on_filetype
+			clients.on_filetype = function(...)
+				local bufnr = vim.api.nvim_get_current_buf()
+				local name = vim.api.nvim_buf_get_name(bufnr)
+				if name:find("Claude Code", 1, true) then
+					return
+				end
+				return orig_on_filetype(...)
+			end
 		end
 	},
 
@@ -300,7 +313,7 @@ return {
 		lazy = false,
 		opts = {
 			-- Behavior
-			auto_start = false,             -- Manual start only
+			auto_start = true,              -- Start MCP server so Claude can detect Neovim
 			track_selection = true,         -- Send selection context in real-time
 
 			-- Working directory
@@ -308,6 +321,11 @@ return {
 
 			-- Logging (set to "debug" for troubleshooting)
 			log_level = "warn",
+
+			-- Diff configuration
+			diff_opts = {
+				open_in_new_tab = true,           -- Open diffs in a new tab instead of a split
+			},
 
 			-- Terminal configuration
 			terminal = {
@@ -321,6 +339,9 @@ return {
 				},
 			},
 		},
+		config = function(_, opts)
+			require("claudecode").setup(opts)
+		end,
 		keys = {
 			{ "<leader>ac", "<cmd>ClaudeCode<cr>",            desc = "Toggle Claude" },
 			{ "<leader>ar", "<cmd>ClaudeCode --resume<cr>",   desc = "Resume Claude" },

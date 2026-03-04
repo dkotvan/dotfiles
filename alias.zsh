@@ -82,6 +82,8 @@ cdc() {
 }
 
 alias ngst='nvim -c ":G"'
+alias nvimc='nvim -c "ClaudeCode"'
+alias nvimcr='nvim -c "ClaudeCode --resume"'
 
 update_nvim() {
   echo "update neovim"

@@ -8,6 +8,8 @@ ln -s ~/dotfiles/agignore ~/.fdignore
 mkdir -p ~/.config
 ln -s ~/dotfiles/starship.toml ~/.config/starship.toml
 ln -s ~/dotfiles/nvim/ ~/.config/nvim
+mkdir -p ~/.config/ghostty
+ln -s ~/dotfiles/ghostty.conf ~/.config/ghostty/config
 ln -s ~/dotfiles/ideavimrc ~/.ideavimrc
 
 # Install Homerew and all the hoebrew dependencies
