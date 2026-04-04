@@ -1,0 +1,10 @@
+[tools]
+python = "3.13"
+node = "22"
+ruby = "3.3"
+go = "latest"
+rust = "stable"
+lua = "5.4"
+java = "temurin-25"
+yarn = "latest"
+

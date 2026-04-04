@@ -48,3 +48,37 @@ vim.opt.undofile = true       -- persistent undo, write undo at disk
 
 -- editorconfig
 vim.g.editorconfig = true
+
+-- Register compound filetypes used by LSP servers
+vim.filetype.add({
+	filename = {
+		["docker-compose.yaml"]   = "yaml.docker-compose",
+		["docker-compose.yml"]    = "yaml.docker-compose",
+		["compose.yaml"]          = "yaml.docker-compose",
+		["compose.yml"]           = "yaml.docker-compose",
+		[".gitlab-ci.yml"]        = "yaml.gitlab",
+		[".gitlab-ci.yaml"]       = "yaml.gitlab",
+	},
+	pattern = {
+		[".*compose.*%.ya?ml"]    = "yaml.docker-compose",
+		[".*/helm/.*values.*%.ya?ml"] = "yaml.helm-values",
+		[".*%.tmpl"]              = "gotmpl",
+		-- OpenAPI: detect by content (openapi: key in first few lines)
+		[".*%.ya?ml"] = {
+			function(_, bufnr)
+				for _, line in ipairs(vim.api.nvim_buf_get_lines(bufnr, 0, 8, false)) do
+					if line:match("^openapi%s*:") then return "yaml.openapi" end
+				end
+			end,
+			{ priority = 10 },
+		},
+		[".*%.json"] = {
+			function(_, bufnr)
+				for _, line in ipairs(vim.api.nvim_buf_get_lines(bufnr, 0, 8, false)) do
+					if line:match('"openapi"%s*:') then return "json.openapi" end
+				end
+			end,
+			{ priority = 10 },
+		},
+	},
+})

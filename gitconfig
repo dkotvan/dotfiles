@@ -40,5 +40,3 @@
 	smudge = git-lfs smudge -- %f
 	process = git-lfs filter-process
 	required = true
-[ghq]
-	root = /Users/dimas.kotvan/Projects/iFood/consumer/account

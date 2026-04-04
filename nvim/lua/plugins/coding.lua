@@ -1,47 +1,23 @@
 return {
-	-- treesiter
+	-- Parser manager for Neovim 0.12+ (nvim-treesitter is archived)
 	{
-		"nvim-treesitter/nvim-treesitter",
-		build = ":TSUpdateSync",
-		dependencies = {
-			"RRethy/nvim-treesitter-textsubjects",
-			'JoosepAlviste/nvim-ts-context-commentstring',
-		},
+		"romus204/tree-sitter-manager.nvim",
 		config = function()
-			require("nvim-treesitter.configs").setup({
+			require("tree-sitter-manager").setup({
+				auto_install = true,
 				ensure_installed = {
-					"bash", "c", "css", "csv", "clojure", "cpp", "diff", "dockerfile", "dot", "elixir",
-					"git_config", "git_rebase", "gitattributes", "gitcommit", "gitignore",
-					"go", "gomod", "gosum", "gowork", "graphql", "hcl", "html", "http", "hurl",
-					"java", "javascript", "jq", "json", "json5", "jsonc", "kotlin", "latex", "lua", "make",
-					"markdown_inline", "perl", "php", "python", "ruby", "sql", "terraform", "toml", "typescript", "vim",
-					"vimdoc", "xml", "yaml", "zig"
+					"bash", "c", "comment", "css", "cpp", "diff", "dockerfile",
+					"elixir", "git_config", "git_rebase", "gitattributes", "gitcommit", "gitignore",
+					"go", "gomod", "gosum", "gowork", "gotmpl", "graphql", "hcl", "html", "http",
+					"java", "javascript", "json", "json5", "kotlin", "lua", "make",
+					"markdown", "markdown_inline", "python", "regex", "ruby", "scss", "sql",
+					"svelte", "terraform", "toml", "tsx", "typescript", "vim", "vimdoc", "vue", "xml", "yaml", "zig",
 				},
-				highlight = { enable = true },
-				indentation = { enable = true },
-				folding = { enable = false },
-				incremental_selection = {
-					enable = true,
-					keymaps = {
-						init_selection = "gni",
-						node_incremental = "gnn",
-						scope_incremental = "gnc",
-						node_decremental = "gnm",
-					},
-				},
-				textsubjects = {
-					enable = true,
-					prev_selection = ',', -- (Optional) keymap to select the previous selection
-					keymaps = {
-						['.'] = 'textsubjects-smart',
-						[';'] = { 'textsubjects-container-outer', desc = "Select outside containers (classes, functions, etc.)" },
-						['i;'] = { 'textsubjects-container-inner', desc = "Select inside containers (classes, functions, etc.)" },
-					},
-				},
-				autopairs = { enable = true },
 			})
 		end,
 	},
+	-- Stub: go.nvim and other plugins still declare nvim-treesitter as a dependency
+	{ "nvim-treesitter/nvim-treesitter" },
 
 	{
 		"williamboman/mason.nvim",
@@ -50,91 +26,84 @@ return {
 			"WhoIsSethDaniel/mason-tool-installer.nvim",
 			"neovim/nvim-lspconfig",
 		},
-
 		config = function()
 			require("mason").setup()
 			require("mason-lspconfig").setup()
-			require('mason-tool-installer').setup {
+			require("mason-tool-installer").setup({
 				ensure_installed = {
 					-- LSP Servers
-					"autotools_ls", "bashls", "docker_compose_language_service", "dockerls",
-					"jqls", "lua_ls", "pyright", "solargraph", "terraformls",
-					"tflint", "yamlls",
+					"autotools-language-server", "bashls", "docker-compose-language-service", "dockerls",
+					"gopls", "jqls", "lua_ls", "pyright", "solargraph", "terraformls", "tflint", "yamlls",
 					-- Linters
 					"eslint_d", "shellcheck", "vacuum",
-					-- Format
-					"cbfmt", "jq", "shfmt", "sqlfluff",
+					-- Formatters
+					"cbfmt", "jq", "shfmt", "sqlfluff", "stylua",
 				},
 				auto_update = true,
 				run_on_start = true,
 				start_delay = 10000,
 				debounce_hours = 8,
-			}
+			})
 
-			vim.lsp.config.lua_ls = { filetypes = { "lua" } }
-			vim.lsp.config.bashls = { filetypes = { "bash", "sh" } }
-			vim.lsp.config.terraformls = { filetypes = { "terraform", "terraform-vars", "hcl" } }
-			vim.lsp.config.tflint = { filetypes = { "terraform", "terraform-vars", "hcl" } }
-		end
+			-- Enable LSP servers — config is loaded from nvim/lsp/<server>.lua
+			vim.lsp.enable({ "gopls", "lua_ls", "bashls", "terraformls", "tflint" })
+		end,
 	},
 
 	{
 		"nvimtools/none-ls.nvim",
+		dependencies = { "nvim-lua/plenary.nvim", "lewis6991/gitsigns.nvim" },
 		config = function()
 			local nls = require("null-ls")
-
-			local sqlfluff_with = {
-				extra_args = { "--config", vim.fn.expand("$HOME/dotfiles/nvim/sqlfluff.toml") },
-			}
-
-			local sources = {
-				-- Code Actions
-				nls.builtins.code_actions.gitrebase,
-				nls.builtins.code_actions.gitsigns,
-				-- Diagnostics
-				-- nls.builtins.diagnostics.sqlfluff.with(sqlfluff_with),
-				nls.builtins.diagnostics.vacuum, -- TODO: create a recomended ruleset
-				nls.builtins.diagnostics.zsh,
-				-- Formatting.
-				nls.builtins.formatting.cbfmt,
-				nls.builtins.formatting.shfmt,
-				nls.builtins.formatting.sqlfluff.with(sqlfluff_with),
-			}
-			-- local gotest = require("go.null_ls").gotest()
-			-- local gotest_codeaction = require("go.null_ls").gotest_action()
-			-- table.insert(sources, gotest)
-			-- table.insert(sources, gotest_codeaction)
 			nls.setup({
 				debug = false,
-				sources = sources,
+				sources = {
+					-- Code Actions
+					nls.builtins.code_actions.gitrebase,
+					nls.builtins.code_actions.gitsigns,
+					-- Diagnostics (formatting handled by conform.nvim)
+					-- vacuum runs as LSP server already, no need to duplicate here
+					nls.builtins.diagnostics.zsh,
+				},
+			})
+
+			-- Suppress diagnostics for .env files
+			vim.api.nvim_create_autocmd("FileType", {
+				group = vim.api.nvim_create_augroup("EnvFileDiagnostics", { clear = true }),
+				pattern = "sh",
+				callback = function(args)
+					local filename = vim.fn.expand("%:t")
+					if filename:match("^%.env") or filename:match("%.env$") then
+						vim.diagnostic.disable(args.buf)
+					end
+				end,
 			})
 		end,
 	},
 
-	{ "ray-x/guihua.lua", build = "cd lua/fzy && make" },
-	"onsails/lspkind-nvim",
 	{
-		'ray-x/navigator.lua',
-		dependencies = {
-			'ray-x/guihua.lua',
-			'neovim/nvim-lspconfig',
-		},
+		"stevearc/conform.nvim",
 		config = function()
-			require("navigator").setup({
-				debug = false,
-				default_mapping = false,
-				keymaps = {},
-				mason = true,
-				lines_show_prompt = 20,
-				lsp = {
-					code_action = { enable = true, sign = true, sign_priority = 40, virtual_text = true, virtual_text_icon = true },
-					code_lens_action = { enable = true, sign = true, sign_priority = 40, virtual_text = true },
-					format_on_save = false,
-					display_diagnostic_qf = 'trouble',
-					disable_lsp = { "sumneko_lua" },
+			require("conform").setup({
+				formatters_by_ft = {
+					lua = { "stylua" },
+					sh = { "shfmt" },
+					bash = { "shfmt" },
+					sql = { "sqlfluff" },
+					go = { "goimports", "gofmt" },
+				},
+				formatters = {
+					sqlfluff = {
+						args = { "format", "--dialect=postgres", "--config", vim.fn.expand("$HOME/dotfiles/nvim/sqlfluff.toml"), "-" },
+						require_cwd = false,
+					},
+				},
+				format_on_save = {
+					timeout_ms = 500,
+					lsp_fallback = true,
 				},
 			})
-		end
+		end,
 	},
 
 	{
@@ -152,145 +121,61 @@ return {
 		ft = { "ruby" },
 	},
 
-	-- Snippets
-	"rafamadriz/friendly-snippets",
 	{
-		"hrsh7th/vim-vsnip",
-		config = function()
-			vim.g.vsnip_snippet_dir = vim.fn.stdpath("config") .. "/snippets/"
-		end,
-	},
-	"hrsh7th/vim-vsnip-integ",
-
-	{
-		"hrsh7th/nvim-cmp",
-		dependencies = {
-			"andersevenrud/cmp-tmux",
-			"hrsh7th/cmp-buffer",
-			"hrsh7th/cmp-nvim-lsp",
-			"hrsh7th/cmp-path",
-			"hrsh7th/cmp-vsnip",
-			"hrsh7th/cmp-nvim-lua",
-			"ray-x/cmp-treesitter",
-			"f3fora/cmp-spell",
-			"hrsh7th/cmp-emoji",
-			"hrsh7th/cmp-cmdline",
-			"hrsh7th/cmp-nvim-lsp-signature-help",
-			"hrsh7th/cmp-nvim-lsp-document-symbol",
-			"ray-x/lsp_signature.nvim",
-			"davidsierradz/cmp-conventionalcommits",
-			-- "zbirenbaum/copilot-cmp",
+		'saghen/blink.cmp',
+		version = '*',
+		dependencies = 'rafamadriz/friendly-snippets',
+		opts = {
+			keymap = { preset = 'default' },
+			appearance = {
+				use_nvim_cmp_as_default = true,
+				nerd_font_variant = 'mono'
+			},
+			sources = {
+				default = { 'lsp', 'path', 'snippets', 'buffer' },
+			},
+			signature = { enabled = true }
 		},
-		config = function()
-			vim.o.completeopt = "menuone,noselect"
-
-			local cmp = require('cmp')
-			cmp.setup {
-				snippet = {
-					-- REQUIRED - you must specify a snippet engine
-					expand = function(args)
-						vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
-					end,
-				},
-				sources = {
-					-- { name = "copilot-cmp" },
-					{ name = 'nvim_lsp' },
-					{ name = 'nvim_lua' },
-					{ name = 'vsnip' },
-					{ name = 'path' },
-					{ name = 'emoji' },
-					{
-						name = 'tmux',
-						option = {
-							all_panes = true,
-							label = '[tmux]',
-						}
-					},
-					{ name = 'buffer' },
-					{ name = 'spell' },
-					{ name = 'treesiter' },
-				},
-				mapping = cmp.mapping.preset.insert({
-					['<C-b>'] = cmp.mapping.scroll_docs(-4), ['<C-f>'] = cmp.mapping.scroll_docs(4),
-					['<C-Space>'] = cmp.mapping.complete(),
-					['<C-e>'] = cmp.mapping.abort(),
-					['<esc>'] = cmp.mapping.abort(),
-					['<CR>'] = cmp.mapping.confirm({
-						behavior = cmp.ConfirmBehavior.Replace,
-						select = true
-					}), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
-				}),
-				experimental = {
-					ghost_text = false,
-				},
-				formatting = {
-					format = function(entry, vim_item)
-						if (entry.source.name == "codeium") then
-							vim_item.kind = " codeium"
-						else
-							-- fancy icons and a name of kind
-							vim_item.kind = require("lspkind").presets.default[vim_item.kind] .. " " .. vim_item.kind
-						end
-
-						-- set a name for each source
-						vim_item.menu = ({
-							codeium = "",
-							path = "",
-							buffer = "",
-							vsnip = "",
-							spell = "",
-							tmux = "",
-							treesiter = "",
-						})[entry.source.name]
-						return vim_item
-					end,
-				},
-			}
-
-			cmp.setup.filetype('gitcommit', {
-				sources = cmp.config.sources({
-					{ name = 'conventionalcommits' },
-					{ name = 'path' },
-					{ name = 'emoji' },
-					{ name = 'tmux' },
-					{ name = 'buffer' },
-					{ name = 'spell' },
-					{ name = 'buffer' },
-				})
-			})
-
-			-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
-			cmp.setup.cmdline('/', {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = {
-					{ name = 'nvim_lsp_document_symbol' },
-					{ name = 'buffer' },
-					{ name = 'tmux' },
-				}
-			})
-
-			-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
-			cmp.setup.cmdline(':', {
-				mapping = cmp.mapping.preset.cmdline(),
-				sources = cmp.config.sources({
-					{ name = 'path' },
-					{ name = 'cmdline' },
-					{ name = 'buffer' },
-				})
-			})
-		end,
 	},
 
 	{
 		"coder/claudecode.nvim",
 		dependencies = { "folke/snacks.nvim" },
-		config = true,
+		lazy = false,
 		opts = {
-		  terminal_cmd = "ccr code",
-		  terminal = {
-			provider = "snacks",
-		  },
+			auto_start = true,
+			track_selection = true,
+			git_repo_cwd = true,
+			log_level = "warn",
+			diff_opts = {
+				layout = "horizontal",
+				open_in_new_tab = true,
+				keep_terminal_focus = true,
+			},
+			terminal = {
+				provider = "snacks",
+				split_side = "right",
+				split_width_percentage = 0.35,
+				snacks_win_opts = {
+					keys = {
+						nav_w = { "<C-w><C-w>", function() vim.cmd("wincmd w") end, mode = "t", desc = "Go to next window" },
+					},
+				},
+			},
 		},
+		config = function(_, opts)
+			require("claudecode").setup(opts)
+			-- Light blue visual selection inside Claude terminal buffers
+			vim.api.nvim_create_autocmd("BufEnter", {
+				pattern = "*",
+				callback = function()
+					local bufname = vim.api.nvim_buf_get_name(0)
+					if bufname:find("snacks") or bufname:find("claude", 1, true) then
+						vim.api.nvim_set_hl(0, "Visual", { bg = "#83a598" })
+					end
+				end,
+			})
+		end,
 		keys = {
 			{ "<leader>a",  nil,                              desc = "AI/Claude Code" },
 			{ "<leader>ac", "<cmd>ClaudeCode<cr>",            desc = "Toggle Claude" },
@@ -306,141 +191,10 @@ return {
 				desc = "Add file",
 				ft = { "NvimTree", "neo-tree", "oil", "minifiles", "netrw" },
 			},
-			-- Diff management
 			{ "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
 			{ "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>",   desc = "Deny diff" },
 		},
 	},
-
-	-- Golang
-	{
-		"ray-x/go.nvim",
-		dependencies = "nvim-treesitter/nvim-treesitter-textobjects",
-		config = function()
-			require('go').setup({
-				goimports = 'gopls', -- if set to 'gopls' will use golsp format
-				gofmt = 'gopls', -- if set to gopls will use golsp format
-				-- max_line_len = 120,
-				tag_transform = false,
-				test_dir = '',
-				comment_placeholder = '   ',
-				lsp_cfg = true,   -- false: use your own lspconfig
-				lsp_gofumpt = true, -- true: set default gofmt in gopls format to gofumpt
-				lsp_on_attach = true, -- use on_attach from go.nvim
-				lsp_keymaps = false, -- use our keymaps instead
-				dap_debug = true,
-				trouble = true,
-			})
-
-			local format_sync_grp = vim.api.nvim_create_augroup("GoImport", {})
-			vim.api.nvim_create_autocmd("BufWritePre", {
-				pattern = "*.go",
-				callback = function()
-					require('go.format').goimport()
-				end,
-				group = format_sync_grp,
-			})
-
-			local cfg = require 'go.lsp'.config() -- config() return the go.nvim gopls setup
-			vim.lsp.config.gopls = cfg
-		end,
-	},
-	{
-		"ray-x/lsp_signature.nvim",
-		config = function()
-			require("lsp_signature").setup {
-				log_path = "/tmp/sig.log",
-				debug = true,
-				hint_enable = false,
-				handler_opts = { border = "single" },
-				max_width = 80,
-			}
-		end
-	},
-
-	-- {
-	-- 	"zbirenbaum/copilot.lua",
-	-- 	config = function()
-	-- 		require("copilot").setup({
-	-- 			panel = {
-	-- 				enabled = true,
-	-- 				auto_refresh = false,
-	-- 				keymap = {
-	-- 					jump_prev = "[[",
-	-- 					jump_next = "]]",
-	-- 					accept = "<CR>",
-	-- 					refresh = "gr",
-	-- 					open = "<M-CR>"
-	-- 				},
-	-- 				layout = {
-	-- 					position = "bottom", -- | top | left | right
-	-- 					ratio = 0.4
-	-- 				},
-	-- 				suggestion = {
-	-- 					enabled = false,
-	-- 					auto_trigger = false,
-	-- 					debounce = 75,
-	-- 					keymap = {
-	-- 						accept = "<M-l>",
-	-- 						accept_word = false,
-	-- 						accept_line = false,
-	-- 						next = "<M-]>",
-	-- 						prev = "<M-[>",
-	-- 						dismiss = "<C-]>",
-	-- 					},
-	-- 				},
-	-- 			},
-	-- 			filetypes = {
-	-- 				sh = function()
-	-- 					if string.match(vim.fs.basename(vim.api.nvim_buf_get_name(0)), '^%.env.*') then
-	-- 						return false
-	-- 					end
-	-- 					return true
-	-- 				end,
-	-- 				['*'] = function()
-	-- 					local home = os.getenv("HOME")
-	-- 					local ignored_paths = {
-	-- 						home .. "/.ssh/",
-	-- 						home .. "/.aws/",
-	-- 						home .. "/.config/lab",
-	-- 						home .. "/.netrc",
-	-- 						home .. "/.kube",
-	-- 						home .. "/.docker",
-	-- 					}
-	-- 					local current_path = vim.api.nvim_buf_get_name(0)
-	-- 					for _, path in ipairs(ignored_paths) do
-	-- 						if string.match(current_path, path) then
-	-- 							return false
-	-- 						end
-	-- 					end
-	-- 					return true
-	-- 				end,
-	-- 			},
-	-- 			copilot_node_command = 'node', -- Node.js version must be > 16.x
-	-- 			server_opts_overrides = {}
-	-- 		})
-	-- 	end,
-	-- },
-	-- {
-	-- 	"zbirenbaum/copilot-cmp",
-	-- 	dependencies = { "copilot.lua" },
-	-- 	config       = function()
-	-- 		require("copilot_cmp").setup()
-	-- 	end
-	-- },
-	-- {
-	-- 	"CopilotC-Nvim/CopilotChat.nvim",
-	-- 	dependencies = {
-	-- 		{ "github/copilot.vim" },                    -- or zbirenbaum/copilot.lua
-	-- 		{ "nvim-lua/plenary.nvim", branch = "master" }, -- for curl, log and async functions
-	-- 	},
-	-- 	build = "make tiktoken",                       -- Only on MacOS or Linux
-	-- 	opts = {
-	-- 		-- See Configuration section for options
-	-- 	},
-	-- 	-- See Commands section for default commands if you want to lazy load on them
-	-- },
-
 
 	{
 		"nvim-neotest/neotest",

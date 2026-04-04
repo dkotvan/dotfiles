@@ -5,3 +5,4 @@ if not vim.g.vscode then
   require('loader')
 end
 require('options')
+require('commands')

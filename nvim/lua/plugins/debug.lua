@@ -79,7 +79,14 @@ local function setup_debug()
 			max_value_lines = 100, -- Can be integer or nil.
 		}
 	})
-	require('dap').set_log_level('TRACE')
+	-- Auto open/close DAP UI
+	local dapui = require("dapui")
+	local dap = require("dap")
+	dap.listeners.after.event_initialized["dapui_config"] = function() dapui.open() end
+	dap.listeners.before.event_terminated["dapui_config"] = function() dapui.close() end
+	dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
+
+	dap.set_log_level('TRACE')
 	require('dap-go').setup({
 		dap_configurations = {
 			{
@@ -99,7 +106,14 @@ return {
 		"mfussenegger/nvim-dap",
 		dependencies = {
 			"theHamsta/nvim-dap-virtual-text",
-			-- "nvim-telescope/telescope-dap.nvim",
+		},
+		keys = {
+			{ "<F5>",   "<cmd>DapContinue<cr>",        desc = "Continue" },
+			{ "<F9>",   "<cmd>DapToggleBreakpoint<cr>", desc = "Toggle breakpoint" },
+			{ "<F10>",  "<cmd>DapStepOver<cr>",         desc = "Step over" },
+			{ "<F11>",  "<cmd>DapStepInto<cr>",         desc = "Step into" },
+			{ "<S-F11>","<cmd>DapStepOut<cr>",          desc = "Step out" },
+			{ "<S-F5>", "<cmd>DapTerminate<cr>",        desc = "Terminate" },
 		},
 	},
 	{

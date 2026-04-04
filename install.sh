@@ -7,34 +7,16 @@ ln -s ~/dotfiles/agignore ~/.agignore
 ln -s ~/dotfiles/agignore ~/.fdignore
 mkdir -p ~/.config
 ln -s ~/dotfiles/starship.toml ~/.config/starship.toml
+mkdir -p ~/.config/mise
+ln -s ~/dotfiles/mise-config.toml ~/.config/mise/config.toml
 ln -s ~/dotfiles/nvim/ ~/.config/nvim
 ln -s ~/dotfiles/ideavimrc ~/.ideavimrc
+mkdir -p ~/.config/ghostty
+ln -s ~/dotfiles/ghostty.conf ~/.config/ghostty/config
 
-# Install Homerew and all the hoebrew dependencies
-sudo apt install -y --quiet gcc
-/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install.sh)" </dev/null
-eval $(/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+# Install Homebrew and dependencies
+/bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew bundle
-
-# Install nodejs
-nodenv install 13.7.0
-nodenv global 13.7.0
-
-# Fonts to allow
-sudo apt install -y --quiet fonts-powerline fonts-hack
-
-# Install Shouo Dein
-curl https://raw.githubusercontent.com/Shougo/dein.vim/master/bin/installer.sh > /tmp/installer.sh
-sh /tmp/installer.sh ~/dotfiles/nvim/bundles
-nvim +q
-
-# Install nvim requirements 
-yarn global add neovim
-pip install neovim
-pip3 install neovim
-
-# Change default shell
-sudo sh -c "echo $(which zsh) >> /etc/shells" && chsh -s $(which zsh)
 
 # Instal Tmux plugins
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm
