@@ -323,9 +323,17 @@ return {
 			log_level = "warn",
 
 			-- Diff configuration
-			diff_opts = {
-				open_in_new_tab = true,           -- Open diffs in a new tab instead of a split
-			},
+            diff_opts = {
+                layout = "horizontal", -- "vertical" or "horizontal"
+                open_in_new_tab = true,
+                keep_terminal_focus = true, -- If true, moves focus back to terminal after diff opens
+                hide_terminal_in_new_tab = false,
+                -- on_new_file_reject = "keep_empty", -- "keep_empty" or "close_window"
+
+                -- Legacy aliases (still supported):
+                -- vertical_split = true,
+                -- open_in_current_tab = true,
+            },
 
 			-- Terminal configuration
 			terminal = {
@@ -341,6 +349,17 @@ return {
 		},
 		config = function(_, opts)
 			require("claudecode").setup(opts)
+
+			-- Custom visual selection highlight for Claude Code terminal (light blue)
+			vim.api.nvim_create_autocmd("BufEnter", {
+				pattern = "*",
+				callback = function()
+					local bufname = vim.api.nvim_buf_get_name(0)
+					if bufname:find("snacks") or bufname:find("claude", 1, true) then
+						vim.api.nvim_set_hl(0, "Visual", { bg = "#83a598" })
+					end
+				end,
+			})
 		end,
 		keys = {
 			{ "<leader>ac", "<cmd>ClaudeCode<cr>",            desc = "Toggle Claude" },

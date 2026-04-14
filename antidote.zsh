@@ -8,8 +8,8 @@ source $HOME/.antidote/antidote.zsh
 [[ -e $HOME/.zsh_plugins.zsh ]] \
   || antidote bundle <$DOTFILES/zsh_plugins.txt >$HOME/.zsh_plugins.zsh
 
-#Fix for oh my zsh
-export ZSH="$(antidote home)/https-COLON--SLASH--SLASH-github.com-SLASH-ohmyzsh-SLASH-ohmyzsh"
+# Set ZSH path BEFORE sourcing plugins (oh-my-zsh needs this early)
+export ZSH="$HOME/Library/Caches/antidote/github.com/ohmyzsh/ohmyzsh"
 
 # source static plugins file
 source $HOME/.zsh_plugins.zsh
