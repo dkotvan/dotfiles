@@ -7,6 +7,8 @@ ln -s ~/dotfiles/agignore ~/.agignore
 ln -s ~/dotfiles/agignore ~/.fdignore
 mkdir -p ~/.config
 ln -s ~/dotfiles/starship.toml ~/.config/starship.toml
+mkdir -p ~/.config/mise
+ln -s ~/dotfiles/mise-config.toml ~/.config/mise/config.toml
 ln -s ~/dotfiles/nvim/ ~/.config/nvim
 mkdir -p ~/.config/ghostty
 ln -s ~/dotfiles/ghostty.conf ~/.config/ghostty/config

@@ -64,11 +64,7 @@ if [[ $OSTYPE == darwin* ]]; then
   export GPG_TTY=`tty` # Makes gpg and git works well
 fi
 
-export RUBY_CONFIGURE_OPTS="--with-openssl-dir=$(brew --prefix openssl@1.1)"
-
 zmodload zsh/zpty
-
-
 
 eval "$(starship init zsh)"
 
@@ -84,7 +80,5 @@ autoload -Uz compinit
 zstyle ':completion:*' menu select
 fpath+=~/.zfunc
 
-export PATH=/Users/dimas.kotvan/Library/Python/3.13/bin:${PATH}
-
 export PATH="/opt/homebrew/bin:$PATH"
-export PATH="${ASDF_DATA_DIR:-$HOME/.asdf}/shims:$PATH"
+eval "$(mise activate zsh)"

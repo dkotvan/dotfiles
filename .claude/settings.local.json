@@ -13,7 +13,8 @@
       "Bash(claude mcp remove:*)",
       "Bash(claude mcp add:*)",
       "Bash(claude mcp list:*)",
-      "Bash(claude mcp:*)"
+      "Bash(claude mcp:*)",
+      "Bash(rtk ls *)"
     ],
     "deny": [],
     "ask": []

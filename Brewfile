@@ -7,23 +7,7 @@ brew 'gcc'
 brew 'make'
 
 # Languages
-brew 'asdf'
-brew 'python'
-brew 'node-build'
-brew 'nodenv'
-brew 'virtualenv'
-brew 'yarn'
-brew 'rust'
-brew 'rbenv'
-brew 'rbenv-binstubs'
-brew 'rbenv-bundler'
-brew 'goenv'
-brew 'lua'
-brew 'luarocks'
-unless OS.mac?
-  brew 'openjdk@11'
-  brew 'openjdk@17'
-end
+brew 'mise'
 
 # Git related
 brew 'git'
@@ -88,6 +72,13 @@ brew 'lsd'
 brew 'wget'
 brew 'awscli'
 
+# apps - new stuff
+brew "conikeec/tap/mcp-probe"
+brew "bookofrat"
+brew "mpryor/tap/nless"
+brew "kiki-ki/tap/qo"
+brew "xan"
+
 # apps
 brew 'ghostscript'
 brew 'imagemagick'
@@ -112,16 +103,7 @@ if OS.mac?
   brew 'gnu-sed'
   brew 'pinentry-mac'
 
-  cask 'zulu@8'
-  cask 'zulu@17'
-  cask 'zulu@21'
-  cask 'temurin@11'
-  cask 'temurin@17'
-  cask 'temurin@21'
   cask 'clocker'
-  cask 'dbeaver-community'
-  cask 'discord'
-  cask 'drawio'
   cask 'gifcapture'
   cask 'google-chrome'
   cask 'iterm2'
@@ -129,12 +111,12 @@ if OS.mac?
   cask 'postman'
   cask 'rectangle'
   cask 'slack'
-  cask 'skype'
   cask 'tomighty'
-  cask 'visual-studio-code'
   cask 'visualvm'
   cask 'yed'
   cask 'zoom'
+
+  cask 'claude-code'
 
   # iOS Development
   cask 'swiftformat-for-xcode'
