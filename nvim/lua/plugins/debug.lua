@@ -87,18 +87,6 @@ local function setup_debug()
 	dap.listeners.before.event_exited["dapui_config"] = function() dapui.close() end
 
 	dap.set_log_level('TRACE')
-	require('dap-go').setup({
-		dap_configurations = {
-			{
-				type = "go",
-				name = "Attach remote",
-				mode = "remote",
-				request = "attach",
-				port = 59360,
-				host = "127.0.0.1",
-			},
-		},
-	})
 end
 
 return {
@@ -114,25 +102,71 @@ return {
 			{ "<F11>",  "<cmd>DapStepInto<cr>",         desc = "Step into" },
 			{ "<S-F11>","<cmd>DapStepOut<cr>",          desc = "Step out" },
 			{ "<S-F5>", "<cmd>DapTerminate<cr>",        desc = "Terminate" },
+			{ "<leader>db", "<cmd>DapToggleBreakpoint<cr>", desc = "Toggle breakpoint" },
+			{ "<leader>dc", "<cmd>DapContinue<cr>",         desc = "Continue" },
+			{ "<leader>dt", "<cmd>DapTerminate<cr>",        desc = "Terminate" },
+			{ "<leader>dR", "<cmd>DapToggleRepl<cr>",       desc = "Toggle REPL" },
+			{ "<leader>dE", "<cmd>DapSetExceptionBreakpoints<cr>", desc = "Set exception breakpoints" },
 		},
 	},
 	{
 		"leoluz/nvim-dap-go",
 		dependencies = { "mfussenegger/nvim-dap" },
+		ft = { "go", "gomod", "gosum", "gowork" },
+		config = function()
+			require('dap-go').setup({
+				dap_configurations = {
+					{
+						type = "go",
+						name = "Attach remote",
+						mode = "remote",
+						request = "attach",
+						port = 59360,
+						host = "127.0.0.1",
+					},
+				},
+			})
+		end,
 		keys = {
 			{
-				'<leader>rg',
+				'<leader>dg',
 				function()
 					require('dap-go').debug_test()
 				end,
 				mode = { 'n' },
-				desc = 'Debug Go Test'
-			}
+				desc = 'Debug Go test'
+			},
+			{
+				'<leader>dG',
+				function()
+					require('dap-go').debug_last_test()
+				end,
+				mode = { 'n' },
+				desc = 'Debug last Go test'
+			},
 		},
 	},
 	{
 		"rcarriga/nvim-dap-ui",
 		dependencies = { "mfussenegger/nvim-dap", "nvim-neotest/nvim-nio" },
-		config = setup_debug
+		config = setup_debug,
+		keys = {
+			{
+				'<leader>dU',
+				function()
+					require('dapui').toggle()
+				end,
+				mode = { 'n' },
+				desc = 'Toggle debug UI'
+			},
+			{
+				'<leader>dH',
+				function()
+					require('dapui').eval()
+				end,
+				mode = { 'n', 'v' },
+				desc = 'Evaluate under cursor'
+			},
+		},
 	},
 }

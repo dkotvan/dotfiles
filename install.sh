@@ -18,5 +18,5 @@ ln -s ~/dotfiles/ghostty.conf ~/.config/ghostty/config
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 brew bundle
 
-# Instal Tmux plugins
+# Install Tmux plugins
 git clone https://github.com/tmux-plugins/tpm ~/.tmux/plugins/tpm

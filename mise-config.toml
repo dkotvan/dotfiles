@@ -4,7 +4,6 @@ node = "22"
 ruby = "3.3"
 go = "latest"
 rust = "stable"
-lua = "5.4"
+"asdf:mise-plugins/mise-lua" = "5.1"
 java = "temurin-25"
 yarn = "latest"
-
