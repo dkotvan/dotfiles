@@ -1,13 +1,9 @@
-# Taps
-tap 'homebrew/bundle'
 tap 'remotemobprogramming/brew'
 tap 'hashicorp/tap'
 tap 'int128/kubelogin'
 tap 'kiki-ki/tap'
 tap 'mpryor/tap'
 tap 'conikeec/tap'
-tap 'xan-cloud/tap'
-tap 'bookofrat/tap'
 
 # Prerequisites
 brew 'gcc'
@@ -88,10 +84,10 @@ brew 'tree-sitter-cli'
 
 # Specialized Apps
 brew 'conikeec/tap/mcp-probe'
-brew 'bookofrat/tap/bookofrat'
 brew 'mpryor/tap/nless'
 brew 'kiki-ki/tap/qo'
-brew 'xan-cloud/tap/xan'
+brew 'xan'
+brew 'bookokrat'
 
 # Applications
 brew 'ghostscript'
