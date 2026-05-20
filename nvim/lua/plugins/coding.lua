@@ -6,18 +6,59 @@ return {
 			require("tree-sitter-manager").setup({
 				auto_install = true,
 				ensure_installed = {
-					"bash", "c", "comment", "css", "cpp", "diff", "dockerfile",
-					"elixir", "git_config", "git_rebase", "gitattributes", "gitcommit", "gitignore",
-					"go", "gomod", "gosum", "gowork", "gotmpl", "graphql", "hcl", "html", "http",
-					"java", "javascript", "json", "json5", "kotlin", "lua", "make",
-					"markdown", "markdown_inline", "python", "regex", "ruby", "scss", "sql",
-					"svelte", "terraform", "toml", "tsx", "typescript", "vim", "vimdoc", "vue", "xml", "yaml", "zig",
+					"bash",
+					"c",
+					"comment",
+					"css",
+					"cpp",
+					"diff",
+					"dockerfile",
+					"elixir",
+					"git_config",
+					"git_rebase",
+					"gitattributes",
+					"gitcommit",
+					"gitignore",
+					"go",
+					"gomod",
+					"gosum",
+					"gowork",
+					"gotmpl",
+					"graphql",
+					"hcl",
+					"html",
+					"http",
+					"java",
+					"javascript",
+					"json",
+					"json5",
+					"kotlin",
+					"lua",
+					"make",
+					"markdown",
+					"markdown_inline",
+					"python",
+					"regex",
+					"ruby",
+					"scss",
+					"sql",
+					"svelte",
+					"terraform",
+					"toml",
+					"tsx",
+					"typescript",
+					"vim",
+					"vimdoc",
+					"vue",
+					"xml",
+					"yaml",
+					"zig",
 				},
 			})
 		end,
 	},
 	-- Stub: go.nvim and other plugins still declare nvim-treesitter as a dependency
-	{ "nvim-treesitter/nvim-treesitter" },
+	-- { "nvim-treesitter/nvim-treesitter" },
 
 	{
 		"williamboman/mason.nvim",
@@ -32,12 +73,28 @@ return {
 			require("mason-tool-installer").setup({
 				ensure_installed = {
 					-- LSP Servers
-					"autotools-language-server", "bashls", "docker-compose-language-service", "dockerls",
-					"gopls", "jqls", "lua_ls", "pyright", "solargraph", "terraformls", "tflint", "yamlls",
+					"autotools-language-server",
+					"bashls",
+					"docker-compose-language-service",
+					"dockerls",
+					"gopls",
+					"jqls",
+					"lua_ls",
+					"pyright",
+					"solargraph",
+					"terraformls",
+					"tflint",
+					"yamlls",
 					-- Linters
-					"eslint_d", "shellcheck", "vacuum",
+					"eslint_d",
+					"shellcheck",
+					"vacuum",
 					-- Formatters
-					"cbfmt", "jq", "shfmt", "sqlfluff", "stylua",
+					"cbfmt",
+					"jq",
+					"shfmt",
+					"sqlfluff",
+					"stylua",
 				},
 				auto_update = true,
 				run_on_start = true,
@@ -94,7 +151,13 @@ return {
 				},
 				formatters = {
 					sqlfluff = {
-						args = { "format", "--dialect=postgres", "--config", vim.fn.expand("$HOME/dotfiles/nvim/sqlfluff.toml"), "-" },
+						args = {
+							"format",
+							"--dialect=postgres",
+							"--config",
+							vim.fn.expand("$HOME/dotfiles/nvim/sqlfluff.toml"),
+							"-",
+						},
 						require_cwd = false,
 					},
 				},
@@ -122,19 +185,19 @@ return {
 	},
 
 	{
-		'saghen/blink.cmp',
-		version = '*',
-		dependencies = 'rafamadriz/friendly-snippets',
+		"saghen/blink.cmp",
+		version = "*",
+		dependencies = "rafamadriz/friendly-snippets",
 		opts = {
-			keymap = { preset = 'default' },
+			keymap = { preset = "default" },
 			appearance = {
 				use_nvim_cmp_as_default = true,
-				nerd_font_variant = 'mono'
+				nerd_font_variant = "mono",
 			},
 			sources = {
-				default = { 'lsp', 'path', 'snippets', 'buffer' },
+				default = { "lsp", "path", "snippets", "buffer" },
 			},
-			signature = { enabled = true }
+			signature = { enabled = true },
 		},
 	},
 
@@ -158,7 +221,14 @@ return {
 				split_width_percentage = 0.35,
 				snacks_win_opts = {
 					keys = {
-						nav_w = { "<C-w><C-w>", function() vim.cmd("wincmd w") end, mode = "t", desc = "Go to next window" },
+						nav_w = {
+							"<C-w><C-w>",
+							function()
+								vim.cmd("wincmd w")
+							end,
+							mode = "t",
+							desc = "Go to next window",
+						},
 					},
 				},
 			},
@@ -177,14 +247,14 @@ return {
 			})
 		end,
 		keys = {
-			{ "<leader>a",  nil,                              desc = "AI/Claude Code" },
-			{ "<leader>ac", "<cmd>ClaudeCode<cr>",            desc = "Toggle Claude" },
-			{ "<leader>af", "<cmd>ClaudeCodeFocus<cr>",       desc = "Focus Claude" },
-			{ "<leader>ar", "<cmd>ClaudeCode --resume<cr>",   desc = "Resume Claude" },
+			{ "<leader>a", nil, desc = "AI/Claude Code" },
+			{ "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
+			{ "<leader>af", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
+			{ "<leader>ar", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
 			{ "<leader>aC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
 			{ "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
-			{ "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>",       desc = "Add current buffer" },
-			{ "<leader>as", "<cmd>ClaudeCodeSend<cr>",        mode = "v",                  desc = "Send to Claude" },
+			{ "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
+			{ "<leader>as", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
 			{
 				"<leader>as",
 				"<cmd>ClaudeCodeTreeAdd<cr>",
@@ -192,7 +262,7 @@ return {
 				ft = { "NvimTree", "neo-tree", "oil", "minifiles", "netrw" },
 			},
 			{ "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
-			{ "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>",   desc = "Deny diff" },
+			{ "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
 		},
 	},
 
@@ -202,7 +272,7 @@ return {
 			"nvim-neotest/nvim-nio",
 			"nvim-lua/plenary.nvim",
 			"antoinemadec/FixCursorHold.nvim",
-			"nvim-treesitter/nvim-treesitter",
+			-- "nvim-treesitter/nvim-treesitter",
 			{
 				"fredrikaverpil/neotest-golang",
 				version = "*",
@@ -215,7 +285,7 @@ return {
 			local neotest_golang_opts = {
 				runner = "gotestsum",
 				recursive_run = true, -- Enable recursive testing for all subdirectories
-			}                   -- Specify custom configuration
+			} -- Specify custom configuration
 			require("neotest").setup({
 				adapters = {
 					require("neotest-golang")(neotest_golang_opts), -- Registration
@@ -261,11 +331,12 @@ return {
 			{
 				"<leader>tt",
 				function()
-					require('neotest').run.run(vim.fn.getcwd())
-					require('neotest').summary.open()
+					require("neotest").run.run(vim.fn.getcwd())
+					require("neotest").summary.open()
 				end,
 				desc = "Run all tests",
 			},
 		},
 	},
 }
+

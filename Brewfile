@@ -11,6 +11,9 @@ brew 'make'
 
 # Languages - managed via mise
 brew 'mise'
+brew 'lua'
+brew 'luarocks'
+brew 'luajit'
 
 # Git
 brew 'git'
@@ -118,33 +121,14 @@ cask 'yed'
 cask 'swiftformat-for-xcode'
 
 # Media & Design
-cask 'simple-comic'
-cask 'transmission'
-cask 'vlc'
 cask 'drawio'
-
-# Editors & IDEs
-cask 'zed'
-
-# Cloud & Utilities
-cask 'dropbox'
-
-# Security
-cask 'keepassxc'
-cask 'nordvpn'
 
 # AI
 cask 'claude-code'
 
 # Communication
-cask 'discord'
 cask 'slack'
-cask 'whatsapp'
 cask 'zoom'
-
-# Notes & Knowledge
-cask 'logseq'
-cask 'obsidian'
 
 # Productivity
 cask 'tomighty'
