@@ -84,6 +84,9 @@ brew 'awscli'
 brew 'gnu-sed'
 brew 'uv'
 brew 'tree-sitter-cli'
+cask 'session-manager-plugin'
+brew 'strongswan'
+brew 'pam-reattach'
 
 # Specialized Apps
 brew 'conikeec/tap/mcp-probe'
@@ -125,6 +128,7 @@ cask 'drawio'
 
 # AI
 cask 'claude-code'
+brew 'rtk'
 
 # Communication
 cask 'slack'
