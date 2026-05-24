@@ -119,7 +119,7 @@ update_everything() {
   echo "update zsh plugins"
   rm ~/.zsh_plugins.zsh && antidote update
   echo "update brew packages"
-  (cd $HOME/dotfiles && brew bundle --cleanup && brew update && brew outdated && brew upgrade)
+  (cd $HOME/dotfiles && brew bundle && brew update && brew outdated && brew upgrade)
   echo "update mise tools"
   mise install
   update_nvim
