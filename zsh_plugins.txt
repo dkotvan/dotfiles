@@ -6,8 +6,6 @@ ohmyzsh/ohmyzsh path:plugins/safe-paste
 ohmyzsh/ohmyzsh path:plugins/history-substring-search
 # zsh configurations
 ohmyzsh/ohmyzsh path:plugins/git
-# mise version manager
-ohmyzsh/ohmyzsh path:plugins/mise
 # zsh configurations
 willghatch/zsh-saneopt
 # better vim mode
