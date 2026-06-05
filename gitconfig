@@ -8,13 +8,16 @@
 [push]
 	default = simple
 [merge]
-	tool = vimdiff
+	tool = diffview
+	conflictstyle = diff3
 [diff]
-	tool = vimdirdiff
+	tool = diffview
 [mergetool]
-	tool = vimdiff
-[mergetool]
-  prompt = true
+	tool = diffview
+	prompt = false
+[mergetool "diffview"]
+	cmd = nvim -f -c "DiffviewOpen"
+	trustExitCode = false
 [difftool "meld"]
     cmd = meld "$LOCAL" "$REMOTE"
 [mergetool "vimdiff"]

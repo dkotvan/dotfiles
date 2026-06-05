@@ -12,7 +12,26 @@ return {
   {
     "sindrets/diffview.nvim",
     config = function()
-      require("diffview").setup()
+      local actions = require("diffview.actions")
+      require("diffview").setup({
+        view = {
+          merge_tool = {
+            layout = "diff3_mixed",
+            disable_diagnostics = true,
+          },
+        },
+        keymaps = {
+          merge_tool = {
+            { "n", "<leader>co", actions.conflict_choose("ours"),   { desc = "Choose OURS" } },
+            { "n", "<leader>ct", actions.conflict_choose("theirs"), { desc = "Choose THEIRS" } },
+            { "n", "<leader>cb", actions.conflict_choose("base"),   { desc = "Choose BASE" } },
+            { "n", "<leader>ca", actions.conflict_choose("all"),    { desc = "Choose ALL" } },
+            { "n", "dx",         actions.conflict_choose("none"),   { desc = "Delete conflict region" } },
+            { "n", "]x",         actions.next_conflict,             { desc = "Next conflict" } },
+            { "n", "[x",         actions.prev_conflict,             { desc = "Prev conflict" } },
+          },
+        },
+      })
 
       local watcher = (vim.uv or vim.loop).new_fs_event()
 
