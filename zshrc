@@ -8,6 +8,9 @@ fi
 DISABLE_AUTO_TITLE=”true”
 DISABLE_AUTO_UPDATE=true
 
+# Prepend Homebrew zsh functions to fpath to fix stale inherited FPATH after upgrades
+fpath=(/opt/homebrew/share/zsh/functions $fpath)
+
 source $DOTFILES/antidote.zsh
 
 export EDITOR="${EDITOR:-nvim}"
