@@ -90,13 +90,13 @@ return {
       auto_open_terminal = false,
       auto_context       = true,
       batch_size         = 10,
-      log_level          = "warn",
+      logging            = { level = "WARN" },
     },
   },
 
   {
     "pittcat/claude-fzf-history.nvim",
     dependencies = { "ibhagwan/fzf-lua", "coder/claudecode.nvim" },
-    opts = { log_level = "warn" },
+    opts = { logging = { level = "WARN" } },
   },
 }
