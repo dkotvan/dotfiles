@@ -218,7 +218,7 @@ return {
 			terminal = {
 				provider = "snacks",
 				split_side = "right",
-				split_width_percentage = 0.35,
+				split_width_percentage = 0.60,
 				snacks_win_opts = {
 					keys = {
 						nav_w = {
@@ -339,4 +339,3 @@ return {
 		},
 	},
 }
-

@@ -18,3 +18,5 @@ toggles.txt
 Session.vim
 denitevimlsp.log
 jmeter.log
+
+**/.claude/settings.local.json
