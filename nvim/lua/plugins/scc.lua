@@ -10,7 +10,26 @@ return {
   },
 
   {
-	"sindrets/diffview.nvim", -- TODO: review config
+    "sindrets/diffview.nvim",
+    config = function()
+      require("diffview").setup()
+
+      local watcher = (vim.uv or vim.loop).new_fs_event()
+
+      local function refresh_diffview()
+        local ok, api = pcall(require, "diffview.lib")
+        if not ok then return end
+        local view = api.get_current_view()
+        if view then view:update_files() end
+      end
+
+      watcher:start(vim.fn.getcwd(), { recursive = true }, vim.schedule_wrap(function(err, fname)
+        if err or not fname then return end
+        if not fname:match("node_modules") and not fname:match("%.git/objects") then
+          refresh_diffview()
+        end
+      end))
+    end,
   },
 
   -- best git plugin

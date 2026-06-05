@@ -58,7 +58,7 @@ return {
 		end,
 	},
 	-- Stub: go.nvim and other plugins still declare nvim-treesitter as a dependency
-	-- { "nvim-treesitter/nvim-treesitter" },
+	{ "nvim-treesitter/nvim-treesitter" },
 
 	{
 		"williamboman/mason.nvim",
@@ -198,71 +198,6 @@ return {
 				default = { "lsp", "path", "snippets", "buffer" },
 			},
 			signature = { enabled = true },
-		},
-	},
-
-	{
-		"coder/claudecode.nvim",
-		dependencies = { "folke/snacks.nvim" },
-		lazy = false,
-		opts = {
-			auto_start = true,
-			track_selection = true,
-			git_repo_cwd = true,
-			log_level = "warn",
-			diff_opts = {
-				layout = "horizontal",
-				open_in_new_tab = true,
-				keep_terminal_focus = true,
-			},
-			terminal = {
-				provider = "snacks",
-				split_side = "right",
-				split_width_percentage = 0.60,
-				snacks_win_opts = {
-					keys = {
-						nav_w = {
-							"<C-w><C-w>",
-							function()
-								vim.cmd("wincmd w")
-							end,
-							mode = "t",
-							desc = "Go to next window",
-						},
-					},
-				},
-			},
-		},
-		config = function(_, opts)
-			require("claudecode").setup(opts)
-			-- Light blue visual selection inside Claude terminal buffers
-			vim.api.nvim_create_autocmd("BufEnter", {
-				pattern = "*",
-				callback = function()
-					local bufname = vim.api.nvim_buf_get_name(0)
-					if bufname:find("snacks") or bufname:find("claude", 1, true) then
-						vim.api.nvim_set_hl(0, "Visual", { bg = "#83a598" })
-					end
-				end,
-			})
-		end,
-		keys = {
-			{ "<leader>a", nil, desc = "AI/Claude Code" },
-			{ "<leader>ac", "<cmd>ClaudeCode<cr>", desc = "Toggle Claude" },
-			{ "<leader>af", "<cmd>ClaudeCodeFocus<cr>", desc = "Focus Claude" },
-			{ "<leader>ar", "<cmd>ClaudeCode --resume<cr>", desc = "Resume Claude" },
-			{ "<leader>aC", "<cmd>ClaudeCode --continue<cr>", desc = "Continue Claude" },
-			{ "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", desc = "Select Claude model" },
-			{ "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>", desc = "Add current buffer" },
-			{ "<leader>as", "<cmd>ClaudeCodeSend<cr>", mode = "v", desc = "Send to Claude" },
-			{
-				"<leader>as",
-				"<cmd>ClaudeCodeTreeAdd<cr>",
-				desc = "Add file",
-				ft = { "NvimTree", "neo-tree", "oil", "minifiles", "netrw" },
-			},
-			{ "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", desc = "Accept diff" },
-			{ "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", desc = "Deny diff" },
 		},
 	},
 

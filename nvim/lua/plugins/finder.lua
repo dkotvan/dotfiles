@@ -269,5 +269,10 @@ return {
 			})
 		end,
 	},
+
+  {
+    "HawkinsT/pathfinder.nvim",
+    opts = {},
+  },
 }
 

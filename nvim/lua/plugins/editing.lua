@@ -140,4 +140,37 @@ return {
 	},
   },
 
+  {
+    "okuuva/auto-save.nvim",
+    version = "^1.0.0",
+    event   = { "InsertLeave", "TextChanged" },
+    opts = {
+      trigger_events = {
+        immediate_save       = { "BufLeave", "FocusLost", "QuitPre", "VimSuspend" },
+        defer_save           = { "InsertLeave", "TextChanged" },
+        cancel_deferred_save = { "InsertEnter" },
+      },
+      debounce_delay    = 1000,
+      write_all_buffers = false,
+      condition = function(buf)
+        if vim.fn.getbufvar(buf, "&buftype") ~= "" then return false end
+        local name = vim.api.nvim_buf_get_name(buf)
+        if name:match("%(proposed%)") or name:match("%(NEW FILE") then return false end
+        if vim.b[buf].claudecode_diff_tab_name
+          or vim.b[buf].claudecode_diff_new_win
+          or vim.b[buf].claudecode_diff_target_win
+        then return false end
+        return true
+      end,
+    },
+    config = function(_, opts)
+      local as = require("auto-save")
+      as.setup(opts)
+      vim.keymap.set("n", "<leader>ua", function()
+        if as.enabled() then as.off() else as.on() end
+        vim.notify("AutoSave: " .. (as.enabled() and "ON" or "OFF"))
+      end, { desc = "Toggle auto-save" })
+    end,
+  },
+
 }
