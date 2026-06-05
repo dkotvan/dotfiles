@@ -104,13 +104,13 @@ brew 'octosql'
 brew 'tmux'
 brew 'bash'
 brew 'zsh'
-brew 'zsh-completions'
 brew 'starship'
 brew 'atuin'
 brew 'pinentry-mac'
 
 # Shell Completions
 brew 'brew-cask-completion'
+brew 'zsh-completions'
 
 # Casks - macOS only
 cask 'ghostty'
@@ -127,7 +127,7 @@ cask 'swiftformat-for-xcode'
 cask 'drawio'
 
 # AI
-cask 'claude-code'
+cask 'claude-code@latest'
 brew 'rtk'
 
 # Communication
