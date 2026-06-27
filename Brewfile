@@ -1,9 +1,4 @@
-tap 'remotemobprogramming/brew'
 tap 'hashicorp/tap'
-tap 'int128/kubelogin'
-tap 'kiki-ki/tap'
-tap 'mpryor/tap'
-tap 'conikeec/tap'
 
 # Prerequisites
 brew 'gcc'
@@ -24,7 +19,6 @@ brew 'glab'
 brew 'git-delta'
 brew 'lab'
 brew 'tig'
-brew 'mob'
 brew 'pre-commit'
 brew 'lazygit'
 
@@ -39,7 +33,6 @@ brew 'kubernetes-cli'
 brew 'krew'
 brew 'kubectx'
 brew 'k9s'
-brew 'int128/kubelogin/kubelogin'
 brew 'stern'
 brew 'ctop'
 brew 'helm'
@@ -89,9 +82,6 @@ brew 'strongswan'
 brew 'pam-reattach'
 
 # Specialized Apps
-brew 'conikeec/tap/mcp-probe'
-brew 'mpryor/tap/nless'
-brew 'kiki-ki/tap/qo'
 brew 'xan'
 brew 'bookokrat'
 

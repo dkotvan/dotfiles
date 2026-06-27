@@ -85,6 +85,18 @@ return {
 	},
 
 	{
+		"MeanderingProgrammer/render-markdown.nvim",
+		dependencies = { "nvim-treesitter/nvim-treesitter", "echasnovski/mini.nvim" },
+		ft = { "markdown" },
+		opts = {
+			completions = { lsp = { enabled = true } },
+		},
+		config = function(_, opts)
+			require("render-markdown").setup(opts)
+		end,
+	},
+
+	{
 		"stevearc/dressing.nvim",
 		opts = {
 			input = {
