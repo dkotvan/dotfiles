@@ -274,5 +274,22 @@ return {
     "HawkinsT/pathfinder.nvim",
     opts = {},
   },
+
+	{
+		"AntonVanAssche/md-headers.nvim",
+		cmd = "MDHeaders",
+		dependencies = {
+			"nvim-lua/plenary.nvim",
+			"nvim-treesitter/nvim-treesitter",
+		},
+		ft = { "markdown" },
+		keys = {
+			{
+				"<leader>mh",
+				"<cmd>MDHeaders<cr>",
+				desc = "show markdown headers",
+			},
+		},
+	},
 }
 
