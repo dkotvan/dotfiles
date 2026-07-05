@@ -272,7 +272,9 @@ return {
 
   {
     "HawkinsT/pathfinder.nvim",
-    opts = {},
+    opts = {
+      remap_default_keys = false, -- keep neovim's built-in gx for URLs (pathfinder breaks URLs with query params)
+    },
   },
 
 	{

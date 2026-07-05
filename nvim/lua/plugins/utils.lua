@@ -68,7 +68,28 @@ return {
 	"mattn/vim-maketable",
 
 	-- compare directories
-	"will133/vim-dirdiff",
+	{
+		"will133/vim-dirdiff",
+		config = function()
+			vim.api.nvim_create_autocmd("FileType", {
+				pattern = "DirDiff",
+				callback = function()
+					-- vim-dirdiff uses <LocalLeader> (defaults to \)
+					-- built-in mappings inside the DirDiff listing:
+					--   <LocalLeader>j  → next diff group
+					--   <LocalLeader>k  → prev diff group
+					--   <LocalLeader>g  → diffget
+					--   <LocalLeader>p  → diffput
+					--   Enter / o        → open diff for file under cursor
+					--   s                → sync (refresh listing)
+					--
+					-- Inside an opened diff (standard vim diff mode):
+					--   ]c → next hunk,  [c → prev hunk
+					--   do → diff obtain, dp → diff put
+				end,
+			})
+		end,
+	},
 
 	-- kill all buffers except the current
 	"duff/vim-bufonly",

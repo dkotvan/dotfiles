@@ -60,6 +60,7 @@ return {
 
                 -- g prefix: LSP navigation
                 { "g",   group = "go to" },
+                { "gx",  desc = "open URL under cursor" },  -- built-in, passthrough (which-key won't block it)
                 { "gr",  function() Snacks.picker.lsp_references() end,        desc = "LSP references" },
                 { "g0",  function() Snacks.picker.lsp_symbols() end,           desc = "LSP document symbols" },
                 { "gW",  function() Snacks.picker.lsp_workspace_symbols() end, desc = "LSP workspace symbols" },
