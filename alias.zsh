@@ -109,6 +109,7 @@ cdz() {
 alias ngst='nvim -c ":G"'
 alias nvimc='nvim -c "ClaudeCode"'
 alias nvimcr='nvim -c "ClaudeCode --resume"'
+alias nvimo='nvim -c "Opencode"'
 
 update_nvim() {
   echo "update neovim"

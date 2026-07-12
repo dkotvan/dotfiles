@@ -195,10 +195,69 @@ return {
 				nerd_font_variant = "mono",
 			},
 			sources = {
-				default = { "lsp", "path", "snippets", "buffer" },
+				default = { "lsp", "minuet", "snippets", "buffer", "path" },
+				providers = {
+					minuet = {
+						name = "minuet",
+						module = "minuet.blink",
+						async = true,
+						timeout_ms = 3000,
+						score_offset = 50,
+					},
+				},
 			},
 			signature = { enabled = true },
 		},
+	},
+
+	{
+		"milanglacier/minuet-ai.nvim",
+		version = "*",
+		dependencies = {
+			"saghen/blink.cmp",
+		},
+		config = function()
+			local function get_opencode_go_key()
+				local ok, result = pcall(function()
+					local f = io.open(vim.fn.expand("~/.local/share/opencode/auth.json"), "r")
+					if not f then
+						return nil
+					end
+					local content = f:read("*a")
+					f:close()
+					return vim.json.decode(content)["opencode-go"].key
+				end)
+				return ok and result or nil
+			end
+
+			require("minuet").setup({
+				provider = "openai_compatible",
+				request_timeout = 2.5,
+				throttle = 1500,
+				debounce = 600,
+				provider_options = {
+					openai_compatible = {
+						api_key = get_opencode_go_key,
+						end_point = "https://opencode.ai/zen/go/v1/chat/completions",
+						model = "deepseek-v4-flash",
+						name = "Opencode",
+						optional = {
+							max_tokens = 500,
+							top_p = 0.9,
+							thinking = { type = "disabled" },
+						},
+					},
+				},
+				virtualtext = {
+					auto_trigger_ft = { "*" },
+					keymap = {
+						accept = "<M-CR>",
+						accept_line = "<M-l>",
+						dismiss = "<M-d>",
+					},
+				},
+			})
+		end,
 	},
 
 	{
